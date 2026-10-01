@@ -12,6 +12,135 @@
         {
             "type": "package",
             "package": {
+                "name": "symfony/filesystem",
+                "version": "8.1.6",
+                "type": "library",
+                "require": {
+                    "php": ">=8.4.1",
+                    "symfony/deprecation-contracts": "^2.5|^3",
+                    "symfony/polyfill-ctype": "~1.8",
+                    "symfony/polyfill-mbstring": "~1.8"
+                },
+                "autoload": {
+                    "psr-4": {
+                        "Symfony\\Component\\Filesystem\\": ""
+                    },
+                    "exclude-from-classmap": [
+                        "/Tests/"
+                    ]
+                },
+                "dist": {
+                    "url": "https://codeload.github.com/symfony/filesystem/zip/refs/tags/v8.1.6",
+                    "type": "zip"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "mtdowling/jmespath.php",
+                "version": "2.9.2",
+                "type": "library",
+                "require": {
+                    "php": "^7.2.5 || ^8.0",
+                    "symfony/polyfill-mbstring": "^1.17"
+                },
+                "autoload": {
+                    "psr-4": {
+                        "JmesPath\\": "src/"
+                    },
+                    "files": [
+                        "src/JmesPath.php"
+                    ]
+                },
+                "bin": [
+                    "bin/jp.php"
+                ],
+                "dist": {
+                    "url": "https://codeload.github.com/jmespath/jmespath.php/zip/refs/tags/2.9.2",
+                    "type": "zip"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "aws/aws-crt-php",
+                "version": "1.2.7",
+                "type": "library",
+                "require": {
+                    "php": ">=5.5"
+                },
+                "autoload": {
+                    "classmap": [
+                        "src/"
+                    ]
+                },
+                "dist": {
+                    "url": "https://codeload.github.com/awslabs/aws-crt-php/zip/refs/tags/v1.2.7",
+                    "type": "zip"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "aws/aws-sdk-php",
+                "version": "3.399.0",
+                "type": "library",
+                "require": {
+                    "php": ">=8.1",
+                    "guzzlehttp/guzzle": "^7.8.2 || ^8.0",
+                    "guzzlehttp/psr7": "^2.6.3 || ^3.0",
+                    "guzzlehttp/promises": "^2.0.3 || ^3.0",
+                    "mtdowling/jmespath.php": "^2.9.1",
+                    "aws/aws-crt-php": "^1.2.3",
+                    "psr/http-message": "^1.0 || ^2.0",
+                    "symfony/filesystem": "^v5.4.45 || ^v6.4.3 || ^v7.1.0 || ^v8.0.0"
+                },
+                "autoload": {
+                    "psr-4": {
+                        "Aws\\": "src/"
+                    },
+                    "files": [
+                        "src/functions.php"
+                    ],
+                    "exclude-from-classmap": [
+                        "src/data/"
+                    ]
+                },
+                "dist": {
+                    "url": "https://codeload.github.com/aws/aws-sdk-php/zip/refs/tags/3.399.0",
+                    "type": "zip"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "league/flysystem-aws-s3-v3",
+                "version": "3.35.3",
+                "type": "library",
+                "require": {
+                    "php": "^8.0.2",
+                    "league/flysystem": "^3.10.0",
+                    "league/mime-type-detection": "^1.0.0",
+                    "aws/aws-sdk-php": "^3.371.5"
+                },
+                "autoload": {
+                    "psr-4": {
+                        "League\\Flysystem\\AwsS3V3\\": ""
+                    }
+                },
+                "dist": {
+                    "url": "https://codeload.github.com/thephpleague/flysystem-aws-s3-v3/zip/refs/tags/3.35.3",
+                    "type": "zip"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
                 "name": "spatie/laravel-package-tools",
                 "version": "1.93.3",
                 "type": "library",
@@ -74,6 +203,7 @@
         "laravel/framework": "^13.17",
         "laravel/tinker": "^3.0",
         "laravel/wayfinder": "^0.1.14",
+        "league/flysystem-aws-s3-v3": "3.35.3",
         "spatie/laravel-permission": "^8.3.0"
     },
     "require-dev": {
