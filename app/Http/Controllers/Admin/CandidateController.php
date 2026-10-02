@@ -31,7 +31,7 @@ class CandidateController extends Controller
             'applications.documents',
             'credentials.verifier:id,name',
             'documents',
-            'employmentHistory',
+            'employmentHistory.referenceChecks.checkedBy:id,name',
             'education',
         ]);
 

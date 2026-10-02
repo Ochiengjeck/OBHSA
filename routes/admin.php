@@ -1,14 +1,17 @@
 <?php
 
+use App\Http\Controllers\Admin\ApplicationRequirementController;
 use App\Http\Controllers\Admin\BlogPostController;
 use App\Http\Controllers\Admin\CandidateController;
 use App\Http\Controllers\Admin\CommunicationTemplateController;
+use App\Http\Controllers\Admin\CredentialController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\InterviewController;
 use App\Http\Controllers\Admin\InterviewQuestionController;
 use App\Http\Controllers\Admin\JobApplicationController;
 use App\Http\Controllers\Admin\JobListingController;
 use App\Http\Controllers\Admin\PageController;
+use App\Http\Controllers\Admin\ReferenceCheckController;
 use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\SiteSettingController;
 use App\Http\Controllers\Admin\StaffingRequestController;
@@ -41,6 +44,10 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'verified', 'role:ad
         Route::get('interviews/{interview}', [InterviewController::class, 'show'])->name('interviews.show');
         Route::put('interviews/{interview}', [InterviewController::class, 'update'])->name('interviews.update');
         Route::post('job-applications/{application}/interviews', [InterviewController::class, 'store'])->name('job-applications.interviews.store');
+        Route::put('credentials/{credential}/verify', [CredentialController::class, 'verify'])->name('credentials.verify');
+        Route::put('credentials/{credential}/reject', [CredentialController::class, 'reject'])->name('credentials.reject');
+        Route::put('application-requirements/{applicationRequirement}', [ApplicationRequirementController::class, 'update'])->name('application-requirements.update');
+        Route::post('employment-history/{employmentHistory}/reference-checks', [ReferenceCheckController::class, 'store'])->name('employment-history.reference-checks.store');
     });
     Route::resource('blog-posts', BlogPostController::class)->except(['show'])->middleware('permission:manage-blog');
     Route::resource('testimonials', TestimonialController::class)->except(['show'])->middleware('permission:manage-testimonials');

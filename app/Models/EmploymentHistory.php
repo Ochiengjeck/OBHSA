@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Carbon;
 
 /**
@@ -48,5 +49,13 @@ class EmploymentHistory extends Model
     public function candidate(): BelongsTo
     {
         return $this->belongsTo(Candidate::class);
+    }
+
+    /**
+     * @return HasMany<ReferenceCheck, $this>
+     */
+    public function referenceChecks(): HasMany
+    {
+        return $this->hasMany(ReferenceCheck::class)->latest('contacted_at');
     }
 }

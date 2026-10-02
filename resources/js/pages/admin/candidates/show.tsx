@@ -2,8 +2,10 @@ import { Head } from '@inertiajs/react';
 import { FileText } from 'lucide-react';
 import { AdminPageHeader } from '@/components/admin/admin-page-header';
 import { ApplicationPanel } from '@/components/admin/candidates/application-panel';
-import { StatusBadge } from '@/components/admin/status-badge';
+import { CredentialCard } from '@/components/admin/candidates/credential-card';
+import { EmploymentHistoryCard } from '@/components/admin/candidates/employment-history-card';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Separator } from '@/components/ui/separator';
 import admin from '@/routes/admin';
 import type {
     CandidateApplication,
@@ -83,31 +85,19 @@ export default function CandidateShow({
                                 <CardHeader>
                                     <CardTitle>Credentials</CardTitle>
                                 </CardHeader>
-                                <CardContent className="space-y-2">
-                                    {candidate.credentials.map((credential) => (
-                                        <div
-                                            key={credential.id}
-                                            className="flex items-center justify-between text-sm"
-                                        >
-                                            <div>
-                                                <p className="font-medium text-foreground">
-                                                    {credential.credential_name}
-                                                </p>
-                                                {credential.jurisdiction && (
-                                                    <p className="text-xs text-muted-foreground">
-                                                        {
-                                                            credential.jurisdiction
-                                                        }
-                                                    </p>
+                                <CardContent className="space-y-4">
+                                    {candidate.credentials.map(
+                                        (credential, index) => (
+                                            <div key={credential.id}>
+                                                {index > 0 && (
+                                                    <Separator className="mb-4" />
                                                 )}
+                                                <CredentialCard
+                                                    credential={credential}
+                                                />
                                             </div>
-                                            <StatusBadge
-                                                status={
-                                                    credential.verification_status
-                                                }
-                                            />
-                                        </div>
-                                    ))}
+                                        ),
+                                    )}
                                 </CardContent>
                             </Card>
                         )}
@@ -139,16 +129,16 @@ export default function CandidateShow({
                                 <CardHeader>
                                     <CardTitle>Employment History</CardTitle>
                                 </CardHeader>
-                                <CardContent className="space-y-2 text-sm">
+                                <CardContent className="space-y-4">
                                     {candidate.employment_history.map(
                                         (row, index) => (
-                                            <div key={index}>
-                                                <p className="font-medium text-foreground">
-                                                    {row.job_title}
-                                                </p>
-                                                <p className="text-muted-foreground">
-                                                    {row.employer_name}
-                                                </p>
+                                            <div key={row.id}>
+                                                {index > 0 && (
+                                                    <Separator className="mb-4" />
+                                                )}
+                                                <EmploymentHistoryCard
+                                                    row={row}
+                                                />
                                             </div>
                                         ),
                                     )}

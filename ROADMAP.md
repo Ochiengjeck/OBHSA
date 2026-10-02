@@ -59,9 +59,17 @@ Gave the `interview` application status (reserved since Phase 1's state machine)
 - Scheduling an interview does not auto-transition the application's status — recruiters still move `credentialing → interview` themselves via the existing status form, consistent with every other stage
 - 4 new Pest tests covering specialty-scoped question snapshotting, scoring + completing an interview, the interviews list filters, and editor access being forbidden
 
-### 5. Credential verification & reference checking — ⏳ Not started
+### 5. Credential verification & reference checking — ✅ Done (2026-10-02)
 
-Admin verification actions on `credentials`, reference-check workflow.
+Wired up `Credential::verify()`/`reject()` and `ApplicationRequirement::markComplete()`/`markFailed()` — all four built in Phase 1, none ever called until now.
+
+**Delivered:**
+
+- Verify/Reject actions on the dossier's Credentials card auto-resolve the matching `license_verification`/`certification_verification` requirement (setting the previously-unused `related_credential_id` link) on every one of the candidate's applications where it's still unresolved — a past, already-decided application's requirement is never rewritten
+- Reference checks (`ReferenceCheck` model) log against a candidate's existing employment-history entries, reusing the `supervisor_name`/`supervisor_contact` the Phase 2 wizard already collects — no new data asked of candidates. Outcome is Positive / Negative / Unable to Reach; append-only, same spirit as `ApplicationCommunication`
+- A generic Pass/Fail override on any `not_started` requirement in `ApplicationPanel`, resolving `employment_history_verification`/`education_verification` — the two requirement types Phase 2 seeds but nothing else can ever complete
+- 5 new Pest tests covering requirement auto-resolution (and that it skips already-decided applications), rejection notes, reference-check logging, the manual override, and editor access being forbidden
+- Real bug found & fixed while writing the migration: `reference_checks.employment_history_id`'s `constrained()` guessed the table name `employment_histories`, but Phase 1's table is singular `employment_history` — fixed by passing the table name explicitly
 
 ### 6. Background screening — ⏳ Not started
 

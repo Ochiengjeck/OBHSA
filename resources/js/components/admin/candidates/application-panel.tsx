@@ -1,4 +1,4 @@
-import { Link, useForm } from '@inertiajs/react';
+import { Link, router, useForm } from '@inertiajs/react';
 import { AlertTriangle, FileText } from 'lucide-react';
 import { useState } from 'react';
 import { StatusBadge } from '@/components/admin/status-badge';
@@ -220,7 +220,54 @@ export function ApplicationPanel({
                                             ' ',
                                         )}
                                     </span>
-                                    <StatusBadge status={requirement.status} />
+                                    <div className="flex items-center gap-2">
+                                        {requirement.status ===
+                                            'not_started' && (
+                                            <>
+                                                <button
+                                                    type="button"
+                                                    className="text-xs font-medium text-primary hover:underline"
+                                                    onClick={() =>
+                                                        router.put(
+                                                            admin.applicationRequirements.update(
+                                                                requirement.id,
+                                                            ).url,
+                                                            {
+                                                                status: 'passed',
+                                                            },
+                                                            {
+                                                                preserveScroll: true,
+                                                            },
+                                                        )
+                                                    }
+                                                >
+                                                    Pass
+                                                </button>
+                                                <button
+                                                    type="button"
+                                                    className="text-xs font-medium text-destructive hover:underline"
+                                                    onClick={() =>
+                                                        router.put(
+                                                            admin.applicationRequirements.update(
+                                                                requirement.id,
+                                                            ).url,
+                                                            {
+                                                                status: 'failed',
+                                                            },
+                                                            {
+                                                                preserveScroll: true,
+                                                            },
+                                                        )
+                                                    }
+                                                >
+                                                    Fail
+                                                </button>
+                                            </>
+                                        )}
+                                        <StatusBadge
+                                            status={requirement.status}
+                                        />
+                                    </div>
                                 </div>
                             ))}
                         </div>

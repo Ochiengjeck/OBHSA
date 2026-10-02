@@ -62,6 +62,19 @@ const STATUS_STYLES: Record<string, string> = {
     maybe: 'bg-amber-100 text-amber-700 dark:bg-amber-500/20 dark:text-amber-300',
     do_not_recommend:
         'bg-red-100 text-red-700 dark:bg-red-500/20 dark:text-red-300',
+    verified:
+        'bg-emerald-100 text-emerald-700 dark:bg-emerald-500/20 dark:text-emerald-300',
+    not_submitted:
+        'bg-slate-100 text-slate-700 dark:bg-slate-500/20 dark:text-slate-300',
+    passed: 'bg-emerald-100 text-emerald-700 dark:bg-emerald-500/20 dark:text-emerald-300',
+    failed: 'bg-red-100 text-red-700 dark:bg-red-500/20 dark:text-red-300',
+    not_started:
+        'bg-slate-100 text-slate-700 dark:bg-slate-500/20 dark:text-slate-300',
+    positive:
+        'bg-emerald-100 text-emerald-700 dark:bg-emerald-500/20 dark:text-emerald-300',
+    negative: 'bg-red-100 text-red-700 dark:bg-red-500/20 dark:text-red-300',
+    unable_to_reach:
+        'bg-amber-100 text-amber-700 dark:bg-amber-500/20 dark:text-amber-300',
 };
 
 export function StatusBadge({ status }: { status: string }) {

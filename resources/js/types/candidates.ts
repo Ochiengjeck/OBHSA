@@ -1,4 +1,4 @@
-import type { EducationRow, EmploymentHistoryRow } from './apply';
+import type { EducationRow } from './apply';
 
 export type CommunicationTemplate = {
     id: number;
@@ -74,6 +74,28 @@ export type CandidateCredential = {
     expiry_date: string | null;
     verification_status: string;
     verifier: { id: number; name: string } | null;
+    notes: string | null;
+};
+
+export type ReferenceCheckEntry = {
+    id: number;
+    contact_method: string;
+    contacted_at: string;
+    outcome: string;
+    notes: string | null;
+    checked_by: { id: number; name: string } | null;
+};
+
+export type CandidateEmploymentHistoryEntry = {
+    id: number;
+    employer_name: string;
+    job_title: string;
+    start_date: string;
+    end_date: string | null;
+    is_current: boolean;
+    supervisor_name: string | null;
+    supervisor_contact: string | null;
+    reference_checks: ReferenceCheckEntry[];
 };
 
 export type CandidateDocument = {
@@ -94,6 +116,6 @@ export type CandidateDossier = {
     created_at: string;
     credentials: CandidateCredential[];
     documents: CandidateDocument[];
-    employment_history: EmploymentHistoryRow[];
+    employment_history: CandidateEmploymentHistoryEntry[];
     education: EducationRow[];
 };
