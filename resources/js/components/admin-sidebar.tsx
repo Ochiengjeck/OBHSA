@@ -1,6 +1,7 @@
 import { Link, usePage } from '@inertiajs/react';
 import {
     BarChart3,
+    Bot,
     Briefcase,
     Building2,
     CalendarClock,
@@ -42,6 +43,7 @@ type AdminNavItem = NavItem & { permission?: string };
 
 const mainNavItems: AdminNavItem[] = [
     { title: 'Dashboard', href: admin.dashboard(), icon: LayoutGrid },
+    { title: 'Copilot', href: admin.copilot.index(), icon: Bot },
     {
         title: 'Site Settings',
         href: admin.siteSettings.index(),
@@ -124,6 +126,12 @@ const mainNavItems: AdminNavItem[] = [
         title: 'Facilities',
         href: admin.facilities.index(),
         icon: Building2,
+        permission: 'manage-applications',
+    },
+    {
+        title: 'Policy Documents',
+        href: admin.policyDocuments.index(),
+        icon: FileText,
         permission: 'manage-applications',
     },
     {

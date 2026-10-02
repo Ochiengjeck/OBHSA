@@ -2,6 +2,12 @@
 
 namespace App\Providers;
 
+use App\Services\Copilot\Tools\AssignRecruiterTool;
+use App\Services\Copilot\Tools\GetCandidateDossierTool;
+use App\Services\Copilot\Tools\SearchCandidatesTool;
+use App\Services\Copilot\Tools\SearchPolicyDocsTool;
+use App\Services\Copilot\Tools\SendCandidateMessageTool;
+use App\Services\Copilot\Tools\TransitionApplicationStatusTool;
 use Carbon\CarbonImmutable;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\DB;
@@ -15,7 +21,14 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        $this->app->tag([
+            SearchCandidatesTool::class,
+            GetCandidateDossierTool::class,
+            TransitionApplicationStatusTool::class,
+            AssignRecruiterTool::class,
+            SendCandidateMessageTool::class,
+            SearchPolicyDocsTool::class,
+        ], 'copilot.tools');
     }
 
     /**
