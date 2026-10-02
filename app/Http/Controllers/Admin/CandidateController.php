@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Enums\ApplicationStatus;
 use App\Http\Controllers\Controller;
+use App\Models\Assessment;
 use App\Models\Candidate;
 use App\Models\CommunicationTemplate;
 use App\Models\User;
@@ -30,6 +31,8 @@ class CandidateController extends Controller
             'applications.interviews.interviewer:id,name',
             'applications.backgroundChecks.initiatedBy:id,name',
             'applications.backgroundChecks.resolvedBy:id,name',
+            'applications.assessmentAttempts.assessment:id,name',
+            'applications.assessmentAttempts.administeredBy:id,name',
             'applications.documents',
             'credentials.verifier:id,name',
             'documents',
@@ -63,6 +66,7 @@ class CandidateController extends Controller
             'applications' => $applications,
             'recruiters' => User::query()->orderBy('name')->get(['id', 'name']),
             'communicationTemplates' => CommunicationTemplate::query()->orderBy('name')->get(),
+            'assessments' => Assessment::query()->where('is_active', true)->orderBy('name')->get(['id', 'name', 'max_attempts']),
         ]);
     }
 }

@@ -1,4 +1,5 @@
 export type * from './apply';
+export type * from './assessments';
 export type * from './auth';
 export type * from './candidates';
 export type * from './interviews';

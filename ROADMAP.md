@@ -83,9 +83,21 @@ No background-check vendor has been chosen for this project and no API credentia
 - `ApplyController::submit()` now seeds a `background_check` requirement on every submission (consent for it is always collected at wizard step 7, unlike the conditional requirements seeded from what the candidate actually provided)
 - 5 new Pest tests; updated one pre-existing Phase 2 wizard test whose requirement-count assertion needed to account for the new requirement
 
-### 7. Competency assessments — ⏳ Not started
+### 7. Competency assessments — ✅ Done (2026-10-02)
 
-Assessment definitions, attempts, scoring, pass/retry.
+Gives the `assessment` application status (reserved since Phase 1) real behavior. Unlike Phases 3–6, the user explicitly asked for both delivery modes (candidates can take an assessment themselves online, or staff can administer/record one directly) and per-question structured scoring rather than a single typed-in number — the largest phase since Phase 2, since it adds a real (deliberately simple — no timers, no randomization) candidate-facing test-taking flow alongside the admin side.
+
+**Delivered:**
+
+- `Assessment` (definitions, each owning its own question bank via `AssessmentQuestion` — multiple-choice, auto-graded, or short-answer, staff-graded) + `AssessmentAttempt`/`AssessmentResponse`, with a new "Assessments" and "Assessment Questions" admin area
+- Both delivery modes share one data model and one admin review screen (`/admin/assessment-attempts/{attempt}`) — they differ only in how a response row gets filled in: a candidate self-submits online, or staff types it in directly. A `pending` attempt is fully editable (entry mode); a `submitted` self-service attempt shows its multiple-choice answers read-only with correctness and only exposes an editable points field for short-answer questions; `completed`/`cancelled` is read-only
+- A real (if simple) candidate-facing flow: `AssessmentTakingController` + `routes/assessments.php`, reusing `Application::issueResumeToken()`'s exact hashed-token pattern from Phase 2 for the emailed access link, including the same non-leaking invalid-vs-expired distinction
+- Assigning an assessment snapshots its current question bank (including each multiple-choice question's correct answer) into the attempt's responses, so later edits to the bank never retroactively change a past attempt's grading — same reasoning as Phase 4's interview-response snapshotting
+- A new cross-candidate "Assessment Attempts" list with a "Needs Grading" quick filter for self-service attempts sitting at `submitted`
+- Real bugs caught before they shipped: the entry/grading page's "set state then immediately submit" first draft relied on a stale React state read (fixed by passing the payload directly to `router.put` instead of `useForm`'s async `setData`); the public show page was missing the plaintext `token` prop entirely, which the submit button needs to build its own URL; Laravel's shallow nested resource (`assessments.questions`) names its edit/update/destroy routes under the bare child resource (`admin.questions.*`), not nested under the parent — caught three wrong route calls via `npm run build`'s route-name check before they ever reached a browser
+- 9 new Pest tests across two files, covering both delivery modes, auto-grading, the awaiting-grading hand-off, `max_attempts`, and expired/invalid tokens
+
+### 8. Offer → Onboarding → Activation — ⏳ Not started
 
 ### 8. Offer → Onboarding → Activation — ⏳ Not started
 

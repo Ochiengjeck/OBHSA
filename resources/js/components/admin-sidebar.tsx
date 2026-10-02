@@ -3,6 +3,7 @@ import {
     BarChart3,
     Briefcase,
     CalendarClock,
+    ClipboardCheck,
     ClipboardList,
     ExternalLink,
     FileText,
@@ -82,6 +83,18 @@ const mainNavItems: AdminNavItem[] = [
     {
         title: 'Interview Questions',
         href: admin.interviewQuestions.index(),
+        icon: ClipboardList,
+        permission: 'manage-applications',
+    },
+    {
+        title: 'Assessments',
+        href: admin.assessments.index(),
+        icon: ClipboardCheck,
+        permission: 'manage-applications',
+    },
+    {
+        title: 'Assessment Attempts',
+        href: admin.assessmentAttempts.index(),
         icon: ClipboardList,
         permission: 'manage-applications',
     },

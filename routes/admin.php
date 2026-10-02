@@ -1,6 +1,9 @@
 <?php
 
 use App\Http\Controllers\Admin\ApplicationRequirementController;
+use App\Http\Controllers\Admin\AssessmentAttemptController;
+use App\Http\Controllers\Admin\AssessmentController;
+use App\Http\Controllers\Admin\AssessmentQuestionController;
 use App\Http\Controllers\Admin\BackgroundCheckController;
 use App\Http\Controllers\Admin\BlogPostController;
 use App\Http\Controllers\Admin\CandidateController;
@@ -51,6 +54,12 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'verified', 'role:ad
         Route::post('employment-history/{employmentHistory}/reference-checks', [ReferenceCheckController::class, 'store'])->name('employment-history.reference-checks.store');
         Route::post('job-applications/{application}/background-checks', [BackgroundCheckController::class, 'store'])->name('job-applications.background-checks.store');
         Route::put('background-checks/{backgroundCheck}', [BackgroundCheckController::class, 'update'])->name('background-checks.update');
+        Route::resource('assessments', AssessmentController::class)->except(['show']);
+        Route::resource('assessments.questions', AssessmentQuestionController::class)->except(['show'])->shallow();
+        Route::get('assessment-attempts', [AssessmentAttemptController::class, 'index'])->name('assessment-attempts.index');
+        Route::get('assessment-attempts/{assessmentAttempt}', [AssessmentAttemptController::class, 'show'])->name('assessment-attempts.show');
+        Route::put('assessment-attempts/{assessmentAttempt}', [AssessmentAttemptController::class, 'update'])->name('assessment-attempts.update');
+        Route::post('job-applications/{application}/assessment-attempts', [AssessmentAttemptController::class, 'store'])->name('job-applications.assessment-attempts.store');
     });
     Route::resource('blog-posts', BlogPostController::class)->except(['show'])->middleware('permission:manage-blog');
     Route::resource('testimonials', TestimonialController::class)->except(['show'])->middleware('permission:manage-testimonials');

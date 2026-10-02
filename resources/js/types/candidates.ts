@@ -57,6 +57,15 @@ export type ApplicationBackgroundCheckEntry = {
     resolved_by: { id: number; name: string } | null;
 };
 
+export type ApplicationAssessmentAttemptSummary = {
+    id: number;
+    attempt_number: number;
+    status: string;
+    score: number | null;
+    passed: boolean | null;
+    assessment: { id: number; name: string };
+};
+
 export type CandidateApplication = {
     id: number;
     candidate_id: number;
@@ -72,6 +81,7 @@ export type CandidateApplication = {
     communications: ApplicationCommunicationEntry[];
     interviews: ApplicationInterviewSummary[];
     background_checks: ApplicationBackgroundCheckEntry[];
+    assessment_attempts: ApplicationAssessmentAttemptSummary[];
     resume_url: string | null;
     allowed_statuses: { value: string; label: string }[];
 };

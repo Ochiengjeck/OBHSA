@@ -8,6 +8,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
 import admin from '@/routes/admin';
 import type {
+    Assessment,
     CandidateApplication,
     CandidateDossier,
     CommunicationTemplate,
@@ -19,11 +20,13 @@ export default function CandidateShow({
     applications,
     recruiters,
     communicationTemplates,
+    assessments,
 }: {
     candidate: CandidateDossier;
     applications: CandidateApplication[];
     recruiters: RecruiterOption[];
     communicationTemplates: CommunicationTemplate[];
+    assessments: Pick<Assessment, 'id' | 'name' | 'max_attempts'>[];
 }) {
     return (
         <>
@@ -43,6 +46,7 @@ export default function CandidateShow({
                                 candidateFullName={candidate.full_name}
                                 recruiters={recruiters}
                                 templates={communicationTemplates}
+                                assessments={assessments}
                             />
                         ))}
                     </div>

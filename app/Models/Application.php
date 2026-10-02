@@ -142,6 +142,14 @@ class Application extends Model
     }
 
     /**
+     * @return HasMany<AssessmentAttempt, $this>
+     */
+    public function assessmentAttempts(): HasMany
+    {
+        return $this->hasMany(AssessmentAttempt::class)->latest();
+    }
+
+    /**
      * Generate a fresh resume token, storing only its hash (mirrors
      * Laravel's own password-reset-token convention) and returning the
      * plaintext for use in an emailed link. Excluded from #[Fillable] since

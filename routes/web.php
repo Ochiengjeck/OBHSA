@@ -25,6 +25,7 @@ Route::get('jobs/{jobListing:slug}', [JobListingController::class, 'show'])->nam
 Route::post('jobs/{jobListing:slug}/apply', [JobApplicationController::class, 'store'])->name('jobs.apply');
 
 require __DIR__.'/apply.php';
+require __DIR__.'/assessments.php';
 
 Route::get('blog', [BlogController::class, 'index'])->name('blog.index');
 Route::get('blog/{blogPost:slug}', [BlogController::class, 'show'])->name('blog.show');

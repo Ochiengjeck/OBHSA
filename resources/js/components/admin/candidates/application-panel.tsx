@@ -20,6 +20,7 @@ import { Textarea } from '@/components/ui/textarea';
 import admin from '@/routes/admin';
 import { REVIEW_REASON_CODES } from '@/lib/review-reason-codes';
 import type {
+    Assessment,
     CandidateApplication,
     CommunicationTemplate,
     RecruiterOption,
@@ -40,11 +41,13 @@ export function ApplicationPanel({
     candidateFullName,
     recruiters,
     templates,
+    assessments,
 }: {
     application: CandidateApplication;
     candidateFullName: string;
     recruiters: RecruiterOption[];
     templates: CommunicationTemplate[];
+    assessments: Pick<Assessment, 'id' | 'name' | 'max_attempts'>[];
 }) {
     const position = application.job_listing?.title ?? 'General Application';
 
@@ -73,9 +76,15 @@ export function ApplicationPanel({
 
     const backgroundCheckForm = useForm({ provider: '' });
 
+    const assignAssessmentForm = useForm({
+        assessment_id: null as number | null,
+    });
+
     const [showMessagePanel, setShowMessagePanel] = useState(false);
     const [showSchedulePanel, setShowSchedulePanel] = useState(false);
     const [showBackgroundCheckPanel, setShowBackgroundCheckPanel] =
+        useState(false);
+    const [showAssignAssessmentPanel, setShowAssignAssessmentPanel] =
         useState(false);
 
     function submitStatus(event: React.FormEvent) {
@@ -151,6 +160,20 @@ export function ApplicationPanel({
                 onSuccess: () => {
                     backgroundCheckForm.reset();
                     setShowBackgroundCheckPanel(false);
+                },
+            },
+        );
+    }
+
+    function submitAssignAssessment(event: React.FormEvent) {
+        event.preventDefault();
+        assignAssessmentForm.post(
+            admin.jobApplications.assessmentAttempts.store(application.id).url,
+            {
+                preserveScroll: true,
+                onSuccess: () => {
+                    assignAssessmentForm.reset();
+                    setShowAssignAssessmentPanel(false);
                 },
             },
         );
@@ -691,6 +714,115 @@ export function ApplicationPanel({
                                     key={check.id}
                                     check={check}
                                 />
+                            ))}
+                        </div>
+                    )}
+                </div>
+
+                <Separator />
+
+                <div className="space-y-3">
+                    <div className="flex items-center justify-between">
+                        <Label>Assessments</Label>
+                        <Button
+                            type="button"
+                            size="sm"
+                            variant="outline"
+                            onClick={() =>
+                                setShowAssignAssessmentPanel(
+                                    !showAssignAssessmentPanel,
+                                )
+                            }
+                        >
+                            {showAssignAssessmentPanel
+                                ? 'Cancel'
+                                : 'Assign Assessment'}
+                        </Button>
+                    </div>
+
+                    {showAssignAssessmentPanel && (
+                        <form
+                            onSubmit={submitAssignAssessment}
+                            className="space-y-3 rounded-lg border border-border p-3"
+                        >
+                            <Select
+                                value={
+                                    assignAssessmentForm.data.assessment_id
+                                        ? String(
+                                              assignAssessmentForm.data
+                                                  .assessment_id,
+                                          )
+                                        : undefined
+                                }
+                                onValueChange={(value) =>
+                                    assignAssessmentForm.setData(
+                                        'assessment_id',
+                                        Number(value),
+                                    )
+                                }
+                            >
+                                <SelectTrigger>
+                                    <SelectValue placeholder="Select an assessment" />
+                                </SelectTrigger>
+                                <SelectContent>
+                                    {assessments.map((assessment) => (
+                                        <SelectItem
+                                            key={assessment.id}
+                                            value={String(assessment.id)}
+                                        >
+                                            {assessment.name}
+                                        </SelectItem>
+                                    ))}
+                                </SelectContent>
+                            </Select>
+                            <Button
+                                type="submit"
+                                size="sm"
+                                disabled={
+                                    assignAssessmentForm.processing ||
+                                    !assignAssessmentForm.data.assessment_id
+                                }
+                            >
+                                {assignAssessmentForm.processing
+                                    ? 'Assigning...'
+                                    : 'Assign'}
+                            </Button>
+                        </form>
+                    )}
+
+                    {application.assessment_attempts.length > 0 && (
+                        <div className="space-y-2">
+                            {application.assessment_attempts.map((attempt) => (
+                                <Link
+                                    key={attempt.id}
+                                    href={admin.assessmentAttempts.show(
+                                        attempt.id,
+                                    )}
+                                    className="flex items-center justify-between rounded-md border border-border p-2 text-xs hover:bg-muted/50"
+                                >
+                                    <div>
+                                        <p className="font-medium text-foreground">
+                                            {attempt.assessment.name}
+                                        </p>
+                                        <p className="text-muted-foreground">
+                                            Attempt #{attempt.attempt_number}
+                                            {attempt.score !== null &&
+                                                ` · ${attempt.score}%`}
+                                        </p>
+                                    </div>
+                                    <div className="flex items-center gap-1.5">
+                                        {attempt.score !== null && (
+                                            <StatusBadge
+                                                status={
+                                                    attempt.passed
+                                                        ? 'passed'
+                                                        : 'failed'
+                                                }
+                                            />
+                                        )}
+                                        <StatusBadge status={attempt.status} />
+                                    </div>
+                                </Link>
                             ))}
                         </div>
                     )}
