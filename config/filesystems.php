@@ -1,5 +1,7 @@
 <?php
 
+$publicDriver = env('FILESYSTEM_PUBLIC_DRIVER', 'local');
+
 return [
 
     /*
@@ -39,10 +41,11 @@ return [
         ],
 
         'public' => [
-            'driver' => env('FILESYSTEM_PUBLIC_DRIVER', 'local'),
+            'driver' => $publicDriver,
             'root' => storage_path('app/public'),
             'url' => env('AWS_URL') ?: rtrim((string) env('APP_URL', 'http://localhost'), '/').'/storage',
-            'visibility' => 'public',
+            // Cloud Object Storage (R2) rejects per-object ACLs; visibility is bucket-level there.
+            ...$publicDriver === 'local' ? ['visibility' => 'public'] : [],
             'key' => env('AWS_ACCESS_KEY_ID'),
             'secret' => env('AWS_SECRET_ACCESS_KEY'),
             'region' => env('AWS_DEFAULT_REGION'),
