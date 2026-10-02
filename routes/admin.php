@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\ApplicationRequirementController;
+use App\Http\Controllers\Admin\BackgroundCheckController;
 use App\Http\Controllers\Admin\BlogPostController;
 use App\Http\Controllers\Admin\CandidateController;
 use App\Http\Controllers\Admin\CommunicationTemplateController;
@@ -48,6 +49,8 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'verified', 'role:ad
         Route::put('credentials/{credential}/reject', [CredentialController::class, 'reject'])->name('credentials.reject');
         Route::put('application-requirements/{applicationRequirement}', [ApplicationRequirementController::class, 'update'])->name('application-requirements.update');
         Route::post('employment-history/{employmentHistory}/reference-checks', [ReferenceCheckController::class, 'store'])->name('employment-history.reference-checks.store');
+        Route::post('job-applications/{application}/background-checks', [BackgroundCheckController::class, 'store'])->name('job-applications.background-checks.store');
+        Route::put('background-checks/{backgroundCheck}', [BackgroundCheckController::class, 'update'])->name('background-checks.update');
     });
     Route::resource('blog-posts', BlogPostController::class)->except(['show'])->middleware('permission:manage-blog');
     Route::resource('testimonials', TestimonialController::class)->except(['show'])->middleware('permission:manage-testimonials');

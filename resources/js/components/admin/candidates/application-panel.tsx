@@ -1,6 +1,7 @@
 import { Link, router, useForm } from '@inertiajs/react';
 import { AlertTriangle, FileText } from 'lucide-react';
 import { useState } from 'react';
+import { BackgroundCheckRow } from '@/components/admin/candidates/background-check-row';
 import { StatusBadge } from '@/components/admin/status-badge';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Button } from '@/components/ui/button';
@@ -70,8 +71,12 @@ export function ApplicationPanel({
         location_or_link: '',
     });
 
+    const backgroundCheckForm = useForm({ provider: '' });
+
     const [showMessagePanel, setShowMessagePanel] = useState(false);
     const [showSchedulePanel, setShowSchedulePanel] = useState(false);
+    const [showBackgroundCheckPanel, setShowBackgroundCheckPanel] =
+        useState(false);
 
     function submitStatus(event: React.FormEvent) {
         event.preventDefault();
@@ -136,6 +141,24 @@ export function ApplicationPanel({
             },
         );
     }
+
+    function submitBackgroundCheck(event: React.FormEvent) {
+        event.preventDefault();
+        backgroundCheckForm.post(
+            admin.jobApplications.backgroundChecks.store(application.id).url,
+            {
+                preserveScroll: true,
+                onSuccess: () => {
+                    backgroundCheckForm.reset();
+                    setShowBackgroundCheckPanel(false);
+                },
+            },
+        );
+    }
+
+    const hasActiveBackgroundCheck = application.background_checks.some(
+        (check) => check.status === 'initiated',
+    );
 
     const blockingRequirements = application.requirements.filter(
         (requirement) =>
@@ -605,6 +628,69 @@ export function ApplicationPanel({
                                         />
                                     </div>
                                 </Link>
+                            ))}
+                        </div>
+                    )}
+                </div>
+
+                <Separator />
+
+                <div className="space-y-3">
+                    <div className="flex items-center justify-between">
+                        <Label>Background Check</Label>
+                        {!hasActiveBackgroundCheck && (
+                            <Button
+                                type="button"
+                                size="sm"
+                                variant="outline"
+                                onClick={() =>
+                                    setShowBackgroundCheckPanel(
+                                        !showBackgroundCheckPanel,
+                                    )
+                                }
+                            >
+                                {showBackgroundCheckPanel
+                                    ? 'Cancel'
+                                    : 'Initiate Background Check'}
+                            </Button>
+                        )}
+                    </div>
+
+                    {showBackgroundCheckPanel && (
+                        <form
+                            onSubmit={submitBackgroundCheck}
+                            className="space-y-3 rounded-lg border border-border p-3"
+                        >
+                            <Input
+                                placeholder="Provider (e.g. Checkr)"
+                                value={backgroundCheckForm.data.provider}
+                                onChange={(e) =>
+                                    backgroundCheckForm.setData(
+                                        'provider',
+                                        e.target.value,
+                                    )
+                                }
+                                required
+                            />
+                            <Button
+                                type="submit"
+                                size="sm"
+                                disabled={backgroundCheckForm.processing}
+                            >
+                                {backgroundCheckForm.processing
+                                    ? 'Initiating...'
+                                    : 'Initiate'}
+                            </Button>
+                        </form>
+                    )}
+
+                    {application.background_checks.length > 0 && (
+                        <div className="space-y-2">
+                            {application.background_checks.map((check) => (
+                                <BackgroundCheckRow
+                                    key={check.id}
+                                    check={check}
+                                />
                             ))}
                         </div>
                     )}

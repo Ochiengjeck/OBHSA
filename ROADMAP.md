@@ -71,9 +71,17 @@ Wired up `Credential::verify()`/`reject()` and `ApplicationRequirement::markComp
 - 5 new Pest tests covering requirement auto-resolution (and that it skips already-decided applications), rejection notes, reference-check logging, the manual override, and editor access being forbidden
 - Real bug found & fixed while writing the migration: `reference_checks.employment_history_id`'s `constrained()` guessed the table name `employment_histories`, but Phase 1's table is singular `employment_history` — fixed by passing the table name explicitly
 
-### 6. Background screening — ⏳ Not started
+### 6. Background screening — ✅ Done (2026-10-02)
 
-Status-tracking subsystem now exists on `application_requirements`; a real provider integration needs a vendor chosen first.
+No background-check vendor has been chosen for this project and no API credentials exist, so — confirmed with the user — this phase builds manual tracking, not a real provider integration: a recruiter records that a check was initiated with whichever provider they actually used (typed freeform) and later records the result. The shape (`initiate` → external process → `record result`) mirrors a real integration closely enough that swapping in a vendor's API later is a follow-up, not a rewrite.
+
+**Delivered:**
+
+- `BackgroundCheck` model — a per-application log (a candidate can be re-checked), `recordResult()`/`cancel()` mirroring `Interview`'s outcome-mutation pattern
+- A new "Background Check" section in `ApplicationPanel`: "Initiate Background Check" (provider, freeform) and, once initiated, "Record Result" (Clear / Consider / Flagged / Cancelled)
+- Recording a `clear` result passes the application's `background_check` requirement; `consider`/`flagged` fails it — same unresolved-only guard as Phase 5's credential-driven resolution, so a past decided application is never rewritten
+- `ApplyController::submit()` now seeds a `background_check` requirement on every submission (consent for it is always collected at wizard step 7, unlike the conditional requirements seeded from what the candidate actually provided)
+- 5 new Pest tests; updated one pre-existing Phase 2 wizard test whose requirement-count assertion needed to account for the new requirement
 
 ### 7. Competency assessments — ⏳ Not started
 

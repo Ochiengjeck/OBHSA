@@ -46,6 +46,17 @@ export type ApplicationInterviewSummary = {
     interviewer: { id: number; name: string } | null;
 };
 
+export type ApplicationBackgroundCheckEntry = {
+    id: number;
+    provider: string;
+    status: string;
+    initiated_at: string;
+    result_received_at: string | null;
+    notes: string | null;
+    initiated_by: { id: number; name: string } | null;
+    resolved_by: { id: number; name: string } | null;
+};
+
 export type CandidateApplication = {
     id: number;
     candidate_id: number;
@@ -60,6 +71,7 @@ export type CandidateApplication = {
     recruiter: { id: number; name: string } | null;
     communications: ApplicationCommunicationEntry[];
     interviews: ApplicationInterviewSummary[];
+    background_checks: ApplicationBackgroundCheckEntry[];
     resume_url: string | null;
     allowed_statuses: { value: string; label: string }[];
 };

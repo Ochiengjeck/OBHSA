@@ -28,6 +28,8 @@ class CandidateController extends Controller
             'applications.recruiter:id,name',
             'applications.communications.sentBy:id,name',
             'applications.interviews.interviewer:id,name',
+            'applications.backgroundChecks.initiatedBy:id,name',
+            'applications.backgroundChecks.resolvedBy:id,name',
             'applications.documents',
             'credentials.verifier:id,name',
             'documents',

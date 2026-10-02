@@ -75,6 +75,12 @@ const STATUS_STYLES: Record<string, string> = {
     negative: 'bg-red-100 text-red-700 dark:bg-red-500/20 dark:text-red-300',
     unable_to_reach:
         'bg-amber-100 text-amber-700 dark:bg-amber-500/20 dark:text-amber-300',
+    initiated:
+        'bg-blue-100 text-blue-700 dark:bg-blue-500/20 dark:text-blue-300',
+    clear: 'bg-emerald-100 text-emerald-700 dark:bg-emerald-500/20 dark:text-emerald-300',
+    consider:
+        'bg-amber-100 text-amber-700 dark:bg-amber-500/20 dark:text-amber-300',
+    flagged: 'bg-red-100 text-red-700 dark:bg-red-500/20 dark:text-red-300',
 };
 
 export function StatusBadge({ status }: { status: string }) {

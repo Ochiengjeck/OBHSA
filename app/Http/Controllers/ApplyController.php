@@ -415,7 +415,7 @@ class ApplyController extends Controller
 
         $candidate = $application->candidate;
 
-        $requirements = ['recruiter_review'];
+        $requirements = ['recruiter_review', 'background_check'];
 
         if ($candidate->employmentHistory()->exists()) {
             $requirements[] = 'employment_history_verification';

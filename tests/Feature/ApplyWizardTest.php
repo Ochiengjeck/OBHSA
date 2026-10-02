@@ -81,7 +81,8 @@ test('a caregiver can complete the full application wizard', function () {
     $application->refresh();
 
     expect($application->status)->toBe('submitted');
-    expect($application->requirements()->count())->toBe(3);
+    expect($application->requirements()->count())->toBe(4);
+    expect($application->requirements()->where('requirement_type', 'background_check')->exists())->toBeTrue();
     expect($application->stageHistory()->count())->toBe(2);
 
     $resume = $application->documents()->where('document_type', 'resume')->firstOrFail();

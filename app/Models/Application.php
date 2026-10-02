@@ -134,6 +134,14 @@ class Application extends Model
     }
 
     /**
+     * @return HasMany<BackgroundCheck, $this>
+     */
+    public function backgroundChecks(): HasMany
+    {
+        return $this->hasMany(BackgroundCheck::class)->latest('initiated_at');
+    }
+
+    /**
      * Generate a fresh resume token, storing only its hash (mirrors
      * Laravel's own password-reset-token convention) and returning the
      * plaintext for use in an emailed link. Excluded from #[Fillable] since
