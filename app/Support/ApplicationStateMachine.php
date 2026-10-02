@@ -14,7 +14,7 @@ class ApplicationStateMachine
      */
     private const array TRANSITIONS = [
         'draft' => ['started', 'submitted', 'withdrawn'],
-        'started' => ['submitted', 'withdrawn'],
+        'started' => ['submitted', 'ineligible', 'withdrawn'],
         'submitted' => ['eligibility_review', 'ineligible', 'rejected', 'withdrawn'],
         'eligibility_review' => ['recruiter_review', 'ineligible', 'on_hold', 'withdrawn'],
         'recruiter_review' => ['screening', 'rejected', 'on_hold', 'withdrawn'],

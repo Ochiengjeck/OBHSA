@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 /**
  * @property int $id
@@ -29,8 +30,19 @@ use Illuminate\Support\Facades\DB;
  * @property string|null $user_agent
  * @property string|null $resume_token
  * @property Carbon|null $resume_token_expires_at
+ * @property string|null $primary_specialty
+ * @property string|null $secondary_specialty
+ * @property string|null $desired_employment_type
+ * @property string|null $desired_start_timeframe
+ * @property array<int, string>|null $work_settings
+ * @property Carbon|null $consent_accepted_at
+ * @property string|null $consent_signature_name
  */
-#[Fillable(['candidate_id', 'job_listing_id', 'cover_note', 'source', 'ip_address', 'user_agent'])]
+#[Fillable([
+    'candidate_id', 'job_listing_id', 'cover_note', 'source', 'ip_address', 'user_agent',
+    'primary_specialty', 'secondary_specialty', 'desired_employment_type', 'desired_start_timeframe',
+    'work_settings', 'consent_accepted_at', 'consent_signature_name',
+])]
 class Application extends Model
 {
     /** @use HasFactory<ApplicationFactory> */
@@ -52,6 +64,8 @@ class Application extends Model
             'current_stage_entered_at' => 'datetime',
             'submitted_at' => 'datetime',
             'resume_token_expires_at' => 'datetime',
+            'work_settings' => 'array',
+            'consent_accepted_at' => 'datetime',
         ];
     }
 
@@ -101,6 +115,32 @@ class Application extends Model
     public function documents(): HasMany
     {
         return $this->hasMany(Document::class);
+    }
+
+    /**
+     * Generate a fresh resume token, storing only its hash (mirrors
+     * Laravel's own password-reset-token convention) and returning the
+     * plaintext for use in an emailed link. Excluded from #[Fillable] since
+     * it must never be settable via mass assignment.
+     */
+    public function issueResumeToken(): string
+    {
+        $plaintext = Str::random(64);
+
+        $this->forceFill([
+            'resume_token' => hash('sha256', $plaintext),
+            'resume_token_expires_at' => now()->addDays(14),
+        ])->save();
+
+        return $plaintext;
+    }
+
+    /**
+     * Whether this application's resume token has expired.
+     */
+    public function resumeTokenHasExpired(): bool
+    {
+        return $this->resume_token_expires_at !== null && $this->resume_token_expires_at->isPast();
     }
 
     /**

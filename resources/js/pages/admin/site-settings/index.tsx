@@ -29,6 +29,7 @@ const LABELS: Record<string, string> = {
     linkedin_url: 'LinkedIn URL',
     twitter_url: 'Twitter URL',
     instagram_url: 'Instagram URL',
+    service_area_states: 'States We Serve (comma-separated, e.g. "NH, MA")',
 };
 
 export default function SiteSettingsIndex({

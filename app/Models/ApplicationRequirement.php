@@ -79,4 +79,15 @@ class ApplicationRequirement extends Model
             'completed_at' => now(),
         ])->save();
     }
+
+    /**
+     * Mark this requirement as failed.
+     */
+    public function markFailed(): void
+    {
+        $this->forceFill([
+            'status' => 'failed',
+            'completed_at' => now(),
+        ])->save();
+    }
 }

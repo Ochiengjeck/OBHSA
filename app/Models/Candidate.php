@@ -84,4 +84,16 @@ class Candidate extends Model
     {
         return $this->hasMany(Education::class);
     }
+
+    /**
+     * Mark this candidate's contact details as verified, via a redeemed
+     * resume-link token. Excluded from #[Fillable] since it must never be
+     * settable via mass assignment.
+     */
+    public function markContactVerified(): void
+    {
+        if ($this->contact_verified_at === null) {
+            $this->forceFill(['contact_verified_at' => now()])->save();
+        }
+    }
 }

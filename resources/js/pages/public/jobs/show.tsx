@@ -1,30 +1,14 @@
-import { Link, useForm } from '@inertiajs/react';
+import { Link } from '@inertiajs/react';
 import { ArrowLeft, Briefcase, Clock, MapPin } from 'lucide-react';
-import InputError from '@/components/input-error';
 import { PageHead } from '@/components/public/page-head';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Textarea } from '@/components/ui/textarea';
-import { apply, index } from '@/routes/jobs';
+import applyRoutes from '@/routes/apply';
+import { index } from '@/routes/jobs';
 import type { JobListing } from '@/types';
 
 export default function JobShow({ jobListing }: { jobListing: JobListing }) {
-    const { data, setData, post, processing, errors, wasSuccessful } = useForm({
-        full_name: '',
-        email: '',
-        phone: '',
-        resume: null as File | null,
-        cover_note: '',
-    });
-
-    function submit(event: React.FormEvent) {
-        event.preventDefault();
-        post(apply(jobListing.slug).url, { forceFormData: true });
-    }
-
     return (
         <>
             <PageHead
@@ -91,112 +75,21 @@ export default function JobShow({ jobListing }: { jobListing: JobListing }) {
                         <CardTitle>Apply for this position</CardTitle>
                     </CardHeader>
                     <CardContent>
-                        {wasSuccessful ? (
-                            <p className="text-sm font-medium text-primary">
-                                Application submitted. We will be in touch soon!
-                            </p>
-                        ) : (
-                            <form onSubmit={submit} className="space-y-5">
-                                <div className="grid gap-5 sm:grid-cols-2">
-                                    <div className="grid gap-2">
-                                        <Label htmlFor="full_name">
-                                            Full Name
-                                        </Label>
-                                        <Input
-                                            id="full_name"
-                                            value={data.full_name}
-                                            onChange={(e) =>
-                                                setData(
-                                                    'full_name',
-                                                    e.target.value,
-                                                )
-                                            }
-                                            required
-                                        />
-                                        <InputError
-                                            message={errors.full_name}
-                                        />
-                                    </div>
-
-                                    <div className="grid gap-2">
-                                        <Label htmlFor="phone">Phone</Label>
-                                        <Input
-                                            id="phone"
-                                            type="tel"
-                                            value={data.phone}
-                                            onChange={(e) =>
-                                                setData('phone', e.target.value)
-                                            }
-                                            required
-                                        />
-                                        <InputError message={errors.phone} />
-                                    </div>
-
-                                    <div className="grid gap-2 sm:col-span-2">
-                                        <Label htmlFor="email">Email</Label>
-                                        <Input
-                                            id="email"
-                                            type="email"
-                                            value={data.email}
-                                            onChange={(e) =>
-                                                setData('email', e.target.value)
-                                            }
-                                            required
-                                        />
-                                        <InputError message={errors.email} />
-                                    </div>
-
-                                    <div className="grid gap-2 sm:col-span-2">
-                                        <Label htmlFor="resume">
-                                            Resume (PDF or Word, max 5MB)
-                                        </Label>
-                                        <Input
-                                            id="resume"
-                                            type="file"
-                                            accept=".pdf,.doc,.docx"
-                                            onChange={(e) =>
-                                                setData(
-                                                    'resume',
-                                                    e.target.files?.[0] ?? null,
-                                                )
-                                            }
-                                            required
-                                        />
-                                        <InputError message={errors.resume} />
-                                    </div>
-
-                                    <div className="grid gap-2 sm:col-span-2">
-                                        <Label htmlFor="cover_note">
-                                            Note (optional)
-                                        </Label>
-                                        <Textarea
-                                            id="cover_note"
-                                            rows={4}
-                                            value={data.cover_note}
-                                            onChange={(e) =>
-                                                setData(
-                                                    'cover_note',
-                                                    e.target.value,
-                                                )
-                                            }
-                                        />
-                                        <InputError
-                                            message={errors.cover_note}
-                                        />
-                                    </div>
-                                </div>
-
-                                <Button
-                                    type="submit"
-                                    disabled={processing}
-                                    size="lg"
-                                >
-                                    {processing
-                                        ? 'Submitting...'
-                                        : 'Submit Application'}
-                                </Button>
-                            </form>
-                        )}
+                        <p className="mb-5 text-sm text-muted-foreground">
+                            Our application takes about 10 minutes. You can save
+                            your progress and finish later.
+                        </p>
+                        <Button asChild size="lg">
+                            <Link
+                                href={
+                                    applyRoutes.create({
+                                        query: { job_listing: jobListing.slug },
+                                    }).url
+                                }
+                            >
+                                Start Your Application
+                            </Link>
+                        </Button>
                     </CardContent>
                 </Card>
             </section>

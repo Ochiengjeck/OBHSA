@@ -25,6 +25,7 @@ class SiteSettingSeeder extends Seeder
             ['key' => 'twitter_url', 'value' => null, 'type' => 'url', 'group' => 'social'],
             ['key' => 'instagram_url', 'value' => null, 'type' => 'url', 'group' => 'social'],
             ['key' => 'footer_note', 'value' => 'Optimum Baseline Healthcare Staffing Agency is a per-diem healthcare staffing partner serving facilities and caregivers across New Hampshire.', 'type' => 'textarea', 'group' => 'general'],
+            ['key' => 'service_area_states', 'value' => 'NH', 'type' => 'text', 'group' => 'general'],
         ];
 
         foreach ($settings as $setting) {
