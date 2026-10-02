@@ -1,3 +1,5 @@
+import type { EmployeeShiftAssignment } from './facilities';
+
 export type EmployeeListRow = {
     id: number;
     employee_number: string | null;
@@ -33,6 +35,7 @@ export type EmployeeProfile = {
         id: number;
         job_listing: { id: number; title: string } | null;
     } | null;
+    shift_assignments: EmployeeShiftAssignment[];
 };
 
 export type CredentialExpiryNotification = {

@@ -123,9 +123,18 @@ Introduces Laravel's scheduler to this app for the first time, to keep watching 
 - Real bug caught before it shipped — not by PHPStan, by re-deriving the logic by hand: the stage-threshold lookup's `match`-style ordering checked widest-window-first (60/30/7/overdue), which would have mis-classified a 5-days-left credential as "60_day" instead of "7_day" — fixed by checking narrowest (most urgent) window first
 - 6 new Pest tests covering all four stages, the beyond-window no-op, the inactive-employee skip, and that a second run never re-sends a stage already logged
 
-### 10. Facility / Shift / deployment matching — ⏳ Not started
+### 10. Facility / Shift / deployment matching — ✅ Done (2026-10-02)
 
-A genuinely new domain — OBHSA doesn't model client facilities or shifts at all today.
+A genuinely new domain — OBHSA didn't model client facilities or shifts at all before this phase. Confirmed with the user: admin-only assignment, no employee-facing shift pickup.
+
+**Delivered:**
+
+- `Facility` (address + contact details, `facility_type` reusing Phase 2's work-setting vocabulary) and `Shift` (`facility_id`, specialty, date/time, `slots_needed`, `status`: `open`/`filled`/`cancelled`) — new "Facilities" admin area, shifts nested (shallow) under a facility exactly like Phase 4's `assessments.questions`
+- `ShiftAssignment` (`shift_id`, `employee_id`, `status`: `assigned`/`confirmed`/`completed`/`no_show`/`cancelled`) — matching is a specialty- and active-status-filtered dropdown on the shift's own show page, no scoring algorithm, enforced again at the validation layer (`Rule::exists` with the same `where` filters) so a mismatched id can never be posted directly even bypassing the dropdown
+- `Shift::recomputeStatus()` — called after every assignment create/update, flips a shift between `open`/`filled` based on its active-assignment count; a `cancelled` shift never auto-reopens
+- Restored the two references deferred from Phase 8 once their dependency existed: `Employee::shiftAssignments()` and `Admin\EmployeeController::show()`'s eager-load; Employee show page gained a "Shift Assignments" section
+- Real bug caught before it shipped — not by PHPStan, by re-reading the diff: `Admin\ShiftController::update()`'s first draft mass-assigned `status` straight from the request, but `Shift::status` is deliberately excluded from `#[Fillable]` (it's computed, not direct input) — the exact same class of bug Phase 8 shipped with `Offer::extended_by`. Fixed by handling `status` explicitly (`cancel()` or `recomputeStatus()`), separate from the rest of the fillable fields
+- 8 new Pest tests covering shift scheduling, filling a shift across two assignments, cancelling an assignment reopening the shift, the specialty/active-status guard rejecting a mismatched or inactive employee (enforced at validation, not just UI), the available-employees list excluding already-assigned and mismatched employees, a cancelled shift staying cancelled through an assignment change, and editor access being forbidden
 
 ### 11. AI copilot — ⏳ Not started
 

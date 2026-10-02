@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Carbon;
 
 /**
@@ -44,6 +45,14 @@ class Employee extends Model
     public function application(): BelongsTo
     {
         return $this->belongsTo(Application::class);
+    }
+
+    /**
+     * @return HasMany<ShiftAssignment, $this>
+     */
+    public function shiftAssignments(): HasMany
+    {
+        return $this->hasMany(ShiftAssignment::class)->latest('assigned_at');
     }
 
     /**

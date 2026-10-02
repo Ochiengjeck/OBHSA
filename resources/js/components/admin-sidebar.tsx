@@ -2,6 +2,7 @@ import { Link, usePage } from '@inertiajs/react';
 import {
     BarChart3,
     Briefcase,
+    Building2,
     CalendarClock,
     ClipboardCheck,
     ClipboardList,
@@ -117,6 +118,12 @@ const mainNavItems: AdminNavItem[] = [
         title: 'Compliance',
         href: admin.compliance.index(),
         icon: ShieldAlert,
+        permission: 'manage-applications',
+    },
+    {
+        title: 'Facilities',
+        href: admin.facilities.index(),
+        icon: Building2,
         permission: 'manage-applications',
     },
     {

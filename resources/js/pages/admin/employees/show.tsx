@@ -198,6 +198,58 @@ export default function EmployeeShow({
                         )}
                     </CardContent>
                 </Card>
+
+                <Card>
+                    <CardHeader>
+                        <CardTitle>Shift Assignments</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                        {employee.shift_assignments.length === 0 ? (
+                            <p className="text-sm text-muted-foreground">
+                                No shift assignments yet.
+                            </p>
+                        ) : (
+                            <div className="space-y-2">
+                                {employee.shift_assignments.map(
+                                    (assignment) => (
+                                        <Link
+                                            key={assignment.id}
+                                            href={admin.shifts.show(
+                                                assignment.shift.id,
+                                            )}
+                                            className="flex items-center justify-between rounded-md border border-border p-2 text-sm hover:bg-muted/50"
+                                        >
+                                            <div>
+                                                <p className="font-medium text-foreground">
+                                                    {
+                                                        assignment.shift
+                                                            .facility.name
+                                                    }
+                                                </p>
+                                                <p className="text-xs text-muted-foreground">
+                                                    {new Date(
+                                                        assignment.shift
+                                                            .shift_date,
+                                                    ).toLocaleDateString()}{' '}
+                                                    ·{' '}
+                                                    {
+                                                        assignment.shift
+                                                            .start_time
+                                                    }{' '}
+                                                    –{' '}
+                                                    {assignment.shift.end_time}
+                                                </p>
+                                            </div>
+                                            <StatusBadge
+                                                status={assignment.status}
+                                            />
+                                        </Link>
+                                    ),
+                                )}
+                            </div>
+                        )}
+                    </CardContent>
+                </Card>
             </div>
         </>
     );

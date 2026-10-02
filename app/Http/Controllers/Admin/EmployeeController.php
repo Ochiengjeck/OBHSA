@@ -41,6 +41,7 @@ class EmployeeController extends Controller
             'candidate.credentials.verifier:id,name',
             'candidate.credentials.expiryNotifications',
             'application.jobListing:id,title',
+            'shiftAssignments.shift.facility:id,name',
         ]);
 
         return Inertia::render('admin/employees/show', [
