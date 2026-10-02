@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Carbon;
 
 /**
@@ -61,6 +62,14 @@ class Credential extends Model
     public function verifier(): BelongsTo
     {
         return $this->belongsTo(User::class, 'verified_by');
+    }
+
+    /**
+     * @return HasMany<CredentialExpiryNotification, $this>
+     */
+    public function expiryNotifications(): HasMany
+    {
+        return $this->hasMany(CredentialExpiryNotification::class);
     }
 
     /**

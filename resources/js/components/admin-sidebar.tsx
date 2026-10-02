@@ -16,6 +16,7 @@ import {
     MessageSquareQuote,
     Newspaper,
     Settings2,
+    ShieldAlert,
     UserCheck,
     Users,
 } from 'lucide-react';
@@ -110,6 +111,12 @@ const mainNavItems: AdminNavItem[] = [
         title: 'Employees',
         href: admin.employees.index(),
         icon: UserCheck,
+        permission: 'manage-applications',
+    },
+    {
+        title: 'Compliance',
+        href: admin.compliance.index(),
+        icon: ShieldAlert,
         permission: 'manage-applications',
     },
     {

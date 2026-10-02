@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\BackgroundCheckController;
 use App\Http\Controllers\Admin\BlogPostController;
 use App\Http\Controllers\Admin\CandidateController;
 use App\Http\Controllers\Admin\CommunicationTemplateController;
+use App\Http\Controllers\Admin\ComplianceController;
 use App\Http\Controllers\Admin\CredentialController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\EmployeeController;
@@ -70,6 +71,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'verified', 'role:ad
         Route::resource('onboarding-checklist-templates.items', OnboardingChecklistTemplateItemController::class)->except(['show'])->shallow();
         Route::get('employees', [EmployeeController::class, 'index'])->name('employees.index');
         Route::get('employees/{employee}', [EmployeeController::class, 'show'])->name('employees.show');
+        Route::get('compliance', [ComplianceController::class, 'index'])->name('compliance.index');
     });
     Route::resource('blog-posts', BlogPostController::class)->except(['show'])->middleware('permission:manage-blog');
     Route::resource('testimonials', TestimonialController::class)->except(['show'])->middleware('permission:manage-testimonials');

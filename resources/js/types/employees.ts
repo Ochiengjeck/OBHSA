@@ -26,12 +26,29 @@ export type EmployeeProfile = {
             credential_name: string;
             verification_status: string;
             expiry_date: string | null;
+            expiry_notifications: CredentialExpiryNotification[];
         }[];
     };
     application: {
         id: number;
         job_listing: { id: number; title: string } | null;
     } | null;
+};
+
+export type CredentialExpiryNotification = {
+    id: number;
+    stage: string;
+    sent_at: string;
+    notified_employee: boolean;
+    notified_staff: boolean;
+};
+
+export type ComplianceCredentialRow = {
+    id: number;
+    credential_name: string;
+    expiry_date: string;
+    verification_status: string;
+    candidate: { id: number; full_name: string; email: string };
 };
 
 export type OnboardingChecklistTemplate = {

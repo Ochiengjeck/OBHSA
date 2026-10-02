@@ -39,6 +39,7 @@ class EmployeeController extends Controller
     {
         $employee->load([
             'candidate.credentials.verifier:id,name',
+            'candidate.credentials.expiryNotifications',
             'application.jobListing:id,title',
         ]);
 

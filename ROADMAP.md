@@ -111,9 +111,17 @@ Gives the `offer_pending`/`offer_accepted`/`onboarding`/`activation_review` stat
 - Real bug found & fixed before it shipped: `Offer`'s `#[Fillable]` list omitted `extended_by`/`extended_at`, so `Admin\OfferController::store()`'s mass-assignment silently dropped who extended the offer and when — caught by a failing Pest assertion, not by PHPStan (mass-assignment of a non-fillable attribute fails silently rather than throwing in this app's config)
 - 16 new Pest tests across three files, covering both offer-response paths, the activation blocking-gate (including that it's bypassed once requirements pass), onboarding-template instantiation and its non-duplication on re-entry, Employee auto-creation, the "only one default template" rule, and editor access being forbidden
 
-### 9. Continuous compliance — ⏳ Not started
+### 9. Continuous compliance — ✅ Done (2026-10-02)
 
-Staged credential-expiry warnings and notifications once people are active.
+Introduces Laravel's scheduler to this app for the first time, to keep watching credentials after a candidate becomes an `Employee` — something nothing in Phases 1–8 did once an application left the pipeline.
+
+**Delivered:**
+
+- `CredentialExpiryNotification` — an immutable per-credential, per-stage log (`overdue`/`7_day`/`30_day`/`60_day`), unique on `(credential_id, stage)` at the schema level as a second line of defense alongside the application-level check
+- `App\Console\Commands\CheckCredentialExpirations` (`compliance:check-credential-expirations`), scheduled daily via `bootstrap/app.php`'s new `->withSchedule()`: for every credential with an `expiry_date` belonging to a candidate with an `active` `Employee`, computes the most urgent applicable stage and — only the first time a given credential reaches a given stage — queues `CredentialExpiryWarning` to the employee and `CredentialExpiryStaffAlert` to the site contact email (`SiteSetting::get('email', ...)`, the same fallback used by Phases 1–3's own notification emails), then logs the notification
+- A new "Compliance" admin screen (`/admin/compliance`) listing active employees' credentials expiring within 90 days, most urgent first, with an "Overdue" quick filter; the Employee show page's Credentials card gained a compliance view — an amber expiry date inside the 90-day window and each credential's notification-stage history as badges
+- Real bug caught before it shipped — not by PHPStan, by re-deriving the logic by hand: the stage-threshold lookup's `match`-style ordering checked widest-window-first (60/30/7/overdue), which would have mis-classified a 5-days-left credential as "60_day" instead of "7_day" — fixed by checking narrowest (most urgent) window first
+- 6 new Pest tests covering all four stages, the beyond-window no-op, the inactive-employee skip, and that a second run never re-sends a stage already logged
 
 ### 10. Facility / Shift / deployment matching — ⏳ Not started
 

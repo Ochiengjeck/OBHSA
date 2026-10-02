@@ -120,7 +120,7 @@ export default function EmployeeShow({
 
                 <Card>
                     <CardHeader>
-                        <CardTitle>Credentials</CardTitle>
+                        <CardTitle>Credentials & Compliance</CardTitle>
                     </CardHeader>
                     <CardContent>
                         {employee.candidate.credentials.length === 0 ? (
@@ -130,31 +130,69 @@ export default function EmployeeShow({
                         ) : (
                             <div className="space-y-2">
                                 {employee.candidate.credentials.map(
-                                    (credential) => (
-                                        <div
-                                            key={credential.id}
-                                            className="flex items-center justify-between rounded-md border border-border p-2 text-sm"
-                                        >
-                                            <div>
-                                                <p className="font-medium text-foreground">
-                                                    {credential.credential_name}
-                                                </p>
-                                                {credential.expiry_date && (
-                                                    <p className="text-xs text-muted-foreground">
-                                                        Expires{' '}
-                                                        {new Date(
-                                                            credential.expiry_date,
-                                                        ).toLocaleDateString()}
-                                                    </p>
+                                    (credential) => {
+                                        const isExpiringSoon =
+                                            credential.expiry_date &&
+                                            new Date(
+                                                credential.expiry_date,
+                                            ).getTime() -
+                                                Date.now() <
+                                                90 * 24 * 60 * 60 * 1000;
+
+                                        return (
+                                            <div
+                                                key={credential.id}
+                                                className="rounded-md border border-border p-2 text-sm"
+                                            >
+                                                <div className="flex items-center justify-between">
+                                                    <div>
+                                                        <p className="font-medium text-foreground">
+                                                            {
+                                                                credential.credential_name
+                                                            }
+                                                        </p>
+                                                        {credential.expiry_date && (
+                                                            <p
+                                                                className={
+                                                                    isExpiringSoon
+                                                                        ? 'text-xs font-medium text-amber-600'
+                                                                        : 'text-xs text-muted-foreground'
+                                                                }
+                                                            >
+                                                                Expires{' '}
+                                                                {new Date(
+                                                                    credential.expiry_date,
+                                                                ).toLocaleDateString()}
+                                                            </p>
+                                                        )}
+                                                    </div>
+                                                    <StatusBadge
+                                                        status={
+                                                            credential.verification_status
+                                                        }
+                                                    />
+                                                </div>
+
+                                                {credential.expiry_notifications
+                                                    .length > 0 && (
+                                                    <div className="mt-2 flex flex-wrap gap-1.5 border-t border-border pt-2">
+                                                        {credential.expiry_notifications.map(
+                                                            (notification) => (
+                                                                <StatusBadge
+                                                                    key={
+                                                                        notification.id
+                                                                    }
+                                                                    status={
+                                                                        notification.stage
+                                                                    }
+                                                                />
+                                                            ),
+                                                        )}
+                                                    </div>
                                                 )}
                                             </div>
-                                            <StatusBadge
-                                                status={
-                                                    credential.verification_status
-                                                }
-                                            />
-                                        </div>
-                                    ),
+                                        );
+                                    },
                                 )}
                             </div>
                         )}
