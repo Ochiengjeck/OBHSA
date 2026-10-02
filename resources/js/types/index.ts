@@ -2,6 +2,7 @@ export type * from './apply';
 export type * from './assessments';
 export type * from './auth';
 export type * from './candidates';
+export type * from './employees';
 export type * from './interviews';
 export type * from './navigation';
 export type * from './site';

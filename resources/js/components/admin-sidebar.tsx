@@ -10,11 +10,13 @@ import {
     Inbox,
     LayoutGrid,
     ListChecks,
+    ListTodo,
     Mail,
     MessageCircle,
     MessageSquareQuote,
     Newspaper,
     Settings2,
+    UserCheck,
     Users,
 } from 'lucide-react';
 import AppLogo from '@/components/app-logo';
@@ -96,6 +98,18 @@ const mainNavItems: AdminNavItem[] = [
         title: 'Assessment Attempts',
         href: admin.assessmentAttempts.index(),
         icon: ClipboardList,
+        permission: 'manage-applications',
+    },
+    {
+        title: 'Onboarding Checklists',
+        href: admin.onboardingChecklistTemplates.index(),
+        icon: ListTodo,
+        permission: 'manage-applications',
+    },
+    {
+        title: 'Employees',
+        href: admin.employees.index(),
+        icon: UserCheck,
         permission: 'manage-applications',
     },
     {

@@ -26,6 +26,13 @@ import type {
     RecruiterOption,
 } from '@/types';
 
+const EMPLOYMENT_TYPES = [
+    { value: 'full_time', label: 'Full Time' },
+    { value: 'part_time', label: 'Part Time' },
+    { value: 'per_diem', label: 'Per Diem' },
+    { value: 'contract', label: 'Contract' },
+];
+
 function substitutePlaceholders(
     text: string,
     candidateName: string,
@@ -80,12 +87,22 @@ export function ApplicationPanel({
         assessment_id: null as number | null,
     });
 
+    const offerForm = useForm({
+        position,
+        pay_rate: '',
+        employment_type: 'full_time',
+        start_date: '',
+        expires_at: '',
+        notes: '',
+    });
+
     const [showMessagePanel, setShowMessagePanel] = useState(false);
     const [showSchedulePanel, setShowSchedulePanel] = useState(false);
     const [showBackgroundCheckPanel, setShowBackgroundCheckPanel] =
         useState(false);
     const [showAssignAssessmentPanel, setShowAssignAssessmentPanel] =
         useState(false);
+    const [showOfferPanel, setShowOfferPanel] = useState(false);
 
     function submitStatus(event: React.FormEvent) {
         event.preventDefault();
@@ -178,6 +195,32 @@ export function ApplicationPanel({
             },
         );
     }
+
+    function submitOffer(event: React.FormEvent) {
+        event.preventDefault();
+        offerForm.post(admin.jobApplications.offers.store(application.id).url, {
+            preserveScroll: true,
+            onSuccess: () => {
+                offerForm.reset();
+                setShowOfferPanel(false);
+            },
+        });
+    }
+
+    function overrideOffer(
+        offerId: number,
+        status: 'accepted' | 'declined' | 'withdrawn',
+    ) {
+        router.put(
+            admin.offers.update(offerId).url,
+            { status },
+            { preserveScroll: true },
+        );
+    }
+
+    const hasPendingOffer = application.offers.some(
+        (offer) => offer.status === 'pending',
+    );
 
     const hasActiveBackgroundCheck = application.background_checks.some(
         (check) => check.status === 'initiated',
@@ -823,6 +866,192 @@ export function ApplicationPanel({
                                         <StatusBadge status={attempt.status} />
                                     </div>
                                 </Link>
+                            ))}
+                        </div>
+                    )}
+                </div>
+
+                <Separator />
+
+                <div className="space-y-3">
+                    <div className="flex items-center justify-between">
+                        <Label>Offer</Label>
+                        {!hasPendingOffer && (
+                            <Button
+                                type="button"
+                                size="sm"
+                                variant="outline"
+                                onClick={() =>
+                                    setShowOfferPanel(!showOfferPanel)
+                                }
+                            >
+                                {showOfferPanel ? 'Cancel' : 'Extend Offer'}
+                            </Button>
+                        )}
+                    </div>
+
+                    {showOfferPanel && (
+                        <form
+                            onSubmit={submitOffer}
+                            className="space-y-3 rounded-lg border border-border p-3"
+                        >
+                            <div className="grid gap-3 sm:grid-cols-2">
+                                <Input
+                                    placeholder="Position"
+                                    value={offerForm.data.position}
+                                    onChange={(e) =>
+                                        offerForm.setData(
+                                            'position',
+                                            e.target.value,
+                                        )
+                                    }
+                                    required
+                                />
+                                <Input
+                                    placeholder="Pay rate (e.g. 42.50)"
+                                    value={offerForm.data.pay_rate}
+                                    onChange={(e) =>
+                                        offerForm.setData(
+                                            'pay_rate',
+                                            e.target.value,
+                                        )
+                                    }
+                                    required
+                                />
+                                <Select
+                                    value={offerForm.data.employment_type}
+                                    onValueChange={(value) =>
+                                        offerForm.setData(
+                                            'employment_type',
+                                            value,
+                                        )
+                                    }
+                                >
+                                    <SelectTrigger>
+                                        <SelectValue />
+                                    </SelectTrigger>
+                                    <SelectContent>
+                                        {EMPLOYMENT_TYPES.map((type) => (
+                                            <SelectItem
+                                                key={type.value}
+                                                value={type.value}
+                                            >
+                                                {type.label}
+                                            </SelectItem>
+                                        ))}
+                                    </SelectContent>
+                                </Select>
+                                <Input
+                                    type="date"
+                                    value={offerForm.data.start_date}
+                                    onChange={(e) =>
+                                        offerForm.setData(
+                                            'start_date',
+                                            e.target.value,
+                                        )
+                                    }
+                                    required
+                                />
+                                <Input
+                                    type="date"
+                                    placeholder="Expires (optional)"
+                                    value={offerForm.data.expires_at}
+                                    onChange={(e) =>
+                                        offerForm.setData(
+                                            'expires_at',
+                                            e.target.value,
+                                        )
+                                    }
+                                />
+                            </div>
+                            <Textarea
+                                rows={2}
+                                placeholder="Notes (optional)"
+                                value={offerForm.data.notes}
+                                onChange={(e) =>
+                                    offerForm.setData('notes', e.target.value)
+                                }
+                            />
+                            <Button
+                                type="submit"
+                                size="sm"
+                                disabled={offerForm.processing}
+                            >
+                                {offerForm.processing
+                                    ? 'Sending...'
+                                    : 'Send Offer'}
+                            </Button>
+                        </form>
+                    )}
+
+                    {application.offers.length > 0 && (
+                        <div className="space-y-2">
+                            {application.offers.map((offer) => (
+                                <div
+                                    key={offer.id}
+                                    className="space-y-1.5 rounded-md border border-border p-2 text-xs"
+                                >
+                                    <div className="flex items-center justify-between">
+                                        <p className="font-medium text-foreground">
+                                            {offer.position} · ${offer.pay_rate}
+                                            /hr
+                                        </p>
+                                        <StatusBadge status={offer.status} />
+                                    </div>
+                                    <p className="text-muted-foreground">
+                                        Starts{' '}
+                                        {new Date(
+                                            offer.start_date,
+                                        ).toLocaleDateString()}
+                                        {offer.extended_by &&
+                                            ` · ${offer.extended_by.name}`}
+                                    </p>
+                                    {offer.decline_reason && (
+                                        <p className="text-muted-foreground">
+                                            Declined: {offer.decline_reason}
+                                        </p>
+                                    )}
+                                    {offer.status === 'pending' && (
+                                        <div className="flex items-center gap-3 pt-0.5">
+                                            <button
+                                                type="button"
+                                                className="font-medium text-primary hover:underline"
+                                                onClick={() =>
+                                                    overrideOffer(
+                                                        offer.id,
+                                                        'accepted',
+                                                    )
+                                                }
+                                            >
+                                                Mark Accepted
+                                            </button>
+                                            <button
+                                                type="button"
+                                                className="font-medium text-destructive hover:underline"
+                                                onClick={() =>
+                                                    overrideOffer(
+                                                        offer.id,
+                                                        'declined',
+                                                    )
+                                                }
+                                            >
+                                                Mark Declined
+                                            </button>
+                                            <button
+                                                type="button"
+                                                className="font-medium text-muted-foreground hover:underline"
+                                                onClick={() =>
+                                                    overrideOffer(
+                                                        offer.id,
+                                                        'withdrawn',
+                                                    )
+                                                }
+                                            >
+                                                Withdraw
+                                            </button>
+                                        </div>
+                                    )}
+                                </div>
                             ))}
                         </div>
                     )}

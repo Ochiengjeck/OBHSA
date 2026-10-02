@@ -66,6 +66,32 @@ export type ApplicationAssessmentAttemptSummary = {
     assessment: { id: number; name: string };
 };
 
+export type ApplicationOfferEntry = {
+    id: number;
+    position: string;
+    pay_rate: string;
+    employment_type: string;
+    start_date: string;
+    expires_at: string | null;
+    status: string;
+    decline_reason: string | null;
+    notes: string | null;
+    extended_by: { id: number; name: string } | null;
+};
+
+export type PublicOfferDetail = {
+    id: number;
+    position: string;
+    pay_rate: string;
+    employment_type: string;
+    start_date: string;
+    expires_at: string | null;
+    notes: string | null;
+    application: {
+        candidate: { full_name: string };
+    };
+};
+
 export type CandidateApplication = {
     id: number;
     candidate_id: number;
@@ -82,6 +108,7 @@ export type CandidateApplication = {
     interviews: ApplicationInterviewSummary[];
     background_checks: ApplicationBackgroundCheckEntry[];
     assessment_attempts: ApplicationAssessmentAttemptSummary[];
+    offers: ApplicationOfferEntry[];
     resume_url: string | null;
     allowed_statuses: { value: string; label: string }[];
 };

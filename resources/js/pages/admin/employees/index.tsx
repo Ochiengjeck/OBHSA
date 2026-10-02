@@ -1,0 +1,138 @@
+import { Head, Link, router } from '@inertiajs/react';
+import { AdminPageHeader } from '@/components/admin/admin-page-header';
+import { StatusBadge } from '@/components/admin/status-badge';
+import { PaginationLinks } from '@/components/pagination-links';
+import { Input } from '@/components/ui/input';
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from '@/components/ui/select';
+import {
+    Table,
+    TableBody,
+    TableCell,
+    TableHead,
+    TableHeader,
+    TableRow,
+} from '@/components/ui/table';
+import admin from '@/routes/admin';
+import type { EmployeeListRow, Paginated } from '@/types';
+
+export default function EmployeesIndex({
+    employees,
+    filters,
+}: {
+    employees: Paginated<EmployeeListRow>;
+    filters: { status: string | null; specialty: string | null };
+}) {
+    function updateFilters(patch: Partial<typeof filters>) {
+        router.get(
+            admin.employees.index().url,
+            { ...filters, ...patch },
+            { preserveState: true, replace: true },
+        );
+    }
+
+    return (
+        <>
+            <Head title="Employees" />
+            <div className="p-4 sm:p-6">
+                <AdminPageHeader
+                    title="Employees"
+                    description="Caregivers activated from the application pipeline."
+                />
+
+                <div className="mb-4 flex flex-wrap items-center gap-2">
+                    <Select
+                        value={filters.status ?? 'all'}
+                        onValueChange={(value) =>
+                            updateFilters({
+                                status: value === 'all' ? null : value,
+                            })
+                        }
+                    >
+                        <SelectTrigger className="w-48">
+                            <SelectValue placeholder="All statuses" />
+                        </SelectTrigger>
+                        <SelectContent>
+                            <SelectItem value="all">All Statuses</SelectItem>
+                            <SelectItem value="active">Active</SelectItem>
+                            <SelectItem value="inactive">Inactive</SelectItem>
+                            <SelectItem value="terminated">
+                                Terminated
+                            </SelectItem>
+                        </SelectContent>
+                    </Select>
+
+                    <Input
+                        placeholder="Filter by specialty"
+                        className="w-56"
+                        defaultValue={filters.specialty ?? ''}
+                        onBlur={(e) =>
+                            updateFilters({
+                                specialty: e.target.value || null,
+                            })
+                        }
+                    />
+                </div>
+
+                <Table>
+                    <TableHeader>
+                        <TableRow>
+                            <TableHead>Employee</TableHead>
+                            <TableHead>Employee #</TableHead>
+                            <TableHead>Specialty</TableHead>
+                            <TableHead>Hire Date</TableHead>
+                            <TableHead>Status</TableHead>
+                        </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                        {employees.data.map((employee) => (
+                            <TableRow key={employee.id}>
+                                <TableCell>
+                                    <Link
+                                        href={admin.employees.show(employee.id)}
+                                        className="font-medium text-primary hover:underline"
+                                    >
+                                        {employee.candidate.full_name}
+                                    </Link>
+                                    <p className="text-xs text-muted-foreground">
+                                        {employee.candidate.email}
+                                    </p>
+                                </TableCell>
+                                <TableCell className="text-muted-foreground">
+                                    {employee.employee_number ?? '—'}
+                                </TableCell>
+                                <TableCell className="text-muted-foreground">
+                                    {employee.specialty ?? '—'}
+                                </TableCell>
+                                <TableCell className="text-muted-foreground">
+                                    {new Date(
+                                        employee.hire_date,
+                                    ).toLocaleDateString()}
+                                </TableCell>
+                                <TableCell>
+                                    <StatusBadge status={employee.status} />
+                                </TableCell>
+                            </TableRow>
+                        ))}
+                    </TableBody>
+                </Table>
+
+                <div className="mt-6">
+                    <PaginationLinks links={employees.links} />
+                </div>
+            </div>
+        </>
+    );
+}
+
+EmployeesIndex.layout = {
+    breadcrumbs: [
+        { title: 'Dashboard', href: admin.dashboard() },
+        { title: 'Employees', href: admin.employees.index() },
+    ],
+};

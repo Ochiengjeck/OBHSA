@@ -97,11 +97,19 @@ Gives the `assessment` application status (reserved since Phase 1) real behavior
 - Real bugs caught before they shipped: the entry/grading page's "set state then immediately submit" first draft relied on a stale React state read (fixed by passing the payload directly to `router.put` instead of `useForm`'s async `setData`); the public show page was missing the plaintext `token` prop entirely, which the submit button needs to build its own URL; Laravel's shallow nested resource (`assessments.questions`) names its edit/update/destroy routes under the bare child resource (`admin.questions.*`), not nested under the parent — caught three wrong route calls via `npm run build`'s route-name check before they ever reached a browser
 - 9 new Pest tests across two files, covering both delivery modes, auto-grading, the awaiting-grading hand-off, `max_attempts`, and expired/invalid tokens
 
-### 8. Offer → Onboarding → Activation — ⏳ Not started
+### 8. Offer → Onboarding → Activation — ✅ Done (2026-10-02)
 
-### 8. Offer → Onboarding → Activation — ⏳ Not started
+Gives the `offer_pending`/`offer_accepted`/`onboarding`/`activation_review` statuses (reserved since Phase 1) real behavior: offer generation with full self-service acceptance, an admin-configurable onboarding checklist engine layered onto the existing requirement system, a deterministic activation gate, and Employee record creation the moment an application goes active.
 
-Offer generation/acceptance, a checklist-driven onboarding engine, a deterministic activation-eligibility check, and Employee record creation.
+**Delivered:**
+
+- `Offer` model — extend/accept/decline/withdraw, reusing `Application::issueResumeToken()`'s exact hashed-token pattern for the emailed accept/decline link (`OfferResponseController` + `routes/offers.php`, same non-leaking invalid-vs-expired distinction as Phases 2/7); staff retain a manual override (`Admin\OfferController::update`) for a verbal/phone acceptance, both self-service and staff paths converging on the same `accept()`/`decline()`/`withdraw()` model methods
+- `OnboardingChecklistTemplate`/`OnboardingChecklistTemplateItem` — admin-configurable checklists (new "Onboarding Checklists" admin area, mirroring Phase 4's question-bank CRUD) whose items are instantiated as `ApplicationRequirement` rows (`requirement_type = "onboarding:{task_key}"`) the moment an application enters `onboarding`, reusing the existing Pass/Fail UI with no schema change; `firstOrCreate` per item so re-entering onboarding from `on_hold` never duplicates rows
+- A deterministic activation gate in `Admin\JobApplicationController::update()`: transitioning to `active` is blocked by a new `BlockingRequirementsIncompleteException` until every `is_blocking` requirement has passed, naming exactly which ones are outstanding
+- `Employee` model, auto-created (`firstOrCreate` on `candidate_id`) the moment an application legally transitions to `active`, snapshotting specialty and the accepted offer's pay rate, then assigning its `EMP-00001`-style number; new "Employees" admin area (list + profile)
+- `ApplicationPanel` gained an "Offer" section (extend-offer form, status, manual accept/decline/withdraw overrides); new public `offers/{show,thank-you,link-issue}` pages structurally identical to Phase 7's assessment pages
+- Real bug found & fixed before it shipped: `Offer`'s `#[Fillable]` list omitted `extended_by`/`extended_at`, so `Admin\OfferController::store()`'s mass-assignment silently dropped who extended the offer and when — caught by a failing Pest assertion, not by PHPStan (mass-assignment of a non-fillable attribute fails silently rather than throwing in this app's config)
+- 16 new Pest tests across three files, covering both offer-response paths, the activation blocking-gate (including that it's bypassed once requirements pass), onboarding-template instantiation and its non-duplication on re-entry, Employee auto-creation, the "only one default template" rule, and editor access being forbidden
 
 ### 9. Continuous compliance — ⏳ Not started
 

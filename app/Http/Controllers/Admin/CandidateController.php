@@ -33,6 +33,7 @@ class CandidateController extends Controller
             'applications.backgroundChecks.resolvedBy:id,name',
             'applications.assessmentAttempts.assessment:id,name',
             'applications.assessmentAttempts.administeredBy:id,name',
+            'applications.offers.extendedBy:id,name',
             'applications.documents',
             'credentials.verifier:id,name',
             'documents',

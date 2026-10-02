@@ -150,6 +150,14 @@ class Application extends Model
     }
 
     /**
+     * @return HasMany<Offer, $this>
+     */
+    public function offers(): HasMany
+    {
+        return $this->hasMany(Offer::class)->latest();
+    }
+
+    /**
      * Generate a fresh resume token, storing only its hash (mirrors
      * Laravel's own password-reset-token convention) and returning the
      * plaintext for use in an emailed link. Excluded from #[Fillable] since
