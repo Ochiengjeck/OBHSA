@@ -46,9 +46,18 @@ Gave staff a workable queue and a single place to review a candidate, including 
 - The applications index gained stage quick-filters with live counts, a "Days in Stage" column, and a "Recruiter" column; its status filter dropdown — previously hardcoded to a stale, incomplete subset of statuses — now lists every `ApplicationStatus` case
 - 6 new Pest tests covering the dossier, recruiter assign/unassign, templated message sending + logging, and the structured reason code
 
-### 4. Interview workflow — ⏳ Not started
+### 4. Interview workflow — ✅ Done (2026-10-02)
 
-Scheduling, a controlled question bank, structured scoring, interviewer recommendation.
+Gave the `interview` application status (reserved since Phase 1's state machine) real behavior: recruiters schedule interviews from the candidate dossier, interviewers score a snapshotted question bank and leave an overall recommendation, and a new cross-candidate list shows every interview, past and upcoming.
+
+**Delivered:**
+
+- `Interview` + `InterviewQuestionResponse` models — scheduling an interview snapshots the active question bank matching the candidate's specialty (general questions always included) into per-interview response rows, so later edits to the question bank never retroactively change a past interview's record
+- `InterviewQuestion` admin-managed question bank, scoped by `CaregiverSpecialties` (or general), with a new "Interview Questions" admin screen
+- A new "Interviews" admin screen (`/admin/interviews`) listing every interview across all candidates, filterable by interviewer and status — plus each interview's own scoring workspace (`/admin/interviews/{interview}`) for recording per-question scores, an overall recommendation (Recommend / Maybe / Do Not Recommend), and marking it completed/cancelled/no-show
+- `ApplicationPanel` (the dossier's per-application card) gained a "Schedule Interview" mini-form and a compact interview list with status/recommendation badges
+- Scheduling an interview does not auto-transition the application's status — recruiters still move `credentialing → interview` themselves via the existing status form, consistent with every other stage
+- 4 new Pest tests covering specialty-scoped question snapshotting, scoring + completing an interview, the interviews list filters, and editor access being forbidden
 
 ### 5. Credential verification & reference checking — ⏳ Not started
 

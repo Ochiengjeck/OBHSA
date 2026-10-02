@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
             TestimonialSeeder::class,
             StatSeeder::class,
             CommunicationTemplateSeeder::class,
+            InterviewQuestionSeeder::class,
             DemoSubmissionSeeder::class,
         ]);
     }

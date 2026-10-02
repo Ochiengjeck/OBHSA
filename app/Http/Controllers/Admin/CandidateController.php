@@ -27,6 +27,7 @@ class CandidateController extends Controller
             'applications.stageHistory.changedBy:id,name',
             'applications.recruiter:id,name',
             'applications.communications.sentBy:id,name',
+            'applications.interviews.interviewer:id,name',
             'applications.documents',
             'credentials.verifier:id,name',
             'documents',

@@ -2,6 +2,8 @@ import { Link, usePage } from '@inertiajs/react';
 import {
     BarChart3,
     Briefcase,
+    CalendarClock,
+    ClipboardList,
     ExternalLink,
     FileText,
     Inbox,
@@ -69,6 +71,18 @@ const mainNavItems: AdminNavItem[] = [
         title: 'Message Templates',
         href: admin.communicationTemplates.index(),
         icon: MessageCircle,
+        permission: 'manage-applications',
+    },
+    {
+        title: 'Interviews',
+        href: admin.interviews.index(),
+        icon: CalendarClock,
+        permission: 'manage-applications',
+    },
+    {
+        title: 'Interview Questions',
+        href: admin.interviewQuestions.index(),
+        icon: ClipboardList,
         permission: 'manage-applications',
     },
     {

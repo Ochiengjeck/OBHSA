@@ -37,9 +37,19 @@ export type ApplicationCommunicationEntry = {
     template: { id: number; name: string } | null;
 };
 
+export type ApplicationInterviewSummary = {
+    id: number;
+    scheduled_at: string;
+    format: string;
+    status: string;
+    recommendation: string | null;
+    interviewer: { id: number; name: string } | null;
+};
+
 export type CandidateApplication = {
     id: number;
     candidate_id: number;
+    primary_specialty: string | null;
     status: string;
     current_stage_entered_at: string | null;
     created_at: string;
@@ -49,6 +59,7 @@ export type CandidateApplication = {
     stage_history: ApplicationStageHistoryEntry[];
     recruiter: { id: number; name: string } | null;
     communications: ApplicationCommunicationEntry[];
+    interviews: ApplicationInterviewSummary[];
     resume_url: string | null;
     allowed_statuses: { value: string; label: string }[];
 };

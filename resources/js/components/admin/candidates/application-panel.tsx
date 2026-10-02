@@ -1,4 +1,4 @@
-import { useForm } from '@inertiajs/react';
+import { Link, useForm } from '@inertiajs/react';
 import { AlertTriangle, FileText } from 'lucide-react';
 import { useState } from 'react';
 import { StatusBadge } from '@/components/admin/status-badge';
@@ -63,7 +63,15 @@ export function ApplicationPanel({
         body: '',
     });
 
+    const scheduleForm = useForm({
+        scheduled_at: '',
+        interviewer_id: null as number | null,
+        format: 'phone',
+        location_or_link: '',
+    });
+
     const [showMessagePanel, setShowMessagePanel] = useState(false);
+    const [showSchedulePanel, setShowSchedulePanel] = useState(false);
 
     function submitStatus(event: React.FormEvent) {
         event.preventDefault();
@@ -113,6 +121,20 @@ export function ApplicationPanel({
                 setShowMessagePanel(false);
             },
         });
+    }
+
+    function submitSchedule(event: React.FormEvent) {
+        event.preventDefault();
+        scheduleForm.post(
+            admin.jobApplications.interviews.store(application.id).url,
+            {
+                preserveScroll: true,
+                onSuccess: () => {
+                    scheduleForm.reset();
+                    setShowSchedulePanel(false);
+                },
+            },
+        );
     }
 
     const blockingRequirements = application.requirements.filter(
@@ -384,6 +406,158 @@ export function ApplicationPanel({
                                             ` · ${entry.sent_by.name}`}
                                     </p>
                                 </div>
+                            ))}
+                        </div>
+                    )}
+                </div>
+
+                <Separator />
+
+                <div className="space-y-3">
+                    <div className="flex items-center justify-between">
+                        <Label>Interviews</Label>
+                        <Button
+                            type="button"
+                            size="sm"
+                            variant="outline"
+                            onClick={() =>
+                                setShowSchedulePanel(!showSchedulePanel)
+                            }
+                        >
+                            {showSchedulePanel
+                                ? 'Cancel'
+                                : 'Schedule Interview'}
+                        </Button>
+                    </div>
+
+                    {showSchedulePanel && (
+                        <form
+                            onSubmit={submitSchedule}
+                            className="space-y-3 rounded-lg border border-border p-3"
+                        >
+                            <div className="grid gap-3 sm:grid-cols-2">
+                                <Input
+                                    type="datetime-local"
+                                    value={scheduleForm.data.scheduled_at}
+                                    onChange={(e) =>
+                                        scheduleForm.setData(
+                                            'scheduled_at',
+                                            e.target.value,
+                                        )
+                                    }
+                                    required
+                                />
+                                <Select
+                                    value={
+                                        scheduleForm.data.interviewer_id
+                                            ? String(
+                                                  scheduleForm.data
+                                                      .interviewer_id,
+                                              )
+                                            : 'unassigned'
+                                    }
+                                    onValueChange={(value) =>
+                                        scheduleForm.setData(
+                                            'interviewer_id',
+                                            value === 'unassigned'
+                                                ? null
+                                                : Number(value),
+                                        )
+                                    }
+                                >
+                                    <SelectTrigger>
+                                        <SelectValue placeholder="Interviewer" />
+                                    </SelectTrigger>
+                                    <SelectContent>
+                                        <SelectItem value="unassigned">
+                                            Unassigned
+                                        </SelectItem>
+                                        {recruiters.map((recruiter) => (
+                                            <SelectItem
+                                                key={recruiter.id}
+                                                value={String(recruiter.id)}
+                                            >
+                                                {recruiter.name}
+                                            </SelectItem>
+                                        ))}
+                                    </SelectContent>
+                                </Select>
+                                <Select
+                                    value={scheduleForm.data.format}
+                                    onValueChange={(value) =>
+                                        scheduleForm.setData('format', value)
+                                    }
+                                >
+                                    <SelectTrigger>
+                                        <SelectValue />
+                                    </SelectTrigger>
+                                    <SelectContent>
+                                        <SelectItem value="phone">
+                                            Phone
+                                        </SelectItem>
+                                        <SelectItem value="video">
+                                            Video
+                                        </SelectItem>
+                                        <SelectItem value="in_person">
+                                            In Person
+                                        </SelectItem>
+                                    </SelectContent>
+                                </Select>
+                                <Input
+                                    placeholder="Location or link (optional)"
+                                    value={scheduleForm.data.location_or_link}
+                                    onChange={(e) =>
+                                        scheduleForm.setData(
+                                            'location_or_link',
+                                            e.target.value,
+                                        )
+                                    }
+                                />
+                            </div>
+                            <Button
+                                type="submit"
+                                size="sm"
+                                disabled={scheduleForm.processing}
+                            >
+                                {scheduleForm.processing
+                                    ? 'Scheduling...'
+                                    : 'Schedule'}
+                            </Button>
+                        </form>
+                    )}
+
+                    {application.interviews.length > 0 && (
+                        <div className="space-y-2">
+                            {application.interviews.map((interview) => (
+                                <Link
+                                    key={interview.id}
+                                    href={admin.interviews.show(interview.id)}
+                                    className="flex items-center justify-between rounded-md border border-border p-2 text-xs hover:bg-muted/50"
+                                >
+                                    <div>
+                                        <p className="font-medium text-foreground">
+                                            {new Date(
+                                                interview.scheduled_at,
+                                            ).toLocaleString()}
+                                        </p>
+                                        <p className="text-muted-foreground">
+                                            {interview.interviewer?.name ??
+                                                'Unassigned'}
+                                        </p>
+                                    </div>
+                                    <div className="flex items-center gap-1.5">
+                                        {interview.recommendation && (
+                                            <StatusBadge
+                                                status={
+                                                    interview.recommendation
+                                                }
+                                            />
+                                        )}
+                                        <StatusBadge
+                                            status={interview.status}
+                                        />
+                                    </div>
+                                </Link>
                             ))}
                         </div>
                     )}
