@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreJobApplicationRequest;
 use App\Mail\JobApplicationReceived;
-use App\Models\JobApplication;
 use App\Models\JobListing;
 use App\Models\SiteSetting;
+use App\Services\JobApplicationIntakeService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Mail;
 use Inertia\Inertia;
@@ -16,13 +16,18 @@ class JobApplicationController extends Controller
     /**
      * Submit a job application for a listing.
      */
-    public function store(StoreJobApplicationRequest $request, JobListing $jobListing): RedirectResponse
+    public function store(StoreJobApplicationRequest $request, JobListing $jobListing, JobApplicationIntakeService $intake): RedirectResponse
     {
-        $application = JobApplication::query()->create([
-            ...$request->safe()->except('resume'),
-            'job_listing_id' => $jobListing->id,
-            'resume_path' => $request->file('resume')->store('resumes', 'public'),
-        ]);
+        $application = $intake->submit(
+            $request->validated('full_name'),
+            $request->validated('email'),
+            $request->validated('phone'),
+            $request->validated('cover_note'),
+            $jobListing,
+            $request->file('resume'),
+            $request->ip(),
+            $request->userAgent(),
+        );
 
         Mail::to(SiteSetting::get('email', config('mail.from.address')))
             ->queue(new JobApplicationReceived($application));

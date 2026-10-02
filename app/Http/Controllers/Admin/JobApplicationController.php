@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Enums\ApplicationStatus;
+use App\Exceptions\InvalidApplicationTransitionException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\UpdateJobApplicationStatusRequest;
-use App\Models\JobApplication;
+use App\Models\Application;
+use App\Support\ApplicationStateMachine;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -18,8 +21,8 @@ class JobApplicationController extends Controller
      */
     public function index(Request $request): Response
     {
-        $applications = JobApplication::query()
-            ->with('jobListing:id,title')
+        $applications = Application::query()
+            ->with(['candidate:id,full_name,email', 'jobListing:id,title'])
             ->when($request->string('status')->isNotEmpty(), fn ($query) => $query->where('status', $request->string('status')))
             ->latest()
             ->paginate(20)
@@ -34,29 +37,50 @@ class JobApplicationController extends Controller
     /**
      * Show a single job application.
      */
-    public function show(JobApplication $jobApplication): Response
+    public function show(Application $application): Response
     {
-        $jobApplication->load('jobListing:id,title', 'reviewer:id,name');
+        $application->load([
+            'candidate',
+            'jobListing:id,title',
+            'requirements',
+            'stageHistory.changedBy:id,name',
+        ]);
+
+        $resume = $application->documents()
+            ->where('document_type', 'resume')
+            ->latest('version')
+            ->first();
 
         return Inertia::render('admin/job-applications/show', [
-            'application' => $jobApplication,
-            'resumeUrl' => Storage::disk('public')->url($jobApplication->resume_path),
+            'application' => $application,
+            'resumeUrl' => $resume ? Storage::disk($resume->disk)->url($resume->file_path) : null,
+            'allowedStatuses' => array_map(
+                fn (ApplicationStatus $status) => ['value' => $status->value, 'label' => $status->label()],
+                ApplicationStateMachine::allowedFrom(ApplicationStatus::from($application->status)),
+            ),
         ]);
     }
 
     /**
      * Update a job application's review status.
      */
-    public function update(UpdateJobApplicationStatusRequest $request, JobApplication $jobApplication): RedirectResponse
+    public function update(UpdateJobApplicationStatusRequest $request, Application $application): RedirectResponse
     {
-        $jobApplication->update([
-            'status' => $request->validated('status'),
-            'reviewed_by' => $request->user()->id,
-            'reviewed_at' => now(),
-        ]);
+        try {
+            $application->transitionTo(
+                ApplicationStatus::from($request->validated('status')),
+                actor: $request->user(),
+                reason: $request->validated('reason'),
+                reasonCode: 'admin_review',
+            );
+        } catch (InvalidApplicationTransitionException $exception) {
+            Inertia::flash('toast', ['type' => 'error', 'message' => $exception->getMessage()]);
+
+            return to_route('admin.job-applications.show', $application);
+        }
 
         Inertia::flash('toast', ['type' => 'success', 'message' => __('Application status updated.')]);
 
-        return to_route('admin.job-applications.show', $jobApplication);
+        return to_route('admin.job-applications.show', $application);
     }
 }

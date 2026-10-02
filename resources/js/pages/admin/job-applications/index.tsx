@@ -22,10 +22,9 @@ import type { Paginated } from '@/types';
 
 type JobApplicationRow = {
     id: number;
-    full_name: string;
-    email: string;
     status: string;
     created_at: string;
+    candidate: { id: number; full_name: string; email: string };
     job_listing: { id: number; title: string } | null;
 };
 
@@ -63,13 +62,17 @@ export default function JobApplicationsIndex({
                         </SelectTrigger>
                         <SelectContent>
                             <SelectItem value="all">All Statuses</SelectItem>
-                            <SelectItem value="new">New</SelectItem>
-                            <SelectItem value="reviewing">Reviewing</SelectItem>
-                            <SelectItem value="shortlisted">
-                                Shortlisted
+                            <SelectItem value="submitted">Submitted</SelectItem>
+                            <SelectItem value="eligibility_review">
+                                Eligibility Review
                             </SelectItem>
-                            <SelectItem value="hired">Hired</SelectItem>
+                            <SelectItem value="recruiter_review">
+                                Recruiter Review
+                            </SelectItem>
+                            <SelectItem value="approved">Approved</SelectItem>
+                            <SelectItem value="on_hold">On Hold</SelectItem>
                             <SelectItem value="rejected">Rejected</SelectItem>
+                            <SelectItem value="withdrawn">Withdrawn</SelectItem>
                         </SelectContent>
                     </Select>
                 </div>
@@ -93,10 +96,10 @@ export default function JobApplicationsIndex({
                                         )}
                                         className="font-medium text-primary hover:underline"
                                     >
-                                        {application.full_name}
+                                        {application.candidate.full_name}
                                     </Link>
                                     <p className="text-xs text-muted-foreground">
-                                        {application.email}
+                                        {application.candidate.email}
                                     </p>
                                 </TableCell>
                                 <TableCell className="text-muted-foreground">

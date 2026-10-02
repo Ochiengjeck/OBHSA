@@ -46,11 +46,11 @@ class JobListing extends Model
     }
 
     /**
-     * @return HasMany<JobApplication, $this>
+     * @return HasMany<Application, $this>
      */
     public function applications(): HasMany
     {
-        return $this->hasMany(JobApplication::class);
+        return $this->hasMany(Application::class);
     }
 
     /**

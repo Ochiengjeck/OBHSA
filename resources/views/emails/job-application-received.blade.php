@@ -7,9 +7,9 @@
 **Position:** General Application
 @endif
 
-**Name:** {{ $application->full_name }}
-**Email:** {{ $application->email }}
-**Phone:** {{ $application->phone }}
+**Name:** {{ $application->candidate->full_name }}
+**Email:** {{ $application->candidate->email }}
+**Phone:** {{ $application->candidate->phone }}
 
 @if ($application->cover_note)
 **Note from applicant:**

@@ -2,7 +2,7 @@
 
 namespace App\Mail;
 
-use App\Models\JobApplication;
+use App\Models\Application;
 use App\Models\JobListing;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
@@ -14,7 +14,7 @@ class JobApplicationReceived extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public function __construct(public JobApplication $application) {}
+    public function __construct(public Application $application) {}
 
     public function envelope(): Envelope
     {

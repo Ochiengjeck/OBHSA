@@ -2,8 +2,9 @@
 
 namespace App\Http\Requests\Admin;
 
+use App\Enums\ApplicationStatus;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rules\Enum;
 
 class UpdateJobApplicationStatusRequest extends FormRequest
 {
@@ -15,7 +16,8 @@ class UpdateJobApplicationStatusRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'status' => ['required', Rule::in(['new', 'reviewing', 'shortlisted', 'rejected', 'hired'])],
+            'status' => ['required', new Enum(ApplicationStatus::class)],
+            'reason' => ['nullable', 'string', 'max:2000'],
         ];
     }
 }

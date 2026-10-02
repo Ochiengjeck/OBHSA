@@ -2,7 +2,9 @@
 
 namespace Database\Seeders;
 
-use App\Models\JobApplication;
+use App\Enums\ApplicationStatus;
+use App\Models\Application;
+use App\Models\Candidate;
 use App\Models\JobListing;
 use App\Models\StaffingRequest;
 use Illuminate\Database\Seeder;
@@ -10,21 +12,55 @@ use Illuminate\Database\Seeder;
 class DemoSubmissionSeeder extends Seeder
 {
     /**
+     * Requirement types seeded alongside each demo application, mirroring
+     * JobApplicationIntakeService's initial checklist.
+     *
+     * @var list<string>
+     */
+    private const array INITIAL_REQUIREMENTS = [
+        'contact_verification',
+        'eligibility_screen',
+        'recruiter_review',
+    ];
+
+    /**
      * Seed a handful of demo job applications and staffing-request leads
      * so the backoffice index pages aren't empty on first look.
      */
     public function run(): void
     {
-        if (JobApplication::query()->count() === 0) {
+        if (Application::query()->count() === 0) {
             JobListing::query()->inRandomOrder()->take(3)->get()->each(function (JobListing $listing): void {
-                JobApplication::query()->create([
-                    'job_listing_id' => $listing->id,
+                $candidate = Candidate::query()->create([
                     'full_name' => fake()->name(),
                     'email' => fake()->unique()->safeEmail(),
                     'phone' => fake()->numerify('(603) ###-####'),
-                    'resume_path' => 'resumes/demo-resume.pdf',
-                    'cover_note' => fake()->sentence(20),
+                    'source' => 'demo_seed',
                 ]);
+
+                $application = Application::query()->create([
+                    'candidate_id' => $candidate->id,
+                    'job_listing_id' => $listing->id,
+                    'cover_note' => fake()->sentence(20),
+                    'source' => 'demo_seed',
+                ]);
+
+                $application->documents()->create([
+                    'candidate_id' => $candidate->id,
+                    'document_type' => 'resume',
+                    'disk' => 'public',
+                    'file_path' => 'resumes/demo-resume.pdf',
+                    'original_filename' => 'demo-resume.pdf',
+                    'mime_type' => 'application/pdf',
+                    'file_size' => 0,
+                    'uploaded_at' => now(),
+                ]);
+
+                foreach (self::INITIAL_REQUIREMENTS as $requirementType) {
+                    $application->requirements()->create(['requirement_type' => $requirementType]);
+                }
+
+                $application->transitionTo(ApplicationStatus::Submitted, actor: null, reasonCode: 'demo_seed');
             });
         }
 

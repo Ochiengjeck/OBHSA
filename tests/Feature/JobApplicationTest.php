@@ -1,6 +1,7 @@
 <?php
 
-use App\Models\JobApplication;
+use App\Models\Application;
+use App\Models\Candidate;
 use App\Models\JobListing;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Mail;
@@ -22,11 +23,17 @@ test('a caregiver can apply to a job listing with a resume', function () {
 
     $response->assertRedirect();
 
-    $application = JobApplication::query()->where('email', 'jane@example.com')->firstOrFail();
-    expect($application->job_listing_id)->toBe($listing->id);
-    expect($application->status)->toBe('new');
+    $candidate = Candidate::query()->where('email', 'jane@example.com')->firstOrFail();
+    $application = Application::query()->where('candidate_id', $candidate->id)->firstOrFail();
 
-    Storage::disk('public')->assertExists($application->resume_path);
+    expect($application->job_listing_id)->toBe($listing->id);
+    expect($application->status)->toBe('submitted');
+
+    $resume = $application->documents()->where('document_type', 'resume')->firstOrFail();
+    Storage::disk('public')->assertExists($resume->file_path);
+
+    expect($application->requirements()->count())->toBe(3);
+    expect($application->stageHistory()->count())->toBe(1);
 });
 
 test('a job application requires a resume file', function () {
@@ -39,4 +46,25 @@ test('a job application requires a resume file', function () {
     ]);
 
     $response->assertSessionHasErrors('resume');
+});
+
+test('applying twice with the same email reuses the existing candidate', function () {
+    Storage::fake('public');
+    Mail::fake();
+
+    $listingOne = JobListing::factory()->create();
+    $listingTwo = JobListing::factory()->create();
+
+    $payload = fn () => [
+        'full_name' => 'Jane Caregiver',
+        'email' => 'jane@example.com',
+        'phone' => '603-555-0100',
+        'resume' => UploadedFile::fake()->create('resume.pdf', 200, 'application/pdf'),
+    ];
+
+    $this->post(route('jobs.apply', $listingOne), $payload());
+    $this->post(route('jobs.apply', $listingTwo), $payload());
+
+    expect(Candidate::query()->where('email', 'jane@example.com')->count())->toBe(1);
+    expect(Application::query()->count())->toBe(2);
 });

@@ -24,7 +24,10 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'verified', 'role:ad
     Route::resource('pages', PageController::class)->only(['index', 'edit', 'update'])->middleware('permission:manage-pages');
     Route::resource('services', ServiceController::class)->except(['show'])->middleware('permission:manage-services');
     Route::resource('job-listings', JobListingController::class)->except(['show'])->middleware('permission:manage-jobs');
-    Route::resource('job-applications', JobApplicationController::class)->only(['index', 'show', 'update'])->middleware('permission:manage-applications');
+    Route::resource('job-applications', JobApplicationController::class)
+        ->only(['index', 'show', 'update'])
+        ->parameters(['job-applications' => 'application'])
+        ->middleware('permission:manage-applications');
     Route::resource('blog-posts', BlogPostController::class)->except(['show'])->middleware('permission:manage-blog');
     Route::resource('testimonials', TestimonialController::class)->except(['show'])->middleware('permission:manage-testimonials');
     Route::resource('stats', StatController::class)->except(['show'])->middleware('permission:manage-stats');

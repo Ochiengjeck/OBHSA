@@ -4,6 +4,7 @@ import { AdminPageHeader } from '@/components/admin/admin-page-header';
 import { StatusBadge } from '@/components/admin/status-badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Label } from '@/components/ui/label';
 import {
     Select,
     SelectContent,
@@ -11,29 +12,55 @@ import {
     SelectTrigger,
     SelectValue,
 } from '@/components/ui/select';
+import { Textarea } from '@/components/ui/textarea';
 import admin from '@/routes/admin';
 
-type JobApplicationDetail = {
+type StatusOption = { value: string; label: string };
+
+type StageHistoryEntry = {
     id: number;
-    full_name: string;
-    email: string;
-    phone: string;
-    cover_note: string | null;
+    from_status: string | null;
+    to_status: string;
+    reason: string | null;
+    occurred_at: string;
+    changed_by: { id: number; name: string } | null;
+};
+
+type RequirementEntry = {
+    id: number;
+    requirement_type: string;
     status: string;
+    is_blocking: boolean;
+};
+
+type ApplicationDetail = {
+    id: number;
+    status: string;
+    cover_note: string | null;
     created_at: string;
+    candidate: {
+        id: number;
+        full_name: string;
+        email: string;
+        phone: string | null;
+    };
     job_listing: { id: number; title: string } | null;
-    reviewer: { id: number; name: string } | null;
+    requirements: RequirementEntry[];
+    stage_history: StageHistoryEntry[];
 };
 
 export default function JobApplicationsShow({
     application,
     resumeUrl,
+    allowedStatuses,
 }: {
-    application: JobApplicationDetail;
-    resumeUrl: string;
+    application: ApplicationDetail;
+    resumeUrl: string | null;
+    allowedStatuses: StatusOption[];
 }) {
     const { data, setData, put, processing } = useForm({
-        status: application.status,
+        status: allowedStatuses[0]?.value ?? '',
+        reason: '',
     });
 
     function submit(event: React.FormEvent) {
@@ -45,16 +72,16 @@ export default function JobApplicationsShow({
 
     return (
         <>
-            <Head title={application.full_name} />
+            <Head title={application.candidate.full_name} />
             <div className="p-4 sm:p-6">
                 <AdminPageHeader
-                    title={application.full_name}
+                    title={application.candidate.full_name}
                     description={
                         application.job_listing?.title ?? 'General Application'
                     }
                 />
 
-                <div className="grid max-w-3xl gap-6 sm:grid-cols-2">
+                <div className="grid max-w-4xl gap-6 sm:grid-cols-2">
                     <Card>
                         <CardHeader>
                             <CardTitle>Applicant Details</CardTitle>
@@ -64,13 +91,13 @@ export default function JobApplicationsShow({
                                 <span className="text-muted-foreground">
                                     Email:
                                 </span>{' '}
-                                {application.email}
+                                {application.candidate.email}
                             </p>
                             <p>
                                 <span className="text-muted-foreground">
                                     Phone:
                                 </span>{' '}
-                                {application.phone}
+                                {application.candidate.phone}
                             </p>
                             <p>
                                 <span className="text-muted-foreground">
@@ -88,15 +115,17 @@ export default function JobApplicationsShow({
                                     {application.cover_note}
                                 </p>
                             )}
-                            <a
-                                href={resumeUrl}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="inline-flex items-center gap-1.5 font-medium text-primary hover:underline"
-                            >
-                                <FileText className="size-4" />
-                                View Resume
-                            </a>
+                            {resumeUrl && (
+                                <a
+                                    href={resumeUrl}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="inline-flex items-center gap-1.5 font-medium text-primary hover:underline"
+                                >
+                                    <FileText className="size-4" />
+                                    View Resume
+                                </a>
+                            )}
                         </CardContent>
                     </Card>
 
@@ -108,43 +137,118 @@ export default function JobApplicationsShow({
                             <div className="mb-4">
                                 <StatusBadge status={application.status} />
                             </div>
-                            {application.reviewer && (
-                                <p className="mb-4 text-xs text-muted-foreground">
-                                    Last reviewed by {application.reviewer.name}
+
+                            {allowedStatuses.length > 0 ? (
+                                <form onSubmit={submit} className="space-y-4">
+                                    <Select
+                                        value={data.status}
+                                        onValueChange={(value) =>
+                                            setData('status', value)
+                                        }
+                                    >
+                                        <SelectTrigger>
+                                            <SelectValue />
+                                        </SelectTrigger>
+                                        <SelectContent>
+                                            {allowedStatuses.map((option) => (
+                                                <SelectItem
+                                                    key={option.value}
+                                                    value={option.value}
+                                                >
+                                                    {option.label}
+                                                </SelectItem>
+                                            ))}
+                                        </SelectContent>
+                                    </Select>
+
+                                    <div className="grid gap-2">
+                                        <Label htmlFor="reason">
+                                            Reason (optional)
+                                        </Label>
+                                        <Textarea
+                                            id="reason"
+                                            rows={2}
+                                            value={data.reason}
+                                            onChange={(e) =>
+                                                setData(
+                                                    'reason',
+                                                    e.target.value,
+                                                )
+                                            }
+                                        />
+                                    </div>
+
+                                    <Button type="submit" disabled={processing}>
+                                        {processing
+                                            ? 'Saving...'
+                                            : 'Update Status'}
+                                    </Button>
+                                </form>
+                            ) : (
+                                <p className="text-sm text-muted-foreground">
+                                    This application is in a terminal state — no
+                                    further transitions are available.
                                 </p>
                             )}
-                            <form onSubmit={submit} className="space-y-4">
-                                <Select
-                                    value={data.status}
-                                    onValueChange={(value) =>
-                                        setData('status', value)
-                                    }
-                                >
-                                    <SelectTrigger>
-                                        <SelectValue />
-                                    </SelectTrigger>
-                                    <SelectContent>
-                                        <SelectItem value="new">New</SelectItem>
-                                        <SelectItem value="reviewing">
-                                            Reviewing
-                                        </SelectItem>
-                                        <SelectItem value="shortlisted">
-                                            Shortlisted
-                                        </SelectItem>
-                                        <SelectItem value="hired">
-                                            Hired
-                                        </SelectItem>
-                                        <SelectItem value="rejected">
-                                            Rejected
-                                        </SelectItem>
-                                    </SelectContent>
-                                </Select>
-                                <Button type="submit" disabled={processing}>
-                                    {processing ? 'Saving...' : 'Update Status'}
-                                </Button>
-                            </form>
                         </CardContent>
                     </Card>
+
+                    {application.requirements.length > 0 && (
+                        <Card>
+                            <CardHeader>
+                                <CardTitle>Requirements</CardTitle>
+                            </CardHeader>
+                            <CardContent className="space-y-2">
+                                {application.requirements.map((requirement) => (
+                                    <div
+                                        key={requirement.id}
+                                        className="flex items-center justify-between text-sm"
+                                    >
+                                        <span className="capitalize">
+                                            {requirement.requirement_type.replaceAll(
+                                                '_',
+                                                ' ',
+                                            )}
+                                        </span>
+                                        <StatusBadge
+                                            status={requirement.status}
+                                        />
+                                    </div>
+                                ))}
+                            </CardContent>
+                        </Card>
+                    )}
+
+                    {application.stage_history.length > 0 && (
+                        <Card>
+                            <CardHeader>
+                                <CardTitle>History</CardTitle>
+                            </CardHeader>
+                            <CardContent className="space-y-3">
+                                {application.stage_history.map((entry) => (
+                                    <div key={entry.id} className="text-sm">
+                                        <p>
+                                            <StatusBadge
+                                                status={entry.to_status}
+                                            />{' '}
+                                            <span className="text-xs text-muted-foreground">
+                                                {new Date(
+                                                    entry.occurred_at,
+                                                ).toLocaleString()}
+                                                {entry.changed_by &&
+                                                    ` · ${entry.changed_by.name}`}
+                                            </span>
+                                        </p>
+                                        {entry.reason && (
+                                            <p className="mt-0.5 text-xs text-muted-foreground">
+                                                {entry.reason}
+                                            </p>
+                                        )}
+                                    </div>
+                                ))}
+                            </CardContent>
+                        </Card>
+                    )}
                 </div>
             </div>
         </>
