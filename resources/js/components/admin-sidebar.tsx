@@ -8,6 +8,7 @@ import {
     LayoutGrid,
     ListChecks,
     Mail,
+    MessageCircle,
     MessageSquareQuote,
     Newspaper,
     Settings2,
@@ -62,6 +63,12 @@ const mainNavItems: AdminNavItem[] = [
         title: 'Applications',
         href: admin.jobApplications.index(),
         icon: Inbox,
+        permission: 'manage-applications',
+    },
+    {
+        title: 'Message Templates',
+        href: admin.communicationTemplates.index(),
+        icon: MessageCircle,
         permission: 'manage-applications',
     },
     {

@@ -33,9 +33,18 @@ Replaced the single-page form with a staged flow (contact → location/eligibili
 - Same-email restarts reuse the candidate's open draft instead of creating duplicates; a job listing's "Apply" button now carries straight into the wizard with that listing pre-associated
 - 7 new Pest tests covering the full happy path, the eligibility hard-stop, duplicate-draft reuse, job-listing pre-association, and all three resume-link outcomes (valid/expired/invalid)
 
-### 3. Recruiter processing pipeline — ⏳ Not started
+### 3. Recruiter processing pipeline — ✅ Done (2026-10-02)
 
-Pipeline dashboard, candidate dossier screen, recruiter assignment, structured review decisions, requirement-driven "what's blocking this candidate," communication templates.
+Gave staff a workable queue and a single place to review a candidate, including past applications (re-applications are possible since Phase 1/2). The admin-side pipeline was previously a flat per-application table; this phase replaces the per-application show page with a candidate-centric dossier and finally wires up `assigned_recruiter_id` and `is_blocking`, both reserved but unused since Phase 1.
+
+**Delivered:**
+
+- `Admin\CandidateController::show` — a new candidate-centric dossier (`/admin/candidates/{candidate}`) aggregating every application a candidate has made plus their credentials, documents, employment history, and education; replaces the old per-application `admin/job-applications/show` page entirely
+- Recruiter assignment (`Admin\JobApplicationController::assignRecruiter`) and a "what's blocking this candidate" callout surfaced from the existing `is_blocking` requirement flag — both previously-reserved, unused columns from Phase 1
+- Structured review decisions: `reason_code` (a small curated list, `App\Support\ReviewReasonCodes`) now recorded alongside the existing free-text reason on every status change
+- Admin-editable communication templates (`CommunicationTemplate` + a new "Message Templates" admin screen) with `{{candidate_name}}`/`{{position}}` placeholders; recruiters pick one from the dossier, edit it, and send a real email (`CandidateMessage`), logged to `application_communications`
+- The applications index gained stage quick-filters with live counts, a "Days in Stage" column, and a "Recruiter" column; its status filter dropdown — previously hardcoded to a stale, incomplete subset of statuses — now lists every `ApplicationStatus` case
+- 6 new Pest tests covering the dossier, recruiter assign/unassign, templated message sending + logging, and the structured reason code
 
 ### 4. Interview workflow — ⏳ Not started
 

@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\Admin\BlogPostController;
+use App\Http\Controllers\Admin\CandidateController;
+use App\Http\Controllers\Admin\CommunicationTemplateController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\JobApplicationController;
 use App\Http\Controllers\Admin\JobListingController;
@@ -24,10 +26,15 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'verified', 'role:ad
     Route::resource('pages', PageController::class)->only(['index', 'edit', 'update'])->middleware('permission:manage-pages');
     Route::resource('services', ServiceController::class)->except(['show'])->middleware('permission:manage-services');
     Route::resource('job-listings', JobListingController::class)->except(['show'])->middleware('permission:manage-jobs');
-    Route::resource('job-applications', JobApplicationController::class)
-        ->only(['index', 'show', 'update'])
-        ->parameters(['job-applications' => 'application'])
-        ->middleware('permission:manage-applications');
+    Route::middleware('permission:manage-applications')->group(function () {
+        Route::resource('job-applications', JobApplicationController::class)
+            ->only(['index', 'update'])
+            ->parameters(['job-applications' => 'application']);
+        Route::put('job-applications/{application}/recruiter', [JobApplicationController::class, 'assignRecruiter'])->name('job-applications.recruiter');
+        Route::post('job-applications/{application}/message', [JobApplicationController::class, 'sendMessage'])->name('job-applications.message');
+        Route::get('candidates/{candidate}', [CandidateController::class, 'show'])->name('candidates.show');
+        Route::resource('communication-templates', CommunicationTemplateController::class)->except(['show']);
+    });
     Route::resource('blog-posts', BlogPostController::class)->except(['show'])->middleware('permission:manage-blog');
     Route::resource('testimonials', TestimonialController::class)->except(['show'])->middleware('permission:manage-testimonials');
     Route::resource('stats', StatController::class)->except(['show'])->middleware('permission:manage-stats');

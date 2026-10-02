@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
             BlogPostSeeder::class,
             TestimonialSeeder::class,
             StatSeeder::class,
+            CommunicationTemplateSeeder::class,
             DemoSubmissionSeeder::class,
         ]);
     }

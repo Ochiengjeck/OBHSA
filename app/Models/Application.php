@@ -41,7 +41,7 @@ use Illuminate\Support\Str;
 #[Fillable([
     'candidate_id', 'job_listing_id', 'cover_note', 'source', 'ip_address', 'user_agent',
     'primary_specialty', 'secondary_specialty', 'desired_employment_type', 'desired_start_timeframe',
-    'work_settings', 'consent_accepted_at', 'consent_signature_name',
+    'work_settings', 'consent_accepted_at', 'consent_signature_name', 'assigned_recruiter_id',
 ])]
 class Application extends Model
 {
@@ -115,6 +115,14 @@ class Application extends Model
     public function documents(): HasMany
     {
         return $this->hasMany(Document::class);
+    }
+
+    /**
+     * @return HasMany<ApplicationCommunication, $this>
+     */
+    public function communications(): HasMany
+    {
+        return $this->hasMany(ApplicationCommunication::class)->latest();
     }
 
     /**
