@@ -21,9 +21,19 @@ export function HeroSection({ content }: { content: HeroSectionContent }) {
                     className="absolute inset-0 bg-gradient-to-br from-primary/80 via-primary/60 to-accent/70"
                 />
             )}
+            {/* Brand wash: ties photos of varying brightness/color temperature
+                into one consistent look. Multiply blend darkens proportionally
+                to what's underneath, so it never flattens the photo. */}
             <div
                 aria-hidden
-                className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-black/10"
+                className="absolute inset-0 bg-gradient-to-br from-primary/75 via-primary/30 to-primary/55 mix-blend-multiply"
+            />
+            {/* Readability scrim: a fixed (theme-independent) dark pool
+                centered on the headline, fading toward the edges. Guarantees
+                contrast for the white text regardless of photo or theme. */}
+            <div
+                aria-hidden
+                className="absolute inset-0 bg-[radial-gradient(ellipse_65%_60%_at_50%_50%,rgba(6,10,18,0.88)_0%,rgba(6,10,18,0.6)_40%,rgba(6,10,18,0.22)_70%,rgba(6,10,18,0.32)_100%)]"
             />
 
             <div className="relative mx-auto max-w-3xl px-4 py-24 text-center sm:px-6 lg:px-8">
