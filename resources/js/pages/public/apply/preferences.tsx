@@ -81,7 +81,7 @@ export default function ApplyPreferences({
             <PageHead title="Work Preferences" />
 
             <ApplyWizardCard
-                step={3}
+                stepKey="preferences"
                 title="Your work preferences"
                 description="This helps us match you with the right shifts."
             >

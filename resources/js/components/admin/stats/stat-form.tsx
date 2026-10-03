@@ -10,12 +10,15 @@ import {
 } from '@/components/ui/select';
 import { Switch } from '@/components/ui/switch';
 import InputError from '@/components/input-error';
+import { IconUploadField } from '@/components/admin/icon-upload-field';
 import { ICON_NAMES } from '@/lib/dynamic-icon';
 
 export type StatFormData = {
     label: string;
     value: string;
     icon: string;
+    icon_path: string | null;
+    icon_image: File | null;
     position: number;
     is_active: boolean;
 };
@@ -84,6 +87,17 @@ export function StatForm({
                 </Select>
                 <InputError message={errors.icon} />
             </div>
+
+            <IconUploadField
+                iconPath={data.icon_path}
+                pendingFile={data.icon_image}
+                error={errors.icon_image}
+                onUpload={(file) => setData('icon_image', file)}
+                onRemove={() => {
+                    setData('icon_image', null);
+                    setData('icon_path', null);
+                }}
+            />
 
             <div className="grid gap-2">
                 <Label htmlFor="position">Position</Label>

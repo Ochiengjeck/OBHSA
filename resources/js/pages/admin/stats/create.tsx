@@ -11,13 +11,15 @@ export default function StatsCreate() {
         label: '',
         value: '',
         icon: '',
+        icon_path: null,
+        icon_image: null,
         position: 0,
         is_active: true,
     });
 
     function submit(event: React.FormEvent) {
         event.preventDefault();
-        post(admin.stats.store().url);
+        post(admin.stats.store().url, { forceFormData: true });
     }
 
     return (

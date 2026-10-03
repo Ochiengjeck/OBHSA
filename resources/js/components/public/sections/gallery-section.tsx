@@ -1,4 +1,4 @@
-import { storageUrl } from '@/lib/utils';
+import { useStorageUrl } from '@/hooks/use-storage-url';
 import type { GallerySectionContent } from '@/types';
 
 export function GallerySection({
@@ -6,6 +6,8 @@ export function GallerySection({
 }: {
     content: GallerySectionContent;
 }) {
+    const storageUrl = useStorageUrl();
+
     if (content.images.length === 0) {
         return null;
     }

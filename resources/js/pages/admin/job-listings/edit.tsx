@@ -4,7 +4,7 @@ import {
     JobListingForm,
     type JobListingFormData,
 } from '@/components/admin/job-listings/job-listing-form';
-import { storageUrl } from '@/lib/utils';
+import { useStorageUrl } from '@/hooks/use-storage-url';
 import admin from '@/routes/admin';
 import type { JobListing } from '@/types';
 
@@ -13,6 +13,7 @@ export default function JobListingsEdit({
 }: {
     jobListing: JobListing;
 }) {
+    const storageUrl = useStorageUrl();
     const { data, setData, put, processing, errors } =
         useForm<JobListingFormData>({
             title: jobListing.title,

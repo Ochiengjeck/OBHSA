@@ -1,9 +1,11 @@
 import { Link } from '@inertiajs/react';
 import { Button } from '@/components/ui/button';
-import { storageUrl } from '@/lib/utils';
+import { useStorageUrl } from '@/hooks/use-storage-url';
 import type { HeroSectionContent } from '@/types';
 
 export function HeroSection({ content }: { content: HeroSectionContent }) {
+    const storageUrl = useStorageUrl();
+
     return (
         <section className="relative flex min-h-[calc(100vh-4rem)] items-center overflow-hidden">
             {content.image_path ? (

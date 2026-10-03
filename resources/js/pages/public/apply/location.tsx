@@ -34,7 +34,7 @@ export default function ApplyLocation({
             <PageHead title="Where Are You Located?" />
 
             <ApplyWizardCard
-                step={2}
+                stepKey="location"
                 title="Where are you located?"
                 description="We staff caregivers across our active service area — let's confirm we cover yours."
             >

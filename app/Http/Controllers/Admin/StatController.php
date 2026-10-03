@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Concerns\StoresUploadedFiles;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreStatRequest;
 use App\Http\Requests\Admin\UpdateStatRequest;
@@ -12,6 +13,8 @@ use Inertia\Response;
 
 class StatController extends Controller
 {
+    use StoresUploadedFiles;
+
     /**
      * List all stats.
      */
@@ -35,7 +38,16 @@ class StatController extends Controller
      */
     public function store(StoreStatRequest $request): RedirectResponse
     {
-        Stat::query()->create($request->validated());
+        $stat = Stat::query()->create($request->safe()->except(['icon_image', 'icon_path']));
+
+        $stat->update([
+            'icon_path' => $this->resolveReplaceablePath(
+                $request->file('icon_image'),
+                $request->input('icon_path'),
+                null,
+                'stat-icons',
+            ),
+        ]);
 
         Inertia::flash('toast', ['type' => 'success', 'message' => __('Stat created.')]);
 
@@ -57,7 +69,14 @@ class StatController extends Controller
      */
     public function update(UpdateStatRequest $request, Stat $stat): RedirectResponse
     {
-        $stat->update($request->validated());
+        $iconPath = $this->resolveReplaceablePath(
+            $request->file('icon_image'),
+            $request->input('icon_path'),
+            $stat->icon_path,
+            'stat-icons',
+        );
+
+        $stat->update([...$request->safe()->except(['icon_image', 'icon_path']), 'icon_path' => $iconPath]);
 
         Inertia::flash('toast', ['type' => 'success', 'message' => __('Stat updated.')]);
 

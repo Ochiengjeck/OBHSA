@@ -4,12 +4,14 @@ import { PageHead } from '@/components/public/page-head';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { storageUrl } from '@/lib/utils';
+import { useStorageUrl } from '@/hooks/use-storage-url';
 import applyRoutes from '@/routes/apply';
 import { index } from '@/routes/jobs';
 import type { JobListing } from '@/types';
 
 export default function JobShow({ jobListing }: { jobListing: JobListing }) {
+    const storageUrl = useStorageUrl();
+
     return (
         <>
             <PageHead

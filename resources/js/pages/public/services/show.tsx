@@ -3,13 +3,15 @@ import { ArrowLeft } from 'lucide-react';
 import { PageHead } from '@/components/public/page-head';
 import { Button } from '@/components/ui/button';
 import { Icon } from '@/components/ui/icon';
+import { useStorageUrl } from '@/hooks/use-storage-url';
 import { getLucideIcon } from '@/lib/dynamic-icon';
-import { storageUrl } from '@/lib/utils';
 import { index } from '@/routes/services';
 import contact from '@/routes/contact';
 import type { Service } from '@/types';
 
 export default function ServiceShow({ service }: { service: Service }) {
+    const storageUrl = useStorageUrl();
+
     return (
         <>
             <PageHead title={service.title} description={service.summary} />
@@ -30,10 +32,18 @@ export default function ServiceShow({ service }: { service: Service }) {
                     />
                 ) : (
                     <div className="mt-6 flex size-14 items-center justify-center rounded-xl bg-primary/10 text-primary">
-                        <Icon
-                            iconNode={getLucideIcon(service.icon)}
-                            className="size-7"
-                        />
+                        {service.icon_path ? (
+                            <img
+                                src={storageUrl(service.icon_path) ?? undefined}
+                                alt=""
+                                className="size-7 object-contain"
+                            />
+                        ) : (
+                            <Icon
+                                iconNode={getLucideIcon(service.icon)}
+                                className="size-7"
+                            />
+                        )}
                     </div>
                 )}
 

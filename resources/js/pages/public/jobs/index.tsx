@@ -11,7 +11,7 @@ import {
     SelectTrigger,
     SelectValue,
 } from '@/components/ui/select';
-import { storageUrl } from '@/lib/utils';
+import { useStorageUrl } from '@/hooks/use-storage-url';
 import { index, show } from '@/routes/jobs';
 import type { JobListing, Paginated } from '@/types';
 
@@ -32,6 +32,8 @@ export default function JobsIndex({
     specialties: string[];
     cities: string[];
 }) {
+    const storageUrl = useStorageUrl();
+
     function updateFilter(key: keyof Filters, value: string) {
         router.get(
             index().url,

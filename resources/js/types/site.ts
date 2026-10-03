@@ -166,6 +166,7 @@ export type Service = {
     summary: string;
     description: string | null;
     icon: string | null;
+    icon_path: string | null;
     image_path: string | null;
     position: number;
     is_active: boolean;
@@ -224,6 +225,7 @@ export type Stat = {
     label: string;
     value: string;
     icon: string | null;
+    icon_path: string | null;
     position: number;
     is_active: boolean;
 };

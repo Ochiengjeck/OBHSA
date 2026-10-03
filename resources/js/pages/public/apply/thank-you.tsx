@@ -13,7 +13,9 @@ export default function ApplyThankYou() {
             <section className="mx-auto max-w-2xl px-4 py-16 text-center sm:px-6 lg:px-8">
                 <Card>
                     <CardContent className="flex flex-col items-center gap-4 py-8">
-                        <CheckCircle2 className="size-12 text-primary" />
+                        <div className="flex size-16 items-center justify-center rounded-full bg-primary/10">
+                            <CheckCircle2 className="size-8 text-primary" />
+                        </div>
                         <h1 className="text-2xl font-bold text-foreground">
                             Application submitted!
                         </h1>

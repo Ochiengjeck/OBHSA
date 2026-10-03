@@ -48,6 +48,12 @@ class HandleInertiaRequests extends Middleware
             ],
             'sidebarOpen' => ! $request->hasCookie('sidebar_state') || $request->cookie('sidebar_state') === 'true',
             'siteSettings' => SiteSetting::allCached(),
+            // The public disk's resolved URL root — local disk in dev
+            // (`APP_URL/storage`), the real bucket URL once production
+            // switches FILESYSTEM_PUBLIC_DRIVER to s3/r2. Every uploaded
+            // image path is joined onto this rather than a hardcoded
+            // "/storage" prefix, so rendering keeps working either way.
+            'storageUrl' => rtrim((string) config('filesystems.disks.public.url'), '/'),
         ];
     }
 }

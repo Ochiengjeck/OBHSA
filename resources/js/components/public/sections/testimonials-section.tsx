@@ -1,5 +1,5 @@
 import { Card, CardContent } from '@/components/ui/card';
-import { storageUrl } from '@/lib/utils';
+import { useStorageUrl } from '@/hooks/use-storage-url';
 import type { TestimonialsSectionContent, Testimonial } from '@/types';
 
 export function TestimonialsSection({
@@ -9,6 +9,8 @@ export function TestimonialsSection({
     content: TestimonialsSectionContent;
     testimonials: Testimonial[];
 }) {
+    const storageUrl = useStorageUrl();
+
     if (testimonials.length === 0) {
         return null;
     }

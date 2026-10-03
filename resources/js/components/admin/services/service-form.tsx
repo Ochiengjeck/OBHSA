@@ -11,6 +11,7 @@ import {
 import { Switch } from '@/components/ui/switch';
 import { Textarea } from '@/components/ui/textarea';
 import InputError from '@/components/input-error';
+import { IconUploadField } from '@/components/admin/icon-upload-field';
 import { ICON_NAMES } from '@/lib/dynamic-icon';
 
 export type ServiceFormData = {
@@ -18,6 +19,8 @@ export type ServiceFormData = {
     summary: string;
     description: string;
     icon: string;
+    icon_path: string | null;
+    icon_image: File | null;
     image: File | null;
     position: number;
     is_active: boolean;
@@ -99,6 +102,17 @@ export function ServiceForm({
                 </Select>
                 <InputError message={errors.icon} />
             </div>
+
+            <IconUploadField
+                iconPath={data.icon_path}
+                pendingFile={data.icon_image}
+                error={errors.icon_image}
+                onUpload={(file) => setData('icon_image', file)}
+                onRemove={() => {
+                    setData('icon_image', null);
+                    setData('icon_path', null);
+                }}
+            />
 
             <div className="grid gap-2">
                 <Label htmlFor="image">Image</Label>

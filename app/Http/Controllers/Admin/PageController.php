@@ -89,8 +89,18 @@ class PageController extends Controller
             }
 
             $content['image_path'] = $this->storePublicFile($file, 'pages');
-        } elseif (array_key_exists('image_path', $content) && $content['image_path'] === null && ! empty($previousContent['image_path'])) {
-            Storage::disk('public')->delete($previousContent['image_path']);
+        } elseif (empty($content['image_path'])) {
+            // The frontend only ever puts a real path string or null into
+            // image_path. Because the admin editor always submits via
+            // FormData (forceFormData: true), Inertia serializes that null
+            // as '' on the wire (browsers cannot send a literal null) — so
+            // an empty value here reliably means "no image should remain",
+            // whether that's because one was never set or was just cleared.
+            if (! empty($previousContent['image_path'])) {
+                Storage::disk('public')->delete($previousContent['image_path']);
+            }
+
+            $content['image_path'] = null;
         }
         unset($content['image']);
 
@@ -108,8 +118,12 @@ class PageController extends Controller
                     }
 
                     $item['image_path'] = $this->storePublicFile($file, 'pages');
-                } elseif (array_key_exists('image_path', $item) && $item['image_path'] === null && ! empty($previousItem['image_path'])) {
-                    Storage::disk('public')->delete($previousItem['image_path']);
+                } elseif (empty($item['image_path'])) {
+                    if (! empty($previousItem['image_path'])) {
+                        Storage::disk('public')->delete($previousItem['image_path']);
+                    }
+
+                    $item['image_path'] = null;
                 }
 
                 unset($item['image']);

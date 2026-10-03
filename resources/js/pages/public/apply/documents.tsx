@@ -46,7 +46,7 @@ export default function ApplyDocuments({
             <PageHead title="Resume & Credentials" />
 
             <ApplyWizardCard
-                step={6}
+                stepKey="documents"
                 title="Resume & credentials"
                 description="Upload your resume. If you already hold an active license or certification, you can add it now."
             >

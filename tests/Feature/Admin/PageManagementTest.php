@@ -163,6 +163,38 @@ test('editing an unrelated field preserves an existing section image', function 
     Storage::disk('public')->assertExists('pages/existing.jpg');
 });
 
+test('clearing a section image via a real multipart submission deletes the old file', function () {
+    // The admin editor always submits via Inertia's forceFormData, which
+    // serializes a JS `null` as the empty string '' (browsers cannot send a
+    // literal null over multipart/form-data). Pest's put() with a plain
+    // array bypasses that serialization entirely, so it cannot catch a
+    // regression here — this test sends '' directly to match what the
+    // browser actually puts on the wire.
+    Storage::fake('public');
+    Storage::disk('public')->put('pages/old.jpg', 'fake-bytes');
+
+    $page = Page::factory()->create();
+    $section = PageSection::factory()->for($page)->create([
+        'content' => heroPayload(['image_path' => 'pages/old.jpg']),
+    ]);
+
+    $this->actingAs($this->admin)->put(route('admin.pages.update', $page), [
+        'title' => $page->title,
+        'meta_description' => $page->meta_description,
+        'is_published' => true,
+        'sections' => [[
+            'id' => $section->id,
+            'is_visible' => true,
+            'position' => 0,
+            'content' => heroPayload(['image_path' => '']),
+        ]],
+    ]);
+
+    $section->refresh();
+    Storage::disk('public')->assertMissing('pages/old.jpg');
+    expect($section->content['image_path'])->toBeNull();
+});
+
 test('a user without access cannot update a page', function () {
     $user = User::factory()->create();
 

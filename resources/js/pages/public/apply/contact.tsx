@@ -9,15 +9,23 @@ import apply from '@/routes/apply';
 
 export default function ApplyContact({
     jobListing,
+    candidate,
 }: {
     jobListing: { title: string; slug: string } | null;
+    candidate: {
+        first_name: string | null;
+        last_name: string | null;
+        preferred_name: string | null;
+        email: string;
+        phone: string | null;
+    } | null;
 }) {
     const { data, setData, post, processing, errors } = useForm({
-        first_name: '',
-        last_name: '',
-        preferred_name: '',
-        email: '',
-        phone: '',
+        first_name: candidate?.first_name ?? '',
+        last_name: candidate?.last_name ?? '',
+        preferred_name: candidate?.preferred_name ?? '',
+        email: candidate?.email ?? '',
+        phone: candidate?.phone ?? '',
         job_listing: jobListing?.slug ?? '',
     });
 
@@ -34,7 +42,7 @@ export default function ApplyContact({
             />
 
             <ApplyWizardCard
-                step={1}
+                stepKey="contact"
                 title="Let's get started"
                 description={
                     jobListing

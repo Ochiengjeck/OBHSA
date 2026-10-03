@@ -29,54 +29,58 @@ export default function ApplyConsent({
             <PageHead title="Consent" />
 
             <ApplyWizardCard
-                step={7}
+                stepKey="consent"
                 title="Consent & signature"
                 description="Just a few confirmations before you review your application."
             >
                 <form onSubmit={submit} className="space-y-6">
-                    <div className="flex items-start gap-3">
-                        <Checkbox
-                            id="information_accurate"
-                            className="mt-0.5"
-                            checked={data.information_accurate}
-                            onCheckedChange={(checked) =>
-                                setData(
-                                    'information_accurate',
-                                    checked === true,
-                                )
-                            }
-                        />
-                        <Label
-                            htmlFor="information_accurate"
-                            className="font-normal"
-                        >
-                            I confirm that all information provided in this
-                            application is accurate to the best of my knowledge.
-                        </Label>
-                    </div>
-                    <InputError message={errors.information_accurate} />
+                    <div className="space-y-4 rounded-lg border border-border p-4 sm:p-5">
+                        <div className="flex items-start gap-3">
+                            <Checkbox
+                                id="information_accurate"
+                                className="mt-0.5"
+                                checked={data.information_accurate}
+                                onCheckedChange={(checked) =>
+                                    setData(
+                                        'information_accurate',
+                                        checked === true,
+                                    )
+                                }
+                            />
+                            <Label
+                                htmlFor="information_accurate"
+                                className="font-normal"
+                            >
+                                I confirm that all information provided in this
+                                application is accurate to the best of my
+                                knowledge.
+                            </Label>
+                        </div>
+                        <InputError message={errors.information_accurate} />
 
-                    <div className="flex items-start gap-3">
-                        <Checkbox
-                            id="background_check_consent"
-                            className="mt-0.5"
-                            checked={data.background_check_consent}
-                            onCheckedChange={(checked) =>
-                                setData(
-                                    'background_check_consent',
-                                    checked === true,
-                                )
-                            }
-                        />
-                        <Label
-                            htmlFor="background_check_consent"
-                            className="font-normal"
-                        >
-                            I consent to a background check and drug screening
-                            as a condition of employment, if offered.
-                        </Label>
+                        <div className="flex items-start gap-3">
+                            <Checkbox
+                                id="background_check_consent"
+                                className="mt-0.5"
+                                checked={data.background_check_consent}
+                                onCheckedChange={(checked) =>
+                                    setData(
+                                        'background_check_consent',
+                                        checked === true,
+                                    )
+                                }
+                            />
+                            <Label
+                                htmlFor="background_check_consent"
+                                className="font-normal"
+                            >
+                                I consent to a background check and drug
+                                screening as a condition of employment, if
+                                offered.
+                            </Label>
+                        </div>
+                        <InputError message={errors.background_check_consent} />
                     </div>
-                    <InputError message={errors.background_check_consent} />
 
                     <div className="grid gap-2">
                         <Label htmlFor="signature_name">

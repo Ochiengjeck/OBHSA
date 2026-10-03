@@ -1,9 +1,11 @@
 import { Link } from '@inertiajs/react';
 import { Button } from '@/components/ui/button';
-import { storageUrl } from '@/lib/utils';
+import { useStorageUrl } from '@/hooks/use-storage-url';
 import type { CtaSectionContent } from '@/types';
 
 export function CtaSection({ content }: { content: CtaSectionContent }) {
+    const storageUrl = useStorageUrl();
+
     return (
         <section className="relative overflow-hidden bg-primary py-16">
             {content.image_path && (

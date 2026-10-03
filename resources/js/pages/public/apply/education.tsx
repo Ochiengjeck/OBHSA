@@ -1,5 +1,5 @@
 import { useForm } from '@inertiajs/react';
-import { Plus, Trash2 } from 'lucide-react';
+import { GraduationCap, Plus, Trash2 } from 'lucide-react';
 import InputError from '@/components/input-error';
 import { ApplyWizardCard } from '@/components/public/apply-wizard-card';
 import { PageHead } from '@/components/public/page-head';
@@ -7,7 +7,6 @@ import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Separator } from '@/components/ui/separator';
 import apply from '@/routes/apply';
 import type { EducationRow } from '@/types';
 
@@ -58,17 +57,19 @@ export default function ApplyEducation({ rows }: { rows: EducationRow[] }) {
             <PageHead title="Education" />
 
             <ApplyWizardCard
-                step={5}
+                stepKey="education"
                 title="Education"
                 description="Add any relevant schooling, certification programs, or training. Skip if not applicable."
             >
-                <form onSubmit={submit} className="space-y-6">
+                <form onSubmit={submit} className="space-y-5">
                     {data.rows.map((row, index) => (
-                        <div key={index} className="space-y-4">
-                            {index > 0 && <Separator />}
-
-                            <div className="flex items-center justify-between">
-                                <p className="text-sm font-medium text-foreground">
+                        <div
+                            key={index}
+                            className="rounded-lg border border-border p-4 sm:p-5"
+                        >
+                            <div className="mb-4 flex items-center justify-between">
+                                <p className="flex items-center gap-2 text-sm font-semibold text-foreground">
+                                    <GraduationCap className="size-4 text-primary" />
                                     School {index + 1}
                                 </p>
                                 <Button

@@ -13,6 +13,8 @@ export default function ServicesCreate() {
             summary: '',
             description: '',
             icon: '',
+            icon_path: null,
+            icon_image: null,
             image: null,
             position: 0,
             is_active: true,

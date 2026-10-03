@@ -17,7 +17,9 @@ export default function ApplyNotAvailable({
             <section className="mx-auto max-w-2xl px-4 py-16 text-center sm:px-6 lg:px-8">
                 <Card>
                     <CardContent className="flex flex-col items-center gap-4 py-8">
-                        <MapPinOff className="size-12 text-muted-foreground" />
+                        <div className="flex size-16 items-center justify-center rounded-full bg-muted">
+                            <MapPinOff className="size-8 text-muted-foreground" />
+                        </div>
                         <h1 className="text-2xl font-bold text-foreground">
                             We don't serve your area yet
                         </h1>

@@ -1,4 +1,5 @@
-import { cn, storageUrl } from '@/lib/utils';
+import { useStorageUrl } from '@/hooks/use-storage-url';
+import { cn } from '@/lib/utils';
 import type { FeatureShowcaseSectionContent } from '@/types';
 
 export function FeatureShowcaseSection({
@@ -6,6 +7,8 @@ export function FeatureShowcaseSection({
 }: {
     content: FeatureShowcaseSectionContent;
 }) {
+    const storageUrl = useStorageUrl();
+
     if (content.items.length === 0) {
         return null;
     }

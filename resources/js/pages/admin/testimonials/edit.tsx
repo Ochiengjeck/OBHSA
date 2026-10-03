@@ -4,7 +4,7 @@ import {
     TestimonialForm,
     type TestimonialFormData,
 } from '@/components/admin/testimonials/testimonial-form';
-import { storageUrl } from '@/lib/utils';
+import { useStorageUrl } from '@/hooks/use-storage-url';
 import admin from '@/routes/admin';
 import type { Testimonial } from '@/types';
 
@@ -13,6 +13,7 @@ export default function TestimonialsEdit({
 }: {
     testimonial: Testimonial;
 }) {
+    const storageUrl = useStorageUrl();
     const { data, setData, put, processing, errors } =
         useForm<TestimonialFormData>({
             author_name: testimonial.author_name,

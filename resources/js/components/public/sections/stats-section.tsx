@@ -1,4 +1,5 @@
 import { Icon } from '@/components/ui/icon';
+import { useStorageUrl } from '@/hooks/use-storage-url';
 import { getLucideIcon } from '@/lib/dynamic-icon';
 import type { StatsSectionContent, Stat } from '@/types';
 
@@ -9,6 +10,8 @@ export function StatsSection({
     content: StatsSectionContent;
     stats: Stat[];
 }) {
+    const storageUrl = useStorageUrl();
+
     if (stats.length === 0) {
         return null;
     }
@@ -23,11 +26,21 @@ export function StatsSection({
                 <dl className="mt-12 grid grid-cols-2 gap-8 text-center sm:grid-cols-4">
                     {stats.map((stat) => (
                         <div key={stat.id}>
-                            {stat.icon && (
-                                <Icon
-                                    iconNode={getLucideIcon(stat.icon)}
-                                    className="mx-auto mb-2 size-6 text-primary"
+                            {stat.icon_path ? (
+                                <img
+                                    src={
+                                        storageUrl(stat.icon_path) ?? undefined
+                                    }
+                                    alt=""
+                                    className="mx-auto mb-2 size-6 object-contain"
                                 />
+                            ) : (
+                                stat.icon && (
+                                    <Icon
+                                        iconNode={getLucideIcon(stat.icon)}
+                                        className="mx-auto mb-2 size-6 text-primary"
+                                    />
+                                )
                             )}
                             <dt className="text-3xl font-bold text-primary sm:text-4xl">
                                 {stat.value}

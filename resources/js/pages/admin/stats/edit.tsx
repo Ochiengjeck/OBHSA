@@ -12,13 +12,15 @@ export default function StatsEdit({ stat }: { stat: Stat }) {
         label: stat.label,
         value: stat.value,
         icon: stat.icon ?? '',
+        icon_path: stat.icon_path,
+        icon_image: null,
         position: stat.position,
         is_active: stat.is_active,
     });
 
     function submit(event: React.FormEvent) {
         event.preventDefault();
-        put(admin.stats.update(stat.id).url);
+        put(admin.stats.update(stat.id).url, { forceFormData: true });
     }
 
     return (

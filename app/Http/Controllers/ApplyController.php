@@ -42,8 +42,11 @@ class ApplyController extends Controller
             ? JobListing::query()->where('slug', $request->string('job_listing'))->active()->first()
             : null;
 
+        $application = $this->currentApplication();
+
         return Inertia::render('public/apply/contact', [
             'jobListing' => $jobListing ? ['title' => $jobListing->title, 'slug' => $jobListing->slug] : null,
+            'candidate' => $application?->candidate->only(['first_name', 'last_name', 'preferred_name', 'email', 'phone']),
         ]);
     }
 

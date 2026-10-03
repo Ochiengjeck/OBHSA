@@ -4,17 +4,20 @@ import {
     ServiceForm,
     type ServiceFormData,
 } from '@/components/admin/services/service-form';
-import { storageUrl } from '@/lib/utils';
+import { useStorageUrl } from '@/hooks/use-storage-url';
 import admin from '@/routes/admin';
 import type { Service } from '@/types';
 
 export default function ServicesEdit({ service }: { service: Service }) {
+    const storageUrl = useStorageUrl();
     const { data, setData, put, processing, errors } = useForm<ServiceFormData>(
         {
             title: service.title,
             summary: service.summary,
             description: service.description ?? '',
             icon: service.icon ?? '',
+            icon_path: service.icon_path,
+            icon_image: null,
             image: null,
             position: service.position,
             is_active: service.is_active,

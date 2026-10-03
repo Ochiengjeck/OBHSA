@@ -4,11 +4,12 @@ import {
     BlogPostForm,
     type BlogPostFormData,
 } from '@/components/admin/blog-posts/blog-post-form';
-import { storageUrl } from '@/lib/utils';
+import { useStorageUrl } from '@/hooks/use-storage-url';
 import admin from '@/routes/admin';
 import type { BlogPost } from '@/types';
 
 export default function BlogPostsEdit({ post }: { post: BlogPost }) {
+    const storageUrl = useStorageUrl();
     const { data, setData, put, processing, errors } =
         useForm<BlogPostFormData>({
             title: post.title,

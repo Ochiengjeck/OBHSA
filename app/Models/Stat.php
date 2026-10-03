@@ -12,10 +12,11 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $label
  * @property string $value
  * @property string|null $icon
+ * @property string|null $icon_path
  * @property int $position
  * @property bool $is_active
  */
-#[Fillable(['label', 'value', 'icon', 'position', 'is_active'])]
+#[Fillable(['label', 'value', 'icon', 'icon_path', 'position', 'is_active'])]
 class Stat extends Model
 {
     /** @use HasFactory<StatFactory> */

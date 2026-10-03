@@ -14,11 +14,12 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $summary
  * @property string|null $description
  * @property string|null $icon
+ * @property string|null $icon_path
  * @property string|null $image_path
  * @property int $position
  * @property bool $is_active
  */
-#[Fillable(['slug', 'title', 'summary', 'description', 'icon', 'image_path', 'position', 'is_active'])]
+#[Fillable(['slug', 'title', 'summary', 'description', 'icon', 'icon_path', 'image_path', 'position', 'is_active'])]
 class Service extends Model
 {
     /** @use HasFactory<ServiceFactory> */

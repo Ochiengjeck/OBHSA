@@ -39,11 +39,20 @@ class ServiceController extends Controller
      */
     public function store(StoreServiceRequest $request): RedirectResponse
     {
-        $service = Service::query()->create($request->safe()->except('image'));
+        $service = Service::query()->create($request->safe()->except(['image', 'icon_image', 'icon_path']));
+
+        $service->icon_path = $this->resolveReplaceablePath(
+            $request->file('icon_image'),
+            $request->input('icon_path'),
+            null,
+            'service-icons',
+        );
 
         if ($request->hasFile('image')) {
-            $service->update(['image_path' => $this->storePublicFile($request->file('image'), 'services')]);
+            $service->image_path = $this->storePublicFile($request->file('image'), 'services');
         }
+
+        $service->save();
 
         Inertia::flash('toast', ['type' => 'success', 'message' => __('Service created.')]);
 
@@ -65,7 +74,16 @@ class ServiceController extends Controller
      */
     public function update(UpdateServiceRequest $request, Service $service): RedirectResponse
     {
-        $service->fill($request->safe()->except('image'));
+        $previousIconPath = $service->icon_path;
+
+        $service->fill($request->safe()->except(['image', 'icon_image', 'icon_path']));
+
+        $service->icon_path = $this->resolveReplaceablePath(
+            $request->file('icon_image'),
+            $request->input('icon_path'),
+            $previousIconPath,
+            'service-icons',
+        );
 
         if ($request->hasFile('image')) {
             if ($service->image_path) {
@@ -89,6 +107,10 @@ class ServiceController extends Controller
     {
         if ($service->image_path) {
             Storage::disk('public')->delete($service->image_path);
+        }
+
+        if ($service->icon_path) {
+            Storage::disk('public')->delete($service->icon_path);
         }
 
         $service->delete();

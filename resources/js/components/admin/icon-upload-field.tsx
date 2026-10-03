@@ -5,18 +5,18 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useStorageUrl } from '@/hooks/use-storage-url';
 
-export function ImageUploadField({
-    label,
-    imagePath,
+export function IconUploadField({
+    iconPath,
     pendingFile,
     error,
-    onChange,
+    onUpload,
+    onRemove,
 }: {
-    label: string;
-    imagePath: string | null;
-    pendingFile: File | null | undefined;
+    iconPath: string | null;
+    pendingFile: File | null;
     error?: string;
-    onChange: (patch: { image: File | null; image_path?: null }) => void;
+    onUpload: (file: File | null) => void;
+    onRemove: () => void;
 }) {
     const storageUrl = useStorageUrl();
     const [objectUrl, setObjectUrl] = useState<string | null>(null);
@@ -33,42 +33,35 @@ export function ImageUploadField({
         return () => URL.revokeObjectURL(url);
     }, [pendingFile]);
 
-    const previewUrl = objectUrl ?? storageUrl(imagePath);
+    const previewUrl = objectUrl ?? storageUrl(iconPath);
 
     return (
         <div className="grid gap-2">
-            <Label>{label}</Label>
-            {previewUrl ? (
-                <img
-                    src={previewUrl}
-                    alt=""
-                    className="h-32 w-auto max-w-xs rounded-lg border border-border object-cover"
-                />
-            ) : (
-                <div
-                    aria-hidden
-                    className="h-32 w-full max-w-xs rounded-lg bg-gradient-to-br from-primary/20 to-accent/40"
-                />
-            )}
+            <Label>
+                Custom Icon (optional — overrides the preset icon above)
+            </Label>
             <div className="flex items-center gap-3">
+                {previewUrl && (
+                    <img
+                        src={previewUrl}
+                        alt=""
+                        className="size-10 rounded-md border border-border object-contain p-1.5"
+                    />
+                )}
                 <Input
                     type="file"
                     accept="image/*"
-                    onChange={(e) =>
-                        onChange({ image: e.target.files?.[0] ?? null })
-                    }
                     className="max-w-xs"
+                    onChange={(e) => onUpload(e.target.files?.[0] ?? null)}
                 />
-                {(imagePath || pendingFile) && (
+                {(iconPath || pendingFile) && (
                     <Button
                         type="button"
                         variant="ghost"
                         size="sm"
-                        onClick={() =>
-                            onChange({ image: null, image_path: null })
-                        }
+                        onClick={onRemove}
                     >
-                        Remove image
+                        Remove
                     </Button>
                 )}
             </div>

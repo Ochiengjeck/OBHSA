@@ -2,11 +2,13 @@ import { Link } from '@inertiajs/react';
 import { PageHead } from '@/components/public/page-head';
 import { PaginationLinks } from '@/components/pagination-links';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { storageUrl } from '@/lib/utils';
+import { useStorageUrl } from '@/hooks/use-storage-url';
 import { show } from '@/routes/blog';
 import type { BlogPost, Paginated } from '@/types';
 
 export default function BlogIndex({ posts }: { posts: Paginated<BlogPost> }) {
+    const storageUrl = useStorageUrl();
+
     return (
         <>
             <PageHead

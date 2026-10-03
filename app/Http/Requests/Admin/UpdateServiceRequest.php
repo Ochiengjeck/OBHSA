@@ -18,6 +18,8 @@ class UpdateServiceRequest extends FormRequest
             'summary' => ['required', 'string', 'max:500'],
             'description' => ['nullable', 'string'],
             'icon' => ['nullable', 'string', 'max:100'],
+            'icon_path' => ['nullable', 'string'],
+            'icon_image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:512'],
             'image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
             'position' => ['required', 'integer', 'min:0'],
             'is_active' => ['required', 'boolean'],

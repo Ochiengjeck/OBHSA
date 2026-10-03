@@ -1,25 +1,36 @@
 import { Link, useForm } from '@inertiajs/react';
+import {
+    Briefcase,
+    FileText,
+    GraduationCap,
+    MapPin,
+    ShieldCheck,
+    User,
+    type LucideIcon,
+} from 'lucide-react';
 import { ApplyWizardCard } from '@/components/public/apply-wizard-card';
 import { PageHead } from '@/components/public/page-head';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Separator } from '@/components/ui/separator';
 import apply from '@/routes/apply';
 import type { WizardApplicationReview } from '@/types';
 
 function ReviewSection({
+    icon: Icon,
     title,
     editHref,
     children,
 }: {
+    icon: LucideIcon;
     title: string;
     editHref: string;
     children: React.ReactNode;
 }) {
     return (
-        <div className="space-y-2">
+        <div className="rounded-lg border border-border p-4 sm:p-5">
             <div className="flex items-center justify-between">
-                <h3 className="text-sm font-semibold text-foreground">
+                <h3 className="flex items-center gap-2 text-sm font-semibold text-foreground">
+                    <Icon className="size-4 text-primary" />
                     {title}
                 </h3>
                 <Link
@@ -29,7 +40,9 @@ function ReviewSection({
                     Edit
                 </Link>
             </div>
-            <div className="text-sm text-muted-foreground">{children}</div>
+            <div className="mt-3 space-y-1 text-sm text-muted-foreground">
+                {children}
+            </div>
         </div>
     );
 }
@@ -56,26 +69,33 @@ export default function ApplyReview({
             <PageHead title="Review Your Application" />
 
             <ApplyWizardCard
-                step={8}
+                stepKey="review"
                 title="Review your application"
                 description="Make sure everything looks right before you submit."
             >
-                <form onSubmit={submit} className="space-y-6">
+                <form onSubmit={submit} className="space-y-4">
                     <ReviewSection
+                        icon={User}
                         title="Contact"
-                        editHref={apply.location.edit().url}
+                        editHref={apply.create().url}
                     >
                         <p>{candidate.full_name}</p>
                         <p>{candidate.email}</p>
                         <p>{candidate.phone}</p>
+                    </ReviewSection>
+
+                    <ReviewSection
+                        icon={MapPin}
+                        title="Location"
+                        editHref={apply.location.edit().url}
+                    >
                         <p>
                             {candidate.city}, {candidate.state}
                         </p>
                     </ReviewSection>
 
-                    <Separator />
-
                     <ReviewSection
+                        icon={Briefcase}
                         title="Preferences"
                         editHref={apply.preferences.edit().url}
                     >
@@ -94,9 +114,8 @@ export default function ApplyReview({
                         </div>
                     </ReviewSection>
 
-                    <Separator />
-
                     <ReviewSection
+                        icon={Briefcase}
                         title="Employment History"
                         editHref={apply.employmentHistory.edit().url}
                     >
@@ -111,9 +130,8 @@ export default function ApplyReview({
                         )}
                     </ReviewSection>
 
-                    <Separator />
-
                     <ReviewSection
+                        icon={GraduationCap}
                         title="Education"
                         editHref={apply.education.edit().url}
                     >
@@ -126,9 +144,8 @@ export default function ApplyReview({
                         )}
                     </ReviewSection>
 
-                    <Separator />
-
                     <ReviewSection
+                        icon={FileText}
                         title="Resume & Credentials"
                         editHref={apply.documents.edit().url}
                     >
@@ -144,9 +161,8 @@ export default function ApplyReview({
                         ))}
                     </ReviewSection>
 
-                    <Separator />
-
                     <ReviewSection
+                        icon={ShieldCheck}
                         title="Consent"
                         editHref={apply.consent.edit().url}
                     >

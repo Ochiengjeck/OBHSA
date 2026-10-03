@@ -1,5 +1,5 @@
 import { useForm } from '@inertiajs/react';
-import { Plus, Trash2 } from 'lucide-react';
+import { Briefcase, Plus, Trash2 } from 'lucide-react';
 import InputError from '@/components/input-error';
 import { ApplyWizardCard } from '@/components/public/apply-wizard-card';
 import { PageHead } from '@/components/public/page-head';
@@ -7,7 +7,6 @@ import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Separator } from '@/components/ui/separator';
 import { Textarea } from '@/components/ui/textarea';
 import apply from '@/routes/apply';
 import type { EmploymentHistoryRow } from '@/types';
@@ -68,17 +67,19 @@ export default function ApplyEmploymentHistory({
             <PageHead title="Employment History" />
 
             <ApplyWizardCard
-                step={4}
+                stepKey="employment-history"
                 title="Employment history"
                 description="Add your recent caregiving roles. New to the field? Skip this step."
             >
-                <form onSubmit={submit} className="space-y-6">
+                <form onSubmit={submit} className="space-y-5">
                     {data.rows.map((row, index) => (
-                        <div key={index} className="space-y-4">
-                            {index > 0 && <Separator />}
-
-                            <div className="flex items-center justify-between">
-                                <p className="text-sm font-medium text-foreground">
+                        <div
+                            key={index}
+                            className="rounded-lg border border-border p-4 sm:p-5"
+                        >
+                            <div className="mb-4 flex items-center justify-between">
+                                <p className="flex items-center gap-2 text-sm font-semibold text-foreground">
+                                    <Briefcase className="size-4 text-primary" />
                                     Position {index + 1}
                                 </p>
                                 <Button
