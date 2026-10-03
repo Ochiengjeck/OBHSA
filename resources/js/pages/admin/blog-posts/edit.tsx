@@ -4,6 +4,7 @@ import {
     BlogPostForm,
     type BlogPostFormData,
 } from '@/components/admin/blog-posts/blog-post-form';
+import { storageUrl } from '@/lib/utils';
 import admin from '@/routes/admin';
 import type { BlogPost } from '@/types';
 
@@ -34,7 +35,7 @@ export default function BlogPostsEdit({ post }: { post: BlogPost }) {
                         setData={setData}
                         errors={errors}
                         processing={processing}
-                        imagePreview={post.featured_image_path}
+                        imagePreview={storageUrl(post.featured_image_path)}
                         submitLabel="Save Changes"
                     />
                 </form>

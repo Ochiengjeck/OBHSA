@@ -1,5 +1,7 @@
 import { CtaSection } from '@/components/public/sections/cta-section';
 import { FaqSection } from '@/components/public/sections/faq-section';
+import { FeatureShowcaseSection } from '@/components/public/sections/feature-showcase-section';
+import { GallerySection } from '@/components/public/sections/gallery-section';
 import { HeroSection } from '@/components/public/sections/hero-section';
 import { HowItWorksSection } from '@/components/public/sections/how-it-works-section';
 import { IntroSection } from '@/components/public/sections/intro-section';
@@ -10,6 +12,8 @@ import { ContactInfoSection } from '@/components/public/sections/contact-info-se
 import type {
     CtaSectionContent,
     FaqSectionContent,
+    FeatureShowcaseSectionContent,
+    GallerySectionContent,
     HeroSectionContent,
     HowItWorksSectionContent,
     IntroSectionContent,
@@ -109,6 +113,24 @@ export function SectionRenderer({
                                 key={section.id}
                                 content={
                                     section.content as ContactInfoSectionContent
+                                }
+                            />
+                        );
+                    case 'feature_showcase':
+                        return (
+                            <FeatureShowcaseSection
+                                key={section.id}
+                                content={
+                                    section.content as FeatureShowcaseSectionContent
+                                }
+                            />
+                        );
+                    case 'gallery':
+                        return (
+                            <GallerySection
+                                key={section.id}
+                                content={
+                                    section.content as GallerySectionContent
                                 }
                             />
                         );

@@ -25,7 +25,11 @@ export function SiteFooter() {
     ].filter((link) => link.href);
 
     return (
-        <footer className="border-t border-border/60 bg-muted/30">
+        <footer className="relative bg-muted/30">
+            <div
+                aria-hidden
+                className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent"
+            />
             <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
                 <div className="grid gap-10 md:grid-cols-4">
                     <div className="md:col-span-2">

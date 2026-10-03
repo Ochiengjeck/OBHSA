@@ -2,6 +2,7 @@ import { Link } from '@inertiajs/react';
 import { ArrowLeft } from 'lucide-react';
 import { PageHead } from '@/components/public/page-head';
 import { Button } from '@/components/ui/button';
+import { storageUrl } from '@/lib/utils';
 import { index } from '@/routes/blog';
 import type { BlogPost } from '@/types';
 
@@ -23,7 +24,7 @@ export default function BlogShow({ post }: { post: BlogPost }) {
 
                 {post.featured_image_path && (
                     <img
-                        src={post.featured_image_path}
+                        src={storageUrl(post.featured_image_path) ?? undefined}
                         alt=""
                         className="mt-6 aspect-video w-full rounded-xl object-cover"
                     />

@@ -52,8 +52,9 @@ export function SiteHeader() {
                             href={item.href}
                             prefetch
                             className={cn(
-                                'text-sm font-medium text-muted-foreground transition-colors hover:text-foreground',
-                                isCurrentUrl(item.href) && 'text-foreground',
+                                'relative py-1 text-sm font-medium text-muted-foreground transition-colors after:absolute after:inset-x-0 after:-bottom-[1px] after:h-px after:scale-x-0 after:bg-primary after:transition-transform hover:text-foreground hover:after:scale-x-100',
+                                isCurrentUrl(item.href) &&
+                                    'text-foreground after:scale-x-100',
                             )}
                         >
                             {item.title}

@@ -48,4 +48,39 @@ class PageSectionFactory extends Factory
             ],
         ]);
     }
+
+    /**
+     * Configure the section as a "feature_showcase" section.
+     */
+    public function featureShowcase(): static
+    {
+        return $this->state(fn () => [
+            'type' => 'feature_showcase',
+            'content' => [
+                'heading' => fake()->sentence(4),
+                'subheading' => fake()->sentence(),
+                'items' => [
+                    ['title' => fake()->sentence(3), 'body' => fake()->paragraph(), 'image_path' => null],
+                    ['title' => fake()->sentence(3), 'body' => fake()->paragraph(), 'image_path' => null],
+                ],
+            ],
+        ]);
+    }
+
+    /**
+     * Configure the section as a "gallery" section.
+     */
+    public function gallery(): static
+    {
+        return $this->state(fn () => [
+            'type' => 'gallery',
+            'content' => [
+                'heading' => fake()->sentence(3),
+                'images' => [
+                    ['image_path' => null, 'caption' => fake()->sentence()],
+                    ['image_path' => null, 'caption' => fake()->sentence()],
+                ],
+            ],
+        ]);
+    }
 }

@@ -22,6 +22,11 @@ class UpdatePageRequest extends FormRequest
             'sections.*.is_visible' => ['required', 'boolean'],
             'sections.*.position' => ['required', 'integer', 'min:0'],
             'sections.*.content' => ['required', 'array'],
+            'sections.*.content.image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
+            'sections.*.content.items' => ['sometimes', 'array'],
+            'sections.*.content.items.*.image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
+            'sections.*.content.images' => ['sometimes', 'array'],
+            'sections.*.content.images.*.image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
         ];
     }
 }

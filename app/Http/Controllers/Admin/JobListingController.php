@@ -2,16 +2,20 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Concerns\StoresUploadedFiles;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreJobListingRequest;
 use App\Http\Requests\Admin\UpdateJobListingRequest;
 use App\Models\JobListing;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 use Inertia\Response;
 
 class JobListingController extends Controller
 {
+    use StoresUploadedFiles;
+
     /**
      * List all job listings.
      */
@@ -35,7 +39,14 @@ class JobListingController extends Controller
      */
     public function store(StoreJobListingRequest $request): RedirectResponse
     {
-        JobListing::query()->create([...$request->validated(), 'posted_at' => now()]);
+        $jobListing = JobListing::query()->create([
+            ...$request->safe()->except('image'),
+            'posted_at' => now(),
+        ]);
+
+        if ($request->hasFile('image')) {
+            $jobListing->update(['image_path' => $this->storePublicFile($request->file('image'), 'job-listings')]);
+        }
 
         Inertia::flash('toast', ['type' => 'success', 'message' => __('Job listing created.')]);
 
@@ -57,7 +68,17 @@ class JobListingController extends Controller
      */
     public function update(UpdateJobListingRequest $request, JobListing $jobListing): RedirectResponse
     {
-        $jobListing->update($request->validated());
+        $jobListing->fill($request->safe()->except('image'));
+
+        if ($request->hasFile('image')) {
+            if ($jobListing->image_path) {
+                Storage::disk('public')->delete($jobListing->image_path);
+            }
+
+            $jobListing->image_path = $this->storePublicFile($request->file('image'), 'job-listings');
+        }
+
+        $jobListing->save();
 
         Inertia::flash('toast', ['type' => 'success', 'message' => __('Job listing updated.')]);
 
@@ -69,6 +90,10 @@ class JobListingController extends Controller
      */
     public function destroy(JobListing $jobListing): RedirectResponse
     {
+        if ($jobListing->image_path) {
+            Storage::disk('public')->delete($jobListing->image_path);
+        }
+
         $jobListing->delete();
 
         Inertia::flash('toast', ['type' => 'success', 'message' => __('Job listing deleted.')]);

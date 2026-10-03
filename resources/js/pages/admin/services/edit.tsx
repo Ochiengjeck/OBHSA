@@ -4,6 +4,7 @@ import {
     ServiceForm,
     type ServiceFormData,
 } from '@/components/admin/services/service-form';
+import { storageUrl } from '@/lib/utils';
 import admin from '@/routes/admin';
 import type { Service } from '@/types';
 
@@ -36,7 +37,7 @@ export default function ServicesEdit({ service }: { service: Service }) {
                         setData={setData}
                         errors={errors}
                         processing={processing}
-                        imagePreview={service.image_path}
+                        imagePreview={storageUrl(service.image_path)}
                         submitLabel="Save Changes"
                     />
                 </form>

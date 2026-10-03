@@ -81,6 +81,29 @@ export type CtaSectionContent = {
     body: string;
     button_label: string;
     button_url: string;
+    image_path: string | null;
+};
+
+export type FeatureShowcaseItem = {
+    title: string;
+    body: string;
+    image_path: string | null;
+};
+
+export type FeatureShowcaseSectionContent = {
+    heading: string;
+    subheading: string;
+    items: FeatureShowcaseItem[];
+};
+
+export type GalleryImage = {
+    image_path: string | null;
+    caption: string | null;
+};
+
+export type GallerySectionContent = {
+    heading: string | null;
+    images: GalleryImage[];
 };
 
 export type TestimonialsSectionContent = {
@@ -105,7 +128,9 @@ export type PageSectionType =
     | 'cta'
     | 'testimonials'
     | 'stats'
-    | 'contact_info';
+    | 'contact_info'
+    | 'feature_showcase'
+    | 'gallery';
 
 export type Page = {
     id: number;
@@ -129,7 +154,9 @@ export type PageSection = {
         | CtaSectionContent
         | TestimonialsSectionContent
         | StatsSectionContent
-        | ContactInfoSectionContent;
+        | ContactInfoSectionContent
+        | FeatureShowcaseSectionContent
+        | GallerySectionContent;
 };
 
 export type Service = {
@@ -157,6 +184,7 @@ export type JobListing = {
     pay_range_max: string | null;
     description: string;
     requirements: string | null;
+    image_path: string | null;
     is_active: boolean;
     posted_at: string | null;
     closes_at: string | null;

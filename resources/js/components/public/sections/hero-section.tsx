@@ -1,50 +1,58 @@
 import { Link } from '@inertiajs/react';
 import { Button } from '@/components/ui/button';
+import { storageUrl } from '@/lib/utils';
 import type { HeroSectionContent } from '@/types';
 
 export function HeroSection({ content }: { content: HeroSectionContent }) {
     return (
-        <section className="relative overflow-hidden bg-gradient-to-b from-accent/40 to-background">
-            <div className="mx-auto grid max-w-6xl gap-10 px-4 py-20 sm:px-6 lg:grid-cols-2 lg:items-center lg:px-8 lg:py-28">
-                <div>
-                    <h1 className="text-4xl font-bold tracking-tight text-balance text-foreground sm:text-5xl">
-                        {content.heading}
-                    </h1>
-                    <p className="mt-6 max-w-xl text-lg text-muted-foreground">
-                        {content.subheading}
-                    </p>
-                    <div className="mt-8 flex flex-wrap gap-4">
-                        {content.primary_cta_label &&
-                            content.primary_cta_url && (
-                                <Button size="lg" asChild>
-                                    <Link href={content.primary_cta_url}>
-                                        {content.primary_cta_label}
-                                    </Link>
-                                </Button>
-                            )}
-                        {content.secondary_cta_label &&
-                            content.secondary_cta_url && (
-                                <Button size="lg" variant="outline" asChild>
-                                    <Link href={content.secondary_cta_url}>
-                                        {content.secondary_cta_label}
-                                    </Link>
-                                </Button>
-                            )}
-                    </div>
-                </div>
+        <section className="relative flex min-h-[calc(100vh-4rem)] items-center overflow-hidden">
+            {content.image_path ? (
+                <img
+                    src={storageUrl(content.image_path) ?? undefined}
+                    alt=""
+                    loading="eager"
+                    className="absolute inset-0 h-full w-full object-cover"
+                />
+            ) : (
+                <div
+                    aria-hidden
+                    className="absolute inset-0 bg-gradient-to-br from-primary/80 via-primary/60 to-accent/70"
+                />
+            )}
+            <div
+                aria-hidden
+                className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-black/10"
+            />
 
-                {content.image_path ? (
-                    <img
-                        src={content.image_path}
-                        alt=""
-                        className="aspect-4/3 w-full rounded-2xl object-cover shadow-lg"
-                    />
-                ) : (
-                    <div
-                        aria-hidden
-                        className="aspect-4/3 w-full rounded-2xl bg-gradient-to-br from-primary/20 to-accent/40"
-                    />
-                )}
+            <div className="relative mx-auto max-w-3xl px-4 py-24 text-center sm:px-6 lg:px-8">
+                <h1 className="text-4xl font-bold tracking-tight text-balance text-white sm:text-5xl lg:text-6xl">
+                    {content.heading}
+                </h1>
+                <p className="mt-6 text-lg text-white/90 sm:text-xl">
+                    {content.subheading}
+                </p>
+                <div className="mt-8 flex flex-wrap justify-center gap-4">
+                    {content.primary_cta_label && content.primary_cta_url && (
+                        <Button size="lg" asChild>
+                            <Link href={content.primary_cta_url}>
+                                {content.primary_cta_label}
+                            </Link>
+                        </Button>
+                    )}
+                    {content.secondary_cta_label &&
+                        content.secondary_cta_url && (
+                            <Button
+                                size="lg"
+                                variant="outline"
+                                asChild
+                                className="border-white/60 bg-transparent text-white hover:bg-white/10 hover:text-white"
+                            >
+                                <Link href={content.secondary_cta_url}>
+                                    {content.secondary_cta_label}
+                                </Link>
+                            </Button>
+                        )}
+                </div>
             </div>
         </section>
     );

@@ -38,6 +38,7 @@ class UpdateJobListingRequest extends FormRequest
             'pay_range_max' => ['nullable', 'numeric', 'min:0', 'gte:pay_range_min'],
             'description' => ['required', 'string'],
             'requirements' => ['nullable', 'string'],
+            'image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
             'is_active' => ['required', 'boolean'],
             'closes_at' => ['nullable', 'date'],
         ];

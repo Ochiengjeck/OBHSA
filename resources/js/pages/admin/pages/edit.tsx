@@ -1,6 +1,7 @@
 import { Head, useForm } from '@inertiajs/react';
 import { ArrowDown, ArrowUp, Plus, Trash2 } from 'lucide-react';
 import { AdminPageHeader } from '@/components/admin/admin-page-header';
+import { ImageUploadField } from '@/components/admin/pages/image-upload-field';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -10,7 +11,11 @@ import { Textarea } from '@/components/ui/textarea';
 import admin from '@/routes/admin';
 import type { Page, PageSection } from '@/types';
 
-type SectionContentValue = string | Record<string, string>[];
+type SectionContentValue =
+    | string
+    | null
+    | File
+    | Record<string, string | File | null>[];
 
 type EditableSection = Omit<PageSection, 'content'> & {
     content: Record<string, SectionContentValue>;
@@ -33,6 +38,8 @@ const SECTION_LABELS: Record<string, string> = {
     testimonials: 'Testimonials',
     stats: 'Stats',
     contact_info: 'Contact Info',
+    feature_showcase: 'Feature Showcase',
+    gallery: 'Photo Gallery',
 };
 
 export default function PagesEdit({
@@ -87,7 +94,7 @@ export default function PagesEdit({
 
     function submit(event: React.FormEvent) {
         event.preventDefault();
-        put(admin.pages.update(page.id).url);
+        put(admin.pages.update(page.id).url, { forceFormData: true });
     }
 
     const sortedSections = [...data.sections].sort(
@@ -239,6 +246,12 @@ function SectionFields({
                         value={content.subheading as string}
                         onChange={(v) => onChange({ subheading: v })}
                     />
+                    <ImageUploadField
+                        label="Background Photo"
+                        imagePath={(content.image_path as string) ?? null}
+                        pendingFile={content.image as File | null | undefined}
+                        onChange={onChange}
+                    />
                     <div className="grid gap-4 sm:grid-cols-2">
                         <TextField
                             label="Primary Button Label"
@@ -334,6 +347,12 @@ function SectionFields({
                         value={content.body as string}
                         onChange={(v) => onChange({ body: v })}
                     />
+                    <ImageUploadField
+                        label="Background Photo (optional)"
+                        imagePath={(content.image_path as string) ?? null}
+                        pendingFile={content.image as File | null | undefined}
+                        onChange={onChange}
+                    />
                     <div className="grid gap-4 sm:grid-cols-2">
                         <TextField
                             label="Button Label"
@@ -354,12 +373,7 @@ function SectionFields({
                 <RepeatableFields
                     heading={content.heading as string}
                     onHeadingChange={(v) => onChange({ heading: v })}
-                    items={
-                        (content.steps as {
-                            title: string;
-                            description: string;
-                        }[]) ?? []
-                    }
+                    items={(content.steps as Record<string, string>[]) ?? []}
                     itemLabel="Step"
                     fields={[
                         { key: 'title', label: 'Title' },
@@ -379,12 +393,7 @@ function SectionFields({
                 <RepeatableFields
                     heading={content.heading as string}
                     onHeadingChange={(v) => onChange({ heading: v })}
-                    items={
-                        (content.items as {
-                            question: string;
-                            answer: string;
-                        }[]) ?? []
-                    }
+                    items={(content.items as Record<string, string>[]) ?? []}
                     itemLabel="Question"
                     fields={[
                         { key: 'question', label: 'Question' },
@@ -392,6 +401,65 @@ function SectionFields({
                     ]}
                     onItemsChange={(items) => onChange({ items })}
                     emptyItem={{ question: '', answer: '' }}
+                />
+            );
+
+        case 'feature_showcase':
+            return (
+                <div className="space-y-4">
+                    <TextAreaField
+                        label="Subheading"
+                        value={(content.subheading as string) ?? ''}
+                        onChange={(v) => onChange({ subheading: v })}
+                    />
+                    <RepeatableFields
+                        heading={content.heading as string}
+                        onHeadingChange={(v) => onChange({ heading: v })}
+                        items={
+                            (content.items as Record<
+                                string,
+                                string | File | null
+                            >[]) ?? []
+                        }
+                        itemLabel="Feature"
+                        fields={[
+                            { key: 'image', label: 'Photo', type: 'image' },
+                            { key: 'title', label: 'Title' },
+                            {
+                                key: 'body',
+                                label: 'Body',
+                                multiline: true,
+                            },
+                        ]}
+                        onItemsChange={(items) => onChange({ items })}
+                        emptyItem={{
+                            title: '',
+                            body: '',
+                            image_path: null,
+                            image: null,
+                        }}
+                    />
+                </div>
+            );
+
+        case 'gallery':
+            return (
+                <RepeatableFields
+                    heading={(content.heading as string) ?? ''}
+                    onHeadingChange={(v) => onChange({ heading: v })}
+                    items={
+                        (content.images as Record<
+                            string,
+                            string | File | null
+                        >[]) ?? []
+                    }
+                    itemLabel="Image"
+                    fields={[
+                        { key: 'image', label: 'Photo', type: 'image' },
+                        { key: 'caption', label: 'Caption (optional)' },
+                    ]}
+                    onItemsChange={(items) => onChange({ images: items })}
+                    emptyItem={{ image_path: null, image: null, caption: '' }}
                 />
             );
 
@@ -441,7 +509,7 @@ function TextAreaField({
     );
 }
 
-function RepeatableFields<T extends Record<string, string>>({
+function RepeatableFields<T extends Record<string, string | File | null>>({
     heading,
     onHeadingChange,
     items,
@@ -454,7 +522,12 @@ function RepeatableFields<T extends Record<string, string>>({
     onHeadingChange: (value: string) => void;
     items: T[];
     itemLabel: string;
-    fields: { key: keyof T & string; label: string; multiline?: boolean }[];
+    fields: {
+        key: keyof T & string;
+        label: string;
+        multiline?: boolean;
+        type?: 'image';
+    }[];
     onItemsChange: (items: T[]) => void;
     emptyItem: T;
 }) {
@@ -491,11 +564,36 @@ function RepeatableFields<T extends Record<string, string>>({
                         </div>
                         <div className="space-y-3">
                             {fields.map((field) =>
-                                field.multiline ? (
+                                field.type === 'image' ? (
+                                    <ImageUploadField
+                                        key={field.key}
+                                        label={field.label}
+                                        imagePath={
+                                            (item.image_path as
+                                                | string
+                                                | null) ?? null
+                                        }
+                                        pendingFile={
+                                            item.image as
+                                                | File
+                                                | null
+                                                | undefined
+                                        }
+                                        onChange={(patch) =>
+                                            onItemsChange(
+                                                items.map((it, i) =>
+                                                    i === index
+                                                        ? { ...it, ...patch }
+                                                        : it,
+                                                ),
+                                            )
+                                        }
+                                    />
+                                ) : field.multiline ? (
                                     <TextAreaField
                                         key={field.key}
                                         label={field.label}
-                                        value={item[field.key]}
+                                        value={item[field.key] as string}
                                         onChange={(v) =>
                                             onItemsChange(
                                                 items.map((it, i) =>
@@ -513,7 +611,7 @@ function RepeatableFields<T extends Record<string, string>>({
                                     <TextField
                                         key={field.key}
                                         label={field.label}
-                                        value={item[field.key]}
+                                        value={item[field.key] as string}
                                         onChange={(v) =>
                                             onItemsChange(
                                                 items.map((it, i) =>

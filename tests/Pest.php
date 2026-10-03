@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Http\UploadedFile;
 use Tests\TestCase;
 
 /*
@@ -44,7 +45,17 @@ expect()->extend('toBeOne', function () {
 |
 */
 
-function something()
+/**
+ * A fake image upload for tests. UploadedFile::fake()->image() requires the
+ * GD extension; this wraps a tiny real PNG (so Laravel's `image` validation
+ * rule, which sniffs actual file content, accepts it) as a test UploadedFile
+ * instead, with no GD dependency.
+ */
+function fakeImageFile(string $name = 'image.png'): UploadedFile
 {
-    // ..
+    $png = base64_decode('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=');
+    $path = tempnam(sys_get_temp_dir(), 'fake').'.png';
+    file_put_contents($path, $png);
+
+    return new UploadedFile($path, $name, 'image/png', null, true);
 }

@@ -76,6 +76,30 @@ class PageSeeder extends Seeder
                         ],
                     ],
                     [
+                        'type' => 'feature_showcase',
+                        'content' => [
+                            'heading' => 'Why facilities and caregivers choose OBHSA',
+                            'subheading' => 'A staffing partner that treats credentialing, scheduling, and support as seriously as you do.',
+                            'items' => [
+                                [
+                                    'title' => 'Every caregiver is fully credentialed',
+                                    'body' => 'We verify licenses, certifications, and experience before anyone is matched to a shift, so facilities never have to double-check our work.',
+                                    'image_path' => null,
+                                ],
+                                [
+                                    'title' => 'Shifts that fit real schedules',
+                                    'body' => 'Caregivers choose the shifts that work for their lives — no forced schedules, no burnout, just dependable coverage on their terms.',
+                                    'image_path' => null,
+                                ],
+                                [
+                                    'title' => 'A support team that answers the phone',
+                                    'body' => 'Questions about a shift, a credential, or a placement get answered by a real person on our staffing team, not a ticket queue.',
+                                    'image_path' => null,
+                                ],
+                            ],
+                        ],
+                    ],
+                    [
                         'type' => 'stats',
                         'content' => [
                             'heading' => 'Trusted across New Hampshire',
@@ -94,6 +118,7 @@ class PageSeeder extends Seeder
                             'body' => 'Whether you are a caregiver looking for flexible shifts or a facility that needs reliable coverage, OBHSA is here to help.',
                             'button_label' => 'Browse Open Shifts',
                             'button_url' => '/jobs',
+                            'image_path' => null,
                         ],
                     ],
                 ],
@@ -123,12 +148,25 @@ class PageSeeder extends Seeder
                         ],
                     ],
                     [
+                        'type' => 'gallery',
+                        'content' => [
+                            'heading' => 'Life at OBHSA',
+                            'images' => [
+                                ['image_path' => null, 'caption' => 'Our Manchester, NH office team'],
+                                ['image_path' => null, 'caption' => 'A caregiver on shift at a partner facility'],
+                                ['image_path' => null, 'caption' => 'Credentialing review in progress'],
+                                ['image_path' => null, 'caption' => 'OBHSA at a community health event'],
+                            ],
+                        ],
+                    ],
+                    [
                         'type' => 'cta',
                         'content' => [
                             'heading' => 'Want to work with us?',
                             'body' => 'Reach out to learn more about joining our caregiver roster or partnering with OBHSA as a facility.',
                             'button_label' => 'Contact Us',
                             'button_url' => '/contact',
+                            'image_path' => null,
                         ],
                     ],
                 ],
@@ -157,6 +195,7 @@ class PageSeeder extends Seeder
                             'body' => 'Tell us about your staffing needs and we will recommend the right fit.',
                             'button_label' => 'Get in Touch',
                             'button_url' => '/contact',
+                            'image_path' => null,
                         ],
                     ],
                 ],
@@ -203,6 +242,7 @@ class PageSeeder extends Seeder
                             'body' => 'Fill out the form below and our team will follow up shortly.',
                             'button_label' => 'Request Staffing',
                             'button_url' => '/contact#staffing-request',
+                            'image_path' => null,
                         ],
                     ],
                 ],
@@ -261,6 +301,7 @@ class PageSeeder extends Seeder
                             'body' => 'Browse open positions and apply in minutes.',
                             'button_label' => 'View Open Shifts',
                             'button_url' => '/jobs',
+                            'image_path' => null,
                         ],
                     ],
                 ],

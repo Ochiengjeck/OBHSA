@@ -11,6 +11,7 @@ import {
     SelectTrigger,
     SelectValue,
 } from '@/components/ui/select';
+import { storageUrl } from '@/lib/utils';
 import { index, show } from '@/routes/jobs';
 import type { JobListing, Paginated } from '@/types';
 
@@ -126,34 +127,56 @@ export default function JobsIndex({
 
                     {listings.data.map((listing) => (
                         <Link key={listing.id} href={show(listing.slug)}>
-                            <Card className="transition-shadow hover:shadow-md">
-                                <CardHeader>
-                                    <div className="flex flex-wrap items-center justify-between gap-2">
-                                        <CardTitle>{listing.title}</CardTitle>
-                                        <Badge variant="secondary">
-                                            {listing.employment_type}
-                                        </Badge>
+                            <Card className="flex-row overflow-hidden transition-shadow hover:shadow-md">
+                                {listing.image_path ? (
+                                    <img
+                                        src={
+                                            storageUrl(listing.image_path) ??
+                                            undefined
+                                        }
+                                        alt=""
+                                        loading="lazy"
+                                        className="h-auto w-32 shrink-0 object-cover sm:w-48"
+                                    />
+                                ) : (
+                                    <div
+                                        aria-hidden
+                                        className="flex w-32 shrink-0 items-center justify-center bg-gradient-to-br from-primary/15 to-accent/30 sm:w-48"
+                                    >
+                                        <Briefcase className="size-8 text-primary/40" />
                                     </div>
-                                </CardHeader>
-                                <CardContent>
-                                    <div className="flex flex-wrap gap-4 text-sm text-muted-foreground">
-                                        <span className="inline-flex items-center gap-1.5">
-                                            <Briefcase className="size-4" />
-                                            {listing.specialty}
-                                        </span>
-                                        <span className="inline-flex items-center gap-1.5">
-                                            <MapPin className="size-4" />
-                                            {listing.location_city},{' '}
-                                            {listing.location_state}
-                                        </span>
-                                        {listing.shift && (
+                                )}
+                                <div className="flex flex-1 flex-col">
+                                    <CardHeader>
+                                        <div className="flex flex-wrap items-center justify-between gap-2">
+                                            <CardTitle>
+                                                {listing.title}
+                                            </CardTitle>
+                                            <Badge variant="secondary">
+                                                {listing.employment_type}
+                                            </Badge>
+                                        </div>
+                                    </CardHeader>
+                                    <CardContent>
+                                        <div className="flex flex-wrap gap-4 text-sm text-muted-foreground">
                                             <span className="inline-flex items-center gap-1.5">
-                                                <Clock className="size-4" />
-                                                {listing.shift}
+                                                <Briefcase className="size-4" />
+                                                {listing.specialty}
                                             </span>
-                                        )}
-                                    </div>
-                                </CardContent>
+                                            <span className="inline-flex items-center gap-1.5">
+                                                <MapPin className="size-4" />
+                                                {listing.location_city},{' '}
+                                                {listing.location_state}
+                                            </span>
+                                            {listing.shift && (
+                                                <span className="inline-flex items-center gap-1.5">
+                                                    <Clock className="size-4" />
+                                                    {listing.shift}
+                                                </span>
+                                            )}
+                                        </div>
+                                    </CardContent>
+                                </div>
                             </Card>
                         </Link>
                     ))}

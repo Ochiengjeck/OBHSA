@@ -19,13 +19,14 @@ export default function JobListingsCreate() {
             pay_range_max: '',
             description: '',
             requirements: '',
+            image: null,
             is_active: true,
             closes_at: '',
         });
 
     function submit(event: React.FormEvent) {
         event.preventDefault();
-        post(admin.jobListings.store().url);
+        post(admin.jobListings.store().url, { forceFormData: true });
     }
 
     return (

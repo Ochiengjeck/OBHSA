@@ -4,6 +4,7 @@ import {
     TestimonialForm,
     type TestimonialFormData,
 } from '@/components/admin/testimonials/testimonial-form';
+import { storageUrl } from '@/lib/utils';
 import admin from '@/routes/admin';
 import type { Testimonial } from '@/types';
 
@@ -41,7 +42,7 @@ export default function TestimonialsEdit({
                         setData={setData}
                         errors={errors}
                         processing={processing}
-                        photoPreview={testimonial.author_photo_path}
+                        photoPreview={storageUrl(testimonial.author_photo_path)}
                         submitLabel="Save Changes"
                     />
                 </form>

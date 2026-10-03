@@ -22,11 +22,12 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property string|null $pay_range_max
  * @property string $description
  * @property string|null $requirements
+ * @property string|null $image_path
  * @property bool $is_active
  */
 #[Fillable([
     'title', 'slug', 'specialty', 'employment_type', 'location_city', 'location_state',
-    'shift', 'pay_range_min', 'pay_range_max', 'description', 'requirements',
+    'shift', 'pay_range_min', 'pay_range_max', 'description', 'requirements', 'image_path',
     'is_active', 'posted_at', 'closes_at',
 ])]
 class JobListing extends Model

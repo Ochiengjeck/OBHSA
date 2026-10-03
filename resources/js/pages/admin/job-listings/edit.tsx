@@ -4,6 +4,7 @@ import {
     JobListingForm,
     type JobListingFormData,
 } from '@/components/admin/job-listings/job-listing-form';
+import { storageUrl } from '@/lib/utils';
 import admin from '@/routes/admin';
 import type { JobListing } from '@/types';
 
@@ -24,13 +25,16 @@ export default function JobListingsEdit({
             pay_range_max: jobListing.pay_range_max ?? '',
             description: jobListing.description,
             requirements: jobListing.requirements ?? '',
+            image: null,
             is_active: jobListing.is_active,
             closes_at: jobListing.closes_at?.slice(0, 10) ?? '',
         });
 
     function submit(event: React.FormEvent) {
         event.preventDefault();
-        put(admin.jobListings.update(jobListing.id).url);
+        put(admin.jobListings.update(jobListing.id).url, {
+            forceFormData: true,
+        });
     }
 
     return (
@@ -44,6 +48,7 @@ export default function JobListingsEdit({
                         setData={setData}
                         errors={errors}
                         processing={processing}
+                        imagePreview={storageUrl(jobListing.image_path)}
                         submitLabel="Save Changes"
                     />
                 </form>

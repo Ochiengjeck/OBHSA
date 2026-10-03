@@ -4,6 +4,7 @@ import { PageHead } from '@/components/public/page-head';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { storageUrl } from '@/lib/utils';
 import applyRoutes from '@/routes/apply';
 import { index } from '@/routes/jobs';
 import type { JobListing } from '@/types';
@@ -23,6 +24,21 @@ export default function JobShow({ jobListing }: { jobListing: JobListing }) {
                         All Shifts
                     </Link>
                 </Button>
+
+                {jobListing.image_path ? (
+                    <img
+                        src={storageUrl(jobListing.image_path) ?? undefined}
+                        alt=""
+                        className="mt-6 aspect-16/9 w-full rounded-xl object-cover"
+                    />
+                ) : (
+                    <div
+                        aria-hidden
+                        className="mt-6 flex aspect-16/9 w-full items-center justify-center rounded-xl bg-gradient-to-br from-primary/15 to-accent/30"
+                    >
+                        <Briefcase className="size-12 text-primary/40" />
+                    </div>
+                )}
 
                 <div className="mt-6 flex flex-wrap items-center gap-2">
                     <Badge variant="secondary">

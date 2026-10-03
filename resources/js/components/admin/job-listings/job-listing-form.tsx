@@ -23,6 +23,7 @@ export type JobListingFormData = {
     pay_range_max: string;
     description: string;
     requirements: string;
+    image: File | null;
     is_active: boolean;
     closes_at: string;
 };
@@ -32,6 +33,7 @@ export function JobListingForm({
     setData,
     errors,
     processing,
+    imagePreview,
     submitLabel,
 }: {
     data: JobListingFormData;
@@ -41,6 +43,7 @@ export function JobListingForm({
     ) => void;
     errors: Partial<Record<keyof JobListingFormData, string>>;
     processing: boolean;
+    imagePreview?: string | null;
     submitLabel: string;
 }) {
     return (
@@ -204,6 +207,26 @@ export function JobListingForm({
                     onChange={(e) => setData('requirements', e.target.value)}
                 />
                 <InputError message={errors.requirements} />
+            </div>
+
+            <div className="grid gap-2">
+                <Label htmlFor="image">Photo</Label>
+                {imagePreview && (
+                    <img
+                        src={imagePreview}
+                        alt=""
+                        className="h-24 w-auto rounded-md border border-border object-cover"
+                    />
+                )}
+                <Input
+                    id="image"
+                    type="file"
+                    accept="image/*"
+                    onChange={(e) =>
+                        setData('image', e.target.files?.[0] ?? null)
+                    }
+                />
+                <InputError message={errors.image} />
             </div>
 
             <div className="flex items-center gap-2">
