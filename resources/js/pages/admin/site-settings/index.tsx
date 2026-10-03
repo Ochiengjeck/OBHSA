@@ -6,6 +6,7 @@ import { Label } from '@/components/ui/label';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Textarea } from '@/components/ui/textarea';
 import InputError from '@/components/input-error';
+import { useStorageUrl } from '@/hooks/use-storage-url';
 import admin from '@/routes/admin';
 import type { SiteSettingRecord } from '@/types';
 
@@ -47,6 +48,7 @@ export default function SiteSettingsIndex({
         settings: initialValues,
         logo: null as File | null,
     });
+    const storageUrl = useStorageUrl();
 
     function submit(event: React.FormEvent) {
         event.preventDefault();
@@ -62,7 +64,7 @@ export default function SiteSettingsIndex({
                     <Label htmlFor={setting.key}>{label}</Label>
                     {setting.value && (
                         <img
-                            src={setting.value}
+                            src={storageUrl(setting.value) ?? undefined}
                             alt=""
                             className="h-12 w-auto rounded border border-border object-contain p-1"
                         />
