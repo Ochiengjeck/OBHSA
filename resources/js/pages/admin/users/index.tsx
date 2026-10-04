@@ -1,4 +1,4 @@
-import { Head, Link, usePage } from '@inertiajs/react';
+import { Head, Link, router, usePage } from '@inertiajs/react';
 import { Pencil, Plus, Search, Trash2, Users as UsersIcon } from 'lucide-react';
 import { AdminPageHeader } from '@/components/admin/admin-page-header';
 import { ConfirmDeleteDialog } from '@/components/admin/confirm-delete-dialog';
@@ -10,6 +10,13 @@ import { Button } from '@/components/ui/button';
 import { DropdownMenuItem } from '@/components/ui/dropdown-menu';
 import { Input } from '@/components/ui/input';
 import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from '@/components/ui/select';
+import {
     Table,
     TableBody,
     TableCell,
@@ -20,21 +27,31 @@ import {
 import { useDebouncedSearch } from '@/hooks/use-debounced-search';
 import { toUrl } from '@/lib/utils';
 import admin from '@/routes/admin';
-import type { Auth, Paginated, StaffUser } from '@/types';
+import type { Auth, Paginated, Role, StaffUser } from '@/types';
 import { PaginationLinks } from '@/components/pagination-links';
 
 export default function UsersIndex({
     users,
+    roles,
     filters,
 }: {
     users: Paginated<StaffUser>;
-    filters: { search: string | null };
+    roles: Role[];
+    filters: { search: string | null; role: string | null };
 }) {
     const { auth } = usePage<{ auth: Auth }>().props;
     const { search, setSearch } = useDebouncedSearch(
         admin.users.index().url,
         filters,
     );
+
+    function updateRoleFilter(value: string) {
+        router.get(
+            admin.users.index().url,
+            { ...filters, role: value === 'all' ? undefined : value },
+            { preserveState: true, replace: true },
+        );
+    }
 
     return (
         <>
@@ -55,8 +72,8 @@ export default function UsersIndex({
                     }
                 />
 
-                <div className="mb-4">
-                    <div className="relative max-w-xs">
+                <div className="mb-4 flex flex-wrap items-center gap-3">
+                    <div className="relative max-w-xs flex-1">
                         <Search className="absolute top-1/2 left-2.5 size-4 -translate-y-1/2 text-muted-foreground" />
                         <Input
                             value={search}
@@ -65,6 +82,26 @@ export default function UsersIndex({
                             className="pl-8"
                         />
                     </div>
+                    <Select
+                        value={filters.role ?? 'all'}
+                        onValueChange={updateRoleFilter}
+                    >
+                        <SelectTrigger className="w-44">
+                            <SelectValue placeholder="All roles" />
+                        </SelectTrigger>
+                        <SelectContent>
+                            <SelectItem value="all">All Roles</SelectItem>
+                            {roles.map((role) => (
+                                <SelectItem
+                                    key={role.id}
+                                    value={role.name}
+                                    className="capitalize"
+                                >
+                                    {role.name}
+                                </SelectItem>
+                            ))}
+                        </SelectContent>
+                    </Select>
                 </div>
 
                 {users.data.length === 0 ? (
@@ -99,6 +136,7 @@ export default function UsersIndex({
                                     <TableHead>Name</TableHead>
                                     <TableHead>Email</TableHead>
                                     <TableHead>Role</TableHead>
+                                    <TableHead>Joined</TableHead>
                                     <TableHead className="w-0" />
                                 </TableRow>
                             </TableHeader>
@@ -130,6 +168,11 @@ export default function UsersIndex({
                                                     {role.name}
                                                 </Badge>
                                             ))}
+                                        </TableCell>
+                                        <TableCell className="text-muted-foreground">
+                                            {new Date(
+                                                user.created_at,
+                                            ).toLocaleDateString()}
                                         </TableCell>
                                         <TableCell>
                                             <RowActionsMenu>

@@ -44,7 +44,7 @@ class SendCandidateMessageTool implements CopilotTool
 
     public function authorize(User $user): bool
     {
-        return $user->can('manage-applications');
+        return $user->can('applications.update');
     }
 
     public function execute(User $user, array $arguments): array

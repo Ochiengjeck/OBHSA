@@ -218,6 +218,26 @@ export type StaffUser = {
     name: string;
     email: string;
     roles: { id: number; name: string }[];
+    created_at: string;
+};
+
+export type Role = {
+    id: number;
+    name: string;
+    permissions_count?: number;
+    users_count?: number;
+};
+
+export type RoleDetail = {
+    id: number;
+    name: string;
+    is_protected: boolean;
+    permissions: string[];
+};
+
+export type Permission = {
+    id: number;
+    name: string;
 };
 
 export type Stat = {

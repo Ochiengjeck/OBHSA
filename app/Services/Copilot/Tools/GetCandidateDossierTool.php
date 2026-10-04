@@ -43,7 +43,7 @@ class GetCandidateDossierTool implements CopilotTool
 
     public function authorize(User $user): bool
     {
-        return $user->can('manage-applications');
+        return $user->can('applications.view');
     }
 
     public function execute(User $user, array $arguments): array

@@ -2,12 +2,10 @@
 
 namespace App\Http\Requests\Admin;
 
-use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
-use Spatie\Permission\Models\Role;
 
-class StoreUserRequest extends FormRequest
+class StoreRoleRequest extends FormRequest
 {
     /**
      * Get the validation rules that apply to the request.
@@ -17,9 +15,9 @@ class StoreUserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', Rule::unique(User::class)],
-            'role' => ['required', Rule::in(Role::pluck('name'))],
+            'name' => ['required', 'string', 'max:255', Rule::unique('roles', 'name')],
+            'permissions' => ['sometimes', 'array'],
+            'permissions.*' => [Rule::exists('permissions', 'name')],
         ];
     }
 }

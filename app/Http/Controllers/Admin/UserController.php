@@ -3,14 +3,17 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\SetUserPasswordRequest;
 use App\Http\Requests\Admin\StoreUserRequest;
 use App\Http\Requests\Admin\UpdateUserRequest;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Str;
 use Inertia\Inertia;
 use Inertia\Response;
+use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
@@ -27,13 +30,21 @@ class UserController extends Controller
                     ->where('name', 'like', '%'.$request->string('search').'%')
                     ->orWhere('email', 'like', '%'.$request->string('search').'%')),
             )
+            ->when(
+                $request->filled('role'),
+                fn ($query) => $query->role($request->string('role')->value()),
+            )
             ->orderBy('name')
             ->paginate(20)
             ->withQueryString();
 
         return Inertia::render('admin/users/index', [
             'users' => $users,
-            'filters' => ['search' => $request->string('search')->value() ?: null],
+            'roles' => Role::query()->orderBy('name')->get(['id', 'name']),
+            'filters' => [
+                'search' => $request->string('search')->value() ?: null,
+                'role' => $request->string('role')->value() ?: null,
+            ],
         ]);
     }
 
@@ -42,7 +53,9 @@ class UserController extends Controller
      */
     public function create(): Response
     {
-        return Inertia::render('admin/users/create');
+        return Inertia::render('admin/users/create', [
+            'roles' => Role::query()->orderBy('name')->get(['id', 'name']),
+        ]);
     }
 
     /**
@@ -74,6 +87,7 @@ class UserController extends Controller
     {
         return Inertia::render('admin/users/edit', [
             'user' => $user->load('roles:id,name'),
+            'roles' => Role::query()->orderBy('name')->get(['id', 'name']),
         ]);
     }
 
@@ -102,5 +116,46 @@ class UserController extends Controller
         Inertia::flash('toast', ['type' => 'success', 'message' => __('Staff account deleted.')]);
 
         return to_route('admin.users.index');
+    }
+
+    /**
+     * Generate a new random password for a user and flash it once — the
+     * same pattern store() already uses for a brand-new account.
+     */
+    public function generatePassword(User $user): RedirectResponse
+    {
+        $password = Str::password(16);
+
+        $user->forceFill(['password' => $password])->save();
+
+        Inertia::flash('toast', ['type' => 'success', 'message' => __('New password generated.')]);
+        Inertia::flash('generatedPassword', $password);
+
+        return to_route('admin.users.edit', $user);
+    }
+
+    /**
+     * Set a specific password chosen by the admin.
+     */
+    public function setPassword(SetUserPasswordRequest $request, User $user): RedirectResponse
+    {
+        $user->forceFill(['password' => $request->validated('password')])->save();
+
+        Inertia::flash('toast', ['type' => 'success', 'message' => __('Password updated.')]);
+
+        return to_route('admin.users.edit', $user);
+    }
+
+    /**
+     * Email the user a password-reset link via the same broker Fortify's
+     * own self-service "forgot password" flow uses.
+     */
+    public function sendResetLink(User $user): RedirectResponse
+    {
+        Password::broker('users')->sendResetLink(['email' => $user->email]);
+
+        Inertia::flash('toast', ['type' => 'success', 'message' => __('Password reset link sent.')]);
+
+        return to_route('admin.users.edit', $user);
     }
 }

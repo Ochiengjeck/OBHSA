@@ -1,0 +1,82 @@
+[server] php artisan serve
+[queue] php artisan queue:listen --tries=1 --timeout=0
+[vite] pnpm run dev
+
+../muu88yu6-fm8 | Progress: resolved 0, reused 1, downloaded 0, added 0
+../muu88yu6-fm8 | Progress: resolved 0, reused 20, downloaded 0, added 0
+Packages are hard linked from the content-addressable store to the virtual store.
+ Content-addressable store is at: C:\Users\ochie\AppData\Local\pnpm\store\v11
+ Virtual store is at: ../../../AppData/Local/pnpm-cache/dlx/14170e48a4d39a6aaff3192ce0632e74/muu88yu6-fm8/node_modules/.pnpm
+../muu88yu6-fm8 | Progress: resolved 20, reused 20, downloaded 0, added 20, done
+dependencies:
++ concurrently 10.0.5
+[vite] $ vp dev
+[queue] 
+[queue] INFO Processing jobs from the [default] queue. 
+[queue] 
+[server] 
+[server] INFO Server running on [http://127.0.0.1:8000]. 
+[server] 
+[server] Press Ctrl+C to stop the server
+[server] 
+[vite] Inertia SSR dev endpoint: /__inertia_ssr
+[vite] 10:42:18 PM [vite+] (client) info: Types generated for actions, routes, form variants
+[vite] Plugin: @laravel/vite-plugin-wayfinder
+[vite] Port 5173 is in use, trying another one..
+[vite] Warming up Inertia SSR module graph..
+[vite] 
+[vite] VITE+ v0.3.0 
+[vite] 
+[vite] Local: http://localhost:5174/
+[vite] Network: use --host to expose
+[vite] [laravel:fonts] Optimized font fallbacks require the optional "fontaine" package. Install it, or set "optimizedFallbacks: false" on your fonts to disable the feature.
+[vite] 
+[vite] LARAVEL v13.34.0 plugin v3.2.0
+[vite] 
+[vite] APP_URL: http://localhost:8000
+[vite] 10:42:20 PM [vite+] (client) [optimizer] scanning dependencies..
+[vite] 10:42:38 PM [vite+] (client) [optimizer] bundling dependencies..
+[vite] 10:42:46 PM [vite+] (client) [optimizer] bundling dependencies..
+[vite] 10:42:51 PM [vite+] (client) [optimizer] bundling dependencies..
+[vite] 10:42:52 PM [vite+] (client) dependencies optimized: @laravel/passkeys/react, @radix-ui/react-accordion, @radix-ui/react-checkbox, @radix-ui/react-label, @radix-ui/react-select, @radix-ui/react-switch, @radix-ui/react-tabs
+[vite] 10:42:52 PM [vite+] (client) optimized dependencies changed. reloading
+[vite] Inertia SSR module graph warmed up
+[vite] 10:43:38 PM [vite+] (ssr) page reload resources/js/components/admin-sidebar.tsx
+[vite] 10:43:40 PM [vite+] (ssr) page reload resources/js/components/admin-sidebar.tsx
+[vite] 10:43:57 PM [vite+] (ssr) page reload resources/js/pages/admin/roles/index.tsx
+[vite] 10:44:22 PM [vite+] (ssr) page reload resources/js/pages/admin/roles/create.tsx
+[vite] 10:44:30 PM [vite+] (ssr) page reload resources/js/pages/admin/roles/edit.tsx
+[vite] 10:44:34 PM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/users/create.tsx
+[vite] 10:44:37 PM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/users/create.tsx
+[vite] 10:44:56 PM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/users/edit.tsx
+[vite] 10:45:08 PM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/users/edit.tsx
+[vite] 10:45:11 PM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/users/edit.tsx
+[vite] 10:45:14 PM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/users/edit.tsx
+[vite] 10:45:32 PM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/users/index.tsx
+[vite] 10:45:38 PM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/users/index.tsx
+[vite] 10:45:42 PM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/users/index.tsx
+[vite] 10:45:45 PM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/users/index.tsx
+[vite] 10:46:20 PM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/users/create.tsx
+[vite] 10:46:20 PM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/users/edit.tsx
+[vite] 11:08:15 PM [vite+] full reload routes\admin.php
+[vite] 11:08:16 PM [vite+] (client) info: Types generated for actions, routes, form variants
+[vite] Plugin: @laravel/vite-plugin-wayfinder
+[vite] 11:08:29 PM [vite+] (ssr) page reload resources/js/components/admin-sidebar.tsx
+[vite] 11:10:39 PM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessments/edit.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessments/create.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessment-attempts/index.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessments/index.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/dashboard.tsx and 61 more
+[vite] 11:10:39 PM [vite+] (ssr) page reload resources/js/routes/admin/index.ts
+[vite] 11:10:39 PM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessments/edit.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessments/create.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessment-attempts/index.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessments/index.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/dashboard.tsx and 61 more
+[vite] 11:10:39 PM [vite+] (ssr) page reload resources/js/routes/admin/job-applications/index.ts
+[vite] 11:17:08 PM [vite+] full reload routes\admin.php
+[vite] 11:17:10 PM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessments/edit.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessments/create.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessment-attempts/index.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessments/index.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/dashboard.tsx and 61 more
+[vite] 11:17:10 PM [vite+] (ssr) page reload resources/js/routes/admin/index.ts
+[vite] 11:17:10 PM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessments/edit.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessments/create.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessment-attempts/index.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessments/index.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/dashboard.tsx and 61 more
+[vite] 11:17:10 PM [vite+] (ssr) page reload resources/js/routes/admin/job-applications/index.ts
+[vite] 11:17:10 PM [vite+] (client) info: Types generated for actions, routes, form variants
+[vite] Plugin: @laravel/vite-plugin-wayfinder
+[vite] 11:17:26 PM [vite+] full reload routes\admin.php.tmp.6816.c1703654921a
+[vite] 11:17:26 PM [vite+] full reload routes\admin.php
+[vite] 11:17:28 PM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessments/edit.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessments/create.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessment-attempts/index.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessments/index.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/dashboard.tsx and 61 more
+[vite] 11:17:28 PM [vite+] (ssr) page reload resources/js/routes/admin/job-applications/index.ts
+[vite] 11:17:28 PM [vite+] (client) info: Types generated for actions, routes, form variants
+[vite] Plugin: @laravel/vite-plugin-wayfinder
+[vite] 11:20:37 PM [vite+] (ssr) page reload resources/js/components/admin-sidebar.tsx

@@ -134,7 +134,7 @@ test('activating an application succeeds once blocking requirements pass and cre
     expect($employee->specialty)->toBe('rn');
 });
 
-test('a user without manage-applications cannot change an application status', function () {
+test('a user without applications.update cannot change an application status', function () {
     $editor = User::factory()->create();
     $editor->assignRole('editor');
 

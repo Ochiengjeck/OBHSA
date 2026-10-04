@@ -12,12 +12,16 @@ import {
 } from '@/components/ui/select';
 import InputError from '@/components/input-error';
 import admin from '@/routes/admin';
+import type { Role } from '@/types';
 
-export default function UsersCreate() {
+export default function UsersCreate({ roles }: { roles: Role[] }) {
     const { data, setData, post, processing, errors } = useForm({
         name: '',
         email: '',
-        role: 'editor',
+        role:
+            roles.find((r) => r.name === 'editor')?.name ??
+            roles[0]?.name ??
+            '',
     });
 
     function submit(event: React.FormEvent) {
@@ -67,8 +71,15 @@ export default function UsersCreate() {
                                 <SelectValue />
                             </SelectTrigger>
                             <SelectContent>
-                                <SelectItem value="admin">Admin</SelectItem>
-                                <SelectItem value="editor">Editor</SelectItem>
+                                {roles.map((r) => (
+                                    <SelectItem
+                                        key={r.id}
+                                        value={r.name}
+                                        className="capitalize"
+                                    >
+                                        {r.name}
+                                    </SelectItem>
+                                ))}
                             </SelectContent>
                         </Select>
                         <InputError message={errors.role} />

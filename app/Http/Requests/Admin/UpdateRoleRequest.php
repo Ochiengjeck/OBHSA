@@ -2,12 +2,11 @@
 
 namespace App\Http\Requests\Admin;
 
-use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 use Spatie\Permission\Models\Role;
 
-class StoreUserRequest extends FormRequest
+class UpdateRoleRequest extends FormRequest
 {
     /**
      * Get the validation rules that apply to the request.
@@ -16,10 +15,13 @@ class StoreUserRequest extends FormRequest
      */
     public function rules(): array
     {
+        /** @var Role $role */
+        $role = $this->route('role');
+
         return [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', Rule::unique(User::class)],
-            'role' => ['required', Rule::in(Role::pluck('name'))],
+            'name' => ['required', 'string', 'max:255', Rule::unique('roles', 'name')->ignore($role->id)],
+            'permissions' => ['sometimes', 'array'],
+            'permissions.*' => [Rule::exists('permissions', 'name')],
         ];
     }
 }

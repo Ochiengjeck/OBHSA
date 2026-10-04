@@ -33,7 +33,7 @@ test('read-only tools never require confirmation and write tools always do', fun
     expect((new SendCandidateMessageTool)->requiresConfirmation())->toBeTrue();
 });
 
-test('every application-scoped tool inherits the manage-applications permission check', function () {
+test('every application-scoped tool inherits an applications.* permission check', function () {
     $tools = [
         new SearchCandidatesTool,
         new GetCandidateDossierTool,

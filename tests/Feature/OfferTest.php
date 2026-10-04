@@ -132,7 +132,7 @@ test('an expired offer token shows the link-expired page', function () {
             ->where('reason', 'expired'));
 });
 
-test('a user without manage-applications cannot extend an offer', function () {
+test('a user without applications.create cannot extend an offer', function () {
     $editor = User::factory()->create();
     $editor->assignRole('editor');
 
