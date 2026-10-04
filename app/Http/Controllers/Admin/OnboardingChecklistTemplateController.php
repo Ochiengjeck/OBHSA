@@ -7,6 +7,7 @@ use App\Http\Requests\Admin\StoreOnboardingChecklistTemplateRequest;
 use App\Http\Requests\Admin\UpdateOnboardingChecklistTemplateRequest;
 use App\Models\OnboardingChecklistTemplate;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -15,10 +16,18 @@ class OnboardingChecklistTemplateController extends Controller
     /**
      * List all onboarding checklist templates.
      */
-    public function index(): Response
+    public function index(Request $request): Response
     {
+        $templates = OnboardingChecklistTemplate::query()
+            ->withCount('items')
+            ->when($request->string('search')->isNotEmpty(), fn ($query) => $query->where('name', 'like', '%'.$request->string('search').'%'))
+            ->orderBy('name')
+            ->paginate(20)
+            ->withQueryString();
+
         return Inertia::render('admin/onboarding-checklist-templates/index', [
-            'templates' => OnboardingChecklistTemplate::query()->withCount('items')->orderBy('name')->get(),
+            'templates' => $templates,
+            'filters' => ['search' => $request->string('search')->value() ?: null],
         ]);
     }
 

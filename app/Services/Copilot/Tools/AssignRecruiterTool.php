@@ -28,7 +28,7 @@ class AssignRecruiterTool implements CopilotTool
             'type' => 'object',
             'properties' => [
                 'application_id' => ['type' => 'integer', 'description' => 'The application\'s id.'],
-                'recruiter_id' => ['type' => ['integer', 'null'], 'description' => 'The recruiter\'s user id, or null to unassign.'],
+                'recruiter_id' => ['type' => 'integer', 'nullable' => true, 'description' => 'The recruiter\'s user id, or null to unassign.'],
             ],
             'required' => ['application_id'],
         ];

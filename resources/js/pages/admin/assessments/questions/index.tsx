@@ -1,9 +1,12 @@
 import { Head, Link } from '@inertiajs/react';
-import { ArrowLeft, Plus } from 'lucide-react';
+import { ArrowLeft, ClipboardList, Pencil, Plus, Trash2 } from 'lucide-react';
 import { AdminPageHeader } from '@/components/admin/admin-page-header';
 import { ConfirmDeleteDialog } from '@/components/admin/confirm-delete-dialog';
+import { EmptyState } from '@/components/admin/empty-state';
+import { RowActionsMenu } from '@/components/admin/row-actions-menu';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
+import { DropdownMenuItem } from '@/components/ui/dropdown-menu';
 import {
     Table,
     TableBody,
@@ -37,6 +40,8 @@ export default function AssessmentQuestionsIndex({
                 <AdminPageHeader
                     title={assessment.name}
                     description="Question bank for this assessment."
+                    icon={ClipboardList}
+                    stats={[{ label: 'total', value: questions.length }]}
                     action={
                         <Button asChild>
                             <Link
@@ -51,62 +56,90 @@ export default function AssessmentQuestionsIndex({
                     }
                 />
 
-                <Table>
-                    <TableHeader>
-                        <TableRow>
-                            <TableHead>Question</TableHead>
-                            <TableHead>Type</TableHead>
-                            <TableHead>Points</TableHead>
-                            <TableHead className="w-0" />
-                        </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                        {questions.map((question) => (
-                            <TableRow key={question.id}>
-                                <TableCell className="max-w-md font-medium">
-                                    {question.question}
-                                </TableCell>
-                                <TableCell>
-                                    <Badge variant="secondary">
-                                        {question.question_type ===
-                                        'multiple_choice'
-                                            ? 'Multiple Choice'
-                                            : 'Short Answer'}
-                                    </Badge>
-                                </TableCell>
-                                <TableCell className="text-muted-foreground">
-                                    {question.points}
-                                </TableCell>
-                                <TableCell>
-                                    <div className="flex items-center justify-end gap-3">
-                                        <Link
-                                            href={admin.questions.edit(
-                                                question.id,
-                                            )}
-                                            className="text-sm font-medium text-primary hover:underline"
-                                        >
-                                            Edit
-                                        </Link>
-                                        <ConfirmDeleteDialog
-                                            url={toUrl(
-                                                admin.questions.destroy(
-                                                    question.id,
-                                                ),
-                                            )}
-                                            title="Delete question"
-                                            description="Are you sure you want to delete this question? This cannot be undone."
-                                            trigger={
-                                                <button className="text-sm font-medium text-destructive hover:underline">
-                                                    Delete
-                                                </button>
-                                            }
-                                        />
-                                    </div>
-                                </TableCell>
+                {questions.length === 0 ? (
+                    <EmptyState
+                        icon={ClipboardList}
+                        title="No questions yet"
+                        description="Add questions to build this assessment's question bank."
+                        action={
+                            <Button asChild>
+                                <Link
+                                    href={admin.assessments.questions.create(
+                                        assessment.id,
+                                    )}
+                                >
+                                    <Plus className="size-4" />
+                                    Add Question
+                                </Link>
+                            </Button>
+                        }
+                    />
+                ) : (
+                    <Table>
+                        <TableHeader>
+                            <TableRow>
+                                <TableHead>Question</TableHead>
+                                <TableHead>Type</TableHead>
+                                <TableHead>Points</TableHead>
+                                <TableHead className="w-0" />
                             </TableRow>
-                        ))}
-                    </TableBody>
-                </Table>
+                        </TableHeader>
+                        <TableBody>
+                            {questions.map((question) => (
+                                <TableRow key={question.id}>
+                                    <TableCell className="max-w-md font-medium">
+                                        {question.question}
+                                    </TableCell>
+                                    <TableCell>
+                                        <Badge variant="secondary">
+                                            {question.question_type ===
+                                            'multiple_choice'
+                                                ? 'Multiple Choice'
+                                                : 'Short Answer'}
+                                        </Badge>
+                                    </TableCell>
+                                    <TableCell className="text-muted-foreground">
+                                        {question.points}
+                                    </TableCell>
+                                    <TableCell>
+                                        <RowActionsMenu>
+                                            <DropdownMenuItem asChild>
+                                                <Link
+                                                    href={admin.questions.edit(
+                                                        question.id,
+                                                    )}
+                                                >
+                                                    <Pencil className="size-4" />
+                                                    Edit
+                                                </Link>
+                                            </DropdownMenuItem>
+                                            <ConfirmDeleteDialog
+                                                url={toUrl(
+                                                    admin.questions.destroy(
+                                                        question.id,
+                                                    ),
+                                                )}
+                                                title="Delete question"
+                                                description="Are you sure you want to delete this question? This cannot be undone."
+                                                trigger={
+                                                    <DropdownMenuItem
+                                                        variant="destructive"
+                                                        onSelect={(e) =>
+                                                            e.preventDefault()
+                                                        }
+                                                    >
+                                                        <Trash2 className="size-4" />
+                                                        Delete
+                                                    </DropdownMenuItem>
+                                                }
+                                            />
+                                        </RowActionsMenu>
+                                    </TableCell>
+                                </TableRow>
+                            ))}
+                        </TableBody>
+                    </Table>
+                )}
             </div>
         </>
     );

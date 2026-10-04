@@ -8,6 +8,7 @@ use App\Http\Requests\Admin\StoreServiceRequest;
 use App\Http\Requests\Admin\UpdateServiceRequest;
 use App\Models\Service;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -19,10 +20,17 @@ class ServiceController extends Controller
     /**
      * List all services.
      */
-    public function index(): Response
+    public function index(Request $request): Response
     {
+        $services = Service::query()
+            ->when($request->string('search')->isNotEmpty(), fn ($query) => $query->where('title', 'like', '%'.$request->string('search').'%'))
+            ->orderBy('position')
+            ->paginate(20)
+            ->withQueryString();
+
         return Inertia::render('admin/services/index', [
-            'services' => Service::query()->orderBy('position')->get(),
+            'services' => $services,
+            'filters' => ['search' => $request->string('search')->value() ?: null],
         ]);
     }
 

@@ -1,5 +1,7 @@
 import { Head, Link, router } from '@inertiajs/react';
+import { ClipboardList } from 'lucide-react';
 import { AdminPageHeader } from '@/components/admin/admin-page-header';
+import { EmptyState } from '@/components/admin/empty-state';
 import { StatusBadge } from '@/components/admin/status-badge';
 import { PaginationLinks } from '@/components/pagination-links';
 import { Button } from '@/components/ui/button';
@@ -52,6 +54,8 @@ export default function AssessmentAttemptsIndex({
                 <AdminPageHeader
                     title="Assessment Attempts"
                     description="Every assessment attempt across candidates, past and upcoming."
+                    icon={ClipboardList}
+                    stats={[{ label: 'total', value: attempts.total }]}
                 />
 
                 <div className="mb-4 flex flex-wrap items-center gap-2">
@@ -109,64 +113,74 @@ export default function AssessmentAttemptsIndex({
                     </Select>
                 </div>
 
-                <Table>
-                    <TableHeader>
-                        <TableRow>
-                            <TableHead>Candidate</TableHead>
-                            <TableHead>Assessment</TableHead>
-                            <TableHead>Attempt</TableHead>
-                            <TableHead>Status</TableHead>
-                            <TableHead>Score</TableHead>
-                        </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                        {attempts.data.map((attempt) => (
-                            <TableRow key={attempt.id}>
-                                <TableCell>
-                                    <Link
-                                        href={admin.assessmentAttempts.show(
-                                            attempt.id,
-                                        )}
-                                        className="font-medium text-primary hover:underline"
-                                    >
-                                        {
-                                            attempt.application.candidate
-                                                .full_name
-                                        }
-                                    </Link>
-                                </TableCell>
-                                <TableCell className="text-muted-foreground">
-                                    {attempt.assessment.name}
-                                </TableCell>
-                                <TableCell className="text-muted-foreground">
-                                    #{attempt.attempt_number}
-                                </TableCell>
-                                <TableCell>
-                                    <StatusBadge status={attempt.status} />
-                                </TableCell>
-                                <TableCell>
-                                    {attempt.score !== null ? (
-                                        <StatusBadge
-                                            status={
-                                                attempt.passed
-                                                    ? 'passed'
-                                                    : 'failed'
-                                            }
-                                        />
-                                    ) : (
-                                        <span className="text-muted-foreground">
-                                            —
-                                        </span>
-                                    )}
-                                </TableCell>
+                {attempts.data.length === 0 ? (
+                    <EmptyState
+                        icon={ClipboardList}
+                        title="No attempts match these filters"
+                        description="Assessment attempts by candidates will show up here."
+                    />
+                ) : (
+                    <Table>
+                        <TableHeader>
+                            <TableRow>
+                                <TableHead>Candidate</TableHead>
+                                <TableHead>Assessment</TableHead>
+                                <TableHead>Attempt</TableHead>
+                                <TableHead>Status</TableHead>
+                                <TableHead>Score</TableHead>
                             </TableRow>
-                        ))}
-                    </TableBody>
-                </Table>
+                        </TableHeader>
+                        <TableBody>
+                            {attempts.data.map((attempt) => (
+                                <TableRow key={attempt.id}>
+                                    <TableCell>
+                                        <Link
+                                            href={admin.assessmentAttempts.show(
+                                                attempt.id,
+                                            )}
+                                            className="font-medium text-primary hover:underline"
+                                        >
+                                            {
+                                                attempt.application.candidate
+                                                    .full_name
+                                            }
+                                        </Link>
+                                    </TableCell>
+                                    <TableCell className="text-muted-foreground">
+                                        {attempt.assessment.name}
+                                    </TableCell>
+                                    <TableCell className="text-muted-foreground">
+                                        #{attempt.attempt_number}
+                                    </TableCell>
+                                    <TableCell>
+                                        <StatusBadge status={attempt.status} />
+                                    </TableCell>
+                                    <TableCell>
+                                        {attempt.score !== null ? (
+                                            <StatusBadge
+                                                status={
+                                                    attempt.passed
+                                                        ? 'passed'
+                                                        : 'failed'
+                                                }
+                                            />
+                                        ) : (
+                                            <span className="text-muted-foreground">
+                                                —
+                                            </span>
+                                        )}
+                                    </TableCell>
+                                </TableRow>
+                            ))}
+                        </TableBody>
+                    </Table>
+                )}
 
-                <div className="mt-6">
-                    <PaginationLinks links={attempts.links} />
-                </div>
+                {attempts.data.length > 0 && (
+                    <div className="mt-6">
+                        <PaginationLinks links={attempts.links} />
+                    </div>
+                )}
             </div>
         </>
     );

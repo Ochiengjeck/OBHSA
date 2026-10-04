@@ -7,6 +7,7 @@ use App\Http\Requests\Admin\StoreUserRequest;
 use App\Http\Requests\Admin\UpdateUserRequest;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -16,10 +17,23 @@ class UserController extends Controller
     /**
      * List all backoffice staff accounts.
      */
-    public function index(): Response
+    public function index(Request $request): Response
     {
+        $users = User::query()
+            ->with('roles:id,name')
+            ->when(
+                $request->string('search')->isNotEmpty(),
+                fn ($query) => $query->where(fn ($q) => $q
+                    ->where('name', 'like', '%'.$request->string('search').'%')
+                    ->orWhere('email', 'like', '%'.$request->string('search').'%')),
+            )
+            ->orderBy('name')
+            ->paginate(20)
+            ->withQueryString();
+
         return Inertia::render('admin/users/index', [
-            'users' => User::query()->with('roles:id,name')->orderBy('name')->get(),
+            'users' => $users,
+            'filters' => ['search' => $request->string('search')->value() ?: null],
         ]);
     }
 

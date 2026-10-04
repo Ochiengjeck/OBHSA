@@ -13,6 +13,11 @@ declare module '@inertiajs/core' {
             auth: Auth;
             sidebarOpen: boolean;
             storageUrl: string;
+            adminNavBadges: {
+                applications: number;
+                staffingRequests: number;
+                compliance: number;
+            } | null;
             [key: string]: unknown;
         };
     }

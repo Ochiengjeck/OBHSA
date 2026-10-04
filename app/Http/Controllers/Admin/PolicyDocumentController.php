@@ -7,6 +7,7 @@ use App\Http\Requests\Admin\StorePolicyDocumentRequest;
 use App\Http\Requests\Admin\UpdatePolicyDocumentRequest;
 use App\Models\PolicyDocument;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -15,10 +16,17 @@ class PolicyDocumentController extends Controller
     /**
      * List all policy documents.
      */
-    public function index(): Response
+    public function index(Request $request): Response
     {
+        $documents = PolicyDocument::query()
+            ->when($request->string('search')->isNotEmpty(), fn ($query) => $query->where('title', 'like', '%'.$request->string('search').'%'))
+            ->orderBy('title')
+            ->paginate(20)
+            ->withQueryString();
+
         return Inertia::render('admin/policy-documents/index', [
-            'documents' => PolicyDocument::query()->orderBy('title')->get(),
+            'documents' => $documents,
+            'filters' => ['search' => $request->string('search')->value() ?: null],
         ]);
     }
 

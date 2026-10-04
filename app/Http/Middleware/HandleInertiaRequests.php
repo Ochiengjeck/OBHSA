@@ -2,8 +2,14 @@
 
 namespace App\Http\Middleware;
 
+use App\Enums\ApplicationStatus;
+use App\Models\Application;
+use App\Models\Credential;
 use App\Models\SiteSetting;
+use App\Models\StaffingRequest;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Inertia\Middleware;
 
 class HandleInertiaRequests extends Middleware
@@ -54,6 +60,31 @@ class HandleInertiaRequests extends Middleware
             // image path is joined onto this rather than a hardcoded
             // "/storage" prefix, so rendering keeps working either way.
             'storageUrl' => rtrim((string) config('filesystems.disks.public.url'), '/'),
+            'adminNavBadges' => $this->adminNavBadges($user),
         ];
+    }
+
+    /**
+     * "Needs attention now" counts for the admin sidebar's badged nav items.
+     * Only computed for admin/editor users, and briefly cached since the
+     * sidebar renders on every admin page navigation.
+     *
+     * @return array<string, int>|null
+     */
+    private function adminNavBadges(?User $user): ?array
+    {
+        if (! $user?->hasAnyRole(['admin', 'editor'])) {
+            return null;
+        }
+
+        return Cache::remember('admin-nav-badges', 60, fn () => [
+            'applications' => Application::query()->where('status', ApplicationStatus::Submitted->value)->count(),
+            'staffingRequests' => StaffingRequest::query()->where('status', 'new')->count(),
+            'compliance' => Credential::query()
+                ->whereNotNull('expiry_date')
+                ->whereHas('candidate.employee', fn ($query) => $query->where('status', 'active'))
+                ->where('expiry_date', '<=', now()->addDays(30))
+                ->count(),
+        ]);
     }
 }

@@ -4,6 +4,8 @@ use App\Services\Ai\AiProviderFactory;
 use App\Services\Ai\Exceptions\AiProviderNotConfiguredException;
 use App\Services\Ai\ValueObjects\AiMessage;
 use App\Services\Ai\ValueObjects\AiToolDefinition;
+use App\Services\Copilot\Contracts\CopilotTool;
+use App\Services\Copilot\ToolRegistry;
 use Illuminate\Support\Facades\Http;
 
 test('a provider with no api key throws a clear configuration exception', function () {
@@ -74,6 +76,36 @@ test('GeminiProvider parses a function-call reply', function () {
     expect($result->toolCalls)->toHaveCount(1);
     expect($result->toolCalls[0]->name)->toBe('search_candidates');
     expect($result->toolCalls[0]->arguments)->toBe(['query' => 'jane']);
+});
+
+test('every registered copilot tool\'s parameter schema is Gemini-compatible', function () {
+    // Gemini's function-calling schema is a restricted OpenAPI-3.0 subset:
+    // every "type" must be a single string ("integer", "string", ...), not
+    // a JSON-Schema-2020-12 union array like ["integer", "null"] — Gemini's
+    // API rejects the whole request with a generic "Unknown name \"type\""
+    // parse error when it sees one. Nullable fields should use the
+    // "nullable": true keyword instead, which Claude and xAI also accept
+    // (they forward the schema mostly as-is and ignore the extra key).
+    $assertNoUnionTypes = function (array $schema, string $path) use (&$assertNoUnionTypes): void {
+        if (array_key_exists('type', $schema)) {
+            expect($schema['type'])
+                ->not->toBeArray("Tool parameter schema at \"{$path}\" uses a union-type array for \"type\", which Gemini's API rejects. Use a single string type plus \"nullable\": true instead.");
+        }
+
+        foreach ($schema['properties'] ?? [] as $name => $propertySchema) {
+            $assertNoUnionTypes($propertySchema, "{$path}.properties.{$name}");
+        }
+
+        if (isset($schema['items']) && is_array($schema['items'])) {
+            $assertNoUnionTypes($schema['items'], "{$path}.items");
+        }
+    };
+
+    $tools = app(ToolRegistry::class)->all();
+
+    expect($tools)->not->toBeEmpty();
+
+    $tools->each(fn (CopilotTool $tool) => $assertNoUnionTypes($tool->parameters(), $tool->name()));
 });
 
 test('XaiProvider parses a tool_calls reply', function () {

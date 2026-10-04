@@ -1,7 +1,10 @@
 import { Head, Link, router } from '@inertiajs/react';
+import { UserCheck } from 'lucide-react';
 import { AdminPageHeader } from '@/components/admin/admin-page-header';
+import { EmptyState } from '@/components/admin/empty-state';
 import { StatusBadge } from '@/components/admin/status-badge';
 import { PaginationLinks } from '@/components/pagination-links';
+import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { Input } from '@/components/ui/input';
 import {
     Select,
@@ -43,6 +46,8 @@ export default function EmployeesIndex({
                 <AdminPageHeader
                     title="Employees"
                     description="Caregivers activated from the application pipeline."
+                    icon={UserCheck}
+                    stats={[{ label: 'total', value: employees.total }]}
                 />
 
                 <div className="mb-4 flex flex-wrap items-center gap-2">
@@ -79,52 +84,83 @@ export default function EmployeesIndex({
                     />
                 </div>
 
-                <Table>
-                    <TableHeader>
-                        <TableRow>
-                            <TableHead>Employee</TableHead>
-                            <TableHead>Employee #</TableHead>
-                            <TableHead>Specialty</TableHead>
-                            <TableHead>Hire Date</TableHead>
-                            <TableHead>Status</TableHead>
-                        </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                        {employees.data.map((employee) => (
-                            <TableRow key={employee.id}>
-                                <TableCell>
-                                    <Link
-                                        href={admin.employees.show(employee.id)}
-                                        className="font-medium text-primary hover:underline"
-                                    >
-                                        {employee.candidate.full_name}
-                                    </Link>
-                                    <p className="text-xs text-muted-foreground">
-                                        {employee.candidate.email}
-                                    </p>
-                                </TableCell>
-                                <TableCell className="text-muted-foreground">
-                                    {employee.employee_number ?? '—'}
-                                </TableCell>
-                                <TableCell className="text-muted-foreground">
-                                    {employee.specialty ?? '—'}
-                                </TableCell>
-                                <TableCell className="text-muted-foreground">
-                                    {new Date(
-                                        employee.hire_date,
-                                    ).toLocaleDateString()}
-                                </TableCell>
-                                <TableCell>
-                                    <StatusBadge status={employee.status} />
-                                </TableCell>
-                            </TableRow>
-                        ))}
-                    </TableBody>
-                </Table>
+                {employees.data.length === 0 ? (
+                    <EmptyState
+                        icon={UserCheck}
+                        title="No employees match these filters"
+                        description="Caregivers activated from the application pipeline will show up here."
+                    />
+                ) : (
+                    <>
+                        <Table>
+                            <TableHeader>
+                                <TableRow>
+                                    <TableHead>Employee</TableHead>
+                                    <TableHead>Employee #</TableHead>
+                                    <TableHead>Specialty</TableHead>
+                                    <TableHead>Hire Date</TableHead>
+                                    <TableHead>Status</TableHead>
+                                </TableRow>
+                            </TableHeader>
+                            <TableBody>
+                                {employees.data.map((employee) => (
+                                    <TableRow key={employee.id}>
+                                        <TableCell>
+                                            <div className="flex items-center gap-3">
+                                                <Avatar className="size-8">
+                                                    <AvatarFallback>
+                                                        {employee.candidate.full_name
+                                                            .charAt(0)
+                                                            .toUpperCase()}
+                                                    </AvatarFallback>
+                                                </Avatar>
+                                                <div>
+                                                    <Link
+                                                        href={admin.employees.show(
+                                                            employee.id,
+                                                        )}
+                                                        className="font-medium text-primary hover:underline"
+                                                    >
+                                                        {
+                                                            employee.candidate
+                                                                .full_name
+                                                        }
+                                                    </Link>
+                                                    <p className="text-xs text-muted-foreground">
+                                                        {
+                                                            employee.candidate
+                                                                .email
+                                                        }
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </TableCell>
+                                        <TableCell className="text-muted-foreground">
+                                            {employee.employee_number ?? '—'}
+                                        </TableCell>
+                                        <TableCell className="text-muted-foreground">
+                                            {employee.specialty ?? '—'}
+                                        </TableCell>
+                                        <TableCell className="text-muted-foreground">
+                                            {new Date(
+                                                employee.hire_date,
+                                            ).toLocaleDateString()}
+                                        </TableCell>
+                                        <TableCell>
+                                            <StatusBadge
+                                                status={employee.status}
+                                            />
+                                        </TableCell>
+                                    </TableRow>
+                                ))}
+                            </TableBody>
+                        </Table>
 
-                <div className="mt-6">
-                    <PaginationLinks links={employees.links} />
-                </div>
+                        <div className="mt-6">
+                            <PaginationLinks links={employees.links} />
+                        </div>
+                    </>
+                )}
             </div>
         </>
     );

@@ -1,9 +1,20 @@
 import { Head, Link } from '@inertiajs/react';
-import { Plus } from 'lucide-react';
+import {
+    ExternalLink,
+    Newspaper,
+    Pencil,
+    Plus,
+    Search,
+    Trash2,
+} from 'lucide-react';
 import { AdminPageHeader } from '@/components/admin/admin-page-header';
 import { ConfirmDeleteDialog } from '@/components/admin/confirm-delete-dialog';
+import { EmptyState } from '@/components/admin/empty-state';
+import { RowActionsMenu } from '@/components/admin/row-actions-menu';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
+import { DropdownMenuItem } from '@/components/ui/dropdown-menu';
+import { Input } from '@/components/ui/input';
 import {
     Table,
     TableBody,
@@ -12,11 +23,25 @@ import {
     TableHeader,
     TableRow,
 } from '@/components/ui/table';
+import { useDebouncedSearch } from '@/hooks/use-debounced-search';
 import { toUrl } from '@/lib/utils';
 import admin from '@/routes/admin';
-import type { BlogPost } from '@/types';
+import { show as showOnSite } from '@/routes/blog';
+import type { BlogPost, Paginated } from '@/types';
+import { PaginationLinks } from '@/components/pagination-links';
 
-export default function BlogPostsIndex({ posts }: { posts: BlogPost[] }) {
+export default function BlogPostsIndex({
+    posts,
+    filters,
+}: {
+    posts: Paginated<BlogPost>;
+    filters: { search: string | null };
+}) {
+    const { search, setSearch } = useDebouncedSearch(
+        admin.blogPosts.index().url,
+        filters,
+    );
+
     return (
         <>
             <Head title="Blog Posts" />
@@ -24,6 +49,8 @@ export default function BlogPostsIndex({ posts }: { posts: BlogPost[] }) {
                 <AdminPageHeader
                     title="Blog Posts"
                     description="Manage articles shown on the public blog."
+                    icon={Newspaper}
+                    stats={[{ label: 'total', value: posts.total }]}
                     action={
                         <Button asChild>
                             <Link href={admin.blogPosts.create()}>
@@ -34,69 +61,139 @@ export default function BlogPostsIndex({ posts }: { posts: BlogPost[] }) {
                     }
                 />
 
-                <Table>
-                    <TableHeader>
-                        <TableRow>
-                            <TableHead>Title</TableHead>
-                            <TableHead>Published</TableHead>
-                            <TableHead>Status</TableHead>
-                            <TableHead className="w-0" />
-                        </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                        {posts.map((post) => (
-                            <TableRow key={post.id}>
-                                <TableCell className="font-medium">
-                                    {post.title}
-                                </TableCell>
-                                <TableCell className="text-muted-foreground">
-                                    {post.published_at
-                                        ? new Date(
-                                              post.published_at,
-                                          ).toLocaleDateString()
-                                        : '—'}
-                                </TableCell>
-                                <TableCell>
-                                    <Badge
-                                        variant={
-                                            post.is_published
-                                                ? 'default'
-                                                : 'secondary'
-                                        }
-                                    >
-                                        {post.is_published
-                                            ? 'Published'
-                                            : 'Draft'}
-                                    </Badge>
-                                </TableCell>
-                                <TableCell>
-                                    <div className="flex items-center justify-end gap-3">
-                                        <Link
-                                            href={admin.blogPosts.edit(post.id)}
-                                            className="text-sm font-medium text-primary hover:underline"
-                                        >
-                                            Edit
-                                        </Link>
-                                        <ConfirmDeleteDialog
-                                            url={toUrl(
-                                                admin.blogPosts.destroy(
-                                                    post.id,
-                                                ),
-                                            )}
-                                            title="Delete post"
-                                            description={`Are you sure you want to delete "${post.title}"? This cannot be undone.`}
-                                            trigger={
-                                                <button className="text-sm font-medium text-destructive hover:underline">
-                                                    Delete
-                                                </button>
-                                            }
-                                        />
-                                    </div>
-                                </TableCell>
-                            </TableRow>
-                        ))}
-                    </TableBody>
-                </Table>
+                <div className="mb-4">
+                    <div className="relative max-w-xs">
+                        <Search className="absolute top-1/2 left-2.5 size-4 -translate-y-1/2 text-muted-foreground" />
+                        <Input
+                            value={search}
+                            onChange={(e) => setSearch(e.target.value)}
+                            placeholder="Search posts..."
+                            className="pl-8"
+                        />
+                    </div>
+                </div>
+
+                {posts.data.length === 0 ? (
+                    <EmptyState
+                        icon={Newspaper}
+                        title={
+                            filters.search
+                                ? 'No posts match your search'
+                                : 'No blog posts yet'
+                        }
+                        description={
+                            filters.search
+                                ? 'Try a different search term.'
+                                : 'Write your first post to show it on the public blog.'
+                        }
+                        action={
+                            !filters.search && (
+                                <Button asChild>
+                                    <Link href={admin.blogPosts.create()}>
+                                        <Plus className="size-4" />
+                                        New Post
+                                    </Link>
+                                </Button>
+                            )
+                        }
+                    />
+                ) : (
+                    <>
+                        <Table>
+                            <TableHeader>
+                                <TableRow>
+                                    <TableHead>Title</TableHead>
+                                    <TableHead>Published</TableHead>
+                                    <TableHead>Status</TableHead>
+                                    <TableHead className="w-0" />
+                                </TableRow>
+                            </TableHeader>
+                            <TableBody>
+                                {posts.data.map((post) => (
+                                    <TableRow key={post.id}>
+                                        <TableCell className="font-medium">
+                                            {post.title}
+                                        </TableCell>
+                                        <TableCell className="text-muted-foreground">
+                                            {post.published_at
+                                                ? new Date(
+                                                      post.published_at,
+                                                  ).toLocaleDateString()
+                                                : '—'}
+                                        </TableCell>
+                                        <TableCell>
+                                            <Badge
+                                                variant={
+                                                    post.is_published
+                                                        ? 'default'
+                                                        : 'secondary'
+                                                }
+                                            >
+                                                {post.is_published
+                                                    ? 'Published'
+                                                    : 'Draft'}
+                                            </Badge>
+                                        </TableCell>
+                                        <TableCell>
+                                            <RowActionsMenu>
+                                                <DropdownMenuItem asChild>
+                                                    <Link
+                                                        href={admin.blogPosts.edit(
+                                                            post.id,
+                                                        )}
+                                                    >
+                                                        <Pencil className="size-4" />
+                                                        Edit
+                                                    </Link>
+                                                </DropdownMenuItem>
+                                                {post.is_published && (
+                                                    <DropdownMenuItem asChild>
+                                                        <a
+                                                            href={toUrl(
+                                                                showOnSite(
+                                                                    post.slug,
+                                                                ),
+                                                            )}
+                                                            target="_blank"
+                                                            rel="noopener noreferrer"
+                                                        >
+                                                            <ExternalLink className="size-4" />
+                                                            View on site
+                                                        </a>
+                                                    </DropdownMenuItem>
+                                                )}
+                                                <ConfirmDeleteDialog
+                                                    url={toUrl(
+                                                        admin.blogPosts.destroy(
+                                                            post.id,
+                                                        ),
+                                                    )}
+                                                    title="Delete post"
+                                                    description={`Are you sure you want to delete "${post.title}"? This cannot be undone.`}
+                                                    trigger={
+                                                        <DropdownMenuItem
+                                                            variant="destructive"
+                                                            onSelect={(e) =>
+                                                                e.preventDefault()
+                                                            }
+                                                        >
+                                                            <Trash2 className="size-4" />
+                                                            Delete
+                                                        </DropdownMenuItem>
+                                                    }
+                                                />
+                                            </RowActionsMenu>
+                                        </TableCell>
+                                    </TableRow>
+                                ))}
+                            </TableBody>
+                        </Table>
+
+                        <div className="mt-6">
+                            <PaginationLinks links={posts.links} />
+                        </div>
+                    </>
+                )}
             </div>
         </>
     );

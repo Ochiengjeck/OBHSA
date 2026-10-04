@@ -1,9 +1,13 @@
-import { Head, Link, router } from '@inertiajs/react';
-import { cn } from '@/lib/utils';
+import { Head, Link, router, usePage } from '@inertiajs/react';
+import { Inbox, UserPlus } from 'lucide-react';
 import { AdminPageHeader } from '@/components/admin/admin-page-header';
+import { EmptyState } from '@/components/admin/empty-state';
+import { RowActionsMenu } from '@/components/admin/row-actions-menu';
 import { StatusBadge } from '@/components/admin/status-badge';
 import { PaginationLinks } from '@/components/pagination-links';
+import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
+import { DropdownMenuItem } from '@/components/ui/dropdown-menu';
 import {
     Select,
     SelectContent,
@@ -19,8 +23,9 @@ import {
     TableHeader,
     TableRow,
 } from '@/components/ui/table';
+import { cn, toUrl } from '@/lib/utils';
 import admin from '@/routes/admin';
-import type { Paginated } from '@/types';
+import type { Auth, Paginated } from '@/types';
 
 type JobApplicationRow = {
     id: number;
@@ -58,11 +63,21 @@ export default function JobApplicationsIndex({
     statusOptions: StatusOption[];
     statusCounts: Record<string, number>;
 }) {
+    const { auth } = usePage<{ auth: Auth }>().props;
+
     function updateStatusFilter(value: string | null) {
         router.get(
             admin.jobApplications.index().url,
             { status: value ?? undefined },
             { preserveState: true, replace: true },
+        );
+    }
+
+    function assignToMe(applicationId: number) {
+        router.put(
+            toUrl(admin.jobApplications.recruiter(applicationId)),
+            { assigned_recruiter_id: auth.user.id },
+            { preserveScroll: true },
         );
     }
 
@@ -77,6 +92,8 @@ export default function JobApplicationsIndex({
                 <AdminPageHeader
                     title="Job Applications"
                     description="Review and triage applications submitted by caregivers."
+                    icon={Inbox}
+                    stats={[{ label: 'total', value: applications.total }]}
                 />
 
                 <div className="mb-4 flex flex-wrap items-center gap-2">
@@ -125,66 +142,131 @@ export default function JobApplicationsIndex({
                     </Select>
                 </div>
 
-                <Table>
-                    <TableHeader>
-                        <TableRow>
-                            <TableHead>Applicant</TableHead>
-                            <TableHead>Position</TableHead>
-                            <TableHead>Submitted</TableHead>
-                            <TableHead>Status</TableHead>
-                            <TableHead>Days in Stage</TableHead>
-                            <TableHead>Recruiter</TableHead>
-                        </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                        {applications.data.map((application) => (
-                            <TableRow key={application.id}>
-                                <TableCell>
-                                    <Link
-                                        href={admin.candidates.show(
-                                            application.candidate_id,
-                                        )}
-                                        className="font-medium text-primary hover:underline"
-                                    >
-                                        {application.candidate.full_name}
-                                    </Link>
-                                    <p className="text-xs text-muted-foreground">
-                                        {application.candidate.email}
-                                    </p>
-                                </TableCell>
-                                <TableCell className="text-muted-foreground">
-                                    {application.job_listing?.title ??
-                                        'General Application'}
-                                </TableCell>
-                                <TableCell className="text-muted-foreground">
-                                    {new Date(
-                                        application.created_at,
-                                    ).toLocaleDateString()}
-                                </TableCell>
-                                <TableCell>
-                                    <StatusBadge status={application.status} />
-                                </TableCell>
-                                <TableCell
-                                    className={cn(
-                                        'text-muted-foreground',
-                                        (application.days_in_stage ?? 0) >= 7 &&
-                                            'font-medium text-amber-600',
-                                    )}
-                                >
-                                    {application.days_in_stage ?? '—'}
-                                </TableCell>
-                                <TableCell className="text-muted-foreground">
-                                    {application.recruiter?.name ??
-                                        'Unassigned'}
-                                </TableCell>
-                            </TableRow>
-                        ))}
-                    </TableBody>
-                </Table>
+                {applications.data.length === 0 ? (
+                    <EmptyState
+                        icon={Inbox}
+                        title={
+                            filters.status
+                                ? 'No applications in this stage'
+                                : 'No applications yet'
+                        }
+                        description={
+                            filters.status
+                                ? 'Try a different stage or clear the filter.'
+                                : 'Applications submitted by caregivers will show up here.'
+                        }
+                    />
+                ) : (
+                    <>
+                        <Table>
+                            <TableHeader>
+                                <TableRow>
+                                    <TableHead>Applicant</TableHead>
+                                    <TableHead>Position</TableHead>
+                                    <TableHead>Submitted</TableHead>
+                                    <TableHead>Status</TableHead>
+                                    <TableHead>Days in Stage</TableHead>
+                                    <TableHead>Recruiter</TableHead>
+                                    <TableHead className="w-0" />
+                                </TableRow>
+                            </TableHeader>
+                            <TableBody>
+                                {applications.data.map((application) => (
+                                    <TableRow key={application.id}>
+                                        <TableCell>
+                                            <div className="flex items-center gap-3">
+                                                <Avatar className="size-8">
+                                                    <AvatarFallback>
+                                                        {application.candidate.full_name
+                                                            .charAt(0)
+                                                            .toUpperCase()}
+                                                    </AvatarFallback>
+                                                </Avatar>
+                                                <div>
+                                                    <Link
+                                                        href={admin.candidates.show(
+                                                            application.candidate_id,
+                                                        )}
+                                                        className="font-medium text-primary hover:underline"
+                                                    >
+                                                        {
+                                                            application
+                                                                .candidate
+                                                                .full_name
+                                                        }
+                                                    </Link>
+                                                    <p className="text-xs text-muted-foreground">
+                                                        {
+                                                            application
+                                                                .candidate.email
+                                                        }
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </TableCell>
+                                        <TableCell className="text-muted-foreground">
+                                            {application.job_listing?.title ??
+                                                'General Application'}
+                                        </TableCell>
+                                        <TableCell className="text-muted-foreground">
+                                            {new Date(
+                                                application.created_at,
+                                            ).toLocaleDateString()}
+                                        </TableCell>
+                                        <TableCell>
+                                            <StatusBadge
+                                                status={application.status}
+                                            />
+                                        </TableCell>
+                                        <TableCell
+                                            className={cn(
+                                                'text-muted-foreground',
+                                                (application.days_in_stage ??
+                                                    0) >= 7 &&
+                                                    'font-medium text-amber-600',
+                                            )}
+                                        >
+                                            {application.days_in_stage ?? '—'}
+                                        </TableCell>
+                                        <TableCell className="text-muted-foreground">
+                                            {application.recruiter?.name ??
+                                                'Unassigned'}
+                                        </TableCell>
+                                        <TableCell>
+                                            <RowActionsMenu>
+                                                <DropdownMenuItem asChild>
+                                                    <Link
+                                                        href={admin.candidates.show(
+                                                            application.candidate_id,
+                                                        )}
+                                                    >
+                                                        View Candidate
+                                                    </Link>
+                                                </DropdownMenuItem>
+                                                {!application.recruiter && (
+                                                    <DropdownMenuItem
+                                                        onSelect={() =>
+                                                            assignToMe(
+                                                                application.id,
+                                                            )
+                                                        }
+                                                    >
+                                                        <UserPlus className="size-4" />
+                                                        Assign to me
+                                                    </DropdownMenuItem>
+                                                )}
+                                            </RowActionsMenu>
+                                        </TableCell>
+                                    </TableRow>
+                                ))}
+                            </TableBody>
+                        </Table>
 
-                <div className="mt-6">
-                    <PaginationLinks links={applications.links} />
-                </div>
+                        <div className="mt-6">
+                            <PaginationLinks links={applications.links} />
+                        </div>
+                    </>
+                )}
             </div>
         </>
     );

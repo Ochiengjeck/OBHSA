@@ -7,6 +7,7 @@ use App\Http\Requests\Admin\StoreCommunicationTemplateRequest;
 use App\Http\Requests\Admin\UpdateCommunicationTemplateRequest;
 use App\Models\CommunicationTemplate;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -15,10 +16,17 @@ class CommunicationTemplateController extends Controller
     /**
      * List all communication templates.
      */
-    public function index(): Response
+    public function index(Request $request): Response
     {
+        $templates = CommunicationTemplate::query()
+            ->when($request->string('search')->isNotEmpty(), fn ($query) => $query->where('name', 'like', '%'.$request->string('search').'%'))
+            ->orderBy('name')
+            ->paginate(20)
+            ->withQueryString();
+
         return Inertia::render('admin/communication-templates/index', [
-            'templates' => CommunicationTemplate::query()->orderBy('name')->get(),
+            'templates' => $templates,
+            'filters' => ['search' => $request->string('search')->value() ?: null],
         ]);
     }
 

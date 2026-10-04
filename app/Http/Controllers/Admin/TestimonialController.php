@@ -8,6 +8,7 @@ use App\Http\Requests\Admin\StoreTestimonialRequest;
 use App\Http\Requests\Admin\UpdateTestimonialRequest;
 use App\Models\Testimonial;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -19,10 +20,17 @@ class TestimonialController extends Controller
     /**
      * List all testimonials.
      */
-    public function index(): Response
+    public function index(Request $request): Response
     {
+        $testimonials = Testimonial::query()
+            ->when($request->string('search')->isNotEmpty(), fn ($query) => $query->where('author_name', 'like', '%'.$request->string('search').'%'))
+            ->orderBy('position')
+            ->paginate(20)
+            ->withQueryString();
+
         return Inertia::render('admin/testimonials/index', [
-            'testimonials' => Testimonial::query()->orderBy('position')->get(),
+            'testimonials' => $testimonials,
+            'filters' => ['search' => $request->string('search')->value() ?: null],
         ]);
     }
 

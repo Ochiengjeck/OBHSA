@@ -8,6 +8,7 @@ use App\Http\Requests\Admin\StoreStatRequest;
 use App\Http\Requests\Admin\UpdateStatRequest;
 use App\Models\Stat;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -18,10 +19,17 @@ class StatController extends Controller
     /**
      * List all stats.
      */
-    public function index(): Response
+    public function index(Request $request): Response
     {
+        $stats = Stat::query()
+            ->when($request->string('search')->isNotEmpty(), fn ($query) => $query->where('label', 'like', '%'.$request->string('search').'%'))
+            ->orderBy('position')
+            ->paginate(20)
+            ->withQueryString();
+
         return Inertia::render('admin/stats/index', [
-            'stats' => Stat::query()->orderBy('position')->get(),
+            'stats' => $stats,
+            'filters' => ['search' => $request->string('search')->value() ?: null],
         ]);
     }
 

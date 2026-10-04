@@ -1,5 +1,7 @@
 import { Head, Link, router } from '@inertiajs/react';
+import { CalendarClock } from 'lucide-react';
 import { AdminPageHeader } from '@/components/admin/admin-page-header';
+import { EmptyState } from '@/components/admin/empty-state';
 import { StatusBadge } from '@/components/admin/status-badge';
 import { PaginationLinks } from '@/components/pagination-links';
 import { Button } from '@/components/ui/button';
@@ -52,6 +54,8 @@ export default function InterviewsIndex({
                 <AdminPageHeader
                     title="Interviews"
                     description="Every interview scheduled across candidates, past and upcoming."
+                    icon={CalendarClock}
+                    stats={[{ label: 'total', value: interviews.total }]}
                 />
 
                 <div className="mb-4 flex flex-wrap items-center gap-2">
@@ -111,60 +115,77 @@ export default function InterviewsIndex({
                     </Select>
                 </div>
 
-                <Table>
-                    <TableHeader>
-                        <TableRow>
-                            <TableHead>Date</TableHead>
-                            <TableHead>Candidate</TableHead>
-                            <TableHead>Interviewer</TableHead>
-                            <TableHead>Format</TableHead>
-                            <TableHead>Status</TableHead>
-                            <TableHead>Recommendation</TableHead>
-                        </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                        {interviews.data.map((interview) => (
-                            <TableRow key={interview.id}>
-                                <TableCell className="text-muted-foreground">
-                                    <Link
-                                        href={admin.interviews.show(
-                                            interview.id,
-                                        )}
-                                        className="font-medium text-primary hover:underline"
-                                    >
-                                        {new Date(
-                                            interview.scheduled_at,
-                                        ).toLocaleString()}
-                                    </Link>
-                                </TableCell>
-                                <TableCell className="font-medium">
-                                    {interview.application.candidate.full_name}
-                                </TableCell>
-                                <TableCell className="text-muted-foreground">
-                                    {interview.interviewer?.name ??
-                                        'Unassigned'}
-                                </TableCell>
-                                <TableCell className="text-muted-foreground capitalize">
-                                    {interview.format.replaceAll('_', ' ')}
-                                </TableCell>
-                                <TableCell>
-                                    <StatusBadge status={interview.status} />
-                                </TableCell>
-                                <TableCell>
-                                    {interview.recommendation && (
-                                        <StatusBadge
-                                            status={interview.recommendation}
-                                        />
-                                    )}
-                                </TableCell>
+                {interviews.data.length === 0 ? (
+                    <EmptyState
+                        icon={CalendarClock}
+                        title="No interviews match these filters"
+                        description="Interviews scheduled for candidates will show up here."
+                    />
+                ) : (
+                    <Table>
+                        <TableHeader>
+                            <TableRow>
+                                <TableHead>Date</TableHead>
+                                <TableHead>Candidate</TableHead>
+                                <TableHead>Interviewer</TableHead>
+                                <TableHead>Format</TableHead>
+                                <TableHead>Status</TableHead>
+                                <TableHead>Recommendation</TableHead>
                             </TableRow>
-                        ))}
-                    </TableBody>
-                </Table>
+                        </TableHeader>
+                        <TableBody>
+                            {interviews.data.map((interview) => (
+                                <TableRow key={interview.id}>
+                                    <TableCell className="text-muted-foreground">
+                                        <Link
+                                            href={admin.interviews.show(
+                                                interview.id,
+                                            )}
+                                            className="font-medium text-primary hover:underline"
+                                        >
+                                            {new Date(
+                                                interview.scheduled_at,
+                                            ).toLocaleString()}
+                                        </Link>
+                                    </TableCell>
+                                    <TableCell className="font-medium">
+                                        {
+                                            interview.application.candidate
+                                                .full_name
+                                        }
+                                    </TableCell>
+                                    <TableCell className="text-muted-foreground">
+                                        {interview.interviewer?.name ??
+                                            'Unassigned'}
+                                    </TableCell>
+                                    <TableCell className="text-muted-foreground capitalize">
+                                        {interview.format.replaceAll('_', ' ')}
+                                    </TableCell>
+                                    <TableCell>
+                                        <StatusBadge
+                                            status={interview.status}
+                                        />
+                                    </TableCell>
+                                    <TableCell>
+                                        {interview.recommendation && (
+                                            <StatusBadge
+                                                status={
+                                                    interview.recommendation
+                                                }
+                                            />
+                                        )}
+                                    </TableCell>
+                                </TableRow>
+                            ))}
+                        </TableBody>
+                    </Table>
+                )}
 
-                <div className="mt-6">
-                    <PaginationLinks links={interviews.links} />
-                </div>
+                {interviews.data.length > 0 && (
+                    <div className="mt-6">
+                        <PaginationLinks links={interviews.links} />
+                    </div>
+                )}
             </div>
         </>
     );

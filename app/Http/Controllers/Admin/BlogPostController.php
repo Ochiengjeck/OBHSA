@@ -8,6 +8,7 @@ use App\Http\Requests\Admin\StoreBlogPostRequest;
 use App\Http\Requests\Admin\UpdateBlogPostRequest;
 use App\Models\BlogPost;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -19,10 +20,17 @@ class BlogPostController extends Controller
     /**
      * List all blog posts.
      */
-    public function index(): Response
+    public function index(Request $request): Response
     {
+        $posts = BlogPost::query()
+            ->when($request->string('search')->isNotEmpty(), fn ($query) => $query->where('title', 'like', '%'.$request->string('search').'%'))
+            ->latest('published_at')
+            ->paginate(20)
+            ->withQueryString();
+
         return Inertia::render('admin/blog-posts/index', [
-            'posts' => BlogPost::query()->latest('published_at')->get(),
+            'posts' => $posts,
+            'filters' => ['search' => $request->string('search')->value() ?: null],
         ]);
     }
 

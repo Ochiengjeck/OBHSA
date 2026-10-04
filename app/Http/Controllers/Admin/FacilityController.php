@@ -7,6 +7,7 @@ use App\Http\Requests\Admin\StoreFacilityRequest;
 use App\Http\Requests\Admin\UpdateFacilityRequest;
 use App\Models\Facility;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -15,10 +16,18 @@ class FacilityController extends Controller
     /**
      * List all facilities.
      */
-    public function index(): Response
+    public function index(Request $request): Response
     {
+        $facilities = Facility::query()
+            ->withCount('shifts')
+            ->when($request->string('search')->isNotEmpty(), fn ($query) => $query->where('name', 'like', '%'.$request->string('search').'%'))
+            ->orderBy('name')
+            ->paginate(20)
+            ->withQueryString();
+
         return Inertia::render('admin/facilities/index', [
-            'facilities' => Facility::query()->withCount('shifts')->orderBy('name')->get(),
+            'facilities' => $facilities,
+            'filters' => ['search' => $request->string('search')->value() ?: null],
         ]);
     }
 

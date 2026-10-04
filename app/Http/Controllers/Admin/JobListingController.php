@@ -8,6 +8,7 @@ use App\Http\Requests\Admin\StoreJobListingRequest;
 use App\Http\Requests\Admin\UpdateJobListingRequest;
 use App\Models\JobListing;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -19,10 +20,17 @@ class JobListingController extends Controller
     /**
      * List all job listings.
      */
-    public function index(): Response
+    public function index(Request $request): Response
     {
+        $jobListings = JobListing::query()
+            ->when($request->string('search')->isNotEmpty(), fn ($query) => $query->where('title', 'like', '%'.$request->string('search').'%'))
+            ->latest('posted_at')
+            ->paginate(20)
+            ->withQueryString();
+
         return Inertia::render('admin/job-listings/index', [
-            'jobListings' => JobListing::query()->latest('posted_at')->get(),
+            'jobListings' => $jobListings,
+            'filters' => ['search' => $request->string('search')->value() ?: null],
         ]);
     }
 

@@ -7,6 +7,7 @@ use App\Http\Requests\Admin\StoreInterviewQuestionRequest;
 use App\Http\Requests\Admin\UpdateInterviewQuestionRequest;
 use App\Models\InterviewQuestion;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -15,10 +16,18 @@ class InterviewQuestionController extends Controller
     /**
      * List all interview questions.
      */
-    public function index(): Response
+    public function index(Request $request): Response
     {
+        $questions = InterviewQuestion::query()
+            ->when($request->string('search')->isNotEmpty(), fn ($query) => $query->where('question', 'like', '%'.$request->string('search').'%'))
+            ->orderBy('position')
+            ->orderBy('id')
+            ->paginate(20)
+            ->withQueryString();
+
         return Inertia::render('admin/interview-questions/index', [
-            'questions' => InterviewQuestion::query()->orderBy('position')->orderBy('id')->get(),
+            'questions' => $questions,
+            'filters' => ['search' => $request->string('search')->value() ?: null],
         ]);
     }
 

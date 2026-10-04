@@ -1,7 +1,15 @@
 import { Head, Link, router } from '@inertiajs/react';
+import { Mail } from 'lucide-react';
 import { AdminPageHeader } from '@/components/admin/admin-page-header';
+import { EmptyState } from '@/components/admin/empty-state';
+import { RowActionsMenu } from '@/components/admin/row-actions-menu';
 import { StatusBadge } from '@/components/admin/status-badge';
 import { PaginationLinks } from '@/components/pagination-links';
+import {
+    DropdownMenuItem,
+    DropdownMenuLabel,
+    DropdownMenuSeparator,
+} from '@/components/ui/dropdown-menu';
 import {
     Select,
     SelectContent,
@@ -17,8 +25,11 @@ import {
     TableHeader,
     TableRow,
 } from '@/components/ui/table';
+import { toUrl } from '@/lib/utils';
 import admin from '@/routes/admin';
 import type { Paginated } from '@/types';
+
+const STATUS_OPTIONS = ['new', 'contacted', 'qualified', 'closed'] as const;
 
 type StaffingRequestRow = {
     id: number;
@@ -44,6 +55,14 @@ export default function StaffingRequestsIndex({
         );
     }
 
+    function changeStatus(requestId: number, status: string) {
+        router.put(
+            toUrl(admin.staffingRequests.update(requestId)),
+            { status },
+            { preserveScroll: true },
+        );
+    }
+
     return (
         <>
             <Head title="Staffing Requests" />
@@ -51,6 +70,8 @@ export default function StaffingRequestsIndex({
                 <AdminPageHeader
                     title="Staffing Requests"
                     description="Facility leads submitted through the staffing request form."
+                    icon={Mail}
+                    stats={[{ label: 'total', value: requests.total }]}
                 />
 
                 <div className="mb-4">
@@ -71,48 +92,106 @@ export default function StaffingRequestsIndex({
                     </Select>
                 </div>
 
-                <Table>
-                    <TableHeader>
-                        <TableRow>
-                            <TableHead>Facility</TableHead>
-                            <TableHead>Contact</TableHead>
-                            <TableHead>Submitted</TableHead>
-                            <TableHead>Status</TableHead>
-                        </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                        {requests.data.map((request) => (
-                            <TableRow key={request.id}>
-                                <TableCell>
-                                    <Link
-                                        href={admin.staffingRequests.show(
-                                            request.id,
-                                        )}
-                                        className="font-medium text-primary hover:underline"
-                                    >
-                                        {request.facility_name}
-                                    </Link>
-                                </TableCell>
-                                <TableCell className="text-muted-foreground">
-                                    {request.contact_name}
-                                    <p className="text-xs">{request.email}</p>
-                                </TableCell>
-                                <TableCell className="text-muted-foreground">
-                                    {new Date(
-                                        request.created_at,
-                                    ).toLocaleDateString()}
-                                </TableCell>
-                                <TableCell>
-                                    <StatusBadge status={request.status} />
-                                </TableCell>
-                            </TableRow>
-                        ))}
-                    </TableBody>
-                </Table>
+                {requests.data.length === 0 ? (
+                    <EmptyState
+                        icon={Mail}
+                        title={
+                            filters.status
+                                ? 'No requests match this status'
+                                : 'No staffing requests yet'
+                        }
+                        description={
+                            filters.status
+                                ? 'Try a different status or clear the filter.'
+                                : 'Leads submitted through the staffing request form will show up here.'
+                        }
+                    />
+                ) : (
+                    <>
+                        <Table>
+                            <TableHeader>
+                                <TableRow>
+                                    <TableHead>Facility</TableHead>
+                                    <TableHead>Contact</TableHead>
+                                    <TableHead>Submitted</TableHead>
+                                    <TableHead>Status</TableHead>
+                                    <TableHead className="w-0" />
+                                </TableRow>
+                            </TableHeader>
+                            <TableBody>
+                                {requests.data.map((request) => (
+                                    <TableRow key={request.id}>
+                                        <TableCell>
+                                            <Link
+                                                href={admin.staffingRequests.show(
+                                                    request.id,
+                                                )}
+                                                className="font-medium text-primary hover:underline"
+                                            >
+                                                {request.facility_name}
+                                            </Link>
+                                        </TableCell>
+                                        <TableCell className="text-muted-foreground">
+                                            {request.contact_name}
+                                            <p className="text-xs">
+                                                {request.email}
+                                            </p>
+                                        </TableCell>
+                                        <TableCell className="text-muted-foreground">
+                                            {new Date(
+                                                request.created_at,
+                                            ).toLocaleDateString()}
+                                        </TableCell>
+                                        <TableCell>
+                                            <StatusBadge
+                                                status={request.status}
+                                            />
+                                        </TableCell>
+                                        <TableCell>
+                                            <RowActionsMenu>
+                                                <DropdownMenuItem asChild>
+                                                    <Link
+                                                        href={admin.staffingRequests.show(
+                                                            request.id,
+                                                        )}
+                                                    >
+                                                        View
+                                                    </Link>
+                                                </DropdownMenuItem>
+                                                <DropdownMenuSeparator />
+                                                <DropdownMenuLabel>
+                                                    Set status
+                                                </DropdownMenuLabel>
+                                                {STATUS_OPTIONS.filter(
+                                                    (status) =>
+                                                        status !==
+                                                        request.status,
+                                                ).map((status) => (
+                                                    <DropdownMenuItem
+                                                        key={status}
+                                                        onSelect={() =>
+                                                            changeStatus(
+                                                                request.id,
+                                                                status,
+                                                            )
+                                                        }
+                                                        className="capitalize"
+                                                    >
+                                                        {status}
+                                                    </DropdownMenuItem>
+                                                ))}
+                                            </RowActionsMenu>
+                                        </TableCell>
+                                    </TableRow>
+                                ))}
+                            </TableBody>
+                        </Table>
 
-                <div className="mt-6">
-                    <PaginationLinks links={requests.links} />
-                </div>
+                        <div className="mt-6">
+                            <PaginationLinks links={requests.links} />
+                        </div>
+                    </>
+                )}
             </div>
         </>
     );

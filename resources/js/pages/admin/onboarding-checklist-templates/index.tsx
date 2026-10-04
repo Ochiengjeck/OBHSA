@@ -1,9 +1,13 @@
 import { Head, Link } from '@inertiajs/react';
-import { Plus } from 'lucide-react';
+import { ListTodo, Pencil, Plus, Search, Trash2 } from 'lucide-react';
 import { AdminPageHeader } from '@/components/admin/admin-page-header';
 import { ConfirmDeleteDialog } from '@/components/admin/confirm-delete-dialog';
+import { EmptyState } from '@/components/admin/empty-state';
+import { RowActionsMenu } from '@/components/admin/row-actions-menu';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
+import { DropdownMenuItem } from '@/components/ui/dropdown-menu';
+import { Input } from '@/components/ui/input';
 import {
     Table,
     TableBody,
@@ -12,15 +16,24 @@ import {
     TableHeader,
     TableRow,
 } from '@/components/ui/table';
+import { useDebouncedSearch } from '@/hooks/use-debounced-search';
 import { toUrl } from '@/lib/utils';
 import admin from '@/routes/admin';
-import type { OnboardingChecklistTemplate } from '@/types';
+import type { OnboardingChecklistTemplate, Paginated } from '@/types';
+import { PaginationLinks } from '@/components/pagination-links';
 
 export default function OnboardingChecklistTemplatesIndex({
     templates,
+    filters,
 }: {
-    templates: OnboardingChecklistTemplate[];
+    templates: Paginated<OnboardingChecklistTemplate>;
+    filters: { search: string | null };
 }) {
+    const { search, setSearch } = useDebouncedSearch(
+        admin.onboardingChecklistTemplates.index().url,
+        filters,
+    );
+
     return (
         <>
             <Head title="Onboarding Checklist Templates" />
@@ -28,6 +41,8 @@ export default function OnboardingChecklistTemplatesIndex({
                 <AdminPageHeader
                     title="Onboarding Checklist Templates"
                     description="Checklists instantiated against an application's requirements the moment it enters onboarding."
+                    icon={ListTodo}
+                    stats={[{ label: 'total', value: templates.total }]}
                     action={
                         <Button asChild>
                             <Link
@@ -40,80 +55,145 @@ export default function OnboardingChecklistTemplatesIndex({
                     }
                 />
 
-                <Table>
-                    <TableHeader>
-                        <TableRow>
-                            <TableHead>Name</TableHead>
-                            <TableHead>Items</TableHead>
-                            <TableHead>Default</TableHead>
-                            <TableHead>Status</TableHead>
-                            <TableHead className="w-0" />
-                        </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                        {templates.map((template) => (
-                            <TableRow key={template.id}>
-                                <TableCell className="font-medium">
-                                    {template.name}
-                                </TableCell>
-                                <TableCell className="text-muted-foreground">
+                <div className="mb-4">
+                    <div className="relative max-w-xs">
+                        <Search className="absolute top-1/2 left-2.5 size-4 -translate-y-1/2 text-muted-foreground" />
+                        <Input
+                            value={search}
+                            onChange={(e) => setSearch(e.target.value)}
+                            placeholder="Search templates..."
+                            className="pl-8"
+                        />
+                    </div>
+                </div>
+
+                {templates.data.length === 0 ? (
+                    <EmptyState
+                        icon={ListTodo}
+                        title={
+                            filters.search
+                                ? 'No templates match your search'
+                                : 'No checklist templates yet'
+                        }
+                        description={
+                            filters.search
+                                ? 'Try a different search term.'
+                                : 'Create a checklist template for new hires entering onboarding.'
+                        }
+                        action={
+                            !filters.search && (
+                                <Button asChild>
                                     <Link
-                                        href={admin.onboardingChecklistTemplates.items.index(
-                                            template.id,
-                                        )}
-                                        className="font-medium text-primary hover:underline"
+                                        href={admin.onboardingChecklistTemplates.create()}
                                     >
-                                        {template.items_count ?? 0} items
+                                        <Plus className="size-4" />
+                                        New Template
                                     </Link>
-                                </TableCell>
-                                <TableCell>
-                                    {template.is_default && (
-                                        <Badge>Default</Badge>
-                                    )}
-                                </TableCell>
-                                <TableCell>
-                                    <Badge
-                                        variant={
-                                            template.is_active
-                                                ? 'default'
-                                                : 'secondary'
-                                        }
-                                    >
-                                        {template.is_active
-                                            ? 'Active'
-                                            : 'Inactive'}
-                                    </Badge>
-                                </TableCell>
-                                <TableCell>
-                                    <div className="flex items-center justify-end gap-3">
-                                        <Link
-                                            href={admin.onboardingChecklistTemplates.edit(
-                                                template.id,
-                                            )}
-                                            className="text-sm font-medium text-primary hover:underline"
-                                        >
-                                            Edit
-                                        </Link>
-                                        <ConfirmDeleteDialog
-                                            url={toUrl(
-                                                admin.onboardingChecklistTemplates.destroy(
+                                </Button>
+                            )
+                        }
+                    />
+                ) : (
+                    <>
+                        <Table>
+                            <TableHeader>
+                                <TableRow>
+                                    <TableHead>Name</TableHead>
+                                    <TableHead>Items</TableHead>
+                                    <TableHead>Default</TableHead>
+                                    <TableHead>Status</TableHead>
+                                    <TableHead className="w-0" />
+                                </TableRow>
+                            </TableHeader>
+                            <TableBody>
+                                {templates.data.map((template) => (
+                                    <TableRow key={template.id}>
+                                        <TableCell className="font-medium">
+                                            {template.name}
+                                        </TableCell>
+                                        <TableCell className="text-muted-foreground">
+                                            <Link
+                                                href={admin.onboardingChecklistTemplates.items.index(
                                                     template.id,
-                                                ),
+                                                )}
+                                                className="font-medium text-primary hover:underline"
+                                            >
+                                                {template.items_count ?? 0}{' '}
+                                                items
+                                            </Link>
+                                        </TableCell>
+                                        <TableCell>
+                                            {template.is_default && (
+                                                <Badge>Default</Badge>
                                             )}
-                                            title="Delete template"
-                                            description={`Are you sure you want to delete "${template.name}"? This cannot be undone.`}
-                                            trigger={
-                                                <button className="text-sm font-medium text-destructive hover:underline">
-                                                    Delete
-                                                </button>
-                                            }
-                                        />
-                                    </div>
-                                </TableCell>
-                            </TableRow>
-                        ))}
-                    </TableBody>
-                </Table>
+                                        </TableCell>
+                                        <TableCell>
+                                            <Badge
+                                                variant={
+                                                    template.is_active
+                                                        ? 'default'
+                                                        : 'secondary'
+                                                }
+                                            >
+                                                {template.is_active
+                                                    ? 'Active'
+                                                    : 'Inactive'}
+                                            </Badge>
+                                        </TableCell>
+                                        <TableCell>
+                                            <RowActionsMenu>
+                                                <DropdownMenuItem asChild>
+                                                    <Link
+                                                        href={admin.onboardingChecklistTemplates.edit(
+                                                            template.id,
+                                                        )}
+                                                    >
+                                                        <Pencil className="size-4" />
+                                                        Edit
+                                                    </Link>
+                                                </DropdownMenuItem>
+                                                <DropdownMenuItem asChild>
+                                                    <Link
+                                                        href={admin.onboardingChecklistTemplates.items.index(
+                                                            template.id,
+                                                        )}
+                                                    >
+                                                        <ListTodo className="size-4" />
+                                                        Manage items
+                                                    </Link>
+                                                </DropdownMenuItem>
+                                                <ConfirmDeleteDialog
+                                                    url={toUrl(
+                                                        admin.onboardingChecklistTemplates.destroy(
+                                                            template.id,
+                                                        ),
+                                                    )}
+                                                    title="Delete template"
+                                                    description={`Are you sure you want to delete "${template.name}"? This cannot be undone.`}
+                                                    trigger={
+                                                        <DropdownMenuItem
+                                                            variant="destructive"
+                                                            onSelect={(e) =>
+                                                                e.preventDefault()
+                                                            }
+                                                        >
+                                                            <Trash2 className="size-4" />
+                                                            Delete
+                                                        </DropdownMenuItem>
+                                                    }
+                                                />
+                                            </RowActionsMenu>
+                                        </TableCell>
+                                    </TableRow>
+                                ))}
+                            </TableBody>
+                        </Table>
+
+                        <div className="mt-6">
+                            <PaginationLinks links={templates.links} />
+                        </div>
+                    </>
+                )}
             </div>
         </>
     );
