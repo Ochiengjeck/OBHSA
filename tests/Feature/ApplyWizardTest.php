@@ -89,6 +89,32 @@ test('a caregiver can complete the full application wizard', function () {
     Storage::disk('public')->assertExists($resume->file_path);
 });
 
+test('replacing a resume during the apply wizard deletes the old file', function () {
+    Storage::fake('public');
+    Mail::fake();
+
+    startWizardApplication($this);
+
+    $this->put(route('apply.documents.update'), [
+        'resume' => UploadedFile::fake()->create('first.pdf', 200, 'application/pdf'),
+    ]);
+
+    $candidate = Candidate::query()->where('email', 'jane@example.com')->firstOrFail();
+    $application = Application::query()->where('candidate_id', $candidate->id)->firstOrFail();
+    $firstResumePath = $application->documents()->where('document_type', 'resume')->firstOrFail()->file_path;
+
+    Storage::disk('public')->assertExists($firstResumePath);
+
+    $this->put(route('apply.documents.update'), [
+        'resume' => UploadedFile::fake()->create('second.pdf', 200, 'application/pdf'),
+    ]);
+
+    Storage::disk('public')->assertMissing($firstResumePath);
+
+    $secondResumePath = $application->documents()->where('document_type', 'resume')->firstOrFail()->file_path;
+    Storage::disk('public')->assertExists($secondResumePath);
+});
+
 test('applying from a job listing carries the listing onto the application', function () {
     Mail::fake();
 

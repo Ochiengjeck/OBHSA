@@ -9,6 +9,7 @@ use App\Http\Requests\Admin\UpdateStatRequest;
 use App\Models\Stat;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -96,6 +97,10 @@ class StatController extends Controller
      */
     public function destroy(Stat $stat): RedirectResponse
     {
+        if ($stat->icon_path) {
+            Storage::disk('public')->delete($stat->icon_path);
+        }
+
         $stat->delete();
 
         Inertia::flash('toast', ['type' => 'success', 'message' => __('Stat deleted.')]);

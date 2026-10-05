@@ -57,7 +57,7 @@ const RESOURCE_GROUPS: { label: string; resources: string[] }[] = [
     },
     {
         label: 'Administration',
-        resources: ['users', 'roles', 'site-settings'],
+        resources: ['users', 'roles', 'site-settings', 'assets'],
     },
 ];
 

@@ -635,3 +635,649 @@ dependencies:
 [server] 2026-10-05 10:06:57 /favicon.ico .. ~ 0.07ms
 [server] 2026-10-05 10:06:58 /_boost/browser-logs .. ~ 0.20ms
 [server] 2026-10-05 10:24:33 .. ~ 5m 13s
+[vite] 11:01:25 AM [vite+] (client) info: Types generated for actions, routes, form variants
+[vite] Plugin: @laravel/vite-plugin-wayfinder
+[vite] 11:01:44 AM [vite+] (client) info: Types generated for actions, routes, form variants
+[vite] Plugin: @laravel/vite-plugin-wayfinder
+[vite] 11:03:31 AM [vite+] (client) info: Types generated for actions, routes, form variants
+[vite] Plugin: @laravel/vite-plugin-wayfinder
+[vite] 11:04:00 AM [vite+] full reload routes\admin.php
+[vite] 11:04:02 AM [vite+] (client) info: Types generated for actions, routes, form variants
+[vite] Plugin: @laravel/vite-plugin-wayfinder
+[vite] 11:04:04 AM [vite+] full reload routes\admin.php
+[vite] 11:04:06 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/employees/show.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/edit.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessments/index.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/create.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessment-attempts/index.tsx and 65 more
+[vite] 11:04:06 AM [vite+] (ssr) page reload resources/js/routes/admin/index.ts
+[vite] 11:04:06 AM [vite+] (client) info: Types generated for actions, routes, form variants
+[vite] Plugin: @laravel/vite-plugin-wayfinder
+[vite] 11:04:10 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/employees/show.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/edit.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessments/index.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/create.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessment-attempts/index.tsx and 65 more
+[vite] 11:04:10 AM [vite+] (ssr) page reload resources/js/routes/admin/stats/index.ts
+[vite] 11:04:11 AM [vite+] (client) info: Types generated for actions, routes, form variants
+[vite] Plugin: @laravel/vite-plugin-wayfinder
+[vite] 11:04:14 AM [vite+] (client) info: Types generated for actions, routes, form variants
+[vite] Plugin: @laravel/vite-plugin-wayfinder
+[vite] 11:04:24 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/apply/documents.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/apply/contact.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/apply/education.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/apply/consent.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/apply/employment-history.tsx and 7 more
+[vite] 11:04:24 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/apply/documents.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/apply/contact.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/apply/education.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/apply/consent.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/apply/employment-history.tsx and 7 more
+[vite] 11:04:24 AM [vite+] (client) info: Types generated for actions, routes, form variants
+[vite] Plugin: @laravel/vite-plugin-wayfinder
+[vite] 11:04:32 AM [vite+] (client) hmr update /resources/js/components/admin/permission-matrix.tsx
+[vite] 11:04:47 AM [vite+] (client) hmr update /resources/js/components/admin/confirm-delete-dialog.tsx
+[vite] 11:04:53 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessments/index.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/blog-posts/index.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/interview-questions/index.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/facilities/index.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/compliance/index.tsx and 41 more
+[vite] 11:04:53 AM [vite+] (ssr) page reload resources/js/lib/utils.ts
+[vite] 11:06:58 AM [vite+] (client) info: Types generated for actions, routes, form variants
+[vite] Plugin: @laravel/vite-plugin-wayfinder
+[vite] 11:07:14 AM [vite+] (client) hmr update /resources/js/components/admin/status-badge.tsx
+[vite] 11:07:46 AM [vite+] (ssr) page reload resources/js/pages/admin/assets/index.tsx
+[vite] 11:08:01 AM [vite+] (ssr) page reload resources/js/components/admin-sidebar.tsx
+[vite] 11:08:09 AM [vite+] (ssr) page reload resources/js/components/admin-sidebar.tsx
+[vite] 11:08:15 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/auth/confirm-password.tsx
+[vite] 11:08:15 AM [vite+] (client) hmr update /resources/js/components/manage-passkeys.tsx
+[vite] 11:08:15 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/settings/profile.tsx, /resources/js/components/delete-user.tsx
+[vite] 11:08:15 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/settings/security.tsx
+[vite] 11:08:16 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/auth/verify-email.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/auth/forgot-password.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/apply/not-available.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/apply/status.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/apply/thank-you.tsx and 2 more
+[vite] 11:08:16 AM [vite+] (ssr) page reload resources/js/routes/index.ts
+[vite] 11:08:16 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/auth/login.tsx
+[vite] 11:08:16 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/auth/forgot-password.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/auth/reset-password.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/auth/login.tsx
+[vite] 11:08:16 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/auth/verify-email.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/settings/profile.tsx
+[vite] 11:08:16 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/auth/confirm-password.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/auth/forgot-password.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/auth/reset-password.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/auth/login.tsx
+[vite] 11:08:16 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/auth/two-factor-challenge.tsx, /resources/js/components/manage-two-factor.tsx, /resources/js/components/two-factor-setup-modal.tsx, /resources/js/components/two-factor-recovery-codes.tsx
+[vite] 11:08:16 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/auth/two-factor-challenge.tsx, /resources/js/components/manage-two-factor.tsx, /resources/js/components/two-factor-setup-modal.tsx, /resources/js/components/two-factor-recovery-codes.tsx
+[vite] 11:08:16 AM [vite+] (ssr) page reload resources/js/routes/pages/index.ts
+[vite] 11:08:16 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/services/index.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/services/show.tsx, /resources/js/components/public/service-card.tsx
+[vite] 11:08:16 AM [vite+] (ssr) page reload resources/js/routes/services/index.ts
+[vite] 11:08:16 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/services/show.tsx
+[vite] 11:08:16 AM [vite+] (ssr) page reload resources/js/routes/contact/index.ts
+[vite] 11:08:16 AM [vite+] (client) hmr update /resources/js/components/public/staffing-request-form.tsx
+[vite] 11:08:16 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/jobs/index.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/jobs/show.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/blog/show.tsx
+[vite] 11:08:16 AM [vite+] (ssr) page reload resources/js/routes/jobs/index.ts
+[vite] 11:08:16 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/auth/two-factor-challenge.tsx, /resources/js/components/manage-two-factor.tsx, /resources/js/components/two-factor-setup-modal.tsx, /resources/js/components/two-factor-recovery-codes.tsx
+[vite] 11:08:16 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/apply/documents.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/apply/contact.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/apply/education.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/apply/consent.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/apply/employment-history.tsx and 7 more
+[vite] 11:08:16 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/apply/documents.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/apply/contact.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/apply/education.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/apply/consent.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/apply/employment-history.tsx and 7 more
+[vite] 11:08:16 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/apply/documents.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/apply/contact.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/apply/education.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/apply/consent.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/apply/employment-history.tsx and 7 more
+[vite] 11:08:16 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/apply/documents.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/apply/contact.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/apply/education.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/apply/consent.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/apply/employment-history.tsx and 7 more
+[vite] 11:08:16 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/apply/documents.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/apply/contact.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/apply/education.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/apply/consent.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/apply/employment-history.tsx and 7 more
+[vite] 11:08:16 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/assessments/show.tsx
+[vite] 11:08:16 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/apply/documents.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/apply/contact.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/apply/education.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/apply/consent.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/apply/employment-history.tsx and 7 more
+[vite] 11:08:16 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/offers/show.tsx
+[vite] 11:08:16 AM [vite+] (ssr) page reload resources/js/routes/pages/index.ts
+[vite] 11:08:16 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/blog-posts/index.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/blog/index.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/blog/show.tsx
+[vite] 11:08:16 AM [vite+] (ssr) page reload resources/js/routes/blog/index.ts
+[vite] 11:08:16 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/services/index.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/services/show.tsx, /resources/js/components/public/service-card.tsx
+[vite] 11:08:16 AM [vite+] (ssr) page reload resources/js/routes/services/index.ts
+[vite] 11:08:16 AM [vite+] (ssr) page reload resources/js/routes/legal/index.ts
+[vite] 11:08:16 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/settings/profile.tsx
+[vite] 11:08:16 AM [vite+] (ssr) page reload resources/js/routes/profile/index.ts
+[vite] 11:08:16 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/services/show.tsx
+[vite] 11:08:16 AM [vite+] (ssr) page reload resources/js/routes/contact/index.ts
+[vite] 11:08:16 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/settings/security.tsx
+[vite] 11:08:16 AM [vite+] (ssr) page reload resources/js/routes/security/index.ts
+[vite] 11:08:16 AM [vite+] (client) hmr update /resources/js/components/public/staffing-request-form.tsx
+[vite] 11:08:16 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/settings/appearance.tsx
+[vite] 11:08:16 AM [vite+] (ssr) page reload resources/js/routes/appearance/index.ts
+[vite] 11:08:16 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/employees/show.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/edit.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessments/index.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/create.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessment-attempts/index.tsx and 65 more
+[vite] 11:08:16 AM [vite+] (ssr) page reload resources/js/routes/admin/index.ts
+[vite] 11:08:16 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/employees/show.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/edit.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessments/index.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/create.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessment-attempts/index.tsx and 65 more
+[vite] 11:08:16 AM [vite+] (ssr) page reload resources/js/routes/admin/site-settings/index.ts
+[vite] 11:08:16 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/employees/show.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/edit.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessments/index.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/create.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessment-attempts/index.tsx and 65 more
+[vite] 11:08:16 AM [vite+] (ssr) page reload resources/js/routes/admin/ai-settings/index.ts
+[vite] 11:08:16 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/employees/show.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/edit.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessments/index.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/create.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessment-attempts/index.tsx and 65 more
+[vite] 11:08:16 AM [vite+] (ssr) page reload resources/js/routes/admin/pages/index.ts
+[vite] 11:08:16 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/employees/show.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/edit.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessments/index.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/create.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessment-attempts/index.tsx and 65 more
+[vite] 11:08:16 AM [vite+] (ssr) page reload resources/js/routes/admin/services/index.ts
+[vite] 11:08:16 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/employees/show.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/edit.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessments/index.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/create.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessment-attempts/index.tsx and 65 more
+[vite] 11:08:16 AM [vite+] (ssr) page reload resources/js/routes/admin/job-listings/index.ts
+[vite] 11:08:16 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/employees/show.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/edit.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessments/index.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/create.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessment-attempts/index.tsx and 65 more
+[vite] 11:08:16 AM [vite+] (ssr) page reload resources/js/routes/admin/job-applications/index.ts
+[vite] 11:08:16 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/apply/documents.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/apply/contact.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/apply/education.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/apply/consent.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/apply/employment-history.tsx and 7 more
+[vite] 11:08:16 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/auth/two-factor-challenge.tsx, /resources/js/components/manage-two-factor.tsx, /resources/js/components/two-factor-setup-modal.tsx, /resources/js/components/two-factor-recovery-codes.tsx
+[vite] 11:08:16 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/employees/show.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/edit.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessments/index.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/create.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessment-attempts/index.tsx and 65 more
+[vite] 11:08:16 AM [vite+] (ssr) page reload resources/js/routes/admin/candidates/index.ts
+[vite] 11:08:16 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/employees/show.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/edit.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessments/index.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/create.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessment-attempts/index.tsx and 65 more
+[vite] 11:08:16 AM [vite+] (ssr) page reload resources/js/routes/admin/credentials/index.ts
+[vite] 11:08:16 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/employees/show.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/edit.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessments/index.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/create.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessment-attempts/index.tsx and 65 more
+[vite] 11:08:16 AM [vite+] (ssr) page reload resources/js/routes/admin/application-requirements/index.ts
+[vite] 11:08:16 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/employees/show.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/edit.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessments/index.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/create.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessment-attempts/index.tsx and 65 more
+[vite] 11:08:16 AM [vite+] (ssr) page reload resources/js/routes/admin/background-checks/index.ts
+[vite] 11:08:16 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/employees/show.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/edit.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessments/index.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/create.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessment-attempts/index.tsx and 65 more
+[vite] 11:08:16 AM [vite+] (ssr) page reload resources/js/routes/admin/offers/index.ts
+[vite] 11:08:16 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/apply/documents.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/apply/contact.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/apply/education.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/apply/consent.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/apply/employment-history.tsx and 7 more
+[vite] 11:08:16 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/employees/show.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/edit.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessments/index.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/create.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessment-attempts/index.tsx and 65 more
+[vite] 11:08:16 AM [vite+] (ssr) page reload resources/js/routes/admin/employment-history/reference-checks/index.ts
+[vite] 11:08:16 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/apply/documents.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/apply/contact.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/apply/education.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/apply/consent.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/apply/employment-history.tsx and 7 more
+[vite] 11:08:16 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/employees/show.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/edit.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessments/index.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/create.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessment-attempts/index.tsx and 65 more
+[vite] 11:08:16 AM [vite+] (ssr) page reload resources/js/routes/admin/job-applications/background-checks/index.ts
+[vite] 11:08:16 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/apply/documents.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/apply/contact.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/apply/education.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/apply/consent.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/apply/employment-history.tsx and 7 more
+[vite] 11:08:16 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/employees/show.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/edit.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessments/index.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/create.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessment-attempts/index.tsx and 65 more
+[vite] 11:08:16 AM [vite+] (ssr) page reload resources/js/routes/admin/job-applications/offers/index.ts
+[vite] 11:08:16 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/apply/documents.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/apply/contact.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/apply/education.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/apply/consent.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/apply/employment-history.tsx and 7 more
+[vite] 11:08:16 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/employees/show.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/edit.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessments/index.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/create.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessment-attempts/index.tsx and 65 more
+[vite] 11:08:16 AM [vite+] (ssr) page reload resources/js/routes/admin/interviews/index.ts
+[vite] 11:08:16 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/apply/documents.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/apply/contact.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/apply/education.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/apply/consent.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/apply/employment-history.tsx and 7 more
+[vite] 11:08:16 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/employees/show.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/edit.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessments/index.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/create.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessment-attempts/index.tsx and 65 more
+[vite] 11:08:16 AM [vite+] (ssr) page reload resources/js/routes/admin/job-applications/interviews/index.ts
+[vite] 11:08:16 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/apply/documents.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/apply/contact.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/apply/education.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/apply/consent.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/apply/employment-history.tsx and 7 more
+[vite] 11:08:16 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/apply/documents.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/apply/contact.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/apply/education.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/apply/consent.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/apply/employment-history.tsx and 7 more
+[vite] 11:08:16 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/employees/show.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/edit.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessments/index.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/create.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessment-attempts/index.tsx and 65 more
+[vite] 11:08:16 AM [vite+] (ssr) page reload resources/js/routes/admin/interview-questions/index.ts
+[vite] 11:08:16 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/assessments/show.tsx
+[vite] 11:08:16 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/offers/show.tsx
+[vite] 11:08:16 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/employees/show.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/edit.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessments/index.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/create.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessment-attempts/index.tsx and 65 more
+[vite] 11:08:16 AM [vite+] (ssr) page reload resources/js/routes/admin/assessments/index.ts
+[vite] 11:08:16 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/employees/show.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/edit.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessments/index.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/create.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessment-attempts/index.tsx and 65 more
+[vite] 11:08:16 AM [vite+] (ssr) page reload resources/js/routes/admin/assessments/questions/index.ts
+[vite] 11:08:16 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/blog-posts/index.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/blog/index.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/blog/show.tsx
+[vite] 11:08:16 AM [vite+] (ssr) page reload resources/js/routes/blog/index.ts
+[vite] 11:08:16 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/employees/show.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/edit.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessments/index.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/create.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessment-attempts/index.tsx and 65 more
+[vite] 11:08:16 AM [vite+] (ssr) page reload resources/js/routes/admin/questions/index.ts
+[vite] 11:08:16 AM [vite+] (ssr) page reload resources/js/routes/legal/index.ts
+[vite] 11:08:16 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/employees/show.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/edit.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessments/index.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/create.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessment-attempts/index.tsx and 65 more
+[vite] 11:08:16 AM [vite+] (ssr) page reload resources/js/routes/admin/assessment-attempts/index.ts
+[vite] 11:08:16 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/employees/show.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/edit.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessments/index.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/create.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessment-attempts/index.tsx and 65 more
+[vite] 11:08:16 AM [vite+] (ssr) page reload resources/js/routes/admin/job-applications/assessment-attempts/index.ts
+[vite] 11:08:16 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/settings/profile.tsx
+[vite] 11:08:16 AM [vite+] (ssr) page reload resources/js/routes/profile/index.ts
+[vite] 11:08:16 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/employees/show.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/edit.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessments/index.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/create.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessment-attempts/index.tsx and 65 more
+[vite] 11:08:16 AM [vite+] (ssr) page reload resources/js/routes/admin/communication-templates/index.ts
+[vite] 11:08:16 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/settings/security.tsx
+[vite] 11:08:16 AM [vite+] (ssr) page reload resources/js/routes/security/index.ts
+[vite] 11:08:16 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/employees/show.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/edit.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessments/index.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/create.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessment-attempts/index.tsx and 65 more
+[vite] 11:08:16 AM [vite+] (ssr) page reload resources/js/routes/admin/onboarding-checklist-templates/index.ts
+[vite] 11:08:16 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/employees/show.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/edit.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessments/index.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/create.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessment-attempts/index.tsx and 65 more
+[vite] 11:08:16 AM [vite+] (ssr) page reload resources/js/routes/admin/onboarding-checklist-templates/items/index.ts
+[vite] 11:08:16 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/settings/appearance.tsx
+[vite] 11:08:16 AM [vite+] (ssr) page reload resources/js/routes/appearance/index.ts
+[vite] 11:08:16 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/employees/show.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/edit.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessments/index.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/create.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessment-attempts/index.tsx and 65 more
+[vite] 11:08:16 AM [vite+] (ssr) page reload resources/js/routes/admin/items/index.ts
+[vite] 11:08:16 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/employees/show.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/edit.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessments/index.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/create.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessment-attempts/index.tsx and 65 more
+[vite] 11:08:16 AM [vite+] (ssr) page reload resources/js/routes/admin/employees/index.ts
+[vite] 11:08:16 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/employees/show.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/edit.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessments/index.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/create.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessment-attempts/index.tsx and 65 more
+[vite] 11:08:16 AM [vite+] (ssr) page reload resources/js/routes/admin/index.ts
+[vite] 11:08:16 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/employees/show.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/edit.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessments/index.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/create.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessment-attempts/index.tsx and 65 more
+[vite] 11:08:16 AM [vite+] (ssr) page reload resources/js/routes/admin/compliance/index.ts
+[vite] 11:08:16 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/employees/show.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/edit.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessments/index.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/create.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessment-attempts/index.tsx and 65 more
+[vite] 11:08:16 AM [vite+] (ssr) page reload resources/js/routes/admin/site-settings/index.ts
+[vite] 11:08:16 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/employees/show.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/edit.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessments/index.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/create.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessment-attempts/index.tsx and 65 more
+[vite] 11:08:16 AM [vite+] (ssr) page reload resources/js/routes/admin/facilities/index.ts
+[vite] 11:08:16 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/employees/show.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/edit.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessments/index.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/create.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessment-attempts/index.tsx and 65 more
+[vite] 11:08:16 AM [vite+] (ssr) page reload resources/js/routes/admin/ai-settings/index.ts
+[vite] 11:08:16 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/employees/show.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/edit.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessments/index.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/create.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessment-attempts/index.tsx and 65 more
+[vite] 11:08:16 AM [vite+] (ssr) page reload resources/js/routes/admin/facilities/shifts/index.ts
+[vite] 11:08:16 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/employees/show.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/edit.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessments/index.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/create.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessment-attempts/index.tsx and 65 more
+[vite] 11:08:16 AM [vite+] (ssr) page reload resources/js/routes/admin/pages/index.ts
+[vite] 11:08:16 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/employees/show.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/edit.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessments/index.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/create.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessment-attempts/index.tsx and 65 more
+[vite] 11:08:16 AM [vite+] (ssr) page reload resources/js/routes/admin/shifts/index.ts
+[vite] 11:08:16 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/employees/show.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/edit.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessments/index.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/create.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessment-attempts/index.tsx and 65 more
+[vite] 11:08:16 AM [vite+] (ssr) page reload resources/js/routes/admin/shifts/assignments/index.ts
+[vite] 11:08:16 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/employees/show.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/edit.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessments/index.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/create.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessment-attempts/index.tsx and 65 more
+[vite] 11:08:16 AM [vite+] (ssr) page reload resources/js/routes/admin/shift-assignments/index.ts
+[vite] 11:08:16 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/employees/show.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/edit.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessments/index.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/create.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessment-attempts/index.tsx and 65 more
+[vite] 11:08:16 AM [vite+] (ssr) page reload resources/js/routes/admin/policy-documents/index.ts
+[vite] 11:08:16 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/employees/show.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/edit.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessments/index.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/create.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessment-attempts/index.tsx and 65 more
+[vite] 11:08:16 AM [vite+] (ssr) page reload resources/js/routes/admin/copilot/index.ts
+[vite] 11:08:16 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/employees/show.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/edit.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessments/index.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/create.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessment-attempts/index.tsx and 65 more
+[vite] 11:08:16 AM [vite+] (ssr) page reload resources/js/routes/admin/copilot/actions/index.ts
+[vite] 11:08:16 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/employees/show.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/edit.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessments/index.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/create.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessment-attempts/index.tsx and 65 more
+[vite] 11:08:16 AM [vite+] (ssr) page reload resources/js/routes/admin/blog-posts/index.ts
+[vite] 11:08:16 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/employees/show.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/edit.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessments/index.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/create.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessment-attempts/index.tsx and 65 more
+[vite] 11:08:16 AM [vite+] (ssr) page reload resources/js/routes/admin/testimonials/index.ts
+[vite] 11:08:16 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/employees/show.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/edit.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessments/index.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/create.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessment-attempts/index.tsx and 65 more
+[vite] 11:08:16 AM [vite+] (ssr) page reload resources/js/routes/admin/stats/index.ts
+[vite] 11:08:16 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/employees/show.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/edit.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessments/index.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/create.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessment-attempts/index.tsx and 65 more
+[vite] 11:08:16 AM [vite+] (ssr) page reload resources/js/routes/admin/staffing-requests/index.ts
+[vite] 11:08:16 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/employees/show.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/edit.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessments/index.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/create.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessment-attempts/index.tsx and 65 more
+[vite] 11:08:16 AM [vite+] (ssr) page reload resources/js/routes/admin/users/index.ts
+[vite] 11:08:16 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/employees/show.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/edit.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessments/index.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/create.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessment-attempts/index.tsx and 65 more
+[vite] 11:08:16 AM [vite+] (ssr) page reload resources/js/routes/admin/roles/index.ts
+[vite] 11:08:16 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/employees/show.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/edit.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessments/index.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/create.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessment-attempts/index.tsx and 65 more
+[vite] 11:08:16 AM [vite+] (ssr) page reload resources/js/routes/admin/services/index.ts
+[vite] 11:08:16 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/employees/show.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/edit.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessments/index.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/create.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessment-attempts/index.tsx and 65 more
+[vite] 11:08:16 AM [vite+] (ssr) page reload resources/js/routes/admin/job-listings/index.ts
+[vite] 11:08:16 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/employees/show.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/edit.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessments/index.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/create.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessment-attempts/index.tsx and 65 more
+[vite] 11:08:16 AM [vite+] (ssr) page reload resources/js/routes/admin/job-applications/index.ts
+[vite] 11:08:16 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/employees/show.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/edit.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessments/index.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/create.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessment-attempts/index.tsx and 65 more
+[vite] 11:08:16 AM [vite+] (ssr) page reload resources/js/routes/admin/application-requirements/index.ts
+[vite] 11:08:16 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/employees/show.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/edit.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessments/index.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/create.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessment-attempts/index.tsx and 65 more
+[vite] 11:08:16 AM [vite+] (ssr) page reload resources/js/routes/admin/background-checks/index.ts
+[vite] 11:08:16 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/employees/show.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/edit.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessments/index.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/create.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessment-attempts/index.tsx and 65 more
+[vite] 11:08:16 AM [vite+] (ssr) page reload resources/js/routes/admin/offers/index.ts
+[vite] 11:08:16 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/employees/show.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/edit.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessments/index.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/create.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessment-attempts/index.tsx and 65 more
+[vite] 11:08:16 AM [vite+] (ssr) page reload resources/js/routes/admin/employment-history/reference-checks/index.ts
+[vite] 11:08:16 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/employees/show.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/edit.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessments/index.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/create.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessment-attempts/index.tsx and 65 more
+[vite] 11:08:16 AM [vite+] (ssr) page reload resources/js/routes/admin/job-applications/background-checks/index.ts
+[vite] 11:08:16 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/employees/show.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/edit.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessments/index.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/create.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessment-attempts/index.tsx and 65 more
+[vite] 11:08:16 AM [vite+] (ssr) page reload resources/js/routes/admin/job-applications/offers/index.ts
+[vite] 11:08:16 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/employees/show.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/edit.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessments/index.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/create.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessment-attempts/index.tsx and 65 more
+[vite] 11:08:16 AM [vite+] (ssr) page reload resources/js/routes/admin/interviews/index.ts
+[vite] 11:08:16 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/employees/show.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/edit.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessments/index.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/create.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessment-attempts/index.tsx and 65 more
+[vite] 11:08:16 AM [vite+] (ssr) page reload resources/js/routes/admin/job-applications/interviews/index.ts
+[vite] 11:08:16 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/employees/show.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/edit.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessments/index.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/create.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessment-attempts/index.tsx and 65 more
+[vite] 11:08:16 AM [vite+] (ssr) page reload resources/js/routes/admin/interview-questions/index.ts
+[vite] 11:08:16 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/employees/show.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/edit.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessments/index.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/create.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessment-attempts/index.tsx and 65 more
+[vite] 11:08:16 AM [vite+] (ssr) page reload resources/js/routes/admin/assessments/index.ts
+[vite] 11:08:16 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/employees/show.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/edit.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessments/index.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/create.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessment-attempts/index.tsx and 65 more
+[vite] 11:08:16 AM [vite+] (ssr) page reload resources/js/routes/admin/assessments/questions/index.ts
+[vite] 11:08:16 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/employees/show.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/edit.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessments/index.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/create.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessment-attempts/index.tsx and 65 more
+[vite] 11:08:16 AM [vite+] (ssr) page reload resources/js/routes/admin/questions/index.ts
+[vite] 11:08:16 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/employees/show.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/edit.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessments/index.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/create.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessment-attempts/index.tsx and 65 more
+[vite] 11:08:16 AM [vite+] (ssr) page reload resources/js/routes/admin/assessment-attempts/index.ts
+[vite] 11:08:16 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/employees/show.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/edit.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessments/index.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/create.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessment-attempts/index.tsx and 65 more
+[vite] 11:08:16 AM [vite+] (ssr) page reload resources/js/routes/admin/job-applications/assessment-attempts/index.ts
+[vite] 11:08:16 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/employees/show.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/edit.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessments/index.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/create.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessment-attempts/index.tsx and 65 more
+[vite] 11:08:16 AM [vite+] (ssr) page reload resources/js/routes/admin/communication-templates/index.ts
+[vite] 11:08:16 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/employees/show.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/edit.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessments/index.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/create.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessment-attempts/index.tsx and 65 more
+[vite] 11:08:16 AM [vite+] (ssr) page reload resources/js/routes/admin/onboarding-checklist-templates/index.ts
+[vite] 11:08:16 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/employees/show.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/edit.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessments/index.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/create.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessment-attempts/index.tsx and 65 more
+[vite] 11:08:16 AM [vite+] (ssr) page reload resources/js/routes/admin/onboarding-checklist-templates/items/index.ts
+[vite] 11:08:16 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/employees/show.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/edit.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessments/index.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/create.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessment-attempts/index.tsx and 65 more
+[vite] 11:08:16 AM [vite+] (ssr) page reload resources/js/routes/admin/items/index.ts
+[vite] 11:08:16 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/employees/show.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/edit.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessments/index.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/create.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessment-attempts/index.tsx and 65 more
+[vite] 11:08:16 AM [vite+] (ssr) page reload resources/js/routes/admin/employees/index.ts
+[vite] 11:08:16 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/employees/show.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/edit.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessments/index.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/create.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessment-attempts/index.tsx and 65 more
+[vite] 11:08:16 AM [vite+] (ssr) page reload resources/js/routes/admin/compliance/index.ts
+[vite] 11:08:16 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/employees/show.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/edit.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessments/index.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/create.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessment-attempts/index.tsx and 65 more
+[vite] 11:08:16 AM [vite+] (ssr) page reload resources/js/routes/admin/facilities/index.ts
+[vite] 11:08:16 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/employees/show.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/edit.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessments/index.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/create.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessment-attempts/index.tsx and 65 more
+[vite] 11:08:16 AM [vite+] (ssr) page reload resources/js/routes/admin/facilities/shifts/index.ts
+[vite] 11:08:16 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/employees/show.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/edit.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessments/index.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/create.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessment-attempts/index.tsx and 65 more
+[vite] 11:08:16 AM [vite+] (ssr) page reload resources/js/routes/admin/shifts/index.ts
+[vite] 11:08:16 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/employees/show.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/edit.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessments/index.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/create.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessment-attempts/index.tsx and 65 more
+[vite] 11:08:16 AM [vite+] (ssr) page reload resources/js/routes/admin/shifts/assignments/index.ts
+[vite] 11:08:16 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/employees/show.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/edit.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessments/index.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/create.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessment-attempts/index.tsx and 65 more
+[vite] 11:08:16 AM [vite+] (ssr) page reload resources/js/routes/admin/shift-assignments/index.ts
+[vite] 11:08:16 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/employees/show.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/edit.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessments/index.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/create.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessment-attempts/index.tsx and 65 more
+[vite] 11:08:16 AM [vite+] (ssr) page reload resources/js/routes/admin/policy-documents/index.ts
+[vite] 11:08:16 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/employees/show.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/edit.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessments/index.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/create.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessment-attempts/index.tsx and 65 more
+[vite] 11:08:16 AM [vite+] (ssr) page reload resources/js/routes/admin/copilot/index.ts
+[vite] 11:08:16 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/employees/show.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/edit.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessments/index.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/create.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessment-attempts/index.tsx and 65 more
+[vite] 11:08:16 AM [vite+] (ssr) page reload resources/js/routes/admin/blog-posts/index.ts
+[vite] 11:08:16 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/employees/show.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/edit.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessments/index.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/create.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessment-attempts/index.tsx and 65 more
+[vite] 11:08:16 AM [vite+] (ssr) page reload resources/js/routes/admin/copilot/actions/index.ts
+[vite] 11:08:16 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/employees/show.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/edit.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessments/index.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/create.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessment-attempts/index.tsx and 65 more
+[vite] 11:08:16 AM [vite+] (ssr) page reload resources/js/routes/admin/testimonials/index.ts
+[vite] 11:08:16 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/employees/show.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/edit.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessments/index.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/create.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessment-attempts/index.tsx and 65 more
+[vite] 11:08:16 AM [vite+] (ssr) page reload resources/js/routes/admin/stats/index.ts
+[vite] 11:08:16 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/employees/show.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/edit.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessments/index.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/create.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessment-attempts/index.tsx and 65 more
+[vite] 11:08:16 AM [vite+] (ssr) page reload resources/js/routes/admin/staffing-requests/index.ts
+[vite] 11:08:16 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/employees/show.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/edit.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessments/index.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/create.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessment-attempts/index.tsx and 65 more
+[vite] 11:08:16 AM [vite+] (ssr) page reload resources/js/routes/admin/users/index.ts
+[vite] 11:08:16 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/employees/show.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/edit.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessments/index.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/create.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessment-attempts/index.tsx and 65 more
+[vite] 11:08:16 AM [vite+] (ssr) page reload resources/js/routes/admin/roles/index.ts
+[vite] 11:12:21 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/settings/profile.tsx, /resources/js/components/delete-user.tsx
+[vite] 11:12:21 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/settings/security.tsx
+[vite] 11:12:21 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/auth/confirm-password.tsx
+[vite] 11:12:21 AM [vite+] (client) hmr update /resources/js/components/manage-passkeys.tsx
+[vite] 11:12:21 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/employees/show.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/edit.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessments/index.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/create.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessment-attempts/index.tsx and 65 more
+[vite] 11:12:21 AM [vite+] (ssr) page reload resources/js/routes/admin/ai-settings/index.ts
+[vite] 11:12:21 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/employees/show.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/edit.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessments/index.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/create.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessment-attempts/index.tsx and 65 more
+[vite] 11:12:21 AM [vite+] (ssr) page reload resources/js/routes/admin/application-requirements/index.ts
+[vite] 11:12:21 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/employees/show.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/edit.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessments/index.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/create.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessment-attempts/index.tsx and 65 more
+[vite] 11:12:21 AM [vite+] (ssr) page reload resources/js/routes/admin/assessment-attempts/index.ts
+[vite] 11:12:21 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/employees/show.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/edit.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessments/index.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/create.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessment-attempts/index.tsx and 65 more
+[vite] 11:12:21 AM [vite+] (ssr) page reload resources/js/routes/admin/assessments/index.ts
+[vite] 11:12:21 AM [vite+] (client) page reload resources/js/routes/admin/assessments/questions/index.ts
+[vite] 11:12:21 AM [vite+] (ssr) page reload resources/js/routes/admin/assessments/questions/index.ts
+[vite] 11:12:21 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/employees/show.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/edit.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessments/index.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/create.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessment-attempts/index.tsx and 65 more
+[vite] 11:12:21 AM [vite+] (ssr) page reload resources/js/routes/admin/background-checks/index.ts
+[vite] 11:12:21 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/employees/show.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/edit.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessments/index.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/create.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessment-attempts/index.tsx and 65 more
+[vite] 11:12:21 AM [vite+] (ssr) page reload resources/js/routes/admin/blog-posts/index.ts
+[vite] 11:12:21 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/employees/show.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/edit.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessments/index.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/create.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessment-attempts/index.tsx and 65 more
+[vite] 11:12:21 AM [vite+] (ssr) page reload resources/js/routes/admin/candidates/index.ts
+[vite] 11:12:21 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/employees/show.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/edit.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessments/index.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/create.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessment-attempts/index.tsx and 65 more
+[vite] 11:12:21 AM [vite+] (ssr) page reload resources/js/routes/admin/communication-templates/index.ts
+[vite] 11:12:21 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/employees/show.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/edit.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessments/index.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/create.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessment-attempts/index.tsx and 65 more
+[vite] 11:12:21 AM [vite+] (ssr) page reload resources/js/routes/admin/index.ts
+[vite] 11:12:21 AM [vite+] (client) page reload resources/js/routes/admin/copilot/index.ts
+[vite] 11:12:21 AM [vite+] (ssr) page reload resources/js/routes/admin/copilot/index.ts
+[vite] 11:12:21 AM [vite+] (client) page reload resources/js/routes/admin/copilot/actions/index.ts
+[vite] 11:12:21 AM [vite+] (ssr) page reload resources/js/routes/admin/copilot/actions/index.ts
+[vite] 11:12:21 AM [vite+] (client) page reload resources/js/routes/admin/credentials/index.ts
+[vite] 11:12:21 AM [vite+] (ssr) page reload resources/js/routes/admin/credentials/index.ts
+[vite] 11:12:21 AM [vite+] (client) page reload resources/js/routes/admin/compliance/index.ts
+[vite] 11:12:21 AM [vite+] (ssr) page reload resources/js/routes/admin/compliance/index.ts
+[vite] 11:12:21 AM [vite+] (client) page reload resources/js/routes/admin/employees/index.ts
+[vite] 11:12:21 AM [vite+] (ssr) page reload resources/js/routes/admin/employees/index.ts
+[vite] 11:12:21 AM [vite+] (client) page reload resources/js/routes/admin/employment-history/index.ts
+[vite] 11:12:21 AM [vite+] (ssr) page reload resources/js/routes/admin/employment-history/index.ts
+[vite] 11:12:21 AM [vite+] (client) page reload resources/js/routes/admin/employment-history/reference-checks/index.ts
+[vite] 11:12:21 AM [vite+] (ssr) page reload resources/js/routes/admin/employment-history/reference-checks/index.ts
+[vite] 11:12:21 AM [vite+] (client) page reload resources/js/routes/admin/interview-questions/index.ts
+[vite] 11:12:21 AM [vite+] (ssr) page reload resources/js/routes/admin/interview-questions/index.ts
+[vite] 11:12:21 AM [vite+] (client) page reload resources/js/routes/admin/facilities/index.ts
+[vite] 11:12:21 AM [vite+] (ssr) page reload resources/js/routes/admin/facilities/index.ts
+[vite] 11:12:21 AM [vite+] (client) page reload resources/js/routes/admin/facilities/shifts/index.ts
+[vite] 11:12:21 AM [vite+] (ssr) page reload resources/js/routes/admin/facilities/shifts/index.ts
+[vite] 11:12:21 AM [vite+] (client) page reload resources/js/routes/admin/interviews/index.ts
+[vite] 11:12:21 AM [vite+] (ssr) page reload resources/js/routes/admin/interviews/index.ts
+[vite] 11:12:21 AM [vite+] (client) page reload resources/js/routes/admin/items/index.ts
+[vite] 11:12:21 AM [vite+] (ssr) page reload resources/js/routes/admin/items/index.ts
+[vite] 11:12:21 AM [vite+] (client) page reload resources/js/routes/admin/job-applications/index.ts
+[vite] 11:12:21 AM [vite+] (ssr) page reload resources/js/routes/admin/job-applications/index.ts
+[vite] 11:12:21 AM [vite+] (client) page reload resources/js/routes/admin/job-applications/assessment-attempts/index.ts
+[vite] 11:12:21 AM [vite+] (ssr) page reload resources/js/routes/admin/job-applications/assessment-attempts/index.ts
+[vite] 11:12:21 AM [vite+] (client) page reload resources/js/routes/admin/job-applications/offers/index.ts
+[vite] 11:12:21 AM [vite+] (ssr) page reload resources/js/routes/admin/job-applications/offers/index.ts
+[vite] 11:12:21 AM [vite+] (client) page reload resources/js/routes/admin/job-applications/interviews/index.ts
+[vite] 11:12:21 AM [vite+] (ssr) page reload resources/js/routes/admin/job-applications/interviews/index.ts
+[vite] 11:12:21 AM [vite+] (client) page reload resources/js/routes/admin/job-applications/background-checks/index.ts
+[vite] 11:12:21 AM [vite+] (ssr) page reload resources/js/routes/admin/job-applications/background-checks/index.ts
+[vite] 11:12:21 AM [vite+] (client) page reload resources/js/routes/admin/offers/index.ts
+[vite] 11:12:21 AM [vite+] (ssr) page reload resources/js/routes/admin/offers/index.ts
+[vite] 11:12:21 AM [vite+] (client) page reload resources/js/routes/admin/job-listings/index.ts
+[vite] 11:12:21 AM [vite+] (ssr) page reload resources/js/routes/admin/job-listings/index.ts
+[vite] 11:12:21 AM [vite+] (client) page reload resources/js/routes/admin/onboarding-checklist-templates/index.ts
+[vite] 11:12:21 AM [vite+] (ssr) page reload resources/js/routes/admin/onboarding-checklist-templates/index.ts
+[vite] 11:12:21 AM [vite+] (client) page reload resources/js/routes/admin/onboarding-checklist-templates/items/index.ts
+[vite] 11:12:21 AM [vite+] (ssr) page reload resources/js/routes/admin/onboarding-checklist-templates/items/index.ts
+[vite] 11:12:21 AM [vite+] (client) page reload resources/js/routes/admin/policy-documents/index.ts
+[vite] 11:12:21 AM [vite+] (ssr) page reload resources/js/routes/admin/policy-documents/index.ts
+[vite] 11:12:21 AM [vite+] (client) page reload resources/js/routes/admin/roles/index.ts
+[vite] 11:12:21 AM [vite+] (ssr) page reload resources/js/routes/admin/roles/index.ts
+[vite] 11:12:21 AM [vite+] (client) page reload resources/js/routes/admin/pages/index.ts
+[vite] 11:12:21 AM [vite+] (ssr) page reload resources/js/routes/admin/pages/index.ts
+[vite] 11:12:21 AM [vite+] (client) page reload resources/js/routes/admin/shifts/index.ts
+[vite] 11:12:21 AM [vite+] (ssr) page reload resources/js/routes/admin/shifts/index.ts
+[vite] 11:12:21 AM [vite+] (client) page reload resources/js/routes/admin/shifts/assignments/index.ts
+[vite] 11:12:21 AM [vite+] (ssr) page reload resources/js/routes/admin/shifts/assignments/index.ts
+[vite] 11:12:21 AM [vite+] (client) page reload resources/js/routes/admin/questions/index.ts
+[vite] 11:12:21 AM [vite+] (ssr) page reload resources/js/routes/admin/questions/index.ts
+[vite] 11:12:21 AM [vite+] (client) page reload resources/js/routes/admin/services/index.ts
+[vite] 11:12:21 AM [vite+] (ssr) page reload resources/js/routes/admin/services/index.ts
+[vite] 11:12:21 AM [vite+] (client) page reload resources/js/routes/admin/shift-assignments/index.ts
+[vite] 11:12:21 AM [vite+] (ssr) page reload resources/js/routes/admin/shift-assignments/index.ts
+[vite] 11:12:21 AM [vite+] (client) page reload resources/js/routes/admin/site-settings/index.ts
+[vite] 11:12:21 AM [vite+] (ssr) page reload resources/js/routes/admin/site-settings/index.ts
+[vite] 11:12:21 AM [vite+] (client) page reload resources/js/routes/admin/testimonials/index.ts
+[vite] 11:12:21 AM [vite+] (ssr) page reload resources/js/routes/admin/testimonials/index.ts
+[vite] 11:12:21 AM [vite+] (client) page reload resources/js/routes/admin/staffing-requests/index.ts
+[vite] 11:12:21 AM [vite+] (ssr) page reload resources/js/routes/admin/staffing-requests/index.ts
+[vite] 11:12:21 AM [vite+] (client) page reload resources/js/routes/admin/stats/index.ts
+[vite] 11:12:21 AM [vite+] (ssr) page reload resources/js/routes/admin/stats/index.ts
+[vite] 11:12:21 AM [vite+] (client) page reload resources/js/routes/admin/users/index.ts
+[vite] 11:12:21 AM [vite+] (ssr) page reload resources/js/routes/admin/users/index.ts
+[vite] 11:12:21 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/settings/appearance.tsx
+[vite] 11:12:21 AM [vite+] (ssr) page reload resources/js/routes/appearance/index.ts
+[vite] 11:12:21 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/apply/documents.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/apply/contact.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/apply/education.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/apply/consent.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/apply/employment-history.tsx and 7 more
+[vite] 11:12:21 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/apply/documents.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/apply/contact.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/apply/education.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/apply/consent.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/apply/employment-history.tsx and 7 more
+[vite] 11:12:21 AM [vite+] (client) page reload resources/js/routes/apply/employment-history/index.ts
+[vite] 11:12:21 AM [vite+] (client) page reload resources/js/routes/apply/education/index.ts
+[vite] 11:12:21 AM [vite+] (client) page reload resources/js/routes/apply/documents/index.ts
+[vite] 11:12:21 AM [vite+] (client) page reload resources/js/routes/apply/location/index.ts
+[vite] 11:12:21 AM [vite+] (client) page reload resources/js/routes/apply/preferences/index.ts
+[vite] 11:12:21 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/assessments/show.tsx
+[vite] 11:12:21 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/blog-posts/index.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/blog/index.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/blog/show.tsx
+[vite] 11:12:21 AM [vite+] (ssr) page reload resources/js/routes/blog/index.ts
+[vite] 11:12:21 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/services/show.tsx
+[vite] 11:12:21 AM [vite+] (ssr) page reload resources/js/routes/contact/index.ts
+[vite] 11:12:21 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/jobs/index.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/jobs/show.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/blog/show.tsx
+[vite] 11:12:21 AM [vite+] (ssr) page reload resources/js/routes/jobs/index.ts
+[vite] 11:12:21 AM [vite+] (ssr) page reload resources/js/routes/legal/index.ts
+[vite] 11:12:21 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/auth/login.tsx
+[vite] 11:12:21 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/auth/verify-email.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/auth/forgot-password.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/apply/not-available.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/apply/status.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/apply/thank-you.tsx and 2 more
+[vite] 11:12:21 AM [vite+] (ssr) page reload resources/js/routes/index.ts
+[vite] 11:12:21 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/offers/show.tsx
+[vite] 11:12:21 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/auth/forgot-password.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/auth/reset-password.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/auth/login.tsx
+[vite] 11:12:21 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/auth/confirm-password.tsx
+[vite] 11:12:21 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/settings/profile.tsx
+[vite] 11:12:21 AM [vite+] (ssr) page reload resources/js/routes/profile/index.ts
+[vite] 11:12:21 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/settings/security.tsx
+[vite] 11:12:21 AM [vite+] (ssr) page reload resources/js/routes/security/index.ts
+[vite] 11:12:21 AM [vite+] (ssr) page reload resources/js/routes/pages/index.ts
+[vite] 11:12:21 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/services/index.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/services/show.tsx, /resources/js/components/public/service-card.tsx
+[vite] 11:12:21 AM [vite+] (ssr) page reload resources/js/routes/services/index.ts
+[vite] 11:12:21 AM [vite+] (client) hmr update /resources/js/components/public/staffing-request-form.tsx
+[vite] 11:12:21 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/auth/two-factor-challenge.tsx, /resources/js/components/manage-two-factor.tsx, /resources/js/components/two-factor-setup-modal.tsx, /resources/js/components/two-factor-recovery-codes.tsx
+[vite] 11:12:21 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/auth/two-factor-challenge.tsx
+[vite] 11:12:21 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/auth/verify-email.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/settings/profile.tsx
+[vite] 11:12:21 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/settings/profile.tsx, /resources/js/components/delete-user.tsx
+[vite] 11:12:21 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/settings/security.tsx
+[vite] 11:12:21 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/auth/confirm-password.tsx
+[vite] 11:12:21 AM [vite+] (client) hmr update /resources/js/components/manage-passkeys.tsx
+[vite] 11:12:21 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/auth/verify-email.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/auth/forgot-password.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/apply/not-available.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/apply/status.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/apply/thank-you.tsx and 2 more
+[vite] 11:12:21 AM [vite+] (ssr) page reload resources/js/routes/index.ts
+[vite] 11:12:22 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/apply/documents.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/apply/contact.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/apply/education.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/apply/consent.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/apply/employment-history.tsx and 7 more
+[vite] 11:12:22 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/auth/login.tsx
+[vite] 11:12:22 AM [vite+] (ssr) page reload resources/js/routes/pages/index.ts
+[vite] 11:12:22 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/jobs/index.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/jobs/show.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/blog/show.tsx
+[vite] 11:12:22 AM [vite+] (ssr) page reload resources/js/routes/jobs/index.ts
+[vite] 11:12:22 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/auth/two-factor-challenge.tsx, /resources/js/components/manage-two-factor.tsx, /resources/js/components/two-factor-setup-modal.tsx, /resources/js/components/two-factor-recovery-codes.tsx
+[vite] 11:12:22 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/services/index.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/services/show.tsx, /resources/js/components/public/service-card.tsx
+[vite] 11:12:22 AM [vite+] (ssr) page reload resources/js/routes/services/index.ts
+[vite] 11:12:22 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/auth/forgot-password.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/auth/reset-password.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/auth/login.tsx
+[vite] 11:12:22 AM [vite+] (client) hmr update /resources/js/components/public/staffing-request-form.tsx
+[vite] 11:12:22 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/auth/verify-email.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/settings/profile.tsx
+[vite] 11:12:22 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/services/show.tsx
+[vite] 11:12:22 AM [vite+] (ssr) page reload resources/js/routes/contact/index.ts
+[vite] 11:12:22 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/assessments/show.tsx
+[vite] 11:12:22 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/offers/show.tsx
+[vite] 11:12:22 AM [vite+] (client) page reload resources/js/routes/apply/consent/index.ts
+[vite] 11:12:22 AM [vite+] (client) page reload resources/js/routes/apply/documents/index.ts
+[vite] 11:12:22 AM [vite+] (client) page reload resources/js/routes/apply/location/index.ts
+[vite] 11:12:22 AM [vite+] (client) page reload resources/js/routes/apply/education/index.ts
+[vite] 11:12:22 AM [vite+] (client) page reload resources/js/routes/apply/preferences/index.ts
+[vite] 11:12:22 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/auth/two-factor-challenge.tsx
+[vite] 11:12:22 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/auth/confirm-password.tsx
+[vite] 11:12:22 AM [vite+] (client) page reload resources/js/routes/apply/employment-history/index.ts
+[vite] 11:12:22 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/settings/appearance.tsx
+[vite] 11:12:22 AM [vite+] (ssr) page reload resources/js/routes/appearance/index.ts
+[vite] 11:12:22 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/employees/show.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/edit.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessments/index.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/create.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessment-attempts/index.tsx and 65 more
+[vite] 11:12:22 AM [vite+] (ssr) page reload resources/js/routes/admin/index.ts
+[vite] 11:12:22 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/blog-posts/index.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/blog/index.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/blog/show.tsx
+[vite] 11:12:22 AM [vite+] (ssr) page reload resources/js/routes/blog/index.ts
+[vite] 11:12:22 AM [vite+] (ssr) page reload resources/js/routes/legal/index.ts
+[vite] 11:12:22 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/settings/security.tsx
+[vite] 11:12:22 AM [vite+] (ssr) page reload resources/js/routes/security/index.ts
+[vite] 11:12:22 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/settings/profile.tsx
+[vite] 11:12:22 AM [vite+] (ssr) page reload resources/js/routes/profile/index.ts
+[vite] 11:12:22 AM [vite+] (client) page reload resources/js/routes/admin/assessment-attempts/index.ts
+[vite] 11:12:22 AM [vite+] (ssr) page reload resources/js/routes/admin/assessment-attempts/index.ts
+[vite] 11:12:22 AM [vite+] (client) page reload resources/js/routes/admin/ai-settings/index.ts
+[vite] 11:12:22 AM [vite+] (ssr) page reload resources/js/routes/admin/ai-settings/index.ts
+[vite] 11:12:22 AM [vite+] (client) page reload resources/js/routes/admin/application-requirements/index.ts
+[vite] 11:12:22 AM [vite+] (ssr) page reload resources/js/routes/admin/application-requirements/index.ts
+[vite] 11:12:22 AM [vite+] (client) page reload resources/js/routes/admin/assessments/index.ts
+[vite] 11:12:22 AM [vite+] (ssr) page reload resources/js/routes/admin/assessments/index.ts
+[vite] 11:12:22 AM [vite+] (client) page reload resources/js/routes/admin/background-checks/index.ts
+[vite] 11:12:22 AM [vite+] (ssr) page reload resources/js/routes/admin/background-checks/index.ts
+[vite] 11:12:22 AM [vite+] (client) page reload resources/js/routes/admin/blog-posts/index.ts
+[vite] 11:12:22 AM [vite+] (ssr) page reload resources/js/routes/admin/blog-posts/index.ts
+[vite] 11:12:22 AM [vite+] (client) page reload resources/js/routes/admin/candidates/index.ts
+[vite] 11:12:22 AM [vite+] (ssr) page reload resources/js/routes/admin/candidates/index.ts
+[vite] 11:12:22 AM [vite+] (client) page reload resources/js/routes/admin/communication-templates/index.ts
+[vite] 11:12:22 AM [vite+] (ssr) page reload resources/js/routes/admin/communication-templates/index.ts
+[vite] 11:12:22 AM [vite+] (client) page reload resources/js/routes/admin/copilot/index.ts
+[vite] 11:12:22 AM [vite+] (ssr) page reload resources/js/routes/admin/copilot/index.ts
+[vite] 11:12:22 AM [vite+] (client) page reload resources/js/routes/admin/facilities/index.ts
+[vite] 11:12:22 AM [vite+] (ssr) page reload resources/js/routes/admin/facilities/index.ts
+[vite] 11:12:22 AM [vite+] (client) page reload resources/js/routes/admin/compliance/index.ts
+[vite] 11:12:22 AM [vite+] (ssr) page reload resources/js/routes/admin/compliance/index.ts
+[vite] 11:12:22 AM [vite+] (client) page reload resources/js/routes/admin/credentials/index.ts
+[vite] 11:12:22 AM [vite+] (ssr) page reload resources/js/routes/admin/credentials/index.ts
+[vite] 11:12:22 AM [vite+] (client) page reload resources/js/routes/admin/employment-history/index.ts
+[vite] 11:12:22 AM [vite+] (ssr) page reload resources/js/routes/admin/employment-history/index.ts
+[vite] 11:12:22 AM [vite+] (client) page reload resources/js/routes/admin/questions/index.ts
+[vite] 11:12:22 AM [vite+] (ssr) page reload resources/js/routes/admin/questions/index.ts
+[vite] 11:12:22 AM [vite+] (client) page reload resources/js/routes/admin/job-listings/index.ts
+[vite] 11:12:22 AM [vite+] (ssr) page reload resources/js/routes/admin/job-listings/index.ts
+[vite] 11:12:22 AM [vite+] (client) page reload resources/js/routes/admin/employees/index.ts
+[vite] 11:12:22 AM [vite+] (ssr) page reload resources/js/routes/admin/employees/index.ts
+[vite] 11:12:22 AM [vite+] (client) page reload resources/js/routes/admin/policy-documents/index.ts
+[vite] 11:12:22 AM [vite+] (ssr) page reload resources/js/routes/admin/policy-documents/index.ts
+[vite] 11:12:22 AM [vite+] (client) page reload resources/js/routes/admin/offers/index.ts
+[vite] 11:12:22 AM [vite+] (ssr) page reload resources/js/routes/admin/offers/index.ts
+[vite] 11:12:22 AM [vite+] (client) page reload resources/js/routes/admin/roles/index.ts
+[vite] 11:12:22 AM [vite+] (ssr) page reload resources/js/routes/admin/roles/index.ts
+[vite] 11:12:22 AM [vite+] (client) page reload resources/js/routes/admin/services/index.ts
+[vite] 11:12:22 AM [vite+] (ssr) page reload resources/js/routes/admin/services/index.ts
+[vite] 11:12:22 AM [vite+] (client) page reload resources/js/routes/admin/pages/index.ts
+[vite] 11:12:22 AM [vite+] (ssr) page reload resources/js/routes/admin/pages/index.ts
+[vite] 11:12:22 AM [vite+] (client) page reload resources/js/routes/admin/staffing-requests/index.ts
+[vite] 11:12:22 AM [vite+] (ssr) page reload resources/js/routes/admin/staffing-requests/index.ts
+[vite] 11:12:22 AM [vite+] (client) page reload resources/js/routes/admin/job-applications/index.ts
+[vite] 11:12:22 AM [vite+] (ssr) page reload resources/js/routes/admin/job-applications/index.ts
+[vite] 11:12:22 AM [vite+] (client) page reload resources/js/routes/admin/shifts/index.ts
+[vite] 11:12:22 AM [vite+] (ssr) page reload resources/js/routes/admin/shifts/index.ts
+[vite] 11:12:22 AM [vite+] (client) page reload resources/js/routes/admin/interview-questions/index.ts
+[vite] 11:12:22 AM [vite+] (ssr) page reload resources/js/routes/admin/interview-questions/index.ts
+[vite] 11:12:22 AM [vite+] (client) page reload resources/js/routes/admin/interviews/index.ts
+[vite] 11:12:22 AM [vite+] (ssr) page reload resources/js/routes/admin/interviews/index.ts
+[vite] 11:12:22 AM [vite+] (client) page reload resources/js/routes/admin/onboarding-checklist-templates/index.ts
+[vite] 11:12:22 AM [vite+] (ssr) page reload resources/js/routes/admin/onboarding-checklist-templates/index.ts
+[vite] 11:12:22 AM [vite+] (client) page reload resources/js/routes/admin/stats/index.ts
+[vite] 11:12:22 AM [vite+] (ssr) page reload resources/js/routes/admin/stats/index.ts
+[vite] 11:12:22 AM [vite+] (client) page reload resources/js/routes/admin/shift-assignments/index.ts
+[vite] 11:12:22 AM [vite+] (ssr) page reload resources/js/routes/admin/shift-assignments/index.ts
+[vite] 11:12:22 AM [vite+] (client) page reload resources/js/routes/admin/site-settings/index.ts
+[vite] 11:12:22 AM [vite+] (ssr) page reload resources/js/routes/admin/site-settings/index.ts
+[vite] 11:12:22 AM [vite+] (client) page reload resources/js/routes/admin/items/index.ts
+[vite] 11:12:22 AM [vite+] (ssr) page reload resources/js/routes/admin/items/index.ts
+[vite] 11:12:22 AM [vite+] (client) page reload resources/js/routes/admin/testimonials/index.ts
+[vite] 11:12:22 AM [vite+] (ssr) page reload resources/js/routes/admin/testimonials/index.ts
+[vite] 11:12:22 AM [vite+] (client) page reload resources/js/routes/admin/users/index.ts
+[vite] 11:12:22 AM [vite+] (ssr) page reload resources/js/routes/admin/users/index.ts
+[vite] 11:12:22 AM [vite+] (client) page reload resources/js/routes/admin/assessments/questions/index.ts
+[vite] 11:12:22 AM [vite+] (ssr) page reload resources/js/routes/admin/assessments/questions/index.ts
+[vite] 11:12:22 AM [vite+] (client) page reload resources/js/routes/admin/employment-history/reference-checks/index.ts
+[vite] 11:12:22 AM [vite+] (ssr) page reload resources/js/routes/admin/employment-history/reference-checks/index.ts
+[vite] 11:12:22 AM [vite+] (client) page reload resources/js/routes/admin/copilot/actions/index.ts
+[vite] 11:12:22 AM [vite+] (ssr) page reload resources/js/routes/admin/copilot/actions/index.ts
+[vite] 11:12:22 AM [vite+] (client) page reload resources/js/routes/admin/job-applications/assessment-attempts/index.ts
+[vite] 11:12:22 AM [vite+] (ssr) page reload resources/js/routes/admin/job-applications/assessment-attempts/index.ts
+[vite] 11:12:22 AM [vite+] (client) page reload resources/js/routes/admin/job-applications/background-checks/index.ts
+[vite] 11:12:22 AM [vite+] (ssr) page reload resources/js/routes/admin/job-applications/background-checks/index.ts
+[vite] 11:12:22 AM [vite+] (client) page reload resources/js/routes/admin/facilities/shifts/index.ts
+[vite] 11:12:22 AM [vite+] (ssr) page reload resources/js/routes/admin/facilities/shifts/index.ts
+[vite] 11:12:22 AM [vite+] (client) page reload resources/js/routes/admin/job-applications/interviews/index.ts
+[vite] 11:12:22 AM [vite+] (ssr) page reload resources/js/routes/admin/job-applications/interviews/index.ts
+[vite] 11:12:22 AM [vite+] (client) page reload resources/js/routes/admin/job-applications/offers/index.ts
+[vite] 11:12:22 AM [vite+] (ssr) page reload resources/js/routes/admin/job-applications/offers/index.ts
+[vite] 11:12:22 AM [vite+] (client) page reload resources/js/routes/admin/onboarding-checklist-templates/items/index.ts
+[vite] 11:12:22 AM [vite+] (ssr) page reload resources/js/routes/admin/onboarding-checklist-templates/items/index.ts
+[vite] 11:12:22 AM [vite+] (client) page reload resources/js/routes/admin/shifts/assignments/index.ts
+[vite] 11:12:22 AM [vite+] (ssr) page reload resources/js/routes/admin/shifts/assignments/index.ts
+[server] 2026-10-05 11:05:34 .. ~ 7m 9s
+[server] 2026-10-05 11:05:34 .. ~ 7m 9s
+[vite] 11:13:00 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/settings/profile.tsx, /resources/js/components/delete-user.tsx
+[vite] 11:13:00 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/auth/confirm-password.tsx
+[vite] 11:13:00 AM [vite+] (client) hmr update /resources/js/components/manage-passkeys.tsx
+[vite] 11:13:00 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/settings/profile.tsx, /resources/js/components/delete-user.tsx
+[vite] 11:13:00 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/settings/security.tsx
+[vite] 11:13:00 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/auth/verify-email.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/auth/forgot-password.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/apply/not-available.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/apply/status.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/apply/thank-you.tsx and 2 more
+[vite] 11:13:00 AM [vite+] (ssr) page reload resources/js/routes/index.ts
+[vite] 11:13:00 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/auth/login.tsx
+[vite] 11:13:00 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/auth/forgot-password.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/auth/reset-password.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/auth/login.tsx
+[vite] 11:13:00 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/auth/verify-email.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/settings/profile.tsx
+[vite] 11:13:00 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/auth/confirm-password.tsx
+[vite] 11:13:00 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/auth/two-factor-challenge.tsx, /resources/js/components/manage-two-factor.tsx, /resources/js/components/two-factor-setup-modal.tsx, /resources/js/components/two-factor-recovery-codes.tsx
+[vite] 11:13:00 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/auth/two-factor-challenge.tsx
+[vite] 11:13:00 AM [vite+] (ssr) page reload resources/js/routes/pages/index.ts
+[vite] 11:13:00 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/services/index.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/services/show.tsx, /resources/js/components/public/service-card.tsx
+[vite] 11:13:00 AM [vite+] (ssr) page reload resources/js/routes/services/index.ts
+[vite] 11:13:00 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/services/show.tsx
+[vite] 11:13:00 AM [vite+] (ssr) page reload resources/js/routes/contact/index.ts
+[vite] 11:13:00 AM [vite+] (client) hmr update /resources/js/components/public/staffing-request-form.tsx
+[vite] 11:13:00 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/jobs/index.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/jobs/show.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/blog/show.tsx
+[vite] 11:13:00 AM [vite+] (ssr) page reload resources/js/routes/jobs/index.ts
+[vite] 11:13:00 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/apply/documents.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/apply/contact.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/apply/education.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/apply/consent.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/apply/employment-history.tsx and 7 more
+[vite] 11:13:00 AM [vite+] (client) page reload resources/js/routes/apply/location/index.ts
+[vite] 11:13:00 AM [vite+] (client) page reload resources/js/routes/apply/preferences/index.ts
+[vite] 11:13:00 AM [vite+] (client) page reload resources/js/routes/apply/employment-history/index.ts
+[vite] 11:13:00 AM [vite+] (client) page reload resources/js/routes/apply/education/index.ts
+[vite] 11:13:00 AM [vite+] (client) page reload resources/js/routes/apply/documents/index.ts
+[vite] 11:13:00 AM [vite+] (client) page reload resources/js/routes/apply/consent/index.ts
+[vite] 11:13:00 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/assessments/show.tsx
+[vite] 11:13:00 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/offers/show.tsx
+[vite] 11:13:00 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/blog-posts/index.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/blog/index.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/public/blog/show.tsx
+[vite] 11:13:00 AM [vite+] (ssr) page reload resources/js/routes/blog/index.ts
+[vite] 11:13:00 AM [vite+] (ssr) page reload resources/js/routes/legal/index.ts
+[vite] 11:13:00 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/settings/profile.tsx
+[vite] 11:13:00 AM [vite+] (ssr) page reload resources/js/routes/profile/index.ts
+[vite] 11:13:00 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/settings/security.tsx
+[vite] 11:13:00 AM [vite+] (ssr) page reload resources/js/routes/security/index.ts
+[vite] 11:13:00 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/settings/appearance.tsx
+[vite] 11:13:00 AM [vite+] (ssr) page reload resources/js/routes/appearance/index.ts
+[vite] 11:13:00 AM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/employees/show.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/edit.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessments/index.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/communication-templates/create.tsx, /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/assessment-attempts/index.tsx and 65 more
+[vite] 11:13:00 AM [vite+] (ssr) page reload resources/js/routes/admin/index.ts
+[vite] 11:13:00 AM [vite+] (client) page reload resources/js/routes/admin/site-settings/index.ts
+[vite] 11:13:00 AM [vite+] (ssr) page reload resources/js/routes/admin/site-settings/index.ts
+[vite] 11:13:00 AM [vite+] (client) page reload resources/js/routes/admin/ai-settings/index.ts
+[vite] 11:13:00 AM [vite+] (ssr) page reload resources/js/routes/admin/ai-settings/index.ts
+[vite] 11:13:00 AM [vite+] (client) page reload resources/js/routes/admin/pages/index.ts
+[vite] 11:13:00 AM [vite+] (ssr) page reload resources/js/routes/admin/pages/index.ts
+[vite] 11:13:00 AM [vite+] (client) page reload resources/js/routes/admin/services/index.ts
+[vite] 11:13:00 AM [vite+] (ssr) page reload resources/js/routes/admin/services/index.ts
+[vite] 11:13:00 AM [vite+] (client) page reload resources/js/routes/admin/job-listings/index.ts
+[vite] 11:13:00 AM [vite+] (ssr) page reload resources/js/routes/admin/job-listings/index.ts
+[vite] 11:13:00 AM [vite+] (client) page reload resources/js/routes/admin/job-applications/index.ts
+[vite] 11:13:00 AM [vite+] (ssr) page reload resources/js/routes/admin/job-applications/index.ts
+[vite] 11:13:00 AM [vite+] (client) page reload resources/js/routes/admin/candidates/index.ts
+[vite] 11:13:00 AM [vite+] (ssr) page reload resources/js/routes/admin/candidates/index.ts
+[vite] 11:13:00 AM [vite+] (client) page reload resources/js/routes/admin/credentials/index.ts
+[vite] 11:13:00 AM [vite+] (ssr) page reload resources/js/routes/admin/credentials/index.ts
+[vite] 11:13:00 AM [vite+] (client) page reload resources/js/routes/admin/application-requirements/index.ts
+[vite] 11:13:00 AM [vite+] (ssr) page reload resources/js/routes/admin/application-requirements/index.ts
+[vite] 11:13:00 AM [vite+] (client) page reload resources/js/routes/admin/background-checks/index.ts
+[vite] 11:13:00 AM [vite+] (ssr) page reload resources/js/routes/admin/background-checks/index.ts
+[vite] 11:13:00 AM [vite+] (client) page reload resources/js/routes/admin/offers/index.ts
+[vite] 11:13:00 AM [vite+] (ssr) page reload resources/js/routes/admin/offers/index.ts
+[vite] 11:13:00 AM [vite+] (client) page reload resources/js/routes/admin/employment-history/reference-checks/index.ts
+[vite] 11:13:00 AM [vite+] (ssr) page reload resources/js/routes/admin/employment-history/reference-checks/index.ts
+[vite] 11:13:00 AM [vite+] (client) page reload resources/js/routes/admin/job-applications/background-checks/index.ts
+[vite] 11:13:00 AM [vite+] (ssr) page reload resources/js/routes/admin/job-applications/background-checks/index.ts
+[vite] 11:13:00 AM [vite+] (client) page reload resources/js/routes/admin/interviews/index.ts
+[vite] 11:13:00 AM [vite+] (ssr) page reload resources/js/routes/admin/interviews/index.ts
+[vite] 11:13:00 AM [vite+] (client) page reload resources/js/routes/admin/job-applications/offers/index.ts
+[vite] 11:13:00 AM [vite+] (ssr) page reload resources/js/routes/admin/job-applications/offers/index.ts
+[vite] 11:13:00 AM [vite+] (client) page reload resources/js/routes/admin/interview-questions/index.ts
+[vite] 11:13:00 AM [vite+] (ssr) page reload resources/js/routes/admin/interview-questions/index.ts
+[vite] 11:13:00 AM [vite+] (client) page reload resources/js/routes/admin/job-applications/interviews/index.ts
+[vite] 11:13:00 AM [vite+] (ssr) page reload resources/js/routes/admin/job-applications/interviews/index.ts
+[vite] 11:13:00 AM [vite+] (client) page reload resources/js/routes/admin/assessments/index.ts
+[vite] 11:13:00 AM [vite+] (ssr) page reload resources/js/routes/admin/assessments/index.ts
+[vite] 11:13:00 AM [vite+] (client) page reload resources/js/routes/admin/assessments/questions/index.ts
+[vite] 11:13:00 AM [vite+] (ssr) page reload resources/js/routes/admin/assessments/questions/index.ts
+[vite] 11:13:00 AM [vite+] (client) page reload resources/js/routes/admin/questions/index.ts
+[vite] 11:13:00 AM [vite+] (ssr) page reload resources/js/routes/admin/questions/index.ts
+[vite] 11:13:00 AM [vite+] (client) page reload resources/js/routes/admin/assessment-attempts/index.ts
+[vite] 11:13:00 AM [vite+] (ssr) page reload resources/js/routes/admin/assessment-attempts/index.ts
+[vite] 11:13:00 AM [vite+] (client) page reload resources/js/routes/admin/job-applications/assessment-attempts/index.ts
+[vite] 11:13:00 AM [vite+] (ssr) page reload resources/js/routes/admin/job-applications/assessment-attempts/index.ts
+[vite] 11:13:00 AM [vite+] (client) page reload resources/js/routes/admin/communication-templates/index.ts
+[vite] 11:13:00 AM [vite+] (ssr) page reload resources/js/routes/admin/communication-templates/index.ts
+[vite] 11:13:00 AM [vite+] (client) page reload resources/js/routes/admin/onboarding-checklist-templates/index.ts
+[vite] 11:13:00 AM [vite+] (ssr) page reload resources/js/routes/admin/onboarding-checklist-templates/index.ts
+[vite] 11:13:00 AM [vite+] (client) page reload resources/js/routes/admin/onboarding-checklist-templates/items/index.ts
+[vite] 11:13:00 AM [vite+] (ssr) page reload resources/js/routes/admin/onboarding-checklist-templates/items/index.ts
+[vite] 11:13:00 AM [vite+] (client) page reload resources/js/routes/admin/items/index.ts
+[vite] 11:13:00 AM [vite+] (ssr) page reload resources/js/routes/admin/items/index.ts
+[vite] 11:13:00 AM [vite+] (client) page reload resources/js/routes/admin/employees/index.ts
+[vite] 11:13:00 AM [vite+] (ssr) page reload resources/js/routes/admin/employees/index.ts
+[vite] 11:13:00 AM [vite+] (client) page reload resources/js/routes/admin/compliance/index.ts
+[vite] 11:13:00 AM [vite+] (ssr) page reload resources/js/routes/admin/compliance/index.ts
+[vite] 11:13:00 AM [vite+] (client) page reload resources/js/routes/admin/facilities/index.ts
+[vite] 11:13:00 AM [vite+] (ssr) page reload resources/js/routes/admin/facilities/index.ts
+[vite] 11:13:00 AM [vite+] (client) page reload resources/js/routes/admin/facilities/shifts/index.ts
+[vite] 11:13:00 AM [vite+] (ssr) page reload resources/js/routes/admin/facilities/shifts/index.ts
+[vite] 11:13:00 AM [vite+] (client) page reload resources/js/routes/admin/shifts/index.ts
+[vite] 11:13:00 AM [vite+] (ssr) page reload resources/js/routes/admin/shifts/index.ts
+[vite] 11:13:00 AM [vite+] (client) page reload resources/js/routes/admin/shifts/assignments/index.ts
+[vite] 11:13:00 AM [vite+] (ssr) page reload resources/js/routes/admin/shifts/assignments/index.ts
+[vite] 11:13:00 AM [vite+] (client) page reload resources/js/routes/admin/shift-assignments/index.ts
+[vite] 11:13:00 AM [vite+] (ssr) page reload resources/js/routes/admin/shift-assignments/index.ts
+[vite] 11:13:00 AM [vite+] (client) page reload resources/js/routes/admin/policy-documents/index.ts
+[vite] 11:13:00 AM [vite+] (ssr) page reload resources/js/routes/admin/policy-documents/index.ts
+[vite] 11:13:00 AM [vite+] (client) page reload resources/js/routes/admin/copilot/index.ts
+[vite] 11:13:00 AM [vite+] (ssr) page reload resources/js/routes/admin/copilot/index.ts
+[vite] 11:13:00 AM [vite+] (client) page reload resources/js/routes/admin/copilot/actions/index.ts
+[vite] 11:13:00 AM [vite+] (ssr) page reload resources/js/routes/admin/copilot/actions/index.ts
+[vite] 11:13:00 AM [vite+] (client) page reload resources/js/routes/admin/blog-posts/index.ts
+[vite] 11:13:00 AM [vite+] (ssr) page reload resources/js/routes/admin/blog-posts/index.ts
+[vite] 11:13:00 AM [vite+] (client) page reload resources/js/routes/admin/testimonials/index.ts
+[vite] 11:13:00 AM [vite+] (ssr) page reload resources/js/routes/admin/testimonials/index.ts
+[vite] 11:13:00 AM [vite+] (client) page reload resources/js/routes/admin/stats/index.ts
+[vite] 11:13:00 AM [vite+] (ssr) page reload resources/js/routes/admin/stats/index.ts
+[vite] 11:13:00 AM [vite+] (client) page reload resources/js/routes/admin/staffing-requests/index.ts
+[vite] 11:13:00 AM [vite+] (ssr) page reload resources/js/routes/admin/staffing-requests/index.ts
+[vite] 11:13:00 AM [vite+] (client) page reload resources/js/routes/admin/users/index.ts
+[vite] 11:13:00 AM [vite+] (ssr) page reload resources/js/routes/admin/users/index.ts
+[vite] 11:13:00 AM [vite+] (client) page reload resources/js/routes/admin/roles/index.ts
+[vite] 11:13:00 AM [vite+] (ssr) page reload resources/js/routes/admin/roles/index.ts
+[vite] 11:13:28 AM [vite+] (client) hmr update /resources/js/components/admin/status-badge.tsx

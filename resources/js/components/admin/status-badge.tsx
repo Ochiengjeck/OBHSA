@@ -100,6 +100,8 @@ const STATUS_STYLES: Record<string, string> = {
         'bg-blue-100 text-blue-700 dark:bg-blue-500/20 dark:text-blue-300',
     confirmed:
         'bg-emerald-100 text-emerald-700 dark:bg-emerald-500/20 dark:text-emerald-300',
+    in_use: 'bg-emerald-100 text-emerald-700 dark:bg-emerald-500/20 dark:text-emerald-300',
+    legacy: 'bg-slate-100 text-slate-700 dark:bg-slate-500/20 dark:text-slate-300',
 };
 
 export function StatusBadge({ status }: { status: string }) {

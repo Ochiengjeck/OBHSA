@@ -114,6 +114,17 @@ test('an admin can delete a stat', function () {
     expect(Stat::query()->find($stat->id))->toBeNull();
 });
 
+test('deleting a stat also deletes its icon file', function () {
+    Storage::fake('public');
+    Storage::disk('public')->put('stat-icons/icon.jpg', 'fake-bytes');
+
+    $stat = Stat::factory()->create(['icon_path' => 'stat-icons/icon.jpg']);
+
+    $this->actingAs($this->admin)->delete(route('admin.stats.destroy', $stat));
+
+    Storage::disk('public')->assertMissing('stat-icons/icon.jpg');
+});
+
 test('a user without access cannot create a stat', function () {
     $user = User::factory()->create();
 

@@ -304,7 +304,12 @@ class ApplyController extends Controller
             $resume = $request->file('resume');
             $path = $this->storePublicFile($resume, 'resumes');
 
+            $oldResumePaths = $application->documents()->where('document_type', 'resume')->pluck('file_path');
             $application->documents()->where('document_type', 'resume')->delete();
+
+            foreach ($oldResumePaths as $oldResumePath) {
+                Storage::disk('public')->delete($oldResumePath);
+            }
 
             $application->documents()->create([
                 'candidate_id' => $application->candidate_id,

@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\ApplicationRequirementController;
 use App\Http\Controllers\Admin\AssessmentAttemptController;
 use App\Http\Controllers\Admin\AssessmentController;
 use App\Http\Controllers\Admin\AssessmentQuestionController;
+use App\Http\Controllers\Admin\AssetController;
 use App\Http\Controllers\Admin\BackgroundCheckController;
 use App\Http\Controllers\Admin\BlogPostController;
 use App\Http\Controllers\Admin\CandidateController;
@@ -62,6 +63,11 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'verified', 'role:ad
         Route::get('ai-settings', [AiSettingController::class, 'index'])->name('ai-settings.index');
     });
     Route::put('ai-settings', [AiSettingController::class, 'update'])->name('ai-settings.update')->middleware('permission:ai-settings.update');
+
+    Route::middleware('permission:assets.view')->group(function () {
+        Route::get('assets', [AssetController::class, 'index'])->name('assets.index');
+    });
+    Route::delete('assets', [AssetController::class, 'destroy'])->name('assets.destroy')->middleware('permission:assets.delete');
 
     Route::resource('pages', PageController::class)->only(['index', 'edit', 'update'])
         ->middlewareFor(['index'], 'permission:pages.view')

@@ -21,6 +21,7 @@ class RoleSeeder extends Seeder
     private const RESOURCE_ACTIONS = [
         'site-settings' => ['view', 'update'],
         'ai-settings' => ['view', 'update'],
+        'assets' => ['view', 'delete'],
         'pages' => ['view', 'update'],
         'services' => ['view', 'create', 'update', 'delete'],
         'job-listings' => ['view', 'create', 'update', 'delete'],

@@ -13,11 +13,15 @@ import {
 
 export function ConfirmDeleteDialog({
     url,
+    onConfirm,
     title,
     description,
     trigger,
 }: {
-    url: string;
+    /** A normal Inertia-visit delete. Ignored if `onConfirm` is given. */
+    url?: string;
+    /** Use instead of `url` when the delete isn't a plain Inertia visit (e.g. it returns JSON instead of redirecting). */
+    onConfirm?: () => Promise<void>;
     title: string;
     description: string;
     trigger: React.ReactNode;
@@ -25,8 +29,26 @@ export function ConfirmDeleteDialog({
     const [open, setOpen] = useState(false);
     const [processing, setProcessing] = useState(false);
 
-    function handleDelete() {
+    async function handleDelete() {
         setProcessing(true);
+
+        if (onConfirm) {
+            try {
+                await onConfirm();
+            } finally {
+                setProcessing(false);
+                setOpen(false);
+            }
+
+            return;
+        }
+
+        if (!url) {
+            setProcessing(false);
+
+            return;
+        }
+
         router.delete(url, {
             preserveScroll: true,
             onFinish: () => {
