@@ -24,6 +24,18 @@ class DemoSubmissionSeeder extends Seeder
     ];
 
     /**
+     * Realistic cover-note text, picked at random per demo application
+     * instead of placeholder Lorem Ipsum text.
+     *
+     * @var list<string>
+     */
+    private const array COVER_NOTES = [
+        "I'm a licensed caregiver in New Hampshire looking to pick up per-diem shifts around my family's schedule. I'm available most weekday evenings and weekends, and I'm comfortable starting as soon as credentialing is complete.",
+        "I've been working in long-term care for a few years now and I'm looking for more flexibility than my current full-time role offers. I'm interested in per-diem shifts at facilities near Manchester and would love to be considered.",
+        "I recently relocated to the area and I'm rebuilding my per-diem schedule. I have experience in skilled nursing settings and am comfortable with day or evening shifts depending on availability.",
+    ];
+
+    /**
      * Seed a handful of demo job applications and staffing-request leads
      * so the backoffice index pages aren't empty on first look.
      */
@@ -41,7 +53,7 @@ class DemoSubmissionSeeder extends Seeder
                 $application = Application::query()->create([
                     'candidate_id' => $candidate->id,
                     'job_listing_id' => $listing->id,
-                    'cover_note' => fake()->sentence(20),
+                    'cover_note' => fake()->randomElement(self::COVER_NOTES),
                     'source' => 'demo_seed',
                 ]);
 

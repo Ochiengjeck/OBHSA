@@ -547,3 +547,43 @@ dependencies:
 [server] 2026-10-05 09:33:03 /_boost/browser-logs .. ~ 0.02ms
 [server] 2026-10-05 09:33:03 /favicon.ico .. ~ 0.02ms
 [server] 2026-10-05 09:33:55 /admin/interview-questions .. ~ 511.06ms
+[server] 2026-10-05 09:35:40 /blog .. ~ 0.12ms
+[server] 2026-10-05 09:35:48 /jobs .. ~ 500.65ms
+[server] 2026-10-05 09:35:51 /jobs/lpn-per-diem-salem-nh-0092 .. ~ 0.20ms
+[server] 2026-10-05 09:48:26 /jobs/lpn-per-diem-salem-nh-0092 .. ~ 507.23ms
+[server] 2026-10-05 09:48:26 /admin/copilot .. ~ 20s
+[server] 2026-10-05 09:48:47 /admin/copilot .. ~ 512.79ms
+[server] 2026-10-05 09:48:47 /jobs/lpn-per-diem-salem-nh-0092 .. ~ 513.86ms
+[server] 2026-10-05 09:48:48 /_boost/browser-logs .. ~ 0.40ms
+[server] 2026-10-05 09:48:48 /_boost/browser-logs .. ~ 515.27ms
+[server] 2026-10-05 09:48:48 /admin/copilot .. ~ 514.92ms
+[server] 2026-10-05 09:48:48 /jobs/lpn-per-diem-salem-nh-0092 .. ~ 2s
+[server] 2026-10-05 09:48:47 /storage/branding/fs5JFagTAqb64gsSmYCpXRIvVx0tG5n2kOzHpmnY.jpg .. ~ 3s
+[server] 2026-10-05 09:48:50 /storage/branding/fs5JFagTAqb64gsSmYCpXRIvVx0tG5n2kOzHpmnY.jpg .. ~ 0.58ms
+[server] 2026-10-05 09:48:50 /storage/branding/fs5JFagTAqb64gsSmYCpXRIvVx0tG5n2kOzHpmnY.jpg .. ~ 0.04ms
+[server] 2026-10-05 09:48:51 /storage/branding/fs5JFagTAqb64gsSmYCpXRIvVx0tG5n2kOzHpmnY.jpg .. ~ 0.03ms
+[server] 2026-10-05 09:48:51 /favicon.svg .. ~ 0.19ms
+[server] 2026-10-05 09:48:51 /favicon.ico .. ~ 0.06ms
+[server] 2026-10-05 09:48:51 /favicon.svg .. ~ 0.10ms
+[server] 2026-10-05 09:48:51 /favicon.ico .. ~ 0.14ms
+[server] 2026-10-05 09:48:52 /_boost/browser-logs .. ~ 0.05ms
+[server] 2026-10-05 09:48:52 /_boost/browser-logs .. ~ 515.66ms
+[vite] 9:49:25 AM [vite+] .env changed, restarting server..
+[server] 
+[server] INFO Environment modified. Restarting server.. 
+[server] 
+[vite] Inertia SSR dev endpoint: /__inertia_ssr
+[server] INFO Server running on [http://127.0.0.1:8000]. 
+[server] 
+[server] Press Ctrl+C to stop the server
+[server] 
+[vite] 9:49:27 AM [vite+] (client) info: Types generated for actions, routes, form variants
+[vite] Plugin: @laravel/vite-plugin-wayfinder
+[vite] Warming up Inertia SSR module graph..
+[vite] 9:49:27 AM [vite+] server restarted.
+[vite] [laravel:fonts] Optimized font fallbacks require the optional "fontaine" package. Install it, or set "optimizedFallbacks: false" on your fonts to disable the feature.
+[vite] 
+[vite] LARAVEL v13.34.0 plugin v3.2.0
+[vite] 
+[vite] APP_URL: http://localhost:8000
+[vite] Inertia SSR module graph warmed up
