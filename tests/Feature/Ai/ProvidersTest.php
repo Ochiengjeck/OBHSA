@@ -3,6 +3,7 @@
 use App\Services\Ai\AiProviderFactory;
 use App\Services\Ai\Exceptions\AiProviderNotConfiguredException;
 use App\Services\Ai\ValueObjects\AiMessage;
+use App\Services\Ai\ValueObjects\AiToolCall;
 use App\Services\Ai\ValueObjects\AiToolDefinition;
 use App\Services\Copilot\Contracts\CopilotTool;
 use App\Services\Copilot\ToolRegistry;
@@ -137,4 +138,72 @@ test('XaiProvider parses a tool_calls reply', function () {
     expect($result->toolCalls)->toHaveCount(1);
     expect($result->toolCalls[0]->name)->toBe('search_candidates');
     expect($result->toolCalls[0]->arguments)->toBe(['query' => 'jane']);
+});
+
+// Replaying a zero-argument tool call (e.g. applications_summary) through
+// conversation history is the one path none of the single-call tests above
+// exercise — AiToolCall::arguments === [] is indistinguishable from an
+// empty JSON array once encoded, and each provider must coerce it to an
+// object or the real API rejects the whole request. This is exactly the
+// production bug this guards against (Gemini: "Unknown name \"args\"").
+test('GeminiProvider replays a zero-argument tool call as a JSON object, not an array', function () {
+    config(['ai.providers.gemini.api_key' => 'test-key']);
+
+    Http::fake(['generativelanguage.googleapis.com/*' => Http::response([
+        'candidates' => [['content' => ['parts' => [['text' => 'Done.']]]]],
+    ])]);
+
+    $history = [
+        AiMessage::user('Give me a summary'),
+        AiMessage::assistant('', [new AiToolCall('1', 'applications_summary', [])]),
+        AiMessage::toolResult('1', 'applications_summary', '{"pipeline":[]}'),
+    ];
+
+    AiProviderFactory::make('gemini')->chat($history, []);
+
+    Http::assertSent(function ($request) {
+        $body = $request->body();
+
+        return str_contains($body, '"args":{}') && ! str_contains($body, '"args":[]');
+    });
+});
+
+test('ClaudeProvider replays a zero-argument tool call as a JSON object, not an array', function () {
+    config(['ai.providers.claude.api_key' => 'test-key']);
+
+    Http::fake(['api.anthropic.com/*' => Http::response(['content' => [['type' => 'text', 'text' => 'Done.']]])]);
+
+    $history = [
+        AiMessage::user('Give me a summary'),
+        AiMessage::assistant('', [new AiToolCall('1', 'applications_summary', [])]),
+        AiMessage::toolResult('1', 'applications_summary', '{"pipeline":[]}'),
+    ];
+
+    AiProviderFactory::make('claude')->chat($history, []);
+
+    Http::assertSent(function ($request) {
+        $body = $request->body();
+
+        return str_contains($body, '"input":{}') && ! str_contains($body, '"input":[]');
+    });
+});
+
+test('XaiProvider replays a zero-argument tool call as a JSON object, not an array', function () {
+    config(['ai.providers.xai.api_key' => 'test-key']);
+
+    Http::fake(['api.x.ai/*' => Http::response(['choices' => [['message' => ['content' => 'Done.']]]])]);
+
+    $history = [
+        AiMessage::user('Give me a summary'),
+        AiMessage::assistant('', [new AiToolCall('1', 'applications_summary', [])]),
+        AiMessage::toolResult('1', 'applications_summary', '{"pipeline":[]}'),
+    ];
+
+    AiProviderFactory::make('xai')->chat($history, []);
+
+    Http::assertSent(function ($request) {
+        $body = $request->body();
+
+        return str_contains($body, '"arguments":"{}"') && ! str_contains($body, '"arguments":"[]"');
+    });
 });

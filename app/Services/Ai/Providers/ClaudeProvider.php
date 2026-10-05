@@ -72,7 +72,10 @@ class ClaudeProvider implements AiProvider
                         'type' => 'tool_use',
                         'id' => $toolCall->id,
                         'name' => $toolCall->name,
-                        'input' => $toolCall->arguments,
+                        // (object) guarantees "input" encodes as a JSON
+                        // object even when arguments is empty — see the
+                        // identical fix/comment in GeminiProvider.
+                        'input' => (object) $toolCall->arguments,
                     ];
                 }
 

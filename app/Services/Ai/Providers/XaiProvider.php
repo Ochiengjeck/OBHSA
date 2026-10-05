@@ -66,7 +66,10 @@ class XaiProvider implements AiProvider
                         'type' => 'function',
                         'function' => [
                             'name' => $call->name,
-                            'arguments' => json_encode($call->arguments),
+                            // (object) guarantees this encodes as a JSON
+                            // object string ("{}") even when arguments is
+                            // empty — see the identical fix in GeminiProvider.
+                            'arguments' => json_encode((object) $call->arguments),
                         ],
                     ], $message->toolCalls),
                 ];

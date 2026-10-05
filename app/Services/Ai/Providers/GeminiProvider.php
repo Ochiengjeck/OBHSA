@@ -67,7 +67,11 @@ class GeminiProvider implements AiProvider
                 return [
                     'role' => 'model',
                     'parts' => array_map(fn (AiToolCall $call) => [
-                        'functionCall' => ['name' => $call->name, 'args' => $call->arguments],
+                        // (object) guarantees "args" encodes as a JSON object
+                        // ("{}") even when $call->arguments is empty — a bare
+                        // PHP [] would encode as "[]" and Gemini's API
+                        // rejects that with "Unknown name \"args\"".
+                        'functionCall' => ['name' => $call->name, 'args' => (object) $call->arguments],
                     ], $message->toolCalls),
                 ];
             }
