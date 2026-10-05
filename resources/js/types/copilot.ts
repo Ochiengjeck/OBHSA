@@ -3,6 +3,7 @@ export type CopilotMessageEntry = {
     role: 'user' | 'assistant' | 'tool';
     content: string | null;
     created_at: string;
+    action: CopilotActionEntry | null;
 };
 
 export type CopilotActionEntry = {

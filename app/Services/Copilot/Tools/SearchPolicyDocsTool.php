@@ -39,7 +39,12 @@ class SearchPolicyDocsTool implements CopilotTool
         return false;
     }
 
-    public function authorize(User $user): bool
+    public function requiredPermission(array $arguments): ?string
+    {
+        return null;
+    }
+
+    public function authorize(User $user, array $arguments): bool
     {
         return true;
     }

@@ -1,11 +1,16 @@
-import { Head, router, useForm } from '@inertiajs/react';
-import { Bot, Send, User as UserIcon } from 'lucide-react';
+import { Head, router, useForm, usePage } from '@inertiajs/react';
+import { Bot, Send } from 'lucide-react';
+import { useEffect, useRef } from 'react';
 import { AdminPageHeader } from '@/components/admin/admin-page-header';
+import { CopilotToolCallCard } from '@/components/admin/copilot-tool-call-card';
+import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
+import { Spinner } from '@/components/ui/spinner';
 import { Textarea } from '@/components/ui/textarea';
+import { useInitials } from '@/hooks/use-initials';
 import admin from '@/routes/admin';
-import type { CopilotActionEntry, CopilotMessageEntry } from '@/types';
+import type { Auth } from '@/types';
+import type { CopilotActionEntry, CopilotMessageEntry } from '@/types/copilot';
 
 export default function CopilotIndex({
     messages,
@@ -15,9 +20,16 @@ export default function CopilotIndex({
     messages: CopilotMessageEntry[];
     pendingAction: CopilotActionEntry | null;
 }) {
+    const { auth } = usePage<{ auth: Auth }>().props;
+    const getInitials = useInitials();
     const { data, setData, post, processing, reset } = useForm({
         message: '',
     });
+    const bottomRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
+    }, [messages.length, pendingAction, processing]);
 
     function submit(event: React.FormEvent) {
         event.preventDefault();
@@ -54,8 +66,9 @@ export default function CopilotIndex({
                 <div className="flex-1 space-y-4 overflow-y-auto pb-4">
                     {messages.length === 0 && (
                         <p className="text-sm text-muted-foreground">
-                            Try: "Find candidates named Jane" or "Show me the
-                            dossier for candidate #4".
+                            Try: "Find candidates named Jane", "Show me the
+                            dossier for candidate #4", or "Any applications that
+                            need my action?"
                         </p>
                     )}
 
@@ -64,73 +77,91 @@ export default function CopilotIndex({
                         .map((message) => (
                             <div
                                 key={message.id}
-                                className={`flex items-start gap-3 ${
+                                className={`flex animate-in items-start gap-3 duration-200 fade-in slide-in-from-bottom-1 ${
                                     message.role === 'user' ? 'justify-end' : ''
                                 }`}
                             >
                                 {message.role === 'assistant' && (
-                                    <Bot className="mt-1 size-5 shrink-0 text-primary" />
+                                    <Avatar className="mt-0.5">
+                                        <AvatarFallback className="bg-primary/10 text-primary">
+                                            <Bot className="size-4" />
+                                        </AvatarFallback>
+                                    </Avatar>
                                 )}
+
                                 <div
-                                    className={`max-w-xl rounded-lg px-4 py-2 text-sm whitespace-pre-wrap ${
+                                    className={
                                         message.role === 'user'
-                                            ? 'bg-primary text-primary-foreground'
-                                            : 'bg-muted text-foreground'
-                                    }`}
+                                            ? 'max-w-xl'
+                                            : 'max-w-xl flex-1'
+                                    }
                                 >
-                                    {message.content || (
-                                        <span className="italic opacity-70">
-                                            (no reply text)
-                                        </span>
+                                    {message.action ? (
+                                        <CopilotToolCallCard
+                                            action={message.action}
+                                            onConfirm={
+                                                message.action.id ===
+                                                pendingAction?.id
+                                                    ? () =>
+                                                          respondToAction(
+                                                              message.action!,
+                                                              true,
+                                                          )
+                                                    : undefined
+                                            }
+                                            onReject={
+                                                message.action.id ===
+                                                pendingAction?.id
+                                                    ? () =>
+                                                          respondToAction(
+                                                              message.action!,
+                                                              false,
+                                                          )
+                                                    : undefined
+                                            }
+                                        />
+                                    ) : (
+                                        <div
+                                            className={`rounded-lg px-4 py-2 text-sm whitespace-pre-wrap ${
+                                                message.role === 'user'
+                                                    ? 'bg-primary text-primary-foreground'
+                                                    : 'bg-muted text-foreground'
+                                            }`}
+                                        >
+                                            {message.content || (
+                                                <span className="italic opacity-70">
+                                                    (no reply text)
+                                                </span>
+                                            )}
+                                        </div>
                                     )}
                                 </div>
+
                                 {message.role === 'user' && (
-                                    <UserIcon className="mt-1 size-5 shrink-0 text-muted-foreground" />
+                                    <Avatar className="mt-0.5">
+                                        <AvatarFallback className="bg-secondary text-secondary-foreground">
+                                            {getInitials(auth.user.name)}
+                                        </AvatarFallback>
+                                    </Avatar>
                                 )}
                             </div>
                         ))}
 
-                    {pendingAction && (
-                        <Card className="border-amber-400">
-                            <CardContent className="space-y-3 pt-6">
-                                <p className="text-sm font-medium text-foreground">
-                                    The copilot wants to run:{' '}
-                                    <span className="font-mono">
-                                        {pendingAction.tool_name}
-                                    </span>
-                                </p>
-                                <pre className="overflow-x-auto rounded-md bg-muted p-2 text-xs">
-                                    {JSON.stringify(
-                                        pendingAction.arguments,
-                                        null,
-                                        2,
-                                    )}
-                                </pre>
-                                <div className="flex gap-3">
-                                    <Button
-                                        size="sm"
-                                        onClick={() =>
-                                            respondToAction(pendingAction, true)
-                                        }
-                                    >
-                                        Confirm
-                                    </Button>
-                                    <Button
-                                        size="sm"
-                                        variant="outline"
-                                        onClick={() =>
-                                            respondToAction(
-                                                pendingAction,
-                                                false,
-                                            )
-                                        }
-                                    >
-                                        Reject
-                                    </Button>
-                                </div>
-                            </CardContent>
-                        </Card>
+                    {processing && (
+                        <div className="flex animate-in items-center gap-3 duration-200 fade-in">
+                            <Avatar className="mt-0.5">
+                                <AvatarFallback className="bg-primary/10 text-primary">
+                                    <Bot className="size-4" />
+                                </AvatarFallback>
+                            </Avatar>
+                            <div className="flex items-center gap-2 rounded-lg bg-muted px-4 py-2 text-sm text-muted-foreground">
+                                <Spinner />
+                                Thinking...
+                            </div>
+                        </div>
                     )}
+
+                    <div ref={bottomRef} />
                 </div>
 
                 <form onSubmit={submit} className="flex gap-3 border-t pt-4">

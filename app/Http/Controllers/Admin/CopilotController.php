@@ -23,7 +23,7 @@ class CopilotController extends Controller
     public function index(Request $request): Response
     {
         $conversation = $this->currentConversation($request);
-        $conversation->load('messages');
+        $conversation->load(['messages.action']);
 
         return Inertia::render('admin/copilot/index', [
             'conversationId' => $conversation->id,

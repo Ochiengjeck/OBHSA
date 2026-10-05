@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AiSettingController;
 use App\Http\Controllers\Admin\ApplicationRequirementController;
 use App\Http\Controllers\Admin\AssessmentAttemptController;
 use App\Http\Controllers\Admin\AssessmentController;
@@ -56,6 +57,11 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'verified', 'role:ad
         Route::get('site-settings', [SiteSettingController::class, 'index'])->name('site-settings.index');
     });
     Route::put('site-settings', [SiteSettingController::class, 'update'])->name('site-settings.update')->middleware('permission:site-settings.update');
+
+    Route::middleware('permission:ai-settings.view')->group(function () {
+        Route::get('ai-settings', [AiSettingController::class, 'index'])->name('ai-settings.index');
+    });
+    Route::put('ai-settings', [AiSettingController::class, 'update'])->name('ai-settings.update')->middleware('permission:ai-settings.update');
 
     Route::resource('pages', PageController::class)->only(['index', 'edit', 'update'])
         ->middlewareFor(['index'], 'permission:pages.view')

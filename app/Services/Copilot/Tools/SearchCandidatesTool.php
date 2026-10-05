@@ -5,6 +5,7 @@ namespace App\Services\Copilot\Tools;
 use App\Models\Candidate;
 use App\Models\User;
 use App\Services\Copilot\Contracts\CopilotTool;
+use App\Services\Copilot\Tools\Concerns\AuthorizesViaPermission;
 
 /**
  * Read-only — wraps the same candidate lookup the admin dossier search
@@ -12,6 +13,8 @@ use App\Services\Copilot\Contracts\CopilotTool;
  */
 class SearchCandidatesTool implements CopilotTool
 {
+    use AuthorizesViaPermission;
+
     public function name(): string
     {
         return 'search_candidates';
@@ -41,9 +44,9 @@ class SearchCandidatesTool implements CopilotTool
         return false;
     }
 
-    public function authorize(User $user): bool
+    protected function permission(): string
     {
-        return $user->can('applications.view');
+        return 'applications.view';
     }
 
     public function execute(User $user, array $arguments): array

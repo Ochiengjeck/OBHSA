@@ -74,7 +74,7 @@ class GeminiProvider implements AiProvider
 
             return [
                 'role' => $message->role === 'assistant' ? 'model' : 'user',
-                'parts' => [['text' => $message->content]],
+                'parts' => [['text' => $message->content ?? '']],
             ];
         }, $messages);
     }

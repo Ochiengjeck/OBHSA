@@ -9,6 +9,7 @@ use App\Exceptions\InvalidApplicationTransitionException;
 use App\Models\Application;
 use App\Models\User;
 use App\Services\Copilot\Contracts\CopilotTool;
+use App\Services\Copilot\Tools\Concerns\AuthorizesViaPermission;
 use ValueError;
 
 /**
@@ -18,6 +19,8 @@ use ValueError;
  */
 class TransitionApplicationStatusTool implements CopilotTool
 {
+    use AuthorizesViaPermission;
+
     public function name(): string
     {
         return 'transition_application_status';
@@ -46,9 +49,9 @@ class TransitionApplicationStatusTool implements CopilotTool
         return true;
     }
 
-    public function authorize(User $user): bool
+    protected function permission(): string
     {
-        return $user->can('applications.update');
+        return 'applications.update';
     }
 
     public function execute(User $user, array $arguments): array

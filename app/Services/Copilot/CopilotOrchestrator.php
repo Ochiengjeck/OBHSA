@@ -2,6 +2,7 @@
 
 namespace App\Services\Copilot;
 
+use App\Models\AiSetting;
 use App\Models\CopilotAction;
 use App\Models\CopilotConversation;
 use App\Models\CopilotMessage;
@@ -60,7 +61,7 @@ class CopilotOrchestrator
     private function converse(User $user, CopilotConversation $conversation): array
     {
         $provider = AiProviderFactory::make();
-        $providerName = (string) config('ai.provider');
+        $providerName = AiProviderFactory::resolveProviderName();
         $newMessages = collect();
 
         $toolDefinitions = array_values($this->tools->all()
@@ -77,7 +78,7 @@ class CopilotOrchestrator
 
             $assistantMessage = $conversation->messages()->create([
                 'role' => 'assistant',
-                'content' => $result->text,
+                'content' => $this->resolveAssistantContent($result->text, $toolCall !== null),
             ]);
             $newMessages->push($assistantMessage);
 
@@ -86,8 +87,9 @@ class CopilotOrchestrator
             }
 
             $tool = $this->tools->find($toolCall->name);
+            $aiGranted = $tool && AiSetting::current()->hasGrantedPermission($tool->requiredPermission($toolCall->arguments));
 
-            if (! $tool || ! $tool->authorize($user)) {
+            if (! $tool || ! $aiGranted || ! $tool->authorize($user, $toolCall->arguments)) {
                 $action = $this->recordAction($conversation, $assistantMessage, $toolCall, $providerName, $user);
                 $action->markFailed(['error' => 'This tool is unavailable or you are not authorized to use it.']);
 
@@ -104,6 +106,23 @@ class CopilotOrchestrator
         }
 
         return ['messages' => $newMessages, 'pendingAction' => null];
+    }
+
+    /**
+     * Never let an assistant turn persist (and later replay to a provider)
+     * as null text: a tool-call turn's words aren't the user-facing reply
+     * anyway, so it stores empty; a genuinely empty final reply gets a real
+     * fallback sentence instead of silently storing nothing, since a stored
+     * null round-trips back to providers like Gemini as a literal
+     * `"text": null` field and degrades the context they see on later turns.
+     */
+    private function resolveAssistantContent(?string $text, bool $hasToolCall): string
+    {
+        if ($text !== null && $text !== '') {
+            return $text;
+        }
+
+        return $hasToolCall ? '' : "I don't have a response for that — could you rephrase?";
     }
 
     /**
@@ -161,12 +180,12 @@ class CopilotOrchestrator
             $action = $actionsByMessageId->get($message->id);
 
             if (! $action) {
-                $history[] = AiMessage::assistant($message->content);
+                $history[] = AiMessage::assistant($message->content ?? '');
 
                 continue;
             }
 
-            $history[] = AiMessage::assistant($message->content, [
+            $history[] = AiMessage::assistant($message->content ?? '', [
                 new AiToolCall((string) $action->id, $action->tool_name, $action->arguments),
             ]);
 

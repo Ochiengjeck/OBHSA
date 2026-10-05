@@ -74,7 +74,7 @@ class XaiProvider implements AiProvider
                 continue;
             }
 
-            $formatted[] = ['role' => $message->role, 'content' => $message->content];
+            $formatted[] = ['role' => $message->role, 'content' => $message->content ?? ''];
         }
 
         return $formatted;

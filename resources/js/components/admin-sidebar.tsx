@@ -20,6 +20,7 @@ import {
     Settings2,
     ShieldAlert,
     ShieldCheck,
+    Sparkles,
     UserCheck,
     Users,
 } from 'lucide-react';
@@ -206,6 +207,12 @@ const navGroups: AdminNavGroup[] = [
                 href: admin.roles.index(),
                 icon: ShieldCheck,
                 permission: 'roles.view',
+            },
+            {
+                title: 'AI Settings',
+                href: admin.aiSettings.index(),
+                icon: Sparkles,
+                permission: 'ai-settings.view',
             },
         ],
     },

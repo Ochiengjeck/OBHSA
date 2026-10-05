@@ -79,7 +79,7 @@ class ClaudeProvider implements AiProvider
                 return ['role' => 'assistant', 'content' => $content];
             }
 
-            return ['role' => $message->role, 'content' => $message->content];
+            return ['role' => $message->role, 'content' => $message->content ?? ''];
         }, $messages);
     }
 

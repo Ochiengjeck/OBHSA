@@ -5,6 +5,7 @@ namespace App\Services\Copilot\Tools;
 use App\Models\Candidate;
 use App\Models\User;
 use App\Services\Copilot\Contracts\CopilotTool;
+use App\Services\Copilot\Tools\Concerns\AuthorizesViaPermission;
 
 /**
  * Read-only — a condensed version of the admin candidate dossier, sized
@@ -12,6 +13,8 @@ use App\Services\Copilot\Contracts\CopilotTool;
  */
 class GetCandidateDossierTool implements CopilotTool
 {
+    use AuthorizesViaPermission;
+
     public function name(): string
     {
         return 'get_candidate_dossier';
@@ -41,9 +44,9 @@ class GetCandidateDossierTool implements CopilotTool
         return false;
     }
 
-    public function authorize(User $user): bool
+    protected function permission(): string
     {
-        return $user->can('applications.view');
+        return 'applications.view';
     }
 
     public function execute(User $user, array $arguments): array
