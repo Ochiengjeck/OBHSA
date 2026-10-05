@@ -60,7 +60,14 @@ return [
             'endpoint' => env('AWS_ENDPOINT'),
             'use_path_style_endpoint' => env('AWS_USE_PATH_STYLE_ENDPOINT', false),
             'throw' => false,
-            'report' => false,
+            // true (not false): a failed write still just returns false to
+            // the caller (StoresUploadedFiles still throws the same generic
+            // RuntimeException), but the real underlying Flysystem exception
+            // — permission denied, missing bucket, bad credentials, wrong
+            // endpoint — now actually gets logged instead of vanishing
+            // silently. Without this there is no way to diagnose why a
+            // store failed from the logs alone.
+            'report' => true,
         ],
 
         's3' => [
