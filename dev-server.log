@@ -1872,3 +1872,33 @@ dependencies:
 [vite] 2:13:49 PM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/job-listings/index.tsx
 [vite] 2:13:49 PM [vite+] (client) hmr update /@id/C:/Users/ochie/projects/side/OBHSA/resources/js/pages/admin/roles/index.tsx
 [server] 2026-10-05 14:13:51 /_boost/browser-logs .. ~ 0.10ms
+[server] 2026-10-05 14:16:20 /admin/compliance .. ~ 0.20ms
+[server] 2026-10-05 14:16:33 /admin/interview-questions .. ~ 0.08ms
+[server] 2026-10-05 14:16:33 /admin/job-applications .. ~ 0.09ms
+[server] 2026-10-05 14:16:33 /admin/job-listings .. ~ 0.02ms
+[server] 2026-10-05 14:16:36 /admin/interviews .. ~ 0.23ms
+[server] 2026-10-05 14:16:50 /admin/candidates/4 .. ~ 514.82ms
+[server] 2026-10-05 14:18:46 /admin/interview-questions .. ~ 513.87ms
+[server] 2026-10-05 14:19:19 /admin/job-listings .. ~ 0.08ms
+[server] 2026-10-05 14:19:19 /admin/job-applications .. ~ 512.27ms
+[server] 2026-10-05 14:19:19 /admin/interview-questions .. ~ 0.03ms
+[server] 2026-10-05 14:24:10 /admin/interviews .. ~ 514.09ms
+[server] 2026-10-05 15:12:20 /admin/interview-questions .. ~ 520.00ms
+[server] 2026-10-05 15:12:20 /_boost/browser-logs .. ~ 520.53ms
+[server] 2026-10-05 15:12:20 /_boost/browser-logs .. ~ 0.64ms
+[server] 2026-10-05 15:12:20 /storage/branding/fs5JFagTAqb64gsSmYCpXRIvVx0tG5n2kOzHpmnY.jpg .. ~ 0.08ms
+[server] 2026-10-05 15:12:21 /_boost/browser-logs .. ~ 0.02ms
+[server] 2026-10-05 15:12:22 /favicon.svg .. ~ 0.12ms
+[server] 2026-10-05 15:12:22 /_boost/browser-logs .. ~ 0.04ms
+[server] 2026-10-05 15:12:22 /favicon.ico .. ~ 0.03ms
+[server] 2026-10-05 15:12:22 /admin/assets .. ~ 498.72ms
+[server] 2026-10-05 15:12:23 /storage/branding/7Y34ZdZAIy0zleAkUvtiW1n4S1S5KcIDWDLgZeWG.jpg .. ~ 0.04ms
+[server] 2026-10-05 15:12:23 /storage/pages/oKIuOJ8PcViTlsE2rMFkYE8i8BM4RhdzP4Wh3dKE.jpg .. ~ 0.09ms
+[server] 2026-10-05 15:12:23 /storage/pages/sDbXAHS9I1HofZX3sqEgU8z5ugyam7ZzK53Ke2ZK.jpg .. ~ 0.16ms
+[server] 2026-10-05 15:12:23 /storage/branding/xSy0yLHPbiGr6LB6fZvhdXIBWcgUpd5Jl6GQorsY.jpg .. ~ 0.23ms
+[server] 2026-10-05 15:12:23 /admin/assets .. ~ 0.10ms
+[server] 2026-10-05 16:02:23 /admin/assessments .. ~ 0.12ms
+[server] 2026-10-05 16:02:24 /admin/assessment-attempts .. ~ 0.02ms
+[server] 2026-10-05 16:02:24 /admin/communication-templates .. ~ 501.21ms
+[server] 2026-10-05 16:02:25 /admin/communication-templates/3/edit .. ~ 506.30ms
+[server] 2026-10-05 16:02:28 /admin/interview-questions .. ~ 0.12ms
