@@ -31,7 +31,11 @@ class ApplicationsSummaryTool implements CopilotTool
 
     public function parameters(): array
     {
-        return ['type' => 'object', 'properties' => [], 'required' => []];
+        // properties must be cast to an object: an empty PHP array encodes
+        // to JSON "[]", but Gemini's schema requires a Map ("{}") here even
+        // when there are no parameters — ["type"=>"object","properties"=>[]]
+        // gets rejected with a 400 otherwise.
+        return ['type' => 'object', 'properties' => (object) [], 'required' => []];
     }
 
     public function requiresConfirmation(): bool

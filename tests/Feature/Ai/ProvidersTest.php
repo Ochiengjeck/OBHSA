@@ -92,6 +92,14 @@ test('every registered copilot tool\'s parameter schema is Gemini-compatible', f
                 ->not->toBeArray("Tool parameter schema at \"{$path}\" uses a union-type array for \"type\", which Gemini's API rejects. Use a single string type plus \"nullable\": true instead.");
         }
 
+        // An empty PHP array for "properties" json_encodes to "[]", but
+        // Gemini requires a Map ("{}") there even with zero properties —
+        // must be cast to an object (e.g. (object) []), not left as [].
+        if (array_key_exists('properties', $schema) && is_array($schema['properties']) && $schema['properties'] === []) {
+            throw new Exception("Tool parameter schema at \"{$path}\" has an empty array for \"properties\", which "
+                ."encodes to JSON \"[]\" and Gemini's API rejects. Use (object) [] instead of [].");
+        }
+
         foreach ($schema['properties'] ?? [] as $name => $propertySchema) {
             $assertNoUnionTypes($propertySchema, "{$path}.properties.{$name}");
         }
