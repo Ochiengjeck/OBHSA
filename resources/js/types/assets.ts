@@ -4,13 +4,14 @@ export type AssetFile = {
     last_modified_at: string;
     status: 'in_use' | 'legacy';
     used_by: string | null;
-    is_image: boolean;
+    type: 'image' | 'document' | 'other';
 };
 
 export type AssetCounts = {
     total: number;
     in_use: number;
     legacy: number;
+    by_type: Record<'image' | 'document' | 'other', number>;
 };
 
 export type AssetDeleteResult = {

@@ -1,11 +1,17 @@
 import { Head, Link, router } from '@inertiajs/react';
 import { UserCheck } from 'lucide-react';
 import { AdminPageHeader } from '@/components/admin/admin-page-header';
+import { ClickableTableRow } from '@/components/admin/clickable-table-row';
 import { EmptyState } from '@/components/admin/empty-state';
+import {
+    AdminFilterToolbar,
+    ClearFiltersButton,
+    ToolbarSearchInput,
+} from '@/components/admin/filter-toolbar';
 import { StatusBadge } from '@/components/admin/status-badge';
+import { TwoLineCell } from '@/components/admin/two-line-cell';
 import { PaginationLinks } from '@/components/pagination-links';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
-import { Input } from '@/components/ui/input';
 import {
     Select,
     SelectContent,
@@ -21,6 +27,8 @@ import {
     TableHeader,
     TableRow,
 } from '@/components/ui/table';
+import { useDebouncedSearch } from '@/hooks/use-debounced-search';
+import { toUrl } from '@/lib/utils';
 import admin from '@/routes/admin';
 import type { EmployeeListRow, Paginated } from '@/types';
 
@@ -39,6 +47,13 @@ export default function EmployeesIndex({
         );
     }
 
+    const { search: specialty, setSearch: setSpecialty } = useDebouncedSearch(
+        admin.employees.index().url,
+        filters,
+        300,
+        'specialty',
+    );
+
     return (
         <>
             <Head title="Employees" />
@@ -50,7 +65,21 @@ export default function EmployeesIndex({
                     stats={[{ label: 'total', value: employees.total }]}
                 />
 
-                <div className="mb-4 flex flex-wrap items-center gap-2">
+                <AdminFilterToolbar
+                    trailing={
+                        (filters.status || specialty) && (
+                            <ClearFiltersButton
+                                onClick={() => {
+                                    setSpecialty('');
+                                    updateFilters({
+                                        status: null,
+                                        specialty: null,
+                                    });
+                                }}
+                            />
+                        )
+                    }
+                >
                     <Select
                         value={filters.status ?? 'all'}
                         onValueChange={(value) =>
@@ -72,17 +101,13 @@ export default function EmployeesIndex({
                         </SelectContent>
                     </Select>
 
-                    <Input
-                        placeholder="Filter by specialty"
-                        className="w-56"
-                        defaultValue={filters.specialty ?? ''}
-                        onBlur={(e) =>
-                            updateFilters({
-                                specialty: e.target.value || null,
-                            })
-                        }
+                    <ToolbarSearchInput
+                        value={specialty}
+                        onChange={setSpecialty}
+                        placeholder="Filter by specialty..."
+                        className="w-56 sm:max-w-none"
                     />
-                </div>
+                </AdminFilterToolbar>
 
                 {employees.data.length === 0 ? (
                     <EmptyState
@@ -104,36 +129,40 @@ export default function EmployeesIndex({
                             </TableHeader>
                             <TableBody>
                                 {employees.data.map((employee) => (
-                                    <TableRow key={employee.id}>
+                                    <ClickableTableRow
+                                        key={employee.id}
+                                        href={toUrl(
+                                            admin.employees.show(employee.id),
+                                        )}
+                                    >
                                         <TableCell>
-                                            <div className="flex items-center gap-3">
-                                                <Avatar className="size-8">
-                                                    <AvatarFallback>
-                                                        {employee.candidate.full_name
-                                                            .charAt(0)
-                                                            .toUpperCase()}
-                                                    </AvatarFallback>
-                                                </Avatar>
-                                                <div>
+                                            <TwoLineCell
+                                                avatar={
+                                                    <Avatar className="size-8">
+                                                        <AvatarFallback>
+                                                            {employee.candidate.full_name
+                                                                .charAt(0)
+                                                                .toUpperCase()}
+                                                        </AvatarFallback>
+                                                    </Avatar>
+                                                }
+                                                primary={
                                                     <Link
                                                         href={admin.employees.show(
                                                             employee.id,
                                                         )}
-                                                        className="font-medium text-primary hover:underline"
+                                                        className="text-primary hover:underline"
                                                     >
                                                         {
                                                             employee.candidate
                                                                 .full_name
                                                         }
                                                     </Link>
-                                                    <p className="text-xs text-muted-foreground">
-                                                        {
-                                                            employee.candidate
-                                                                .email
-                                                        }
-                                                    </p>
-                                                </div>
-                                            </div>
+                                                }
+                                                secondary={
+                                                    employee.candidate.email
+                                                }
+                                            />
                                         </TableCell>
                                         <TableCell className="text-muted-foreground">
                                             {employee.employee_number ?? '—'}
@@ -151,7 +180,7 @@ export default function EmployeesIndex({
                                                 status={employee.status}
                                             />
                                         </TableCell>
-                                    </TableRow>
+                                    </ClickableTableRow>
                                 ))}
                             </TableBody>
                         </Table>

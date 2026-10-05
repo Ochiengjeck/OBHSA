@@ -1,14 +1,20 @@
 import { Head, Link } from '@inertiajs/react';
-import { MessageSquareQuote, Pencil, Plus, Search, Trash2 } from 'lucide-react';
+import { MessageSquareQuote, Pencil, Plus, Trash2 } from 'lucide-react';
 import { AdminPageHeader } from '@/components/admin/admin-page-header';
+import { ClickableTableRow } from '@/components/admin/clickable-table-row';
 import { ConfirmDeleteDialog } from '@/components/admin/confirm-delete-dialog';
 import { EmptyState } from '@/components/admin/empty-state';
+import {
+    AdminFilterToolbar,
+    ClearFiltersButton,
+    ToolbarSearchInput,
+} from '@/components/admin/filter-toolbar';
 import { RowActionsMenu } from '@/components/admin/row-actions-menu';
+import { TwoLineCell } from '@/components/admin/two-line-cell';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { DropdownMenuItem } from '@/components/ui/dropdown-menu';
-import { Input } from '@/components/ui/input';
 import {
     Table,
     TableBody,
@@ -56,17 +62,19 @@ export default function TestimonialsIndex({
                     }
                 />
 
-                <div className="mb-4">
-                    <div className="relative max-w-xs">
-                        <Search className="absolute top-1/2 left-2.5 size-4 -translate-y-1/2 text-muted-foreground" />
-                        <Input
-                            value={search}
-                            onChange={(e) => setSearch(e.target.value)}
-                            placeholder="Search by author..."
-                            className="pl-8"
-                        />
-                    </div>
-                </div>
+                <AdminFilterToolbar
+                    trailing={
+                        search && (
+                            <ClearFiltersButton onClick={() => setSearch('')} />
+                        )
+                    }
+                >
+                    <ToolbarSearchInput
+                        value={search}
+                        onChange={setSearch}
+                        placeholder="Search by author..."
+                    />
+                </AdminFilterToolbar>
 
                 {testimonials.data.length === 0 ? (
                     <EmptyState
@@ -105,35 +113,40 @@ export default function TestimonialsIndex({
                             </TableHeader>
                             <TableBody>
                                 {testimonials.data.map((testimonial) => (
-                                    <TableRow key={testimonial.id}>
+                                    <ClickableTableRow
+                                        key={testimonial.id}
+                                        href={toUrl(
+                                            admin.testimonials.edit(
+                                                testimonial.id,
+                                            ),
+                                        )}
+                                    >
                                         <TableCell className="font-medium">
-                                            <div className="flex items-center gap-3">
-                                                <Avatar className="size-8">
-                                                    <AvatarImage
-                                                        src={
-                                                            storageUrl(
-                                                                testimonial.author_photo_path,
-                                                            ) ?? undefined
-                                                        }
-                                                        alt=""
-                                                    />
-                                                    <AvatarFallback>
-                                                        {testimonial.author_name
-                                                            .charAt(0)
-                                                            .toUpperCase()}
-                                                    </AvatarFallback>
-                                                </Avatar>
-                                                <div>
-                                                    {testimonial.author_name}
-                                                    {testimonial.author_role && (
-                                                        <p className="text-xs font-normal text-muted-foreground">
-                                                            {
-                                                                testimonial.author_role
+                                            <TwoLineCell
+                                                avatar={
+                                                    <Avatar className="size-8">
+                                                        <AvatarImage
+                                                            src={
+                                                                storageUrl(
+                                                                    testimonial.author_photo_path,
+                                                                ) ?? undefined
                                                             }
-                                                        </p>
-                                                    )}
-                                                </div>
-                                            </div>
+                                                            alt=""
+                                                        />
+                                                        <AvatarFallback>
+                                                            {testimonial.author_name
+                                                                .charAt(0)
+                                                                .toUpperCase()}
+                                                        </AvatarFallback>
+                                                    </Avatar>
+                                                }
+                                                primary={
+                                                    testimonial.author_name
+                                                }
+                                                secondary={
+                                                    testimonial.author_role
+                                                }
+                                            />
                                         </TableCell>
                                         <TableCell className="max-w-sm truncate text-muted-foreground">
                                             {testimonial.quote}
@@ -185,7 +198,7 @@ export default function TestimonialsIndex({
                                                 />
                                             </RowActionsMenu>
                                         </TableCell>
-                                    </TableRow>
+                                    </ClickableTableRow>
                                 ))}
                             </TableBody>
                         </Table>

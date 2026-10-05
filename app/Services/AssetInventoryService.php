@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Enums\AssetStatus;
+use App\Enums\AssetType;
 use App\Models\BlogPost;
 use App\Models\Document;
 use App\Models\JobListing;
@@ -27,8 +28,6 @@ use League\Flysystem\FileAttributes;
  */
 class AssetInventoryService
 {
-    private const array IMAGE_EXTENSIONS = ['jpg', 'jpeg', 'png', 'webp', 'gif', 'svg'];
-
     /**
      * @return Collection<int, AssetFile>
      */
@@ -63,7 +62,7 @@ class AssetInventoryService
                 lastModifiedAt: Carbon::createFromTimestamp($attributes->lastModified() ?? time()),
                 status: $usedBy !== null ? AssetStatus::InUse : AssetStatus::Legacy,
                 usedBy: $usedBy,
-                isImage: in_array(strtolower(pathinfo($path, PATHINFO_EXTENSION)), self::IMAGE_EXTENSIONS, true),
+                type: AssetType::fromExtension(pathinfo($path, PATHINFO_EXTENSION)),
             );
         }
 

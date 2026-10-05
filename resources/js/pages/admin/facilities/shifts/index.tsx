@@ -1,6 +1,7 @@
 import { Head, Link } from '@inertiajs/react';
 import { ArrowLeft, CalendarClock, Pencil, Plus, Trash2 } from 'lucide-react';
 import { AdminPageHeader } from '@/components/admin/admin-page-header';
+import { ClickableTableRow } from '@/components/admin/clickable-table-row';
 import { ConfirmDeleteDialog } from '@/components/admin/confirm-delete-dialog';
 import { EmptyState } from '@/components/admin/empty-state';
 import { RowActionsMenu } from '@/components/admin/row-actions-menu';
@@ -88,7 +89,10 @@ export default function FacilityShiftsIndex({
                         </TableHeader>
                         <TableBody>
                             {shifts.map((shift) => (
-                                <TableRow key={shift.id}>
+                                <ClickableTableRow
+                                    key={shift.id}
+                                    href={toUrl(admin.shifts.show(shift.id))}
+                                >
                                     <TableCell>
                                         <Link
                                             href={admin.shifts.show(shift.id)}
@@ -146,7 +150,7 @@ export default function FacilityShiftsIndex({
                                             />
                                         </RowActionsMenu>
                                     </TableCell>
-                                </TableRow>
+                                </ClickableTableRow>
                             ))}
                         </TableBody>
                     </Table>

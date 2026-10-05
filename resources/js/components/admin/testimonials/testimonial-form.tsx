@@ -11,6 +11,7 @@ import {
 import { Switch } from '@/components/ui/switch';
 import { Textarea } from '@/components/ui/textarea';
 import InputError from '@/components/input-error';
+import { FileDropzone } from '@/components/admin/file-dropzone';
 
 export type TestimonialFormData = {
     author_name: string;
@@ -78,25 +79,16 @@ export function TestimonialForm({
                 <InputError message={errors.quote} />
             </div>
 
-            <div className="grid gap-2">
-                <Label htmlFor="author_photo">Author Photo</Label>
-                {photoPreview && (
-                    <img
-                        src={photoPreview}
-                        alt=""
-                        className="size-16 rounded-full border border-border object-cover"
-                    />
-                )}
-                <Input
-                    id="author_photo"
-                    type="file"
-                    accept="image/*"
-                    onChange={(e) =>
-                        setData('author_photo', e.target.files?.[0] ?? null)
-                    }
-                />
-                <InputError message={errors.author_photo} />
-            </div>
+            <FileDropzone
+                label="Author Photo"
+                shape="circle"
+                value={data.author_photo}
+                existingUrl={photoPreview ?? null}
+                onChange={(file) => setData('author_photo', file)}
+                onClear={() => setData('author_photo', null)}
+                canClearExisting={false}
+                error={errors.author_photo}
+            />
 
             <div className="grid gap-5 sm:grid-cols-2">
                 <div className="grid gap-2">

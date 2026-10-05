@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Enums\AssetStatus;
+use App\Enums\AssetType;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\DeleteAssetsRequest;
 use App\Services\AssetInventory\AssetFile;
@@ -20,11 +21,14 @@ class AssetController extends Controller
 
     /**
      * List every uploaded file on the public disk, classified as in-use
-     * or legacy, optionally filtered by status.
+     * or legacy, optionally filtered by status, type, and a path/used-by
+     * text search.
      */
     public function index(Request $request, AssetInventoryService $assets): Response
     {
         $status = $request->string('status')->value() ?: null;
+        $type = $request->string('type')->value() ?: null;
+        $search = $request->string('search')->value() ?: null;
 
         $files = $assets->scan();
 
@@ -32,17 +36,25 @@ class AssetController extends Controller
             'total' => $files->count(),
             'in_use' => $files->where('status', AssetStatus::InUse)->count(),
             'legacy' => $files->where('status', AssetStatus::Legacy)->count(),
+            'by_type' => collect(AssetType::cases())->mapWithKeys(
+                fn (AssetType $case) => [$case->value => $files->where('type', $case)->count()],
+            )->all(),
         ];
 
-        if ($status !== null) {
-            $files = $files->filter(fn (AssetFile $file) => $file->status->value === $status)->values();
-        }
+        $filtered = $files
+            ->when($status !== null, fn ($items) => $items->filter(fn (AssetFile $file) => $file->status->value === $status))
+            ->when($type !== null, fn ($items) => $items->filter(fn (AssetFile $file) => $file->type->value === $type))
+            ->when($search !== null, fn ($items) => $items->filter(
+                fn (AssetFile $file) => str_contains(strtolower($file->path), strtolower($search))
+                    || str_contains(strtolower($file->usedBy ?? ''), strtolower($search)),
+            ))
+            ->values();
 
         $page = $request->integer('page', 1);
 
         $paginator = new LengthAwarePaginator(
-            $files->forPage($page, self::PER_PAGE)->values(),
-            $files->count(),
+            $filtered->forPage($page, self::PER_PAGE)->values(),
+            $filtered->count(),
             self::PER_PAGE,
             $page,
             ['path' => $request->url(), 'query' => $request->query()],
@@ -51,7 +63,7 @@ class AssetController extends Controller
         return Inertia::render('admin/assets/index', [
             'assets' => $paginator,
             'counts' => $counts,
-            'filters' => ['status' => $status],
+            'filters' => ['status' => $status, 'type' => $type, 'search' => $search],
         ]);
     }
 

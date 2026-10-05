@@ -1,6 +1,7 @@
 import { Head, Link } from '@inertiajs/react';
 import { FileText } from 'lucide-react';
 import { AdminPageHeader } from '@/components/admin/admin-page-header';
+import { ClickableTableRow } from '@/components/admin/clickable-table-row';
 import { EmptyState } from '@/components/admin/empty-state';
 import { Badge } from '@/components/ui/badge';
 import {
@@ -11,6 +12,7 @@ import {
     TableHeader,
     TableRow,
 } from '@/components/ui/table';
+import { toUrl } from '@/lib/utils';
 import admin from '@/routes/admin';
 import type { Page } from '@/types';
 
@@ -43,7 +45,10 @@ export default function PagesIndex({ pages }: { pages: Page[] }) {
                         </TableHeader>
                         <TableBody>
                             {pages.map((page) => (
-                                <TableRow key={page.id}>
+                                <ClickableTableRow
+                                    key={page.id}
+                                    href={toUrl(admin.pages.edit(page.id))}
+                                >
                                     <TableCell className="font-medium">
                                         {page.title}
                                     </TableCell>
@@ -68,7 +73,7 @@ export default function PagesIndex({ pages }: { pages: Page[] }) {
                                             Edit
                                         </Link>
                                     </TableCell>
-                                </TableRow>
+                                </ClickableTableRow>
                             ))}
                         </TableBody>
                     </Table>

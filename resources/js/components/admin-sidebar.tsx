@@ -269,11 +269,16 @@ export function AdminSidebar() {
             </SidebarHeader>
 
             <SidebarContent>
-                {visibleGroups.map((group) => (
+                {visibleGroups.map((group, index) => (
                     <NavMain
                         key={group.label}
                         items={group.items}
                         label={group.label}
+                        className={
+                            index > 0
+                                ? 'border-t border-sidebar-border pt-2'
+                                : undefined
+                        }
                     />
                 ))}
             </SidebarContent>

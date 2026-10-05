@@ -1,9 +1,15 @@
 import { Head, Link, router, usePage } from '@inertiajs/react';
 import { Inbox, UserPlus } from 'lucide-react';
 import { AdminPageHeader } from '@/components/admin/admin-page-header';
+import { ClickableTableRow } from '@/components/admin/clickable-table-row';
 import { EmptyState } from '@/components/admin/empty-state';
+import {
+    AdminFilterToolbar,
+    ClearFiltersButton,
+} from '@/components/admin/filter-toolbar';
 import { RowActionsMenu } from '@/components/admin/row-actions-menu';
 import { StatusBadge } from '@/components/admin/status-badge';
+import { TwoLineCell } from '@/components/admin/two-line-cell';
 import { PaginationLinks } from '@/components/pagination-links';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
@@ -23,7 +29,7 @@ import {
     TableHeader,
     TableRow,
 } from '@/components/ui/table';
-import { cn, toUrl } from '@/lib/utils';
+import { rowAccentClass, toUrl } from '@/lib/utils';
 import admin from '@/routes/admin';
 import type { Auth, Paginated } from '@/types';
 
@@ -96,7 +102,15 @@ export default function JobApplicationsIndex({
                     stats={[{ label: 'total', value: applications.total }]}
                 />
 
-                <div className="mb-4 flex flex-wrap items-center gap-2">
+                <AdminFilterToolbar
+                    trailing={
+                        filters.status && (
+                            <ClearFiltersButton
+                                onClick={() => updateStatusFilter(null)}
+                            />
+                        )
+                    }
+                >
                     <Button
                         size="sm"
                         variant={filters.status ? 'outline' : 'default'}
@@ -125,7 +139,7 @@ export default function JobApplicationsIndex({
                             updateStatusFilter(value === 'all' ? null : value)
                         }
                     >
-                        <SelectTrigger className="ml-auto w-56">
+                        <SelectTrigger className="w-56">
                             <SelectValue placeholder="All statuses" />
                         </SelectTrigger>
                         <SelectContent>
@@ -140,7 +154,7 @@ export default function JobApplicationsIndex({
                             ))}
                         </SelectContent>
                     </Select>
-                </div>
+                </AdminFilterToolbar>
 
                 {applications.data.length === 0 ? (
                     <EmptyState
@@ -172,22 +186,37 @@ export default function JobApplicationsIndex({
                             </TableHeader>
                             <TableBody>
                                 {applications.data.map((application) => (
-                                    <TableRow key={application.id}>
+                                    <ClickableTableRow
+                                        key={application.id}
+                                        href={toUrl(
+                                            admin.candidates.show(
+                                                application.candidate_id,
+                                            ),
+                                        )}
+                                        className={rowAccentClass(
+                                            (application.days_in_stage ?? 0) >=
+                                                7
+                                                ? 'amber'
+                                                : null,
+                                        )}
+                                    >
                                         <TableCell>
-                                            <div className="flex items-center gap-3">
-                                                <Avatar className="size-8">
-                                                    <AvatarFallback>
-                                                        {application.candidate.full_name
-                                                            .charAt(0)
-                                                            .toUpperCase()}
-                                                    </AvatarFallback>
-                                                </Avatar>
-                                                <div>
+                                            <TwoLineCell
+                                                avatar={
+                                                    <Avatar className="size-8">
+                                                        <AvatarFallback>
+                                                            {application.candidate.full_name
+                                                                .charAt(0)
+                                                                .toUpperCase()}
+                                                        </AvatarFallback>
+                                                    </Avatar>
+                                                }
+                                                primary={
                                                     <Link
                                                         href={admin.candidates.show(
                                                             application.candidate_id,
                                                         )}
-                                                        className="font-medium text-primary hover:underline"
+                                                        className="text-primary hover:underline"
                                                     >
                                                         {
                                                             application
@@ -195,14 +224,11 @@ export default function JobApplicationsIndex({
                                                                 .full_name
                                                         }
                                                     </Link>
-                                                    <p className="text-xs text-muted-foreground">
-                                                        {
-                                                            application
-                                                                .candidate.email
-                                                        }
-                                                    </p>
-                                                </div>
-                                            </div>
+                                                }
+                                                secondary={
+                                                    application.candidate.email
+                                                }
+                                            />
                                         </TableCell>
                                         <TableCell className="text-muted-foreground">
                                             {application.job_listing?.title ??
@@ -219,12 +245,12 @@ export default function JobApplicationsIndex({
                                             />
                                         </TableCell>
                                         <TableCell
-                                            className={cn(
-                                                'text-muted-foreground',
+                                            className={
                                                 (application.days_in_stage ??
-                                                    0) >= 7 &&
-                                                    'font-medium text-amber-600',
-                                            )}
+                                                    0) >= 7
+                                                    ? 'font-medium text-amber-600'
+                                                    : 'text-muted-foreground'
+                                            }
                                         >
                                             {application.days_in_stage ?? '—'}
                                         </TableCell>
@@ -257,7 +283,7 @@ export default function JobApplicationsIndex({
                                                 )}
                                             </RowActionsMenu>
                                         </TableCell>
-                                    </TableRow>
+                                    </ClickableTableRow>
                                 ))}
                             </TableBody>
                         </Table>

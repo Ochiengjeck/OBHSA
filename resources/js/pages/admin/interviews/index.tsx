@@ -1,7 +1,12 @@
 import { Head, Link, router } from '@inertiajs/react';
 import { CalendarClock } from 'lucide-react';
 import { AdminPageHeader } from '@/components/admin/admin-page-header';
+import { ClickableTableRow } from '@/components/admin/clickable-table-row';
 import { EmptyState } from '@/components/admin/empty-state';
+import {
+    AdminFilterToolbar,
+    ClearFiltersButton,
+} from '@/components/admin/filter-toolbar';
 import { StatusBadge } from '@/components/admin/status-badge';
 import { PaginationLinks } from '@/components/pagination-links';
 import { Button } from '@/components/ui/button';
@@ -20,6 +25,7 @@ import {
     TableHeader,
     TableRow,
 } from '@/components/ui/table';
+import { toUrl } from '@/lib/utils';
 import admin from '@/routes/admin';
 import type { InterviewListRow, Paginated, RecruiterOption } from '@/types';
 
@@ -58,7 +64,20 @@ export default function InterviewsIndex({
                     stats={[{ label: 'total', value: interviews.total }]}
                 />
 
-                <div className="mb-4 flex flex-wrap items-center gap-2">
+                <AdminFilterToolbar
+                    trailing={
+                        (filters.status || filters.interviewer_id) && (
+                            <ClearFiltersButton
+                                onClick={() =>
+                                    updateFilters({
+                                        status: null,
+                                        interviewer_id: null,
+                                    })
+                                }
+                            />
+                        )
+                    }
+                >
                     <Button
                         size="sm"
                         variant={filters.status ? 'outline' : 'default'}
@@ -96,7 +115,7 @@ export default function InterviewsIndex({
                             })
                         }
                     >
-                        <SelectTrigger className="ml-auto w-56">
+                        <SelectTrigger className="w-56">
                             <SelectValue placeholder="All interviewers" />
                         </SelectTrigger>
                         <SelectContent>
@@ -113,7 +132,7 @@ export default function InterviewsIndex({
                             ))}
                         </SelectContent>
                     </Select>
-                </div>
+                </AdminFilterToolbar>
 
                 {interviews.data.length === 0 ? (
                     <EmptyState
@@ -135,7 +154,12 @@ export default function InterviewsIndex({
                         </TableHeader>
                         <TableBody>
                             {interviews.data.map((interview) => (
-                                <TableRow key={interview.id}>
+                                <ClickableTableRow
+                                    key={interview.id}
+                                    href={toUrl(
+                                        admin.interviews.show(interview.id),
+                                    )}
+                                >
                                     <TableCell className="text-muted-foreground">
                                         <Link
                                             href={admin.interviews.show(
@@ -175,7 +199,7 @@ export default function InterviewsIndex({
                                             />
                                         )}
                                     </TableCell>
-                                </TableRow>
+                                </ClickableTableRow>
                             ))}
                         </TableBody>
                     </Table>

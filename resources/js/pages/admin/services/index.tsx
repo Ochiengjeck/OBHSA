@@ -1,20 +1,18 @@
 import { Head, Link } from '@inertiajs/react';
-import {
-    Briefcase,
-    ExternalLink,
-    Pencil,
-    Plus,
-    Search,
-    Trash2,
-} from 'lucide-react';
+import { Briefcase, ExternalLink, Pencil, Plus, Trash2 } from 'lucide-react';
 import { AdminPageHeader } from '@/components/admin/admin-page-header';
+import { ClickableTableRow } from '@/components/admin/clickable-table-row';
 import { ConfirmDeleteDialog } from '@/components/admin/confirm-delete-dialog';
 import { EmptyState } from '@/components/admin/empty-state';
+import {
+    AdminFilterToolbar,
+    ClearFiltersButton,
+    ToolbarSearchInput,
+} from '@/components/admin/filter-toolbar';
 import { RowActionsMenu } from '@/components/admin/row-actions-menu';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { DropdownMenuItem } from '@/components/ui/dropdown-menu';
-import { Input } from '@/components/ui/input';
 import {
     Table,
     TableBody,
@@ -61,17 +59,19 @@ export default function ServicesIndex({
                     }
                 />
 
-                <div className="mb-4 flex items-center gap-2">
-                    <div className="relative max-w-xs flex-1">
-                        <Search className="absolute top-1/2 left-2.5 size-4 -translate-y-1/2 text-muted-foreground" />
-                        <Input
-                            value={search}
-                            onChange={(e) => setSearch(e.target.value)}
-                            placeholder="Search services..."
-                            className="pl-8"
-                        />
-                    </div>
-                </div>
+                <AdminFilterToolbar
+                    trailing={
+                        search && (
+                            <ClearFiltersButton onClick={() => setSearch('')} />
+                        )
+                    }
+                >
+                    <ToolbarSearchInput
+                        value={search}
+                        onChange={setSearch}
+                        placeholder="Search services..."
+                    />
+                </AdminFilterToolbar>
 
                 {services.data.length === 0 ? (
                     <EmptyState
@@ -110,7 +110,12 @@ export default function ServicesIndex({
                             </TableHeader>
                             <TableBody>
                                 {services.data.map((service) => (
-                                    <TableRow key={service.id}>
+                                    <ClickableTableRow
+                                        key={service.id}
+                                        href={toUrl(
+                                            admin.services.edit(service.id),
+                                        )}
+                                    >
                                         <TableCell className="font-medium">
                                             {service.title}
                                         </TableCell>
@@ -178,7 +183,7 @@ export default function ServicesIndex({
                                                 />
                                             </RowActionsMenu>
                                         </TableCell>
-                                    </TableRow>
+                                    </ClickableTableRow>
                                 ))}
                             </TableBody>
                         </Table>

@@ -1,6 +1,7 @@
 import { Head, Link } from '@inertiajs/react';
 import { ArrowLeft, ClipboardList, Pencil, Plus, Trash2 } from 'lucide-react';
 import { AdminPageHeader } from '@/components/admin/admin-page-header';
+import { ClickableTableRow } from '@/components/admin/clickable-table-row';
 import { ConfirmDeleteDialog } from '@/components/admin/confirm-delete-dialog';
 import { EmptyState } from '@/components/admin/empty-state';
 import { RowActionsMenu } from '@/components/admin/row-actions-menu';
@@ -86,7 +87,12 @@ export default function AssessmentQuestionsIndex({
                         </TableHeader>
                         <TableBody>
                             {questions.map((question) => (
-                                <TableRow key={question.id}>
+                                <ClickableTableRow
+                                    key={question.id}
+                                    href={toUrl(
+                                        admin.questions.edit(question.id),
+                                    )}
+                                >
                                     <TableCell className="max-w-md font-medium">
                                         {question.question}
                                     </TableCell>
@@ -135,7 +141,7 @@ export default function AssessmentQuestionsIndex({
                                             />
                                         </RowActionsMenu>
                                     </TableCell>
-                                </TableRow>
+                                </ClickableTableRow>
                             ))}
                         </TableBody>
                     </Table>

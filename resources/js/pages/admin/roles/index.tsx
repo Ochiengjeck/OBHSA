@@ -1,6 +1,7 @@
 import { Head, Link } from '@inertiajs/react';
 import { Pencil, Plus, ShieldCheck, Trash2 } from 'lucide-react';
 import { AdminPageHeader } from '@/components/admin/admin-page-header';
+import { ClickableTableRow } from '@/components/admin/clickable-table-row';
 import { ConfirmDeleteDialog } from '@/components/admin/confirm-delete-dialog';
 import { EmptyState } from '@/components/admin/empty-state';
 import { RowActionsMenu } from '@/components/admin/row-actions-menu';
@@ -71,7 +72,10 @@ export default function RolesIndex({ roles }: { roles: Role[] }) {
                                     PROTECTED_ROLE_NAMES.includes(role.name);
 
                                 return (
-                                    <TableRow key={role.id}>
+                                    <ClickableTableRow
+                                        key={role.id}
+                                        href={toUrl(admin.roles.edit(role.id))}
+                                    >
                                         <TableCell className="font-medium capitalize">
                                             {role.name}
                                             {isProtected && (
@@ -134,7 +138,7 @@ export default function RolesIndex({ roles }: { roles: Role[] }) {
                                                     )}
                                             </RowActionsMenu>
                                         </TableCell>
-                                    </TableRow>
+                                    </ClickableTableRow>
                                 );
                             })}
                         </TableBody>

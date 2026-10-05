@@ -1,5 +1,5 @@
 import { Head, router, useHttp } from '@inertiajs/react';
-import { HardDrive, Trash2 } from 'lucide-react';
+import { File, FileText, HardDrive, Search, Trash2, X } from 'lucide-react';
 import { useState } from 'react';
 import { toast } from 'sonner';
 import { AdminPageHeader } from '@/components/admin/admin-page-header';
@@ -9,6 +9,14 @@ import { StatusBadge } from '@/components/admin/status-badge';
 import { PaginationLinks } from '@/components/pagination-links';
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
+import { Input } from '@/components/ui/input';
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from '@/components/ui/select';
 import {
     Table,
     TableBody,
@@ -17,8 +25,9 @@ import {
     TableHeader,
     TableRow,
 } from '@/components/ui/table';
+import { useDebouncedSearch } from '@/hooks/use-debounced-search';
 import { useStorageUrl } from '@/hooks/use-storage-url';
-import { formatBytes } from '@/lib/utils';
+import { cn, formatBytes } from '@/lib/utils';
 import admin from '@/routes/admin';
 import type {
     AssetCounts,
@@ -32,6 +41,12 @@ const STATUS_FILTERS = [
     { value: 'legacy', label: 'Legacy' },
 ];
 
+type Filters = {
+    status: string | null;
+    type: string | null;
+    search: string | null;
+};
+
 export default function AssetsIndex({
     assets,
     counts,
@@ -39,20 +54,34 @@ export default function AssetsIndex({
 }: {
     assets: Paginated<AssetFile>;
     counts: AssetCounts;
-    filters: { status: string | null };
+    filters: Filters;
 }) {
     const storageUrl = useStorageUrl();
     const [selected, setSelected] = useState<Set<string>>(new Set());
     const { delete: destroyAssets, setData } = useHttp<{ paths: string[] }>({
         paths: [],
     });
+    const { search, setSearch } = useDebouncedSearch(
+        admin.assets.index().url,
+        filters,
+    );
 
-    function updateFilters(status: string | null) {
+    function updateFilters(next: Partial<Filters>) {
         setSelected(new Set());
-        router.get(admin.assets.index().url, status ? { status } : {}, {
-            preserveState: true,
-            replace: true,
-        });
+        router.get(
+            admin.assets.index().url,
+            { ...filters, ...next },
+            { preserveState: true, replace: true },
+        );
+    }
+
+    const hasActiveFilters = Boolean(
+        filters.status || filters.type || filters.search,
+    );
+
+    function clearFilters() {
+        setSearch('');
+        updateFilters({ status: null, type: null, search: null });
     }
 
     function toggleSelect(path: string, checked: boolean) {
@@ -126,28 +155,79 @@ export default function AssetsIndex({
                     ]}
                 />
 
-                <div className="mb-4 flex flex-wrap items-center gap-2">
-                    <Button
-                        size="sm"
-                        variant={filters.status ? 'outline' : 'default'}
-                        onClick={() => updateFilters(null)}
-                    >
-                        All
-                    </Button>
-                    {STATUS_FILTERS.map((option) => (
+                <div className="mb-4 flex flex-col gap-3 rounded-xl border border-border bg-card p-3 sm:flex-row sm:items-center">
+                    <div className="flex flex-wrap items-center gap-2">
                         <Button
-                            key={option.value}
                             size="sm"
-                            variant={
-                                filters.status === option.value
-                                    ? 'default'
-                                    : 'outline'
-                            }
-                            onClick={() => updateFilters(option.value)}
+                            variant={filters.status ? 'outline' : 'default'}
+                            onClick={() => updateFilters({ status: null })}
                         >
-                            {option.label}
+                            All
                         </Button>
-                    ))}
+                        {STATUS_FILTERS.map((option) => (
+                            <Button
+                                key={option.value}
+                                size="sm"
+                                variant={
+                                    filters.status === option.value
+                                        ? 'default'
+                                        : 'outline'
+                                }
+                                onClick={() =>
+                                    updateFilters({ status: option.value })
+                                }
+                            >
+                                {option.label}
+                            </Button>
+                        ))}
+
+                        <Select
+                            value={filters.type ?? 'all'}
+                            onValueChange={(value) =>
+                                updateFilters({
+                                    type: value === 'all' ? null : value,
+                                })
+                            }
+                        >
+                            <SelectTrigger className="w-44">
+                                <SelectValue placeholder="All types" />
+                            </SelectTrigger>
+                            <SelectContent>
+                                <SelectItem value="all">All Types</SelectItem>
+                                <SelectItem value="image">
+                                    Images ({counts.by_type.image})
+                                </SelectItem>
+                                <SelectItem value="document">
+                                    Documents ({counts.by_type.document})
+                                </SelectItem>
+                                <SelectItem value="other">
+                                    Other ({counts.by_type.other})
+                                </SelectItem>
+                            </SelectContent>
+                        </Select>
+                    </div>
+
+                    <div className="relative flex-1 sm:max-w-xs">
+                        <Search className="absolute top-1/2 left-2.5 size-4 -translate-y-1/2 text-muted-foreground" />
+                        <Input
+                            value={search}
+                            onChange={(e) => setSearch(e.target.value)}
+                            placeholder="Search path or used by..."
+                            className="pl-8"
+                        />
+                    </div>
+
+                    {hasActiveFilters && (
+                        <Button
+                            size="sm"
+                            variant="ghost"
+                            onClick={clearFilters}
+                            className="text-muted-foreground"
+                        >
+                            <X className="size-4" />
+                            Clear filters
+                        </Button>
+                    )}
 
                     {selected.size > 0 && (
                         <ConfirmDeleteDialog
@@ -158,7 +238,7 @@ export default function AssetsIndex({
                                 <Button
                                     size="sm"
                                     variant="destructive"
-                                    className="ml-auto"
+                                    className="sm:ml-auto"
                                 >
                                     <Trash2 className="size-4" />
                                     Delete {selected.size} selected
@@ -173,115 +253,160 @@ export default function AssetsIndex({
                         icon={HardDrive}
                         title="No assets match these filters"
                         description="Uploaded files across the site will show up here."
+                        action={
+                            hasActiveFilters ? (
+                                <Button
+                                    variant="outline"
+                                    onClick={clearFilters}
+                                >
+                                    Clear filters
+                                </Button>
+                            ) : undefined
+                        }
                     />
                 ) : (
                     <>
-                        <Table>
-                            <TableHeader>
-                                <TableRow>
-                                    <TableHead className="w-10">
-                                        <Checkbox
-                                            checked={allLegacySelected}
-                                            onCheckedChange={(checked) =>
-                                                toggleSelectAll(
-                                                    checked === true,
-                                                )
-                                            }
-                                            disabled={legacyPaths.length === 0}
-                                            aria-label="Select all legacy assets"
-                                        />
-                                    </TableHead>
-                                    <TableHead className="w-14" />
-                                    <TableHead>Path</TableHead>
-                                    <TableHead>Size</TableHead>
-                                    <TableHead>Last Modified</TableHead>
-                                    <TableHead>Status</TableHead>
-                                    <TableHead>Used By</TableHead>
-                                    <TableHead className="w-0" />
-                                </TableRow>
-                            </TableHeader>
-                            <TableBody>
-                                {assets.data.map((asset) => (
-                                    <TableRow key={asset.path}>
-                                        <TableCell>
-                                            {asset.status === 'legacy' && (
-                                                <Checkbox
-                                                    checked={selected.has(
-                                                        asset.path,
-                                                    )}
-                                                    onCheckedChange={(
-                                                        checked,
-                                                    ) =>
-                                                        toggleSelect(
-                                                            asset.path,
-                                                            checked === true,
-                                                        )
-                                                    }
-                                                    aria-label={`Select ${asset.path}`}
-                                                />
-                                            )}
-                                        </TableCell>
-                                        <TableCell>
-                                            {asset.is_image && (
-                                                <img
-                                                    src={
-                                                        storageUrl(
-                                                            asset.path,
-                                                        ) ?? undefined
-                                                    }
-                                                    alt=""
-                                                    className="size-10 rounded-md border border-border object-cover"
-                                                />
-                                            )}
-                                        </TableCell>
-                                        <TableCell className="max-w-xs truncate font-mono text-xs text-muted-foreground">
-                                            {asset.path}
-                                        </TableCell>
-                                        <TableCell className="text-muted-foreground">
-                                            {formatBytes(asset.size)}
-                                        </TableCell>
-                                        <TableCell className="text-muted-foreground">
-                                            {new Date(
-                                                asset.last_modified_at,
-                                            ).toLocaleDateString()}
-                                        </TableCell>
-                                        <TableCell>
-                                            <StatusBadge
-                                                status={asset.status}
+                        <div className="overflow-hidden rounded-xl border border-border">
+                            <Table>
+                                <TableHeader>
+                                    <TableRow>
+                                        <TableHead className="w-10">
+                                            <Checkbox
+                                                checked={allLegacySelected}
+                                                onCheckedChange={(checked) =>
+                                                    toggleSelectAll(
+                                                        checked === true,
+                                                    )
+                                                }
+                                                disabled={
+                                                    legacyPaths.length === 0
+                                                }
+                                                aria-label="Select all legacy assets"
                                             />
-                                        </TableCell>
-                                        <TableCell className="text-muted-foreground">
-                                            {asset.used_by ?? (
-                                                <span className="italic">
-                                                    Not referenced
-                                                </span>
-                                            )}
-                                        </TableCell>
-                                        <TableCell>
-                                            {asset.status === 'legacy' && (
-                                                <ConfirmDeleteDialog
-                                                    onConfirm={() =>
-                                                        deletePaths([
-                                                            asset.path,
-                                                        ])
-                                                    }
-                                                    title="Delete asset"
-                                                    description={`Are you sure you want to delete "${asset.path}"? This cannot be undone.`}
-                                                    trigger={
-                                                        <Button
-                                                            size="icon"
-                                                            variant="ghost"
-                                                        >
-                                                            <Trash2 className="size-4 text-destructive" />
-                                                        </Button>
-                                                    }
-                                                />
-                                            )}
-                                        </TableCell>
+                                        </TableHead>
+                                        <TableHead className="w-14" />
+                                        <TableHead>File</TableHead>
+                                        <TableHead>Size</TableHead>
+                                        <TableHead>Last Modified</TableHead>
+                                        <TableHead>Status</TableHead>
+                                        <TableHead>Used By</TableHead>
+                                        <TableHead className="w-0" />
                                     </TableRow>
-                                ))}
-                            </TableBody>
-                        </Table>
+                                </TableHeader>
+                                <TableBody>
+                                    {assets.data.map((asset) => {
+                                        const segments = asset.path.split('/');
+                                        const filename = segments.pop();
+                                        const directory = segments.join('/');
+                                        const isLegacy =
+                                            asset.status === 'legacy';
+
+                                        return (
+                                            <TableRow
+                                                key={asset.path}
+                                                className={cn(
+                                                    isLegacy &&
+                                                        'border-l-2 border-l-amber-400 bg-amber-50/40 dark:bg-amber-500/5',
+                                                )}
+                                            >
+                                                <TableCell>
+                                                    {isLegacy && (
+                                                        <Checkbox
+                                                            checked={selected.has(
+                                                                asset.path,
+                                                            )}
+                                                            onCheckedChange={(
+                                                                checked,
+                                                            ) =>
+                                                                toggleSelect(
+                                                                    asset.path,
+                                                                    checked ===
+                                                                        true,
+                                                                )
+                                                            }
+                                                            aria-label={`Select ${asset.path}`}
+                                                        />
+                                                    )}
+                                                </TableCell>
+                                                <TableCell>
+                                                    {asset.type === 'image' ? (
+                                                        <img
+                                                            src={
+                                                                storageUrl(
+                                                                    asset.path,
+                                                                ) ?? undefined
+                                                            }
+                                                            alt=""
+                                                            className="size-10 rounded-md border border-border object-cover"
+                                                        />
+                                                    ) : (
+                                                        <div className="flex size-10 items-center justify-center rounded-md border border-border bg-muted text-muted-foreground">
+                                                            {asset.type ===
+                                                            'document' ? (
+                                                                <FileText className="size-5" />
+                                                            ) : (
+                                                                <File className="size-5" />
+                                                            )}
+                                                        </div>
+                                                    )}
+                                                </TableCell>
+                                                <TableCell className="max-w-xs">
+                                                    <p className="truncate font-medium text-foreground">
+                                                        {filename}
+                                                    </p>
+                                                    {directory && (
+                                                        <p className="truncate font-mono text-xs text-muted-foreground">
+                                                            {directory}/
+                                                        </p>
+                                                    )}
+                                                </TableCell>
+                                                <TableCell className="text-muted-foreground">
+                                                    {formatBytes(asset.size)}
+                                                </TableCell>
+                                                <TableCell className="text-muted-foreground">
+                                                    {new Date(
+                                                        asset.last_modified_at,
+                                                    ).toLocaleDateString()}
+                                                </TableCell>
+                                                <TableCell>
+                                                    <StatusBadge
+                                                        status={asset.status}
+                                                    />
+                                                </TableCell>
+                                                <TableCell className="max-w-48 truncate text-muted-foreground">
+                                                    {asset.used_by ?? (
+                                                        <span className="italic">
+                                                            Not referenced
+                                                        </span>
+                                                    )}
+                                                </TableCell>
+                                                <TableCell>
+                                                    {isLegacy && (
+                                                        <ConfirmDeleteDialog
+                                                            onConfirm={() =>
+                                                                deletePaths([
+                                                                    asset.path,
+                                                                ])
+                                                            }
+                                                            title="Delete asset"
+                                                            description={`Are you sure you want to delete "${asset.path}"? This cannot be undone.`}
+                                                            trigger={
+                                                                <Button
+                                                                    size="icon"
+                                                                    variant="ghost"
+                                                                >
+                                                                    <Trash2 className="size-4 text-destructive" />
+                                                                </Button>
+                                                            }
+                                                        />
+                                                    )}
+                                                </TableCell>
+                                            </TableRow>
+                                        );
+                                    })}
+                                </TableBody>
+                            </Table>
+                        </div>
 
                         <div className="mt-6">
                             <PaginationLinks links={assets.links} />

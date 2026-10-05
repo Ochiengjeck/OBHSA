@@ -3,6 +3,7 @@
 namespace App\Services\AssetInventory;
 
 use App\Enums\AssetStatus;
+use App\Enums\AssetType;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Support\Carbon;
 
@@ -20,7 +21,7 @@ final readonly class AssetFile implements Arrayable
         public Carbon $lastModifiedAt,
         public AssetStatus $status,
         public ?string $usedBy,
-        public bool $isImage,
+        public AssetType $type,
     ) {}
 
     /**
@@ -34,7 +35,7 @@ final readonly class AssetFile implements Arrayable
             'last_modified_at' => $this->lastModifiedAt->toIso8601String(),
             'status' => $this->status->value,
             'used_by' => $this->usedBy,
-            'is_image' => $this->isImage,
+            'type' => $this->type->value,
         ];
     }
 }

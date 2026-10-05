@@ -146,6 +146,20 @@ test('a Document file on the public disk is in use', function () {
     expect($used['resumes/resume.pdf'])->toContain($candidate->full_name);
 });
 
+test('files are classified by type from their extension', function () {
+    putAsset('services/image.png');
+    putAsset('resumes/resume.pdf');
+    putAsset('credentials/scan.docx');
+    putAsset('credentials/data.csv');
+
+    $files = $this->service->scan();
+
+    expect($files->firstWhere('path', 'services/image.png')->type->value)->toBe('image');
+    expect($files->firstWhere('path', 'resumes/resume.pdf')->type->value)->toBe('document');
+    expect($files->firstWhere('path', 'credentials/scan.docx')->type->value)->toBe('document');
+    expect($files->firstWhere('path', 'credentials/data.csv')->type->value)->toBe('other');
+});
+
 test('a file nothing references is classified as legacy', function () {
     putAsset('services/orphan.png');
 

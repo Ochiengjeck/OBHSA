@@ -1,13 +1,18 @@
 import { Head, Link } from '@inertiajs/react';
-import { ClipboardList, Pencil, Plus, Search, Trash2 } from 'lucide-react';
+import { ClipboardList, Pencil, Plus, Trash2 } from 'lucide-react';
 import { AdminPageHeader } from '@/components/admin/admin-page-header';
+import { ClickableTableRow } from '@/components/admin/clickable-table-row';
 import { ConfirmDeleteDialog } from '@/components/admin/confirm-delete-dialog';
 import { EmptyState } from '@/components/admin/empty-state';
+import {
+    AdminFilterToolbar,
+    ClearFiltersButton,
+    ToolbarSearchInput,
+} from '@/components/admin/filter-toolbar';
 import { RowActionsMenu } from '@/components/admin/row-actions-menu';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { DropdownMenuItem } from '@/components/ui/dropdown-menu';
-import { Input } from '@/components/ui/input';
 import {
     Table,
     TableBody,
@@ -65,17 +70,19 @@ export default function InterviewQuestionsIndex({
                     }
                 />
 
-                <div className="mb-4">
-                    <div className="relative max-w-xs">
-                        <Search className="absolute top-1/2 left-2.5 size-4 -translate-y-1/2 text-muted-foreground" />
-                        <Input
-                            value={search}
-                            onChange={(e) => setSearch(e.target.value)}
-                            placeholder="Search questions..."
-                            className="pl-8"
-                        />
-                    </div>
-                </div>
+                <AdminFilterToolbar
+                    trailing={
+                        search && (
+                            <ClearFiltersButton onClick={() => setSearch('')} />
+                        )
+                    }
+                >
+                    <ToolbarSearchInput
+                        value={search}
+                        onChange={setSearch}
+                        placeholder="Search questions..."
+                    />
+                </AdminFilterToolbar>
 
                 {questions.data.length === 0 ? (
                     <EmptyState
@@ -116,7 +123,14 @@ export default function InterviewQuestionsIndex({
                             </TableHeader>
                             <TableBody>
                                 {questions.data.map((question) => (
-                                    <TableRow key={question.id}>
+                                    <ClickableTableRow
+                                        key={question.id}
+                                        href={toUrl(
+                                            admin.interviewQuestions.edit(
+                                                question.id,
+                                            ),
+                                        )}
+                                    >
                                         <TableCell className="max-w-md font-medium">
                                             {question.question}
                                         </TableCell>
@@ -170,7 +184,7 @@ export default function InterviewQuestionsIndex({
                                                 />
                                             </RowActionsMenu>
                                         </TableCell>
-                                    </TableRow>
+                                    </ClickableTableRow>
                                 ))}
                             </TableBody>
                         </Table>

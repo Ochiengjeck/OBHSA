@@ -58,6 +58,31 @@ test('the index can be filtered by status', function () {
     );
 });
 
+test('the index can be filtered by type', function () {
+    Storage::disk('public')->put('services/image.png', 'bytes');
+    Storage::disk('public')->put('resumes/resume.pdf', 'bytes');
+
+    $response = $this->actingAs($this->admin)->get(route('admin.assets.index', ['type' => 'document']));
+
+    $response->assertInertia(fn ($page) => $page
+        ->where('assets.data.0.path', 'resumes/resume.pdf')
+        ->where('assets.total', 1)
+    );
+});
+
+test('the index can be searched by path or used-by text', function () {
+    Storage::disk('public')->put('services/orphan.png', 'bytes');
+    Storage::disk('public')->put('stat-icons/icon.png', 'bytes');
+    Stat::factory()->create(['icon_path' => 'stat-icons/icon.png', 'label' => 'Unique Label Xyz']);
+
+    $response = $this->actingAs($this->admin)->get(route('admin.assets.index', ['search' => 'Unique Label']));
+
+    $response->assertInertia(fn ($page) => $page
+        ->where('assets.data.0.path', 'stat-icons/icon.png')
+        ->where('assets.total', 1)
+    );
+});
+
 test('destroying a legacy path deletes it and reports success', function () {
     Storage::disk('public')->put('services/orphan.png', 'bytes');
 

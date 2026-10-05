@@ -25,3 +25,21 @@ export function formatBytes(bytes: number): string {
 
     return `${exponent === 0 ? value : value.toFixed(1)} ${units[exponent]}`;
 }
+
+/**
+ * A left-border + tinted-background accent for a table row that needs
+ * attention (e.g. a legacy asset safe to delete, an overdue credential, a
+ * stalled application) — the same treatment introduced on the Asset
+ * Manager page, extracted so every list page can flag a row the same way.
+ */
+export function rowAccentClass(tone: 'amber' | 'red' | null): string {
+    if (tone === 'amber') {
+        return 'border-l-2 border-l-amber-400 bg-amber-50/40 dark:bg-amber-500/5';
+    }
+
+    if (tone === 'red') {
+        return 'border-l-2 border-l-red-400 bg-red-50/40 dark:bg-red-500/5';
+    }
+
+    return '';
+}

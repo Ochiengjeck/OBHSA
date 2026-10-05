@@ -2,7 +2,9 @@ import { Head, Link, router } from '@inertiajs/react';
 import { CheckCircle2, ShieldAlert, XCircle } from 'lucide-react';
 import { useState } from 'react';
 import { AdminPageHeader } from '@/components/admin/admin-page-header';
+import { ClickableTableRow } from '@/components/admin/clickable-table-row';
 import { EmptyState } from '@/components/admin/empty-state';
+import { AdminFilterToolbar } from '@/components/admin/filter-toolbar';
 import { RowActionsMenu } from '@/components/admin/row-actions-menu';
 import { StatusBadge } from '@/components/admin/status-badge';
 import { PaginationLinks } from '@/components/pagination-links';
@@ -25,7 +27,7 @@ import {
     TableHeader,
     TableRow,
 } from '@/components/ui/table';
-import { cn, toUrl } from '@/lib/utils';
+import { rowAccentClass, toUrl } from '@/lib/utils';
 import admin from '@/routes/admin';
 import type { ComplianceCredentialRow, Paginated } from '@/types';
 
@@ -129,7 +131,7 @@ export default function ComplianceIndex({
                     stats={[{ label: 'total', value: credentials.total }]}
                 />
 
-                <div className="mb-4 flex gap-2">
+                <AdminFilterToolbar>
                     <Button
                         size="sm"
                         variant={!filters.filter ? 'default' : 'outline'}
@@ -146,7 +148,7 @@ export default function ComplianceIndex({
                     >
                         Overdue
                     </Button>
-                </div>
+                </AdminFilterToolbar>
 
                 {credentials.data.length === 0 ? (
                     <EmptyState
@@ -173,7 +175,17 @@ export default function ComplianceIndex({
                                         new Date();
 
                                     return (
-                                        <TableRow key={credential.id}>
+                                        <ClickableTableRow
+                                            key={credential.id}
+                                            href={toUrl(
+                                                admin.candidates.show(
+                                                    credential.candidate.id,
+                                                ),
+                                            )}
+                                            className={rowAccentClass(
+                                                isOverdue ? 'red' : null,
+                                            )}
+                                        >
                                             <TableCell>
                                                 <Link
                                                     href={admin.candidates.show(
@@ -191,11 +203,11 @@ export default function ComplianceIndex({
                                                 {credential.credential_name}
                                             </TableCell>
                                             <TableCell
-                                                className={cn(
-                                                    'text-muted-foreground',
-                                                    isOverdue &&
-                                                        'font-medium text-red-600',
-                                                )}
+                                                className={
+                                                    isOverdue
+                                                        ? 'font-medium text-red-600'
+                                                        : 'text-muted-foreground'
+                                                }
                                             >
                                                 {new Date(
                                                     credential.expiry_date,
@@ -251,7 +263,7 @@ export default function ComplianceIndex({
                                                     )}
                                                 </RowActionsMenu>
                                             </TableCell>
-                                        </TableRow>
+                                        </ClickableTableRow>
                                     );
                                 })}
                             </TableBody>

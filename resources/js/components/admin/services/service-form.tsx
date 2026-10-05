@@ -11,6 +11,7 @@ import {
 import { Switch } from '@/components/ui/switch';
 import { Textarea } from '@/components/ui/textarea';
 import InputError from '@/components/input-error';
+import { FileDropzone } from '@/components/admin/file-dropzone';
 import { IconUploadField } from '@/components/admin/icon-upload-field';
 import { ICON_NAMES } from '@/lib/dynamic-icon';
 
@@ -114,25 +115,16 @@ export function ServiceForm({
                 }}
             />
 
-            <div className="grid gap-2">
-                <Label htmlFor="image">Image</Label>
-                {imagePreview && (
-                    <img
-                        src={imagePreview}
-                        alt=""
-                        className="h-24 w-auto rounded-md border border-border object-cover"
-                    />
-                )}
-                <Input
-                    id="image"
-                    type="file"
-                    accept="image/*"
-                    onChange={(e) =>
-                        setData('image', e.target.files?.[0] ?? null)
-                    }
-                />
-                <InputError message={errors.image} />
-            </div>
+            <FileDropzone
+                label="Image"
+                value={data.image}
+                existingUrl={imagePreview ?? null}
+                onChange={(file) => setData('image', file)}
+                onClear={() => setData('image', null)}
+                canClearExisting={false}
+                previewSize="h-24 w-full max-w-xs"
+                error={errors.image}
+            />
 
             <div className="grid gap-2">
                 <Label htmlFor="position">Position</Label>

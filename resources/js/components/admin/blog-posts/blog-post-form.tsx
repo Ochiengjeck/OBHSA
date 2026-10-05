@@ -4,6 +4,7 @@ import { Label } from '@/components/ui/label';
 import { Switch } from '@/components/ui/switch';
 import { Textarea } from '@/components/ui/textarea';
 import InputError from '@/components/input-error';
+import { FileDropzone } from '@/components/admin/file-dropzone';
 
 export type BlogPostFormData = {
     title: string;
@@ -68,25 +69,16 @@ export function BlogPostForm({
                 <InputError message={errors.body} />
             </div>
 
-            <div className="grid gap-2">
-                <Label htmlFor="featured_image">Featured Image</Label>
-                {imagePreview && (
-                    <img
-                        src={imagePreview}
-                        alt=""
-                        className="h-24 w-auto rounded-md border border-border object-cover"
-                    />
-                )}
-                <Input
-                    id="featured_image"
-                    type="file"
-                    accept="image/*"
-                    onChange={(e) =>
-                        setData('featured_image', e.target.files?.[0] ?? null)
-                    }
-                />
-                <InputError message={errors.featured_image} />
-            </div>
+            <FileDropzone
+                label="Featured Image"
+                value={data.featured_image}
+                existingUrl={imagePreview ?? null}
+                onChange={(file) => setData('featured_image', file)}
+                onClear={() => setData('featured_image', null)}
+                canClearExisting={false}
+                previewSize="h-24 w-full max-w-xs"
+                error={errors.featured_image}
+            />
 
             <div className="grid gap-2">
                 <Label htmlFor="published_at">Published Date</Label>

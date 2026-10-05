@@ -1,11 +1,11 @@
 import { Head, useForm } from '@inertiajs/react';
 import { AdminPageHeader } from '@/components/admin/admin-page-header';
+import { FileDropzone } from '@/components/admin/file-dropzone';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Textarea } from '@/components/ui/textarea';
-import InputError from '@/components/input-error';
 import { useStorageUrl } from '@/hooks/use-storage-url';
 import admin from '@/routes/admin';
 import type { SiteSettingRecord } from '@/types';
@@ -60,25 +60,17 @@ export default function SiteSettingsIndex({
 
         if (setting.type === 'image') {
             return (
-                <div key={setting.key} className="grid gap-2">
-                    <Label htmlFor={setting.key}>{label}</Label>
-                    {setting.value && (
-                        <img
-                            src={storageUrl(setting.value) ?? undefined}
-                            alt=""
-                            className="h-12 w-auto rounded border border-border object-contain p-1"
-                        />
-                    )}
-                    <Input
-                        id={setting.key}
-                        type="file"
-                        accept="image/*"
-                        onChange={(e) =>
-                            setData('logo', e.target.files?.[0] ?? null)
-                        }
-                    />
-                    <InputError message={errors.logo} />
-                </div>
+                <FileDropzone
+                    key={setting.key}
+                    label={label}
+                    value={data.logo}
+                    existingUrl={storageUrl(setting.value)}
+                    onChange={(file) => setData('logo', file)}
+                    onClear={() => setData('logo', null)}
+                    canClearExisting={false}
+                    previewSize="h-20 w-full max-w-xs"
+                    error={errors.logo}
+                />
             );
         }
 

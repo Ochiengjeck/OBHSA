@@ -16,8 +16,47 @@ import {
 import type { ComponentType } from 'react';
 import { AdminPageHeader } from '@/components/admin/admin-page-header';
 import { EmptyState } from '@/components/admin/empty-state';
+import { TwoLineCell } from '@/components/admin/two-line-cell';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { cn } from '@/lib/utils';
 import admin from '@/routes/admin';
+
+type CardTone =
+    | 'blue'
+    | 'violet'
+    | 'amber'
+    | 'emerald'
+    | 'rose'
+    | 'cyan'
+    | 'indigo'
+    | 'teal';
+
+const CARD_TONE_CLASSES: Record<CardTone, string> = {
+    blue: 'bg-blue-100 text-blue-700 dark:bg-blue-500/20 dark:text-blue-300',
+    violet: 'bg-violet-100 text-violet-700 dark:bg-violet-500/20 dark:text-violet-300',
+    amber: 'bg-amber-100 text-amber-700 dark:bg-amber-500/20 dark:text-amber-300',
+    emerald:
+        'bg-emerald-100 text-emerald-700 dark:bg-emerald-500/20 dark:text-emerald-300',
+    rose: 'bg-rose-100 text-rose-700 dark:bg-rose-500/20 dark:text-rose-300',
+    cyan: 'bg-cyan-100 text-cyan-700 dark:bg-cyan-500/20 dark:text-cyan-300',
+    indigo: 'bg-indigo-100 text-indigo-700 dark:bg-indigo-500/20 dark:text-indigo-300',
+    teal: 'bg-teal-100 text-teal-700 dark:bg-teal-500/20 dark:text-teal-300',
+};
+
+const PIPELINE_BAR_CLASSES: Record<string, string> = {
+    submitted: 'bg-blue-500',
+    eligibility_review: 'bg-amber-500',
+    recruiter_review: 'bg-amber-500',
+    screening: 'bg-violet-500',
+    credentialing: 'bg-violet-500',
+    interview: 'bg-violet-500',
+    assessment: 'bg-violet-500',
+    final_review: 'bg-violet-500',
+    on_hold: 'bg-amber-500',
+    offer_pending: 'bg-emerald-500',
+    offer_accepted: 'bg-emerald-500',
+    hired: 'bg-emerald-500',
+};
 
 type Counts = {
     newApplications: number;
@@ -80,48 +119,56 @@ export default function Dashboard({
             value: counts.newApplications,
             href: admin.jobApplications.index(),
             icon: Inbox,
+            tone: 'blue' as const,
         },
         {
             label: 'New Staffing Leads',
             value: counts.newLeads,
             href: admin.staffingRequests.index(),
             icon: Mail,
+            tone: 'cyan' as const,
         },
         {
             label: 'Active Job Listings',
             value: counts.activeJobListings,
             href: admin.jobListings.index(),
             icon: ListChecks,
+            tone: 'indigo' as const,
         },
         {
             label: 'Published Posts',
             value: counts.publishedPosts,
             href: admin.blogPosts.index(),
             icon: Newspaper,
+            tone: 'teal' as const,
         },
         {
             label: 'Interviews This Week',
             value: counts.interviewsThisWeek,
             href: admin.interviews.index(),
             icon: CalendarClock,
+            tone: 'violet' as const,
         },
         {
             label: 'Offers Expiring Soon',
             value: counts.offersExpiringSoon,
             href: admin.jobApplications.index(),
             icon: FileCheck,
+            tone: 'amber' as const,
         },
         {
             label: 'Credentials Expiring',
             value: counts.credentialsExpiringSoon,
             href: admin.compliance.index(),
             icon: ShieldAlert,
+            tone: 'rose' as const,
         },
         {
             label: 'Open Shifts',
             value: counts.openShifts,
             href: admin.facilities.index(),
             icon: UserCog,
+            tone: 'emerald' as const,
         },
     ];
 
@@ -144,16 +191,23 @@ export default function Dashboard({
                     {cards.map((card) => (
                         <Link key={card.label} href={card.href}>
                             <Card className="transition-shadow hover:shadow-md">
-                                <CardHeader>
-                                    <CardTitle className="flex items-center justify-between text-sm font-medium text-muted-foreground">
-                                        {card.label}
-                                        <card.icon className="size-4 text-primary" />
-                                    </CardTitle>
-                                </CardHeader>
-                                <CardContent>
-                                    <p className="text-3xl font-bold text-foreground tabular-nums">
-                                        {card.value}
-                                    </p>
+                                <CardContent className="flex items-center gap-4">
+                                    <div
+                                        className={cn(
+                                            'flex size-11 shrink-0 items-center justify-center rounded-lg',
+                                            CARD_TONE_CLASSES[card.tone],
+                                        )}
+                                    >
+                                        <card.icon className="size-5" />
+                                    </div>
+                                    <div className="min-w-0">
+                                        <p className="truncate text-xs font-medium text-muted-foreground">
+                                            {card.label}
+                                        </p>
+                                        <p className="text-2xl font-bold text-foreground tabular-nums">
+                                            {card.value}
+                                        </p>
+                                    </div>
                                 </CardContent>
                             </Card>
                         </Link>
@@ -191,7 +245,12 @@ export default function Dashboard({
                                         </div>
                                         <div className="h-2 overflow-hidden rounded-full bg-muted">
                                             <div
-                                                className="h-full rounded-full bg-primary/70 transition-all group-hover:bg-primary"
+                                                className={cn(
+                                                    'h-full rounded-full opacity-80 transition-all group-hover:opacity-100',
+                                                    PIPELINE_BAR_CLASSES[
+                                                        stage.status
+                                                    ] ?? 'bg-primary/70',
+                                                )}
                                                 style={{
                                                     width: `${Math.max(2, (stage.count / maxPipelineCount) * 100)}%`,
                                                 }}
@@ -226,19 +285,19 @@ export default function Dashboard({
                                             <li key={index}>
                                                 <Link
                                                     href={item.href}
-                                                    className="flex items-center gap-3 py-3 first:pt-0 last:pb-0"
+                                                    className="block py-3 first:pt-0 last:pb-0"
                                                 >
-                                                    <div className="flex size-9 shrink-0 items-center justify-center rounded-full bg-amber-100 text-amber-700 dark:bg-amber-500/20 dark:text-amber-300">
-                                                        <Icon className="size-4" />
-                                                    </div>
-                                                    <div className="min-w-0 flex-1">
-                                                        <p className="truncate text-sm font-medium text-foreground">
-                                                            {item.title}
-                                                        </p>
-                                                        <p className="truncate text-xs text-muted-foreground">
-                                                            {item.subtitle}
-                                                        </p>
-                                                    </div>
+                                                    <TwoLineCell
+                                                        avatar={
+                                                            <div className="flex size-9 shrink-0 items-center justify-center rounded-full bg-amber-100 text-amber-700 dark:bg-amber-500/20 dark:text-amber-300">
+                                                                <Icon className="size-4" />
+                                                            </div>
+                                                        }
+                                                        primary={item.title}
+                                                        secondary={
+                                                            item.subtitle
+                                                        }
+                                                    />
                                                 </Link>
                                             </li>
                                         );
@@ -271,14 +330,21 @@ export default function Dashboard({
                                                 }
                                                 className="block py-3 first:pt-0 last:pb-0"
                                             >
-                                                <p className="truncate text-sm font-medium text-foreground">
-                                                    {interview.candidateName}
-                                                </p>
-                                                <p className="truncate text-xs text-muted-foreground">
-                                                    {interview.jobTitle ??
-                                                        'General application'}
-                                                </p>
-                                                <p className="mt-0.5 text-xs text-primary">
+                                                <TwoLineCell
+                                                    avatar={
+                                                        <div className="flex size-9 shrink-0 items-center justify-center rounded-full bg-violet-100 text-violet-700 dark:bg-violet-500/20 dark:text-violet-300">
+                                                            <CalendarClock className="size-4" />
+                                                        </div>
+                                                    }
+                                                    primary={
+                                                        interview.candidateName
+                                                    }
+                                                    secondary={
+                                                        interview.jobTitle ??
+                                                        'General application'
+                                                    }
+                                                />
+                                                <p className="mt-1 pl-12 text-xs font-medium text-primary">
                                                     {new Date(
                                                         interview.scheduledAt,
                                                     ).toLocaleString(

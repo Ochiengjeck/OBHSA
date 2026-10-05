@@ -1,9 +1,15 @@
 import { Head, Link, router } from '@inertiajs/react';
 import { Mail } from 'lucide-react';
 import { AdminPageHeader } from '@/components/admin/admin-page-header';
+import { ClickableTableRow } from '@/components/admin/clickable-table-row';
 import { EmptyState } from '@/components/admin/empty-state';
+import {
+    AdminFilterToolbar,
+    ClearFiltersButton,
+} from '@/components/admin/filter-toolbar';
 import { RowActionsMenu } from '@/components/admin/row-actions-menu';
 import { StatusBadge } from '@/components/admin/status-badge';
+import { TwoLineCell } from '@/components/admin/two-line-cell';
 import { PaginationLinks } from '@/components/pagination-links';
 import {
     DropdownMenuItem,
@@ -74,7 +80,15 @@ export default function StaffingRequestsIndex({
                     stats={[{ label: 'total', value: requests.total }]}
                 />
 
-                <div className="mb-4">
+                <AdminFilterToolbar
+                    trailing={
+                        filters.status && (
+                            <ClearFiltersButton
+                                onClick={() => updateStatusFilter('all')}
+                            />
+                        )
+                    }
+                >
                     <Select
                         value={filters.status ?? 'all'}
                         onValueChange={updateStatusFilter}
@@ -90,7 +104,7 @@ export default function StaffingRequestsIndex({
                             <SelectItem value="closed">Closed</SelectItem>
                         </SelectContent>
                     </Select>
-                </div>
+                </AdminFilterToolbar>
 
                 {requests.data.length === 0 ? (
                     <EmptyState
@@ -120,7 +134,14 @@ export default function StaffingRequestsIndex({
                             </TableHeader>
                             <TableBody>
                                 {requests.data.map((request) => (
-                                    <TableRow key={request.id}>
+                                    <ClickableTableRow
+                                        key={request.id}
+                                        href={toUrl(
+                                            admin.staffingRequests.show(
+                                                request.id,
+                                            ),
+                                        )}
+                                    >
                                         <TableCell>
                                             <Link
                                                 href={admin.staffingRequests.show(
@@ -131,11 +152,11 @@ export default function StaffingRequestsIndex({
                                                 {request.facility_name}
                                             </Link>
                                         </TableCell>
-                                        <TableCell className="text-muted-foreground">
-                                            {request.contact_name}
-                                            <p className="text-xs">
-                                                {request.email}
-                                            </p>
+                                        <TableCell>
+                                            <TwoLineCell
+                                                primary={request.contact_name}
+                                                secondary={request.email}
+                                            />
                                         </TableCell>
                                         <TableCell className="text-muted-foreground">
                                             {new Date(
@@ -182,7 +203,7 @@ export default function StaffingRequestsIndex({
                                                 ))}
                                             </RowActionsMenu>
                                         </TableCell>
-                                    </TableRow>
+                                    </ClickableTableRow>
                                 ))}
                             </TableBody>
                         </Table>

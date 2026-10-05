@@ -1,14 +1,20 @@
 import { Head, Link, router, usePage } from '@inertiajs/react';
-import { Pencil, Plus, Search, Trash2, Users as UsersIcon } from 'lucide-react';
+import { Pencil, Plus, Trash2, Users as UsersIcon } from 'lucide-react';
 import { AdminPageHeader } from '@/components/admin/admin-page-header';
+import { ClickableTableRow } from '@/components/admin/clickable-table-row';
 import { ConfirmDeleteDialog } from '@/components/admin/confirm-delete-dialog';
 import { EmptyState } from '@/components/admin/empty-state';
+import {
+    AdminFilterToolbar,
+    ClearFiltersButton,
+    ToolbarSearchInput,
+} from '@/components/admin/filter-toolbar';
 import { RowActionsMenu } from '@/components/admin/row-actions-menu';
+import { TwoLineCell } from '@/components/admin/two-line-cell';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { DropdownMenuItem } from '@/components/ui/dropdown-menu';
-import { Input } from '@/components/ui/input';
 import {
     Select,
     SelectContent,
@@ -72,16 +78,23 @@ export default function UsersIndex({
                     }
                 />
 
-                <div className="mb-4 flex flex-wrap items-center gap-3">
-                    <div className="relative max-w-xs flex-1">
-                        <Search className="absolute top-1/2 left-2.5 size-4 -translate-y-1/2 text-muted-foreground" />
-                        <Input
-                            value={search}
-                            onChange={(e) => setSearch(e.target.value)}
-                            placeholder="Search by name or email..."
-                            className="pl-8"
-                        />
-                    </div>
+                <AdminFilterToolbar
+                    trailing={
+                        (search || filters.role) && (
+                            <ClearFiltersButton
+                                onClick={() => {
+                                    setSearch('');
+                                    updateRoleFilter('all');
+                                }}
+                            />
+                        )
+                    }
+                >
+                    <ToolbarSearchInput
+                        value={search}
+                        onChange={setSearch}
+                        placeholder="Search by name or email..."
+                    />
                     <Select
                         value={filters.role ?? 'all'}
                         onValueChange={updateRoleFilter}
@@ -102,7 +115,7 @@ export default function UsersIndex({
                             ))}
                         </SelectContent>
                     </Select>
-                </div>
+                </AdminFilterToolbar>
 
                 {users.data.length === 0 ? (
                     <EmptyState
@@ -134,7 +147,6 @@ export default function UsersIndex({
                             <TableHeader>
                                 <TableRow>
                                     <TableHead>Name</TableHead>
-                                    <TableHead>Email</TableHead>
                                     <TableHead>Role</TableHead>
                                     <TableHead>Joined</TableHead>
                                     <TableHead className="w-0" />
@@ -142,21 +154,24 @@ export default function UsersIndex({
                             </TableHeader>
                             <TableBody>
                                 {users.data.map((user) => (
-                                    <TableRow key={user.id}>
+                                    <ClickableTableRow
+                                        key={user.id}
+                                        href={toUrl(admin.users.edit(user.id))}
+                                    >
                                         <TableCell className="font-medium">
-                                            <div className="flex items-center gap-3">
-                                                <Avatar className="size-8">
-                                                    <AvatarFallback>
-                                                        {user.name
-                                                            .charAt(0)
-                                                            .toUpperCase()}
-                                                    </AvatarFallback>
-                                                </Avatar>
-                                                {user.name}
-                                            </div>
-                                        </TableCell>
-                                        <TableCell className="text-muted-foreground">
-                                            {user.email}
+                                            <TwoLineCell
+                                                avatar={
+                                                    <Avatar className="size-8">
+                                                        <AvatarFallback>
+                                                            {user.name
+                                                                .charAt(0)
+                                                                .toUpperCase()}
+                                                        </AvatarFallback>
+                                                    </Avatar>
+                                                }
+                                                primary={user.name}
+                                                secondary={user.email}
+                                            />
                                         </TableCell>
                                         <TableCell>
                                             {user.roles.map((role) => (
@@ -210,7 +225,7 @@ export default function UsersIndex({
                                                 )}
                                             </RowActionsMenu>
                                         </TableCell>
-                                    </TableRow>
+                                    </ClickableTableRow>
                                 ))}
                             </TableBody>
                         </Table>

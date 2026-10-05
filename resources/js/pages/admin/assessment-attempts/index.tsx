@@ -1,7 +1,12 @@
 import { Head, Link, router } from '@inertiajs/react';
 import { ClipboardList } from 'lucide-react';
 import { AdminPageHeader } from '@/components/admin/admin-page-header';
+import { ClickableTableRow } from '@/components/admin/clickable-table-row';
 import { EmptyState } from '@/components/admin/empty-state';
+import {
+    AdminFilterToolbar,
+    ClearFiltersButton,
+} from '@/components/admin/filter-toolbar';
 import { StatusBadge } from '@/components/admin/status-badge';
 import { PaginationLinks } from '@/components/pagination-links';
 import { Button } from '@/components/ui/button';
@@ -20,6 +25,7 @@ import {
     TableHeader,
     TableRow,
 } from '@/components/ui/table';
+import { toUrl } from '@/lib/utils';
 import admin from '@/routes/admin';
 import type { Assessment, AssessmentAttemptListRow, Paginated } from '@/types';
 
@@ -58,7 +64,20 @@ export default function AssessmentAttemptsIndex({
                     stats={[{ label: 'total', value: attempts.total }]}
                 />
 
-                <div className="mb-4 flex flex-wrap items-center gap-2">
+                <AdminFilterToolbar
+                    trailing={
+                        (filters.status || filters.assessment_id) && (
+                            <ClearFiltersButton
+                                onClick={() =>
+                                    updateFilters({
+                                        status: null,
+                                        assessment_id: null,
+                                    })
+                                }
+                            />
+                        )
+                    }
+                >
                     <Button
                         size="sm"
                         variant={filters.status ? 'outline' : 'default'}
@@ -96,7 +115,7 @@ export default function AssessmentAttemptsIndex({
                             })
                         }
                     >
-                        <SelectTrigger className="ml-auto w-56">
+                        <SelectTrigger className="w-56">
                             <SelectValue placeholder="All assessments" />
                         </SelectTrigger>
                         <SelectContent>
@@ -111,7 +130,7 @@ export default function AssessmentAttemptsIndex({
                             ))}
                         </SelectContent>
                     </Select>
-                </div>
+                </AdminFilterToolbar>
 
                 {attempts.data.length === 0 ? (
                     <EmptyState
@@ -132,7 +151,14 @@ export default function AssessmentAttemptsIndex({
                         </TableHeader>
                         <TableBody>
                             {attempts.data.map((attempt) => (
-                                <TableRow key={attempt.id}>
+                                <ClickableTableRow
+                                    key={attempt.id}
+                                    href={toUrl(
+                                        admin.assessmentAttempts.show(
+                                            attempt.id,
+                                        ),
+                                    )}
+                                >
                                     <TableCell>
                                         <Link
                                             href={admin.assessmentAttempts.show(
@@ -170,7 +196,7 @@ export default function AssessmentAttemptsIndex({
                                             </span>
                                         )}
                                     </TableCell>
-                                </TableRow>
+                                </ClickableTableRow>
                             ))}
                         </TableBody>
                     </Table>

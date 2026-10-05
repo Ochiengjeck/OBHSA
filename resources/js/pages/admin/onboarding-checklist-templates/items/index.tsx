@@ -1,6 +1,7 @@
 import { Head, Link } from '@inertiajs/react';
 import { ArrowLeft, ListTodo, Pencil, Plus, Trash2 } from 'lucide-react';
 import { AdminPageHeader } from '@/components/admin/admin-page-header';
+import { ClickableTableRow } from '@/components/admin/clickable-table-row';
 import { ConfirmDeleteDialog } from '@/components/admin/confirm-delete-dialog';
 import { EmptyState } from '@/components/admin/empty-state';
 import { RowActionsMenu } from '@/components/admin/row-actions-menu';
@@ -90,7 +91,10 @@ export default function OnboardingChecklistTemplateItemsIndex({
                         </TableHeader>
                         <TableBody>
                             {items.map((item) => (
-                                <TableRow key={item.id}>
+                                <ClickableTableRow
+                                    key={item.id}
+                                    href={toUrl(admin.items.edit(item.id))}
+                                >
                                     <TableCell className="font-medium">
                                         {item.label}
                                     </TableCell>
@@ -147,7 +151,7 @@ export default function OnboardingChecklistTemplateItemsIndex({
                                             />
                                         </RowActionsMenu>
                                     </TableCell>
-                                </TableRow>
+                                </ClickableTableRow>
                             ))}
                         </TableBody>
                     </Table>

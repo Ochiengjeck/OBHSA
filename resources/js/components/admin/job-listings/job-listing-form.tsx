@@ -11,6 +11,7 @@ import {
 import { Switch } from '@/components/ui/switch';
 import { Textarea } from '@/components/ui/textarea';
 import InputError from '@/components/input-error';
+import { FileDropzone } from '@/components/admin/file-dropzone';
 
 export type JobListingFormData = {
     title: string;
@@ -209,25 +210,16 @@ export function JobListingForm({
                 <InputError message={errors.requirements} />
             </div>
 
-            <div className="grid gap-2">
-                <Label htmlFor="image">Photo</Label>
-                {imagePreview && (
-                    <img
-                        src={imagePreview}
-                        alt=""
-                        className="h-24 w-auto rounded-md border border-border object-cover"
-                    />
-                )}
-                <Input
-                    id="image"
-                    type="file"
-                    accept="image/*"
-                    onChange={(e) =>
-                        setData('image', e.target.files?.[0] ?? null)
-                    }
-                />
-                <InputError message={errors.image} />
-            </div>
+            <FileDropzone
+                label="Photo"
+                value={data.image}
+                existingUrl={imagePreview ?? null}
+                onChange={(file) => setData('image', file)}
+                onClear={() => setData('image', null)}
+                canClearExisting={false}
+                previewSize="h-24 w-full max-w-xs"
+                error={errors.image}
+            />
 
             <div className="flex items-center gap-2">
                 <Switch
